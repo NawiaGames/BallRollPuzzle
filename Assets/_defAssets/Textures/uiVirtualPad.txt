@@ -1,0 +1,2 @@
+virtualPad,320,320,192,192
+virtualPadFrame,0,192,320,320

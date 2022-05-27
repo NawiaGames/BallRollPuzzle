@@ -1,0 +1,12 @@
+windowBase,0,0,512,512
+levelProgress,256,544,96,96
+progressBarS,0,624,16,16
+insetArea,384,896,128,128
+btnL,128,768,256,256
+sliderFillL,256,640,128,128
+sliderFrameL,128,640,128,128
+sliderFill,192,576,64,64
+sliderFrame,128,576,64,64
+btnSelectionFrame,0,640,128,128
+btnBase,0,768,128,128
+btn,0,896,128,128

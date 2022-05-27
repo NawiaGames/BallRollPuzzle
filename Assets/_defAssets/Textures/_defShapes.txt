@@ -1,0 +1,14 @@
+fill_rect_32,192,672,32,32
+fill_rect_64,128,640,64,64
+fill_rect_128,128,704,128,128
+fill_rect_192,256,640,192,192
+frame_rect_32,64,672,32,32
+frame_rect_64,0,640,64,64
+frame_rect_128,0,704,128,128
+fill_circle_32,192,864,32,32
+fill_circle_64,128,832,64,64
+fill_circle_128,128,896,128,128
+fill_circle_192,256,832,192,192
+frame_circle_32,64,864,32,32
+frame_circle_64,0,832,64,64
+frame_circle_128,0,896,128,128
