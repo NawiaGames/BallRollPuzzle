@@ -14,7 +14,8 @@ public class EffectsManager : MonoBehaviour
   [Header("FX Systems")]
     [SerializeField] ParticleSystem fxSparks = null;
     [SerializeField] ParticleSystem fxItemCompleted = null;
-    [SerializeField] ParticleSystem fxConfettiIngame;
+    [SerializeField] ParticleSystem fxConfettiIngame = null;
+    [SerializeField] ParticleSystem fxPaintSplat = null;
 
     ParticleSystem fxConfetti;
 
@@ -26,17 +27,20 @@ public class EffectsManager : MonoBehaviour
       cameraShakeContainer = Camera.main.GetComponentInParent<ObjectShake>();
       fxConfetti = GameObject.FindGameObjectWithTag("ConfettiFX").GetComponent<ParticleSystem>();
       infoLblMan = FindObjectOfType<UIInfoLabelManager>(true);
+
     }
     private void OnEnable() 
     {
+      Item.onHide += OnItemDestroy;
       //Level.onFinished += OnLevelFinished;
     }
     private void OnDisable()
     {
+      Item.onHide -= OnItemDestroy;
       //Level.onFinished -= OnLevelFinished;
     }
 
-    Vector3 GetFxPosition(Vector3 objectPostion) => objectPostion + (objectPostion - Camera.main.transform.position) * -offsetToCamera;
+    Vector3 GetFxPosition(Vector3 objectPostion) => objectPostion + (objectPostion - Camera.main.transform.position).normalized * -offsetToCamera;
     void PlayFXAtPosition(ParticleSystem ps, Vector3 worldPosition, int emitCount = 0)
     {
       ps.transform.position = GetFxPosition(worldPosition);
@@ -46,6 +50,13 @@ public class EffectsManager : MonoBehaviour
         ps.Play();
     }
 
+    void OnItemDestroy(Item sender)
+    {
+      var psmain = fxPaintSplat.main;
+      psmain.startColor = sender.color;
+
+      PlayFXAtPosition(fxPaintSplat, sender.transform.position, 5);
+    }
     void OnFx00(object sender)
     {
       //PlayFXAtPosition(fxConfettiIngame, sender.transform.position);

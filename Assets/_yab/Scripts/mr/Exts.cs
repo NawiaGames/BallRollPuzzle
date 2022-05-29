@@ -19,6 +19,16 @@ namespace mr
   }
 }
 
+public static class Vector2IntEx
+{
+  public static Vector2Int to_units(this Vector2Int v)
+  {
+    int x = (v.x != 0)? v.x / Mathf.Abs(v.x) : 0;
+    int y = (v.y != 0)? v.y / Mathf.Abs(v.y) : 0;
+
+    return new Vector2Int(x, y);
+  }
+}
 public static class Vector3Ex
 {
   public static Vector3 bezier(Vector3[] vctrl_pts, float t)

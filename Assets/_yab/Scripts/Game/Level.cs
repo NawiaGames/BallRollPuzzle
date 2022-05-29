@@ -74,6 +74,7 @@ public class Level : MonoBehaviour
           vend = clamp(vend);
         if(Mathf.Abs(vend.x) > dim().x/2 || Mathf.Abs(vend.y) > dim().y / 2)
         {
+          vend = clamp(vend) + vdir.to_units();
           break;
         }
         else
@@ -88,10 +89,33 @@ public class Level : MonoBehaviour
       }
       return vend;
     }
+    public void update(List<Item> _items)
+    {
+      clear();
+      for(int q = 0; q < _items.Count; ++q)
+      {
+        if(isInside(_items[q].grid))
+          set(_items[q]);
+        else
+        {
+          _items[q].Hide();
+          _items.RemoveAt(q);
+          q--;
+        } 
+      }
+    }
     // public Item seta(Vector2Int grid, Item item)
     // {
     //   _grid[grid.y, grid.x] = item;
     // }
+  }
+  public struct Match3
+  {
+    public List<Item> _matches;
+    public Match3(Item i0, Item i1, Item i2)
+    {
+      _matches = new List<Item>(){i0, i1, i2};
+    }
   }
 
   public enum PushType
@@ -125,15 +149,6 @@ public class Level : MonoBehaviour
   List<Arrow> _arrowsSelected = new List<Arrow>();
   List<Item> _items = new List<Item>();
   List<Item> _moving = new List<Item>();
-  
-  public struct Match3
-  {
-    public List<Item> _matches;
-    public Match3(Item i0, Item i1, Item i2)
-    {
-      _matches = new List<Item>(){i0, i1, i2};
-    }
-  }
   List<Match3> _matching = new List<Match3>();
 
   Item _nextItem = null;
@@ -209,13 +224,13 @@ public class Level : MonoBehaviour
       }
     }
 
-    UpdateGrid();
+    _grid.update(_items);
 
-    _items.ForEach((item) => item.ArrowVis(_gameplayType == GameType.Match3Move));
+    _items.ForEach((item) => item.IsArrow = _gameplayType == GameType.Match3Move);
 
     _nextItemContainer.gameObject.SetActive(true);
     _nextItem = CreateNextItem();
-    _nextItem.ArrowVis(false);
+    _nextItem.IsArrow = false;
     if(_gameplayPushType != PushType.None)
       _nextItemContainer.gameObject.SetActive(false);
   }
@@ -260,7 +275,7 @@ public class Level : MonoBehaviour
   public void OnInputBeg(TouchInputData tid)
   {
     arrowBeg = arrowEnd = null;
-    if(_pushing.Count > 0 || _moving.Count > 0)
+    if(_pushing.Count > 0 || _moving.Count > 0 || _matching.Count > 0)
       return;
 
     arrowBeg = tid.GetClosestCollider(0.5f)?.GetComponent<Arrow>() ?? null;
@@ -272,7 +287,7 @@ public class Level : MonoBehaviour
   }
   public void OnInputMov(TouchInputData tid)
   {
-    if(_pushing.Count > 0 || _moving.Count > 0)
+    if(_pushing.Count > 0 || _moving.Count > 0 || _matching.Count > 0)
       return;
 
     arrowEnd = tid.GetClosestCollider(0.5f)?.GetComponent<Arrow>() ?? null;
@@ -286,68 +301,58 @@ public class Level : MonoBehaviour
     arrowBeg = null;
     arrowEnd = null;
 
-    if(_pushing.Count == 0 && _moving.Count == 0)
-    {
-      for(int q = 0; q < _arrowsSelected.Count; ++q)
-      {
-        Item push = null;//GameData.Prefabs.CreatePushItem(_itemsContainer);
-        if(_gameplayPushType == PushType.None) // _gameplayType == GameType.Match3 || _gameplayType == GameType.Match3Move)
-        {
-          push = Instantiate(_nextItem, _itemsContainer);
-          push.name = _nextItem.name;
-        }
-        else
-        {
-          push = GameData.Prefabs.CreatePushItem(_itemsContainer);
-        }
-        push.ArrowVis(_gameplayType == GameType.Match3Move);
+    if(_pushing.Count > 0 || _moving.Count > 0 || _matching.Count > 0)
+      return;
 
-        push.vturn = new Vector2Int(Mathf.RoundToInt(_arrowsSelected[q].vDir.x), Mathf.RoundToInt(_arrowsSelected[q].vDir.z));
-        _pushing.Add(push);
-        push.transform.localPosition = _arrowsSelected[q].transform.localPosition - new Vector3Int(_arrowsSelected[q].dir.x/2, 0, _arrowsSelected[q].dir.y/2);
-        push.dir = _arrowsSelected[q].dir;
-      }
-      if(_arrowsSelected.Count > 0 && _nextItem)
-      {
-        Destroy(_nextItem.gameObject);
-        _nextItem = CreateNextItem();
-        _nextItem.ArrowVis(false);
-      }
-      _arrowsSelected.Clear();
-      _arrows.ForEach((ar) => ar.IsSelected = false);
-    }
-  }
-  void UpdateGrid()
-  {
-    _grid.clear();
-    for(int q = 0; q < _items.Count; ++q)
+    for(int q = 0; q < _arrowsSelected.Count; ++q)
     {
-      if(_grid.isInside(_items[q].grid))
-        _grid.set(_items[q]);
+      Item push = null;//GameData.Prefabs.CreatePushItem(_itemsContainer);
+      if(_gameplayPushType == PushType.None) // _gameplayType == GameType.Match3 || _gameplayType == GameType.Match3Move)
+      {
+        _nextItemContainer.gameObject.SetActive(true);
+        push = Instantiate(_nextItem, _itemsContainer);
+        push.name = _nextItem.name;
+      }
       else
       {
-        _items[q].gameObject.SetActive(false);
-        _items.RemoveAt(q);
-        q--;
-      } 
+        _nextItemContainer.gameObject.SetActive(false);
+        push = GameData.Prefabs.CreatePushItem(_itemsContainer);
+      }
+      push.IsArrow = _gameplayType == GameType.Match3Move;
+      push.vturn = new Vector2Int(Mathf.RoundToInt(_arrowsSelected[q].vDir.x), Mathf.RoundToInt(_arrowsSelected[q].vDir.z));
+      push.transform.localPosition = _arrowsSelected[q].transform.localPosition - new Vector3Int(_arrowsSelected[q].dir.x/2, 0, _arrowsSelected[q].dir.y/2);
+      push.dir = _arrowsSelected[q].dir;
+      _pushing.Add(push);
     }
+    if(_arrowsSelected.Count > 0 && _nextItem)
+    {
+      Destroy(_nextItem.gameObject);
+      _nextItem = null;
+    }
+    _arrowsSelected.Clear();
+    _arrows.ForEach((ar) => ar.IsSelected = false);
+
   }
+
   void MoveItems()
   {
     bool checkItems = false;
     for(int p = 0; p < _pushing.Count; ++p)
     {
+      if(!_pushing[p].IsReady)
+        continue;
       Item toMove = null;
       checkItems |= _pushing[p].MoveP(Time.deltaTime * _speed);
       var vg = _pushing[p].gridNext;
-      if(_grid.isInside(vg))
+      bool next_inside = _grid.isInside(vg);
+      if(next_inside || _gameplayOutside)
       {
         if(_grid.geti(vg) != null)
         {
           if(_gameplayPushType == PushType.None)
           {
             _items.Add(_pushing[p]);
-            _pushing[p].Stay();
+            _pushing[p].Stop();
             _pushing.RemoveAt(p);
             p--;
           }
@@ -355,7 +360,16 @@ public class Level : MonoBehaviour
           {
             toMove = _grid.geti(vg);
             toMove.dir = _pushing[p].dir;
-            _pushing[p].gameObject.SetActive(false);
+            _pushing[p].Hide();
+            _pushing.RemoveAt(p);
+            p--;
+          }
+        }
+        else
+        {
+          if(!_grid.isInside(_pushing[p].grid) && !next_inside)
+          {
+            _pushing[p].Hide();
             _pushing.RemoveAt(p);
             p--;
           }
@@ -363,19 +377,30 @@ public class Level : MonoBehaviour
       }
       else
       {
-        if(_gameplayOutside)
+        if(_gameplayPushType == PushType.None)
         {
-          _pushing[p].gameObject.SetActive(false);
+          _items.Add(_pushing[p]);
+          _pushing[p].Stop();
           _pushing.RemoveAt(p);
           p--;
         }
         else
         {
-          _items.Add(_pushing[p]);
-          _pushing[p].Stay();
+          _pushing[p].Hide();
           _pushing.RemoveAt(p);
           p--;
         }
+
+        // if(_gameplayPushType != PushType.None) // _gameplayOutside)
+        // {
+        // }
+        // else
+        // {
+        //   _items.Add(_pushing[p]);
+        //   _pushing[p].Stop();
+        //   _pushing.RemoveAt(p);
+        //   p--;
+        // }
       }
       List<Item> pushToMove = new List<Item>();
       if(toMove)
@@ -393,21 +418,30 @@ public class Level : MonoBehaviour
           }
           v += toMove.dir;
         }
-        if(_grid.isInside(pushToMove.last().grid + toMove.dir) || _gameplayOutside)
+        bool inside = _grid.isInside(pushToMove.last().grid + toMove.dir);
+        if(inside || _gameplayOutside)
         {
-          var gridDir = toMove.dir;
+          var gridDest = pushToMove.last().grid + toMove.dir;
           if(_gameplayPushType == PushType.PushLine)
           {
-            var gridDest = _grid.getDest(pushToMove.last().grid, toMove.dir, !_gameplayOutside);
-            if(gridDest != pushToMove.last().grid)
-              gridDir = gridDest - pushToMove.last().grid;
+            gridDest = _grid.getDest(pushToMove.last().grid, toMove.dir, !_gameplayOutside);
+            if(_grid.isInside(gridDest))
+            {
+              var vdir = gridDest - pushToMove.last().grid;
+              pushToMove.ForEach((item) => item.PushBy(vdir));// toMove.dir));
+            }
+            else
+              pushToMove.ForEach((item) => item.PushTo(gridDest));// toMove.dir));
           }
-          pushToMove.ForEach((item) => item.Push(gridDir));// toMove.dir));
+          else
+          {
+            pushToMove.ForEach((item) => item.PushBy(toMove.dir));
+          }
           _moving.AddRange(pushToMove);
         }
         else
         {
-          pushToMove.ForEach((item) => item.Stay());
+          pushToMove.ForEach((item) => item.Stop());
           pushToMove.Clear();
         }
       }
@@ -416,7 +450,7 @@ public class Level : MonoBehaviour
     for(int q = 0; q < _moving.Count; ++q)
     {
       var dir = _moving[q].dir;
-      if(!_moving[q].Move(Time.deltaTime * _speed))
+      if(!_moving[q].Move(Time.deltaTime * _speed, _grid.dim()))
       {
         checkItems |= true;
         _moving.RemoveAt(q);
@@ -426,13 +460,18 @@ public class Level : MonoBehaviour
 
     if(checkItems)
     {
-      UpdateGrid();
+      _grid.update(_items);
       CheckMatch3();
     }
-    if(_moving.Count == 0 && _pushing.Count == 0)
+    if(_moving.Count == 0 && _pushing.Count == 0 && _matching.Count == 0)
     {
-      UpdateGrid();
+      _grid.update(_items);
       CheckMove();
+      if(_nextItem == null)
+      {
+        _nextItem = CreateNextItem();
+        _nextItem.IsArrow = false;
+      }
     }
   }
   void CheckMatch3()
@@ -476,13 +515,13 @@ public class Level : MonoBehaviour
   {
     if(_gameplayType == GameType.Match3Move)
     {
-      UpdateGrid();
+      _grid.update(_items);
       for(int q = 0; q < _items.Count; ++q)
       {
         var dest = _grid.getDest(_items[q].grid, _items[q].vturn, !_gameplayOutside);
         if(dest != _items[q].grid)
         {
-          _items[q].Push(dest - _items[q].grid);
+          _items[q].PushTo(dest);
           _moving.Add(_items[q]);
           break;
         }
@@ -495,11 +534,11 @@ public class Level : MonoBehaviour
     {
       for(int q = 0; q < _matching[0]._matches.Count; ++q)
       {
-        _matching[0]._matches[q].gameObject.SetActive(false);
+        _matching[0]._matches[q].Hide();
         _items.Remove(_matching[0]._matches[q]);
       }
       _matching.RemoveAt(0);
-      UpdateGrid();
+      _grid.update(_items);
       CheckMatch3();
     }
   }
