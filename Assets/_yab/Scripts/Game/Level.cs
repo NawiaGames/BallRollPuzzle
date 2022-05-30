@@ -159,6 +159,8 @@ public class Level : MonoBehaviour
   [Header("Settings")]
   [SerializeField] Vector2Int _dim;
   [SerializeField] float _speed = 8;
+  [Header("Items")]
+  [SerializeField] Item[] listItems;
 
   public int  LevelIdx => GameState.Progress.Level;
   public bool Succeed => true;
@@ -365,7 +367,6 @@ public class Level : MonoBehaviour
     }
     _arrowsSelected.Clear();
     _arrows.ForEach((ar) => ar.IsSelected = false);
-
   }
 
   int  GetRegularItemsCount()
@@ -498,8 +499,8 @@ public class Level : MonoBehaviour
       var dir = _moving[q].dir;
       if(!_moving[q].Move(Time.deltaTime * _speed, _grid.dim()))
       {
-        // var nextItem = _grid.geti(_moving[q].grid + dir);
-        // _moving[q].Hit(nextItem);
+        var nextItem = _grid.geti(_moving[q].gridNext);
+        _moving[q].Hit(nextItem);
         checkItems |= true;
         _moving.RemoveAt(q);
         --q;
@@ -543,7 +544,7 @@ public class Level : MonoBehaviour
       {
         v.x = x; v.y = y;
         var item0 = _grid.geta(v);
-        if(item0)
+        if(item0 && (item0.IsRegular || item0.IsColorChanger))
         {
           {
             List<Item> match_items = new List<Item>();
@@ -615,12 +616,15 @@ public class Level : MonoBehaviour
       _grid.update(_items);
       for(int q = 0; q < _items.Count; ++q)
       {
-        var dest = _grid.getDest(_items[q].grid, _items[q].vturn, !_gameplayOutside);
-        if(dest != _items[q].grid)
+        if(_items[q].IsRegular)
         {
-          _items[q].PushTo(dest);
-          _moving.Add(_items[q]);
-          break;
+          var dest = _grid.getDest(_items[q].grid, _items[q].vturn, !_gameplayOutside);
+          if(dest != _items[q].grid)
+          {
+            _items[q].PushTo(dest);
+            _moving.Add(_items[q]);
+            break;
+          }
         }
       }
     }
