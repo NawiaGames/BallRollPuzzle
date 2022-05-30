@@ -19,8 +19,6 @@ public class Level : MonoBehaviour
   [SerializeField] Transform _gridContainer;
   [SerializeField] Transform _itemsContainer;
   [SerializeField] Transform _nextItemContainer;
-  
-  bool _started = false;
 
   public class Grid
   {
@@ -140,10 +138,14 @@ public class Level : MonoBehaviour
 
   public int  LevelIdx => GameState.Progress.Level;
   public bool Succeed => true;
+  public bool Finished {get; private set;}
   public GameType gameType => _gameplayType;
   public PushType pushType => _gameplayPushType;
   public bool     gameOutside => _gameplayOutside;
-  
+
+  bool _started = false;
+  UISummary uiSummary = null;
+
   Grid _grid = new Grid();
   List<Arrow> _arrows = new List<Arrow>();
   List<Arrow> _arrowsSelected = new List<Arrow>();
@@ -157,6 +159,7 @@ public class Level : MonoBehaviour
   {
     _grid.init(_dim);
     _items = _itemsContainer.GetComponentsInChildren<Item>().ToList();
+    uiSummary = FindObjectOfType<UISummary>(true);
   }
   void OnDestroy()
   {
@@ -264,6 +267,13 @@ public class Level : MonoBehaviour
     _arrowsSelected.Add(arrowEnd);
     _arrowsSelected = _arrowsSelected.Distinct().ToList();
   }
+  void ClearArrows()
+  {
+    _arrowsSelected.Clear();
+    arrowEnd = null;
+    for(int q = 0; q < _arrows.Count; ++q)
+      _arrows[q].IsSelected = false;
+  }
   Item CreateNextItem()
   {
     List<string> names = _items.Select((Item it)=>it.name).Distinct().ToList();
@@ -275,7 +285,7 @@ public class Level : MonoBehaviour
   public void OnInputBeg(TouchInputData tid)
   {
     arrowBeg = arrowEnd = null;
-    if(_pushing.Count > 0 || _moving.Count > 0 || _matching.Count > 0)
+    if(_pushing.Count > 0 || _moving.Count > 0 || _matching.Count > 0 || _items.Count == 0)
       return;
 
     arrowBeg = tid.GetClosestCollider(0.5f)?.GetComponent<Arrow>() ?? null;
@@ -287,21 +297,21 @@ public class Level : MonoBehaviour
   }
   public void OnInputMov(TouchInputData tid)
   {
-    if(_pushing.Count > 0 || _moving.Count > 0 || _matching.Count > 0)
+    if(_pushing.Count > 0 || _moving.Count > 0 || _matching.Count > 0 || _items.Count == 0)
       return;
 
     arrowEnd = tid.GetClosestCollider(0.5f)?.GetComponent<Arrow>() ?? null;
     if(arrowEnd)
-    {
       SelectArrows();
-    }
+    else
+      ClearArrows();
   }
   public void OnInputEnd(TouchInputData tid)
   {
     arrowBeg = null;
     arrowEnd = null;
 
-    if(_pushing.Count > 0 || _moving.Count > 0 || _matching.Count > 0)
+    if(_pushing.Count > 0 || _moving.Count > 0 || _matching.Count > 0 || _items.Count == 0)
       return;
 
     for(int q = 0; q < _arrowsSelected.Count; ++q)
@@ -390,17 +400,6 @@ public class Level : MonoBehaviour
           _pushing.RemoveAt(p);
           p--;
         }
-
-        // if(_gameplayPushType != PushType.None) // _gameplayOutside)
-        // {
-        // }
-        // else
-        // {
-        //   _items.Add(_pushing[p]);
-        //   _pushing[p].Stop();
-        //   _pushing.RemoveAt(p);
-        //   p--;
-        // }
       }
       List<Item> pushToMove = new List<Item>();
       if(toMove)
@@ -462,6 +461,11 @@ public class Level : MonoBehaviour
     {
       _grid.update(_items);
       CheckMatch3();
+      if(_items.Count == 0 && !Finished)
+      {
+        Finished = true;
+        this.Invoke(()=>uiSummary.Show(this), 0.5f);
+      }
     }
     if(_moving.Count == 0 && _pushing.Count == 0 && _matching.Count == 0)
     {
@@ -469,8 +473,11 @@ public class Level : MonoBehaviour
       CheckMove();
       if(_nextItem == null)
       {
-        _nextItem = CreateNextItem();
-        _nextItem.IsArrow = false;
+        if(_items.Count > 0)
+        {
+          _nextItem = CreateNextItem();
+          _nextItem.IsArrow = false;
+        }
       }
     }
   }
