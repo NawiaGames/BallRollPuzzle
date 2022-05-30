@@ -82,9 +82,9 @@ public class Item : MonoBehaviour
   Vector3 vdir => new Vector3(dir.x, 0, dir.y);
   public bool IsReady => !_activatable.InTransition && _lifetime > 0.125f;
   public bool IsMoving => grid != _gridEnd;
-  public bool IsArrowVis {get => _arrow.activeSelf; set{_arrow.SetActive(value || IsStatic);}}
+  public bool IsArrowVis {get => _arrow.activeSelf; set{_arrow.SetActive(value || IsStatic || IsBomb);}}
   public bool IsStatic => _special == Spec.Static;
-  public bool IsBomb => _special == Spec.Static;
+  public bool IsBomb => _special == Spec.Bomb;
   public bool IsColorChanger => _special == Spec.ColorChange;
 
   public void Hide()
@@ -153,10 +153,20 @@ public class Item : MonoBehaviour
    
     return ret;
   }
-  public void Change(Item itemFrom)
+  public void Hit(Item item)
   {
-    color = itemFrom.color;
-    name = itemFrom.gameObject.name;
+    if(item == null)
+      return;
+    if(this.IsColorChanger)
+    {
+      color = item.color;
+      name = item.gameObject.name;
+    }
+    else if(item.IsColorChanger)
+    {
+      item.color = color;
+      item.gameObject.name = name;
+    }
   }
   void Update()
   {

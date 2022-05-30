@@ -87,6 +87,26 @@ public class Level : MonoBehaviour
       }
       return vend;
     }
+    public List<Item> getNB(Vector2Int v)
+    {
+      List<Item> list = new List<Item>();
+      Vector2Int vv = Vector2Int.zero;
+      for(int y = -1; y <= 1; ++y)
+      {
+        vv.y = y;
+        for(int x = -1; x <= 1; ++x)
+        {
+          vv.x = x;
+          if(x != 0 || y != 0)
+          {
+            var item = geti(v + vv);
+            if(item != null)
+              list.Add(item);
+          }
+        }
+      }
+      return list;
+    }
     public void update(List<Item> _items)
     {
       clear();
@@ -366,8 +386,7 @@ public class Level : MonoBehaviour
         {
           if(_gameplayPushType == PushType.None)
           {
-            if(item.IsColorChanger)
-              item.Change(_pushing[p]);
+            item.Hit(_pushing[p]);
             _items.Add(_pushing[p]);
             _pushing[p].Stop();
             _pushing.RemoveAt(p);
@@ -428,35 +447,38 @@ public class Level : MonoBehaviour
           }
           v += toMove.dir;
         }
-        bool inside = _grid.isInside(pushToMove.last().grid + toMove.dir);
-        if(inside || _gameplayOutside)
+        if(pushToMove.Count > 0)
         {
-          var gridDest = pushToMove.last().grid + toMove.dir;
-          if(_gameplayPushType == PushType.PushLine)
+          bool inside = _grid.isInside(pushToMove.last().grid + toMove.dir);
+          if(inside || _gameplayOutside)
           {
-            gridDest = _grid.getDest(pushToMove.last().grid, toMove.dir, !_gameplayOutside);
-            if(_grid.isInside(gridDest))
+            var gridDest = pushToMove.last().grid + toMove.dir;
+            Item itemNext = _grid.geti(gridDest);
+            if(_gameplayPushType == PushType.PushLine)
             {
-              var vdir = gridDest - pushToMove.last().grid;
-              pushToMove.ForEach((item) => item.PushBy(vdir));// toMove.dir));
+              gridDest = _grid.getDest(pushToMove.last().grid, toMove.dir, !_gameplayOutside);
+              if(_grid.isInside(gridDest))
+              {
+                var vdir = gridDest - pushToMove.last().grid;
+                pushToMove.ForEach((item) => item.PushBy(vdir));// toMove.dir));
+              }
+              else
+                pushToMove.ForEach((item) => item.PushTo(gridDest));// toMove.dir));
             }
             else
-              pushToMove.ForEach((item) => item.PushTo(gridDest));// toMove.dir));
+            {
+              if(!(itemNext && itemNext.IsStatic))
+                pushToMove.ForEach((item) => item.PushBy(toMove.dir));
+              else
+                pushToMove.Clear();  
+            }
+            _moving.AddRange(pushToMove);
           }
           else
           {
-            var next = _grid.geti(gridDest);
-            if(!(next && next.IsStatic))
-              pushToMove.ForEach((item) => item.PushBy(toMove.dir));
-            else
-              pushToMove.Clear();  
+            pushToMove.ForEach((item) => item.Stop());
+            pushToMove.Clear();
           }
-          _moving.AddRange(pushToMove);
-        }
-        else
-        {
-          pushToMove.ForEach((item) => item.Stop());
-          pushToMove.Clear();
         }
       }
     }
@@ -466,6 +488,8 @@ public class Level : MonoBehaviour
       var dir = _moving[q].dir;
       if(!_moving[q].Move(Time.deltaTime * _speed, _grid.dim()))
       {
+        // var nextItem = _grid.geti(_moving[q].grid + dir);
+        // _moving[q].Hit(nextItem);
         checkItems |= true;
         _moving.RemoveAt(q);
         --q;
@@ -475,6 +499,7 @@ public class Level : MonoBehaviour
     if(checkItems)
     {
       _grid.update(_items);
+      CheckBombs();
       CheckMatch3();
       if(_items.Count == 0 && !Finished)
       {
@@ -486,6 +511,7 @@ public class Level : MonoBehaviour
     {
       _grid.update(_items);
       CheckMove();
+      CheckBombs();
       if(_nextItem == null)
       {
         if(_items.Count > 0)
@@ -543,6 +569,34 @@ public class Level : MonoBehaviour
     }
     if(_matching.Count > 0)
       DestroyMatch();
+  }
+  void CheckBombs()
+  {
+    List<Item> toRemove = new List<Item>();
+    for(int q = 0; q < _items.Count; ++q)
+    {
+      if(_items[q].IsBomb)
+      {
+        List<Item> items =_grid.getNB(_items[q].grid);
+        for(int n = 0; n <items.Count; ++n)
+        {
+          if(!items[n].IsStatic)
+          {
+            items[n].Hide();
+            toRemove.Add(items[n]);
+          }
+        }
+        if(toRemove.Count > 0)
+        {
+          _items[q].Hide();
+          _items.RemoveAt(q);
+          --q;
+          _grid.update(_items);
+          break;
+        }
+      }
+    }
+    _items.RemoveAll((item) => toRemove.Contains(item));
   }
   void CheckMove()
   {
