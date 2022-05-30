@@ -233,11 +233,11 @@ public class Level : MonoBehaviour
 
     _grid.update(_items);
 
-    _items.ForEach((item) => item.IsArrow = _gameplayType == GameType.Match3Move);
+    _items.ForEach((item) => item.IsArrowVis = _gameplayType == GameType.Match3Move);
 
     _nextItemContainer.gameObject.SetActive(true);
     _nextItem = CreateNextItem();
-    _nextItem.IsArrow = false;
+    _nextItem.IsArrowVis = false;
     if(_gameplayPushType != PushType.None)
       _nextItemContainer.gameObject.SetActive(false);
   }
@@ -332,7 +332,7 @@ public class Level : MonoBehaviour
         _nextItemContainer.gameObject.SetActive(false);
         push = GameData.Prefabs.CreatePushItem(_itemsContainer);
       }
-      push.IsArrow = _gameplayType == GameType.Match3Move;
+      push.IsArrowVis = _gameplayType == GameType.Match3Move;
       push.vturn = new Vector2Int(Mathf.RoundToInt(_arrowsSelected[q].vDir.x), Mathf.RoundToInt(_arrowsSelected[q].vDir.z));
       push.transform.localPosition = _arrowsSelected[q].transform.localPosition - new Vector3Int(_arrowsSelected[q].dir.x/2, 0, _arrowsSelected[q].dir.y/2);
       push.dir = _arrowsSelected[q].dir;
@@ -372,8 +372,11 @@ public class Level : MonoBehaviour
           }
           else //if(_gameplayPushType == PushType.PushOne || _gameplayPushType == PushType.PushLine)
           {
-            toMove = _grid.geti(vg);
-            toMove.dir = _pushing[p].dir;
+            if(!_grid.geti(vg).IsStatic)
+            {
+              toMove = _grid.geti(vg);
+              toMove.dir = _pushing[p].dir;
+            }
             _pushing[p].Hide();
             _pushing.RemoveAt(p);
             p--;
@@ -414,7 +417,7 @@ public class Level : MonoBehaviour
           if(_grid.isInside(v))
           {
             var item = _grid.geti(v);
-            if(item != null)
+            if(item != null && !item.IsStatic)
               pushToMove.Add(item);
             else
               break;
@@ -480,7 +483,7 @@ public class Level : MonoBehaviour
         if(_items.Count > 0)
         {
           _nextItem = CreateNextItem();
-          _nextItem.IsArrow = false;
+          _nextItem.IsArrowVis = false;
         }
       }
     }

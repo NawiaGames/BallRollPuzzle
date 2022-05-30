@@ -9,6 +9,7 @@ public class Item : MonoBehaviour
   [SerializeField] GameObject _arrow;
   [SerializeField] Color      _color;
   [SerializeField] ActivatableObject _activatable;
+  [SerializeField] bool       _staticItem = false;
 
   MeshRenderer _mr = null;
   MaterialPropertyBlock _mpb = null;
@@ -72,7 +73,8 @@ public class Item : MonoBehaviour
   Vector3 vdir => new Vector3(dir.x, 0, dir.y);
   public bool IsReady => !_activatable.InTransition && _lifetime > 0.125f;
   public bool IsMoving => grid != _gridEnd;
-  public bool IsArrow {get => _arrow.activeSelf; set{_arrow.SetActive(value);}}
+  public bool IsArrowVis {get => _arrow.activeSelf; set{_arrow.SetActive(value || _staticItem);}}
+  public bool IsStatic => _staticItem;
 
   public void Hide()
   {
@@ -103,11 +105,17 @@ public class Item : MonoBehaviour
   }
   public void PushBy(Vector2Int pushDir)
   {
+    if(_staticItem)
+      return;
+      
     _dir = pushDir;
     _gridEnd = grid + _dir;
   }
   public void PushTo(Vector2Int gridDest)
   {
+    if(_staticItem)
+      return;
+
     _dir = (gridDest - grid).to_units();
     _gridEnd = gridDest;
   }
