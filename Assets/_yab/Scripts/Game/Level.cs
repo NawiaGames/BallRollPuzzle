@@ -368,6 +368,16 @@ public class Level : MonoBehaviour
 
   }
 
+  int  GetRegularItemsCount()
+  {
+    int ret = 0;
+    for(int q = 0; q < _items.Count; ++q)
+    {
+      if(_items[q].IsRegular)
+        ret++;
+    }
+    return ret;
+  }
   void MoveItems()
   {
     bool checkItems = false;
@@ -501,7 +511,7 @@ public class Level : MonoBehaviour
       _grid.update(_items);
       CheckBombs();
       CheckMatch3();
-      if(_items.Count == 0 && !Finished)
+      if(GetRegularItemsCount() == 0 && !Finished)
       {
         Finished = true;
         this.Invoke(()=>uiSummary.Show(this), 0.5f);
@@ -514,7 +524,7 @@ public class Level : MonoBehaviour
       CheckBombs();
       if(_nextItem == null)
       {
-        if(_items.Count > 0)
+        if(GetRegularItemsCount() > 0)
         {
           _nextItem = CreateNextItem();
           _nextItem.IsArrowVis = false;

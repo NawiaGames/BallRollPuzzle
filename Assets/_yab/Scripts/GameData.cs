@@ -18,6 +18,9 @@ public class GameData : ScriptableObject
   [Header("Prefabs")]
   [SerializeField] Item[] items;
   [SerializeField] Item pushItem;
+  [SerializeField] Item bombItem;
+  [SerializeField] Item staticItem;
+  [SerializeField] Item colorChangeItem;
   [SerializeField] Arrow arrowPrefab;
   [SerializeField] GridElem gridElemPrefab;
   [Header("Levels")]
@@ -34,6 +37,24 @@ public class GameData : ScriptableObject
     { 
       var item = Instantiate(get().pushItem, parent);
       item.name = get().pushItem.name;
+      return item;
+    }
+    public static Item CreateBombItem(Transform parent)
+    {
+      var item = Instantiate(get().bombItem, parent);
+      item.name = get().bombItem.name;
+      return item;      
+    }
+    public static Item CreateStaticItem(Transform parent)
+    {
+      var item = Instantiate(get().staticItem, parent);
+      item.name = get().staticItem.name;
+      return item;
+    }
+    public static Item CreateColorChangeItem(Transform parent)
+    {
+      var item = Instantiate(get().colorChangeItem, parent);
+      item.name = get().colorChangeItem.name;
       return item;
     }
     public static Item CreateRandItem(Transform parent) 

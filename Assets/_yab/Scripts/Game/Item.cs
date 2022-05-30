@@ -86,6 +86,8 @@ public class Item : MonoBehaviour
   public bool IsStatic => _special == Spec.Static;
   public bool IsBomb => _special == Spec.Bomb;
   public bool IsColorChanger => _special == Spec.ColorChange;
+  public bool IsRegular => _special == Spec.None;
+  public bool IsSpecial => _special != Spec.None;
 
   public void Hide()
   {
