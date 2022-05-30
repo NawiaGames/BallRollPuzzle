@@ -114,6 +114,10 @@ public class Level : MonoBehaviour
     {
       _matches = new List<Item>(){i0, i1, i2};
     }
+    public Match3(List<Item> list)
+    {
+      _matches = new List<Item>(list);
+    }
   }
 
   public enum PushType
@@ -316,8 +320,8 @@ public class Level : MonoBehaviour
 
     for(int q = 0; q < _arrowsSelected.Count; ++q)
     {
-      Item push = null;//GameData.Prefabs.CreatePushItem(_itemsContainer);
-      if(_gameplayPushType == PushType.None) // _gameplayType == GameType.Match3 || _gameplayType == GameType.Match3Move)
+      Item push = null;
+      if(_gameplayPushType == PushType.None)
       {
         _nextItemContainer.gameObject.SetActive(true);
         push = Instantiate(_nextItem, _itemsContainer);
@@ -495,22 +499,33 @@ public class Level : MonoBehaviour
         if(item0)
         {
           {
-            var item1 = _grid.geta(v + vnx);
-            var item2 = _grid.geta(v + vnx * 2);
-            if(Item.EqType(item0, item1) && Item.EqType(item0, item2))
+            List<Item> match_items = new List<Item>();
+            match_items.Add(item0);
+            for(int q = 0; q < _grid.dim().x; ++q)
             {
-              _matching.Add(new Match3(item0, item1, item2));
-              break;
+              var item1 = _grid.geta(v + vnx * (q+1));
+              if(Item.EqType(item0, item1))
+                match_items.Add(item1);
+              else
+                break;      
             }
+            if(match_items.Count >= 3)
+              _matching.Add(new Match3(match_items));
           }
+          if(_matching.Count == 0)
           {
-            var item1 = _grid.geta(v + vny);
-            var item2 = _grid.geta(v + vny * 2);
-            if(Item.EqType(item0, item1) && Item.EqType(item0, item2))
+            List<Item> match_items = new List<Item>();
+            match_items.Add(item0);
+            for(int q = 0; q < _grid.dim().y; ++q)
             {
-              _matching.Add(new Match3(item0, item1, item2));
-              break;
+              var item1 = _grid.geta(v + vny * (q + 1));
+              if(Item.EqType(item0, item1))
+                match_items.Add(item1);
+              else
+                break;
             }
+            if(match_items.Count >= 3)
+              _matching.Add(new Match3(match_items));
           }
         }
       }
