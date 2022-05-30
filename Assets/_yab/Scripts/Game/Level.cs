@@ -222,7 +222,7 @@ public class Level : MonoBehaviour
     for(int y = 0; y < _dim.y; ++y)
     {
       float yy = (-_dim.y + 1) * 0.5f + y;
-      for(int x = 0; x < _dim.y; ++x)
+      for(int x = 0; x < _dim.x; ++x)
       {
         float xx = (-_dim.x + 1) * 0.5f + x;
         var ge = GameData.Prefabs.CreateGridElem(_gridContainer);
