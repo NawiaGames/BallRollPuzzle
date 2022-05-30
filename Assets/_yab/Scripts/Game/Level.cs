@@ -160,16 +160,20 @@ public class Level : MonoBehaviour
   [SerializeField] Vector2Int _dim;
   [SerializeField] float _speed = 8;
   [Header("Items")]
-  [SerializeField] Item[] listItems;
+  [SerializeField] bool        _useItemList = false;
+  [SerializeField] List<Item>  _listItems;
 
   public int  LevelIdx => GameState.Progress.Level;
-  public bool Succeed => true;
+  public bool Succeed {get; private set;}
   public bool Finished {get; private set;}
   public GameType gameType => _gameplayType;
   public PushType pushType => _gameplayPushType;
   public bool     gameOutside => _gameplayOutside;
+  public int      movesAvail => _listItems.Count;
+
 
   bool _started = false;
+  bool _allowInput => (movesAvail > 0 || _nextItem != null) && _pushing.Count == 0 && _moving.Count == 0 && _matching.Count == 0;
   UISummary uiSummary = null;
 
   Grid _grid = new Grid();
@@ -259,7 +263,6 @@ public class Level : MonoBehaviour
 
     _nextItemContainer.gameObject.SetActive(true);
     _nextItem = CreateNextItem();
-    _nextItem.IsArrowVis = false;
     if(_gameplayPushType != PushType.None)
       _nextItemContainer.gameObject.SetActive(false);
   }
@@ -300,18 +303,39 @@ public class Level : MonoBehaviour
     for(int q = 0; q < _arrows.Count; ++q)
       _arrows[q].IsSelected = false;
   }
+
+
   Item CreateNextItem()
   {
-    List<string> names = _items.Select((Item it)=>it.name).Distinct().ToList();
-    if(names.Count > 0)
-      return GameData.Prefabs.CreateRandItem(names,_nextItemContainer);
-    else
-      return GameData.Prefabs.CreateRandItem(_nextItemContainer);
+    Item item = null;
+    if(movesAvail > 0)
+    {
+      if(_useItemList)
+      {
+        if(_listItems[0] != null)
+        {
+          item = Instantiate(_listItems[0], _nextItemContainer);
+          item.name = _listItems[0].name;
+        }
+      }
+      if(!_useItemList || item == null)
+      {
+        List<string> names = _items.Select((Item it) => it.name).Distinct().ToList();
+        if(names.Count > 0)
+          item = GameData.Prefabs.CreateRandItem(names, _nextItemContainer);
+        else
+          item = GameData.Prefabs.CreateRandItem(_nextItemContainer);
+      }
+      item.IsArrowVis = false;
+      _listItems.RemoveAt(0);
+    }
+
+    return item;
   }
   public void OnInputBeg(TouchInputData tid)
   {
     arrowBeg = arrowEnd = null;
-    if(_pushing.Count > 0 || _moving.Count > 0 || _matching.Count > 0 || _items.Count == 0)
+    if(!_allowInput || GetRegularItemsCount() == 0)
       return;
 
     arrowBeg = tid.GetClosestCollider(0.5f)?.GetComponent<Arrow>() ?? null;
@@ -323,7 +347,7 @@ public class Level : MonoBehaviour
   }
   public void OnInputMov(TouchInputData tid)
   {
-    if(_pushing.Count > 0 || _moving.Count > 0 || _matching.Count > 0 || _items.Count == 0)
+    if(!_allowInput || GetRegularItemsCount() == 0)
       return;
 
     arrowEnd = tid.GetClosestCollider(0.5f)?.GetComponent<Arrow>() ?? null;
@@ -337,7 +361,7 @@ public class Level : MonoBehaviour
     arrowBeg = null;
     arrowEnd = null;
 
-    if(_pushing.Count > 0 || _moving.Count > 0 || _matching.Count > 0 || _items.Count == 0)
+    if(!_allowInput || GetRegularItemsCount() == 0)
       return;
 
     for(int q = 0; q < _arrowsSelected.Count; ++q)
@@ -512,11 +536,7 @@ public class Level : MonoBehaviour
       _grid.update(_items);
       CheckBombs();
       CheckMatch3();
-      if(GetRegularItemsCount() == 0 && !Finished)
-      {
-        Finished = true;
-        this.Invoke(()=>uiSummary.Show(this), 0.5f);
-      }
+      CheckEnd();
     }
     if(_moving.Count == 0 && _pushing.Count == 0 && _matching.Count == 0)
     {
@@ -528,7 +548,10 @@ public class Level : MonoBehaviour
         if(GetRegularItemsCount() > 0)
         {
           _nextItem = CreateNextItem();
-          _nextItem.IsArrowVis = false;
+        }
+        else
+        {
+          CheckEnd();
         }
       }
     }
@@ -643,6 +666,19 @@ public class Level : MonoBehaviour
       CheckMatch3();
     }
   }
+  void CheckEnd()
+  {
+    if(!Finished)
+    {
+      if(GetRegularItemsCount() == 0 || movesAvail == 0)
+      {
+        Finished = true;
+        Succeed = GetRegularItemsCount() == 0;
+        this.Invoke(() => uiSummary.Show(this), 0.5f);
+      }
+    }    
+  }
+
 
   void Update()
   {
