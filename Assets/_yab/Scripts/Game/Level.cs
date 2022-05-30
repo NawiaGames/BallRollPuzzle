@@ -412,7 +412,8 @@ public class Level : MonoBehaviour
       if(toMove)
       {
         var v = toMove.grid;
-        for(int q = 0; q < _dim.x; ++q)
+        int cnt = Mathf.Max(_dim.x, _dim.y);
+        for(int q = 0; q < cnt; ++q)
         {
           if(_grid.isInside(v))
           {
@@ -441,7 +442,11 @@ public class Level : MonoBehaviour
           }
           else
           {
-            pushToMove.ForEach((item) => item.PushBy(toMove.dir));
+            var next = _grid.geti(gridDest);
+            if(!(next && next.IsStatic))
+              pushToMove.ForEach((item) => item.PushBy(toMove.dir));
+            else
+              pushToMove.Clear();  
           }
           _moving.AddRange(pushToMove);
         }

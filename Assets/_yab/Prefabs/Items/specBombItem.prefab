@@ -9,19 +9,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4092142241397789765, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
       propertyPath: m_Name
-      value: staticItem
+      value: specBombItem
       objectReference: {fileID: 0}
     - target: {fileID: 4697319830098259965, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -3557221895903419285, guid: 45bb4ec5116b36d49a55ff45e97ba6b6, type: 3}
+      objectReference: {fileID: 21300000, guid: e7caeb9b10edeb240b26c144e6ca7107, type: 3}
     - target: {fileID: 4697319830098259965, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
       propertyPath: m_Color.b
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4697319830098259965, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
       propertyPath: m_Color.g
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4697319830098259965, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
       propertyPath: m_Color.r
@@ -44,16 +44,24 @@ PrefabInstance:
       value: 0.397
       objectReference: {fileID: 0}
     - target: {fileID: 6752348163733698667, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
-      propertyPath: _staticItem
+      propertyPath: _special
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6752348163733698667, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
+      propertyPath: _bombItem
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6752348163733698667, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
+      propertyPath: _staticItem
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7090054455800460876, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.4
+      value: 0.125
       objectReference: {fileID: 0}
     - target: {fileID: 7090054455800460876, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.4
+      value: 0.125
       objectReference: {fileID: 0}
     - target: {fileID: 7845557772794626158, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
       propertyPath: m_RootOrder
