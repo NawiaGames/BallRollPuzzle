@@ -361,10 +361,13 @@ public class Level : MonoBehaviour
       bool next_inside = _grid.isInside(vg);
       if(next_inside || _gameplayOutside)
       {
-        if(_grid.geti(vg) != null)
+        Item item = _grid.geti(vg);
+        if(item)
         {
           if(_gameplayPushType == PushType.None)
           {
+            if(item.IsColorChanger)
+              item.Change(_pushing[p]);
             _items.Add(_pushing[p]);
             _pushing[p].Stop();
             _pushing.RemoveAt(p);

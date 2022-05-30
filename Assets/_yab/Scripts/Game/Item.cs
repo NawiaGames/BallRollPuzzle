@@ -153,6 +153,11 @@ public class Item : MonoBehaviour
    
     return ret;
   }
+  public void Change(Item itemFrom)
+  {
+    color = itemFrom.color;
+    name = itemFrom.gameObject.name;
+  }
   void Update()
   {
     _lifetime += Time.deltaTime;
