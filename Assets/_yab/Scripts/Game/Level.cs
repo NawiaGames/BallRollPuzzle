@@ -152,24 +152,20 @@ public class Level : MonoBehaviour
     Match3Move,
   }
   [Header("Gameplay Variants")]
-  //[SerializeField] GameType  _gameplayType = GameType.Match3;
-  [SerializeField] bool      _gameplayOutside = false;
-  //[SerializeField] PushType  _gameplayPushType = PushType.None;
-
+  [SerializeField] bool       _gameplayOutside = false;
   [Header("Settings")]
   [SerializeField] Vector2Int _dim;
-  [SerializeField] float _speed = 8;
+  [SerializeField] float      _speed = 8;
   [Header("Items")]
-  [SerializeField] List<Item>  _listItems;
+  [SerializeField] List<Item> _listItems;
 
   public int  LevelIdx => GameState.Progress.Level;
   public bool Succeed {get; private set;}
   public bool Finished {get; private set;}
-  //public GameType gameType => _gameplayType;
-  //public PushType pushType => _gameplayPushType;
-  public bool     gameOutside => _gameplayOutside;
-  public int      movesAvail => _listItems.Count;
-
+  public bool gameOutside => _gameplayOutside;
+  public int  movesAvail => _listItems.Count;
+  public int  ColorItems => _items.Count((item) => item.IsRegular);
+  public bool AnyColorItem => _items.Count((item) => item.IsRegular) > 0;
 
   bool _started = false;
   bool _allowInput => (movesAvail > 0 || _nextItem != null) && _pushing.Count == 0 && _moving.Count == 0 && _matching.Count == 0;
@@ -307,7 +303,6 @@ public class Level : MonoBehaviour
       _arrows[q].IsSelected = false;
   }
 
-
   Item CreateNextItem()
   {
     Item item = null;
@@ -343,7 +338,7 @@ public class Level : MonoBehaviour
   public void OnInputBeg(TouchInputData tid)
   {
     arrowBeg = arrowEnd = null;
-    if(!_allowInput || GetRegularItemsCount() == 0)
+    if(!_allowInput || !AnyColorItem)
       return;
 
     arrowBeg = tid.GetClosestCollider(0.5f)?.GetComponent<Arrow>() ?? null;
@@ -355,7 +350,7 @@ public class Level : MonoBehaviour
   }
   public void OnInputMov(TouchInputData tid)
   {
-    if(!_allowInput || GetRegularItemsCount() == 0)
+    if(!_allowInput || !AnyColorItem)
       return;
 
     arrowEnd = tid.GetClosestCollider(0.5f)?.GetComponent<Arrow>() ?? null;
@@ -369,7 +364,7 @@ public class Level : MonoBehaviour
     arrowBeg = null;
     arrowEnd = null;
 
-    if(!_allowInput || GetRegularItemsCount() == 0)
+    if(!_allowInput || !AnyColorItem)
       return;
 
     for(int q = 0; q < _arrowsSelected.Count; ++q)
@@ -401,16 +396,6 @@ public class Level : MonoBehaviour
     _arrows.ForEach((ar) => ar.IsSelected = false);
   }
 
-  int  GetRegularItemsCount()
-  {
-    int ret = 0;
-    for(int q = 0; q < _items.Count; ++q)
-    {
-      if(_items[q].IsRegular)
-        ret++;
-    }
-    return ret;
-  }
   void MoveItems()
   {
     bool checkItems = false;
@@ -554,7 +539,7 @@ public class Level : MonoBehaviour
       CheckBombs();
       if(_nextItem == null)
       {
-        if(GetRegularItemsCount() > 0)
+        if(AnyColorItem)
         {
           _nextItem = CreateNextItem();
         }
@@ -676,10 +661,10 @@ public class Level : MonoBehaviour
   {
     if(!Finished)
     {
-      if(GetRegularItemsCount() == 0 || movesAvail == 0)
+      if(!AnyColorItem || movesAvail == 0)
       {
         Finished = true;
-        Succeed = GetRegularItemsCount() == 0;
+        Succeed = !AnyColorItem;
         this.Invoke(() => uiSummary.Show(this), 0.5f);
       }
     }    
