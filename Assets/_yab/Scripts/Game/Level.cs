@@ -160,7 +160,6 @@ public class Level : MonoBehaviour
   [SerializeField] Vector2Int _dim;
   [SerializeField] float _speed = 8;
   [Header("Items")]
-  [SerializeField] bool        _useItemList = false;
   [SerializeField] List<Item>  _listItems;
 
   public int  LevelIdx => GameState.Progress.Level;
