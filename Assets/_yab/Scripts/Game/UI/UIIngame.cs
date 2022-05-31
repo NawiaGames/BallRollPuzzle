@@ -28,16 +28,16 @@ public class UIIngame : MonoBehaviour
   }
   void OnLevelStart(Level lvl)
   {
-    lblLevelInfo.text = "setup: " + lvl.LevelIdx + "\n";
-    lblLevelInfo.text += "gameType: " + ((lvl.gameType == Level.GameType.Match3Move)? "Match3 + move" : "Match3") + "\n";
-    string push = "";
-    if(lvl.pushType == Level.PushType.None)
-      push = "No push - new balls";
-    else if(lvl.pushType == Level.PushType.PushOne)
-      push = "push to next field";
-    else if(lvl.pushType == Level.PushType.PushLine)
-      push = "push to obstacle";
-    lblLevelInfo.text += "pushType: " + push + "\n";
+    lblLevelInfo.text = "level: " + lvl.LevelIdx + "\n";
+    //lblLevelInfo.text += "gameType: " + ((lvl.gameType == Level.GameType.Match3Move)? "Match3 + move" : "Match3") + "\n";
+    // string push = "";
+    // if(lvl.pushType == Level.PushType.None)
+    //   push = "No push - new balls";
+    // else if(lvl.pushType == Level.PushType.PushOne)
+    //   push = "push to next field";
+    // else if(lvl.pushType == Level.PushType.PushLine)
+    //   push = "push to obstacle";
+    // lblLevelInfo.text += "pushType: " + push + "\n";
     lblLevelInfo.text += "push outside gamefield: " + (lvl.gameOutside).ToString();
   }
   public void OnBtnRestart()

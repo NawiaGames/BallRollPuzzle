@@ -17,11 +17,14 @@ public class GameData : ScriptableObject
 
   [Header("Prefabs")]
   [SerializeField] Item[] items;
+  [SerializeField] Item[] moveItems;
   [SerializeField] Item pushItem;
+  [SerializeField] Item pushLineItem;
   [SerializeField] Item bombItem;
   [SerializeField] Item staticItem;
   [SerializeField] Item colorChangeItem;
-  [SerializeField] Arrow arrowPrefab;
+  [Header("Field Elems")]
+  [SerializeField] Arrow    arrowPrefab;
   [SerializeField] GridElem gridElemPrefab;
   [Header("Levels")]
   [SerializeField] List<Level> listLevels;
@@ -33,12 +36,17 @@ public class GameData : ScriptableObject
   {
     public static Arrow CreateArrow(Transform parent){return Instantiate(get().arrowPrefab, parent);}
     public static GridElem CreateGridElem(Transform parent) { return Instantiate(get().gridElemPrefab, parent); }
-    public static Item CreatePushItem(Transform parent) 
+    public static Item CreatePushItem(Transform parent, Item.Push push_type) 
     { 
-      var item = Instantiate(get().pushItem, parent);
+      Item item = null;
+      if(push_type == Item.Push.One)
+        item = Instantiate(get().pushItem, parent);
+      else
+        item = Instantiate(get().pushLineItem, parent);  
       item.name = get().pushItem.name;
       return item;
     }
+
     public static Item CreateBombItem(Transform parent)
     {
       var item = Instantiate(get().bombItem, parent);
@@ -57,9 +65,9 @@ public class GameData : ScriptableObject
       item.name = get().colorChangeItem.name;
       return item;
     }
-    public static Item CreateRandItem(Transform parent) 
+    public static Item CreateRandItem(Transform parent, bool moveable) 
     {
-      var prefabItem = get().items.get_random();
+      var prefabItem = (moveable)? get().moveItems.get_random() : get().items.get_random();
       var item = Instantiate(prefabItem, parent);
       item.name = prefabItem.name;
       return item;
@@ -68,6 +76,7 @@ public class GameData : ScriptableObject
     {
       Item item = null;
       List<Item> prefabs = new List<Item>(get().items);
+      prefabs.AddRange(get().moveItems);
       prefabs.RemoveAll((Item it) => !names.Contains(it.name));
       prefabs.shuffle(20);
       var prefab = prefabs.get_random();

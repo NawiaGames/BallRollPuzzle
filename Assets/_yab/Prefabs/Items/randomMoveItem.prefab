@@ -7,13 +7,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2714924256337797800, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3031739283272724307, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4092142241397789765, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
       propertyPath: m_Name
-      value: itemYellow
+      value: randomMoveItem
       objectReference: {fileID: 0}
     - target: {fileID: 4092142241397789765, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
       propertyPath: m_IsActive
@@ -21,7 +25,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6752348163733698667, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
       propertyPath: _id
-      value: 4
+      value: 1001
       objectReference: {fileID: 0}
     - target: {fileID: 6752348163733698667, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
       propertyPath: _color.b
@@ -34,6 +38,10 @@ PrefabInstance:
     - target: {fileID: 6752348163733698667, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
       propertyPath: _color.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6752348163733698667, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
+      propertyPath: _special
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6793089514052621997, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
       propertyPath: m_RootOrder
