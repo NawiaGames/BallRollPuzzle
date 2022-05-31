@@ -6,19 +6,30 @@ using GameLib.Utilities;
 
 public class Item : MonoBehaviour
 {
-  [SerializeField] GameObject _arrow;
+  [SerializeField] int        _id = 0;
   [SerializeField] Color      _color;
   [SerializeField] ActivatableObject _activatable;
+  [SerializeField] Push       _push = Push.None;
   [SerializeField] Spec       _special = Spec.None;
+  [SerializeField] bool       _autoMove = false;
+   
 
+  public enum Push
+  {
+    None,
+    One,
+    Line,
+  }
   public enum Spec
   {
     None,
     Static,
     Bomb,
-    ColorChange
+    ColorChange,
+    RandomPush,
+    RandomItem,
+    RandomMoveItem,
   }
-
 
   MeshRenderer _mr = null;
   MaterialPropertyBlock _mpb = null;
@@ -27,7 +38,7 @@ public class Item : MonoBehaviour
   Vector2Int _dir = Vector2Int.zero;
   Vector2Int _gridBeg = Vector2Int.zero;
   Vector2Int _gridEnd = Vector2Int.zero;
-  float _lifetime = 0;
+  float      _lifetime = 0;
 
 
   public static System.Action<Item> onShow, onHide; 
@@ -36,7 +47,8 @@ public class Item : MonoBehaviour
   static Vector3     toPos(Vector2Int grid) => new Vector3(grid.x, 0,  grid.y);
   public static bool EqType(Item item0, Item item1)
   {
-    return item0 != null && item1 != null && item0.name.Equals(item1.name);
+    return item0 != null && item1 != null && item0.id == item1.id;
+    //return item0 != null && item1 != null && item0.name.Equals(item1.name);
   }
 
   void Awake()
@@ -54,6 +66,7 @@ public class Item : MonoBehaviour
     _activatable.ActivateObject();
     onShow?.Invoke(this);
   }
+  public int   id { get => _id; set{ _id = value;}}
   public Color color
   {
     get => _color; 
@@ -80,14 +93,19 @@ public class Item : MonoBehaviour
   }
  
   Vector3 vdir => new Vector3(dir.x, 0, dir.y);
+  public Push push {get => _push; set{ _push = value;}}
   public bool IsReady => !_activatable.InTransition && _lifetime > 0.125f;
   public bool IsMoving => grid != _gridEnd;
-  public bool IsArrowVis {get => _arrow.activeSelf; set{_arrow.SetActive(value || IsStatic || IsBomb);}}
+  //public bool IsArrowVis {get => _arrow.activeSelf; set{_arrow.SetActive(value || IsStatic || IsBomb || _autoMove || _push != Item.Push.None && );}}
   public bool IsStatic => _special == Spec.Static;
   public bool IsBomb => _special == Spec.Bomb;
   public bool IsColorChanger => _special == Spec.ColorChange;
   public bool IsRegular => _special == Spec.None;
   public bool IsSpecial => _special != Spec.None;
+  public bool IsMoveable => _autoMove;
+  public bool IsRandItem => _special == Spec.RandomItem;
+  public bool IsRandMoveItem => _special == Spec.RandomMoveItem;
+  public bool IsRandPush => _special == Spec.RandomPush;
 
   public void Hide()
   {
@@ -163,9 +181,11 @@ public class Item : MonoBehaviour
     {
       color = item.color;
       name = item.gameObject.name;
+      id = item.id;
     }
     else if(item.IsColorChanger)
     {
+      item.id = id;
       item.color = color;
       item.gameObject.name = name;
     }

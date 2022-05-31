@@ -152,9 +152,9 @@ public class Level : MonoBehaviour
     Match3Move,
   }
   [Header("Gameplay Variants")]
-  [SerializeField] GameType  _gameplayType = GameType.Match3;
+  //[SerializeField] GameType  _gameplayType = GameType.Match3;
   [SerializeField] bool      _gameplayOutside = false;
-  [SerializeField] PushType  _gameplayPushType = PushType.None;
+  //[SerializeField] PushType  _gameplayPushType = PushType.None;
 
   [Header("Settings")]
   [SerializeField] Vector2Int _dim;
@@ -166,8 +166,8 @@ public class Level : MonoBehaviour
   public int  LevelIdx => GameState.Progress.Level;
   public bool Succeed {get; private set;}
   public bool Finished {get; private set;}
-  public GameType gameType => _gameplayType;
-  public PushType pushType => _gameplayPushType;
+  //public GameType gameType => _gameplayType;
+  //public PushType pushType => _gameplayPushType;
   public bool     gameOutside => _gameplayOutside;
   public int      movesAvail => _listItems.Count;
 
@@ -245,6 +245,7 @@ public class Level : MonoBehaviour
       arrow.transform.Rotate(new Vector3(0, -90, 0));
     }
     
+    int t = 0;
     for(int y = 0; y < _dim.y; ++y)
     {
       float yy = (-_dim.y + 1) * 0.5f + y;
@@ -254,17 +255,20 @@ public class Level : MonoBehaviour
         var ge = GameData.Prefabs.CreateGridElem(_gridContainer);
         ge.even = ((x ^ y) & 1) == 0;
         ge.transform.localPosition = new Vector3(xx * scale, 0.05f, yy * scale);
+        //ge.Touch(t);
+        t--;
       }
+      
     }
 
     _grid.update(_items);
 
-    _items.ForEach((item) => item.IsArrowVis = _gameplayType == GameType.Match3Move);
+    //_items.ForEach((item) => item.IsArrowVis = _gameplayType == GameType.Match3Move);
 
     _nextItemContainer.gameObject.SetActive(true);
     _nextItem = CreateNextItem();
-    if(_gameplayPushType != PushType.None)
-      _nextItemContainer.gameObject.SetActive(false);
+    // if(_gameplayPushType != PushType.None)
+    //   _nextItemContainer.gameObject.SetActive(false);
   }
   List<Item> _pushing = new List<Item>();
 
@@ -310,28 +314,33 @@ public class Level : MonoBehaviour
     Item item = null;
     if(movesAvail > 0)
     {
-      if(_useItemList)
+      var next_item = _listItems[0];
+      if(next_item != null)
       {
-        if(_listItems[0] != null)
-        {
+        if(next_item.IsRandItem)
+          item = GameData.Prefabs.CreateRandItem(_nextItemContainer, false);
+        else if(next_item.IsRandMoveItem)
+          item = GameData.Prefabs.CreateRandItem(_nextItemContainer, true);
+        else if(next_item.IsRandPush)
+          item = GameData.Prefabs.CreatePushItem(_nextItemContainer, (Random.value < 0.5f)? Item.Push.One : Item.Push.Line);
+        else  
           item = Instantiate(_listItems[0], _nextItemContainer);
-          item.name = _listItems[0].name;
-        }
+        //item.name = _listItems[0].name;
       }
-      if(!_useItemList || item == null)
+      else
       {
         List<string> names = _items.Select((Item it) => it.name).Distinct().ToList();
         if(names.Count > 0)
           item = GameData.Prefabs.CreateRandItem(names, _nextItemContainer);
         else
-          item = GameData.Prefabs.CreateRandItem(_nextItemContainer);
+          item = GameData.Prefabs.CreateRandItem(_nextItemContainer, false);
       }
-      item.IsArrowVis = false;
       _listItems.RemoveAt(0);
     }
 
     return item;
   }
+
   public void OnInputBeg(TouchInputData tid)
   {
     arrowBeg = arrowEnd = null;
@@ -367,18 +376,18 @@ public class Level : MonoBehaviour
     for(int q = 0; q < _arrowsSelected.Count; ++q)
     {
       Item push = null;
-      if(_gameplayPushType == PushType.None)
-      {
+      //if(_gameplayPushType == PushType.None)
+      //{
         _nextItemContainer.gameObject.SetActive(true);
         push = Instantiate(_nextItem, _itemsContainer);
         push.name = _nextItem.name;
-      }
-      else
-      {
-        _nextItemContainer.gameObject.SetActive(false);
-        push = GameData.Prefabs.CreatePushItem(_itemsContainer);
-      }
-      push.IsArrowVis = _gameplayType == GameType.Match3Move;
+      //}
+      // else
+      // {
+      //   _nextItemContainer.gameObject.SetActive(false);
+      //   push = GameData.Prefabs.CreatePushItem(_itemsContainer, (_gameplayPushType == PushType.PushOne)? Item.Push.One : Item.Push.One);
+      // }
+      //push.IsArrowVis = _gameplayType == GameType.Match3Move;
       push.vturn = new Vector2Int(Mathf.RoundToInt(_arrowsSelected[q].vDir.x), Mathf.RoundToInt(_arrowsSelected[q].vDir.z));
       push.transform.localPosition = _arrowsSelected[q].transform.localPosition - new Vector3Int(_arrowsSelected[q].dir.x/2, 0, _arrowsSelected[q].dir.y/2);
       push.dir = _arrowsSelected[q].dir;
@@ -414,12 +423,13 @@ public class Level : MonoBehaviour
       checkItems |= _pushing[p].MoveP(Time.deltaTime * _speed);
       var vg = _pushing[p].gridNext;
       bool next_inside = _grid.isInside(vg);
+      var pushType = _pushing[p].push;
       if(next_inside || _gameplayOutside)
       {
         Item item = _grid.geti(vg);
         if(item)
         {
-          if(_gameplayPushType == PushType.None)
+          if(_pushing[p].push == Item.Push.None) //_gameplayPushType == PushType.None)
           {
             item.Hit(_pushing[p]);
             _items.Add(_pushing[p]);
@@ -451,7 +461,7 @@ public class Level : MonoBehaviour
       }
       else
       {
-        if(_gameplayPushType == PushType.None)
+        if(pushType == Item.Push.None) //_gameplayPushType == PushType.None)
         {
           _items.Add(_pushing[p]);
           _pushing[p].Stop();
@@ -489,7 +499,7 @@ public class Level : MonoBehaviour
           {
             var gridDest = pushToMove.last().grid + toMove.dir;
             Item itemNext = _grid.geti(gridDest);
-            if(_gameplayPushType == PushType.PushLine)
+            if(pushType == Item.Push.Line)//_gameplayPushType == PushType.PushLine)
             {
               gridDest = _grid.getDest(pushToMove.last().grid, toMove.dir, !_gameplayOutside);
               if(_grid.isInside(gridDest))
@@ -634,20 +644,17 @@ public class Level : MonoBehaviour
   }
   void CheckMove()
   {
-    if(_gameplayType == GameType.Match3Move)
+    _grid.update(_items);
+    for(int q = 0; q < _items.Count; ++q)
     {
-      _grid.update(_items);
-      for(int q = 0; q < _items.Count; ++q)
+      if(_items[q].IsRegular && _items[q].IsMoveable)
       {
-        if(_items[q].IsRegular)
+        var dest = _grid.getDest(_items[q].grid, _items[q].vturn, !_gameplayOutside);
+        if(dest != _items[q].grid)
         {
-          var dest = _grid.getDest(_items[q].grid, _items[q].vturn, !_gameplayOutside);
-          if(dest != _items[q].grid)
-          {
-            _items[q].PushTo(dest);
-            _moving.Add(_items[q]);
-            break;
-          }
+          _items[q].PushTo(dest);
+          _moving.Add(_items[q]);
+          break;
         }
       }
     }
