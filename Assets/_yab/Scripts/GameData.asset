@@ -34,6 +34,7 @@ MonoBehaviour:
   - {fileID: 5382338121493344219, guid: 44c4a441099c24d9a9c2d09a20631260, type: 3}
   - {fileID: 5382338121493344219, guid: 3d2d0e944d3e6444dae8ece5d28df0f4, type: 3}
   - {fileID: 5382338121493344219, guid: e60c9c96ccc7c4833a85857fecbc9ed0, type: 3}
+  - {fileID: 5382338121493344219, guid: 127b378ab60a14264be98b4aac2055c0, type: 3}
   themeColors:
   - {r: 0.78, g: 0.7532353, b: 0.7532353, a: 1}
   - {r: 0.1882353, g: 0.17254902, b: 0.17254902, a: 1}
