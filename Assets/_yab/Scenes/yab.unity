@@ -1711,15 +1711,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1057109850387628728, guid: 44dab6fda00a3554d89f3e3933cedca2, type: 3}
       propertyPath: _autoFit
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1057109850387628728, guid: 44dab6fda00a3554d89f3e3933cedca2, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1057109850387628728, guid: 44dab6fda00a3554d89f3e3933cedca2, type: 3}
       propertyPath: _autoUpdateTrackedPOI
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3969958582868310480, guid: 44dab6fda00a3554d89f3e3933cedca2, type: 3}
       propertyPath: m_Name
@@ -1739,15 +1739,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8491482514022058379, guid: 44dab6fda00a3554d89f3e3933cedca2, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.92387956
+      value: 0.7660445
       objectReference: {fileID: 0}
     - target: {fileID: 8491482514022058379, guid: 44dab6fda00a3554d89f3e3933cedca2, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.38268343
+      value: 0.6427876
       objectReference: {fileID: 0}
     - target: {fileID: 8491482514022058379, guid: 44dab6fda00a3554d89f3e3933cedca2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 45
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 8491482514105513082, guid: 44dab6fda00a3554d89f3e3933cedca2, type: 3}
       propertyPath: m_CullingMask.m_Bits

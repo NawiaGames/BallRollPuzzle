@@ -19,6 +19,8 @@ public class Level : MonoBehaviour
   [SerializeField] Transform _gridContainer;
   [SerializeField] Transform _itemsContainer;
   [SerializeField] Transform _nextItemContainer;
+  [SerializeField] Transform _poiLT;
+  [SerializeField] Transform _poiRB;
 
   public class Grid
   {
@@ -179,12 +181,13 @@ public class Level : MonoBehaviour
   List<Item> _exploding = new List<Item>();
   List<Match3> _matching = new List<Match3>();
 
-
   Item _nextItem = null;
 
   void Awake()
   {
     _grid.init(_dim);
+    _poiLT.position = new Vector3(-_grid.dim().x/2 - 2, 0, _grid.dim().y / 2 + 2);
+    _poiRB.position = new Vector3(_grid.dim().x / 2 + 2, 0, -_grid.dim().y / 2 - 2);
     _items = _itemsContainer.GetComponentsInChildren<Item>().ToList();
     uiSummary = FindObjectOfType<UISummary>(true);
   }
@@ -671,7 +674,7 @@ public class Level : MonoBehaviour
         Succeed = !AnyColorItem;
         this.Invoke(() => uiSummary.Show(this), 0.5f);
       }
-    }    
+    }
   }
 
   void Update()
