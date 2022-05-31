@@ -77,7 +77,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _gameplayType
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _gridContainer
@@ -101,11 +101,15 @@ PrefabInstance:
       objectReference: {fileID: 8381947839899221933}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _gameplayOutside
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _gameplayPushType
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
+      propertyPath: _listItems.Array.size
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 9021463498802342378, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -268,6 +272,10 @@ PrefabInstance:
     - target: {fileID: 4327388485657350923, guid: d954e5e9c4683724cb6e4b05273af295, type: 3}
       propertyPath: m_Name
       value: specBombItem
+      objectReference: {fileID: 0}
+    - target: {fileID: 4327388485657350923, guid: d954e5e9c4683724cb6e4b05273af295, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7504906227862767392, guid: d954e5e9c4683724cb6e4b05273af295, type: 3}
       propertyPath: m_RootOrder
@@ -805,6 +813,10 @@ PrefabInstance:
     - target: {fileID: 4327388485657350923, guid: d954e5e9c4683724cb6e4b05273af295, type: 3}
       propertyPath: m_Name
       value: specBombItem
+      objectReference: {fileID: 0}
+    - target: {fileID: 4327388485657350923, guid: d954e5e9c4683724cb6e4b05273af295, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7504906227862767392, guid: d954e5e9c4683724cb6e4b05273af295, type: 3}
       propertyPath: m_RootOrder
