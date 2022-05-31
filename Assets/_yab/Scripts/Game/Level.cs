@@ -260,15 +260,10 @@ public class Level : MonoBehaviour
       }
       
     }
-
     _grid.update(_items);
-
-    //_items.ForEach((item) => item.IsArrowVis = _gameplayType == GameType.Match3Move);
 
     _nextItemContainer.gameObject.SetActive(true);
     _nextItem = CreateNextItem();
-    // if(_gameplayPushType != PushType.None)
-    //   _nextItemContainer.gameObject.SetActive(false);
   }
   List<Item> _pushing = new List<Item>();
 
