@@ -242,7 +242,7 @@ MonoBehaviour:
   _poiRB: {fileID: 7699192860217285146}
   _gameplayOutside: 0
   _dim: {x: 5, y: 5}
-  _speed: 8
+  _speed: 16
   _listItems: []
 --- !u!1 &5007030670280906191
 GameObject:
