@@ -216,7 +216,7 @@ public class Level : MonoBehaviour
     Vector2Int vgrid = Vector2Int.zero;
     for(int x = 0; x < _dim.x; ++x)
     {
-      vgrid.x = _dim.x / 2 + x;
+      vgrid.x = -_dim.x / 2 + x;
       vgrid.y = _dim.y / 2 + 1;
       var arrow = GameData.Prefabs.CreateArrow(_arrowsContainer);
       arrow.grid = vgrid;
