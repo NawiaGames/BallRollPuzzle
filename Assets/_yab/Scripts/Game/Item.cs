@@ -114,6 +114,10 @@ public class Item : MonoBehaviour
     StartCoroutine(WaitForEnd());
     //gameObject.SetActive(false);
   }
+  public void Deactivate()
+  {
+    _activatable.DeactivateObject();
+  }
   IEnumerator WaitForEnd()
   {
     yield return null;
@@ -179,14 +183,16 @@ public class Item : MonoBehaviour
       return;
     if(this.IsColorChanger)
     {
-      color = item.color;
-      name = item.gameObject.name;
       id = item.id;
+      color = item.color;
+      _special = Item.Spec.None;
+      name = item.gameObject.name;
     }
     else if(item.IsColorChanger)
     {
       item.id = id;
       item.color = color;
+      item._special = Item.Spec.None;
       item.gameObject.name = name;
     }
   }

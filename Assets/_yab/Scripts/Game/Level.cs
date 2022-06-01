@@ -190,6 +190,8 @@ public class Level : MonoBehaviour
     _poiRB.position = new Vector3(_grid.dim().x / 2 + 2, 0, -_grid.dim().y / 2 - 2);
     _items = _itemsContainer.GetComponentsInChildren<Item>().ToList();
     uiSummary = FindObjectOfType<UISummary>(true);
+    
+    _nextItemContainer.transform.position = new Vector3(0, 0, _grid.dim().y / 2 + 3);
   }
   void OnDestroy()
   {
@@ -332,6 +334,9 @@ public class Level : MonoBehaviour
       _listItems.RemoveAt(0);
     }
 
+    if(item)
+      item.transform.localPosition = Vector3.zero;
+
     return item;
   }
 
@@ -370,18 +375,8 @@ public class Level : MonoBehaviour
     for(int q = 0; q < _arrowsSelected.Count; ++q)
     {
       Item push = null;
-      //if(_gameplayPushType == PushType.None)
-      //{
-        _nextItemContainer.gameObject.SetActive(true);
-        push = Instantiate(_nextItem, _itemsContainer);
-        push.name = _nextItem.name;
-      //}
-      // else
-      // {
-      //   _nextItemContainer.gameObject.SetActive(false);
-      //   push = GameData.Prefabs.CreatePushItem(_itemsContainer, (_gameplayPushType == PushType.PushOne)? Item.Push.One : Item.Push.One);
-      // }
-      //push.IsArrowVis = _gameplayType == GameType.Match3Move;
+      push = Instantiate(_nextItem, _itemsContainer);
+      push.name = _nextItem.name;
       push.vturn = new Vector2Int(Mathf.RoundToInt(_arrowsSelected[q].vDir.x), Mathf.RoundToInt(_arrowsSelected[q].vDir.z));
       push.transform.localPosition = _arrowsSelected[q].transform.localPosition - new Vector3Int(_arrowsSelected[q].dir.x/2, 0, _arrowsSelected[q].dir.y/2);
       push.dir = _arrowsSelected[q].dir;
@@ -389,8 +384,12 @@ public class Level : MonoBehaviour
     }
     if(_arrowsSelected.Count > 0 && _nextItem)
     {
-      Destroy(_nextItem.gameObject);
-      _nextItem = null;
+      _nextItem.Deactivate();
+      this.Invoke(()=>
+      {
+        Destroy(_nextItem.gameObject);
+        _nextItem = null;
+      },0.25f);
     }
     _arrowsSelected.Clear();
     _arrows.ForEach((ar) => ar.IsSelected = false);
@@ -522,10 +521,10 @@ public class Level : MonoBehaviour
       var dir = _moving[q].dir;
       if(!_moving[q].Move(Time.deltaTime * _speed, _grid.dim()))
       {
-        var nextItem = _grid.geti(_moving[q].gridNext);
-        _moving[q].Hit(nextItem);
-        if(nextItem && nextItem.IsBomb)
-          _exploding.Add(nextItem);
+        var nextFieldItem = _grid.geti(_moving[q].gridNext);
+        _moving[q].Hit(nextFieldItem);
+        if(nextFieldItem && nextFieldItem.IsBomb)
+          _exploding.Add(nextFieldItem);
         if(_moving[q].IsBomb)
           _exploding.Add(_moving[q]);
         checkItems |= true;

@@ -82,6 +82,7 @@ public class GameData : ScriptableObject
       var prefab = prefabs.get_random();
       item = Instantiate(prefab, parent);
       item.name = prefab.name;
+      item.transform.position = Vector3.zero;
       return item;
     }    
   }
