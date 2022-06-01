@@ -182,6 +182,7 @@ public class Level : MonoBehaviour
   List<Match3> _matching = new List<Match3>();
 
   Item _nextItem = null;
+  bool _inputBlocked = false;
 
   void Awake()
   {
@@ -211,21 +212,21 @@ public class Level : MonoBehaviour
     Vector2Int vgrid = Vector2Int.zero;
     for(int x = 0; x < _dim.x; ++x)
     {
-      vgrid.x = -_dim.x / 2 + x;
+      vgrid.x = _dim.x / 2 + x;
       vgrid.y = _dim.y / 2 + 1;
       var arrow = GameData.Prefabs.CreateArrow(_arrowsContainer);
       arrow.grid = vgrid;
       arrow.dir = new Vector2Int(0, -1);
       _arrows.Add(arrow);
       float xx = (-_dim.x + 1) * 0.5f + x;
-      arrow.transform.localPosition = new Vector3(xx, 0, _dim.y/2 + 1.0f);
+      arrow.transform.localPosition = new Vector3(xx, 0, vgrid.y);
       arrow.transform.Rotate(new Vector3(0, 180, 0));
       arrow = GameData.Prefabs.CreateArrow(_arrowsContainer);
       vgrid.y = -_dim.y / 2 - 1;
       arrow.grid = vgrid;
       arrow.dir = new Vector2Int(0, 1);
       _arrows.Add(arrow);
-      arrow.transform.localPosition = new Vector3(xx, 0, -_dim.y/2 - 1.0f);
+      arrow.transform.localPosition = new Vector3(xx, 0, vgrid.y);
     }
     for(int y = 0; y < _dim.y; ++y)
     {
@@ -236,14 +237,14 @@ public class Level : MonoBehaviour
       arrow.dir = new Vector2Int(1, 0);      
       _arrows.Add(arrow);
       float yy = (-_dim.y + 1) * 0.5f + y;
-      arrow.transform.localPosition = new Vector3(-_dim.x/2 - 1.0f, 0, yy * scale);
+      arrow.transform.localPosition = new Vector3(vgrid.x, 0, yy);
       arrow.transform.Rotate(new Vector3(0, 90, 0));
       arrow = GameData.Prefabs.CreateArrow(_arrowsContainer);
       vgrid.x = _dim.x / 2 + 1;
       arrow.grid = vgrid;
       arrow.dir = new Vector2Int(-1, 0);
       _arrows.Add(arrow);
-      arrow.transform.localPosition = new Vector3(_dim.x / 2 + 1.0f, 0, -yy * scale);
+      arrow.transform.localPosition = new Vector3(vgrid.x, 0, yy);
       arrow.transform.Rotate(new Vector3(0, -90, 0));
     }
     
@@ -296,6 +297,18 @@ public class Level : MonoBehaviour
     _arrowsSelected.Add(arrowBeg);
     _arrowsSelected.Add(arrowEnd);
     _arrowsSelected = _arrowsSelected.Distinct().ToList();
+
+    for(int q = 0; q < _arrowsSelected.Count; ++q)
+    {
+      _arrowsSelected[q].IsBlocked = _grid.geti(_arrowsSelected[q].grid + _arrowsSelected[q].dir) != null;
+      if(_arrowsSelected[q].IsBlocked)
+      {
+        _arrowsSelected.RemoveAt(q);
+        --q;
+      }
+      else
+        _arrowsSelected[q].IsSelected = _arrowsSelected[q].IsSelected;
+    }
   }
   void ClearArrows()
   {
@@ -303,6 +316,11 @@ public class Level : MonoBehaviour
     arrowEnd = null;
     for(int q = 0; q < _arrows.Count; ++q)
       _arrows[q].IsSelected = false;
+  }
+  void BlockArrows(bool block)
+  {
+    for(int q = 0; q < _arrows.Count; ++q)
+      _arrows[q].IsBlocked = block;   
   }
 
   Item CreateNextItem()
@@ -675,5 +693,11 @@ public class Level : MonoBehaviour
   {
     if(_started)
       MoveItems();
+
+    if((!_allowInput || !AnyColorItem) ^ _inputBlocked)
+    {
+      _inputBlocked = !_inputBlocked;
+      BlockArrows(_inputBlocked);
+    }
   }
 }

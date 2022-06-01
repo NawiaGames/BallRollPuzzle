@@ -9,6 +9,7 @@ public class Arrow : MonoBehaviour
   [SerializeField] Color _colorSelected;
 
   bool    _selected = false;
+  bool    _blocked = false;
   Vector2Int _grid = Vector2Int.zero;
 
   void Awake()
@@ -16,6 +17,7 @@ public class Arrow : MonoBehaviour
     _sr.color = _colorNormal;
   }
   public bool        IsSelected { get => _selected; set { _selected = value; _sr.color = (_selected) ? _colorSelected : _colorNormal; } }
+  public bool        IsBlocked { get => _blocked; set { _blocked = value; _sr.color = (_blocked)? Color.grey : _colorNormal;}}
   public Vector3     vPos => transform.localPosition;
   public Vector2Int  grid {get; set;}
   public Vector2Int  dir {get; set;}

@@ -17,8 +17,6 @@ MonoBehaviour:
   version: 0
   progress:
     level: 0
-    itemsAppeared: 01000000
-    extrasAppeared: []
   economy:
     cash: 0
   selectedTheme: 0
