@@ -7,6 +7,7 @@ using GameLib.CameraSystem;
 using GameLib.Splines;
 using GameLib.InputSystem;
 using GameLib.Utilities;
+using TMPLbl = TMPro.TextMeshPro;
 
 public class Level : MonoBehaviour
 {
@@ -19,8 +20,10 @@ public class Level : MonoBehaviour
   [SerializeField] Transform _gridContainer;
   [SerializeField] Transform _itemsContainer;
   [SerializeField] Transform _nextItemContainer;
+  [SerializeField] Transform _trayItemContainer;
   [SerializeField] Transform _poiLT;
   [SerializeField] Transform _poiRB;
+  [SerializeField] TMPLbl    _ballInfo;
 
   public class Grid
   {
@@ -192,6 +195,7 @@ public class Level : MonoBehaviour
     _items = _itemsContainer.GetComponentsInChildren<Item>().ToList();
     uiSummary = FindObjectOfType<UISummary>(true);
     
+    _nextItemContainer.gameObject.SetActive(true);
     _nextItemContainer.transform.position = new Vector3(0, 0, _grid.dim().y / 2 + 3);
   }
   void OnDestroy()
@@ -332,28 +336,31 @@ public class Level : MonoBehaviour
       if(next_item != null)
       {
         if(next_item.IsRandItem)
-          item = GameData.Prefabs.CreateRandItem(_nextItemContainer, false);
+          item = GameData.Prefabs.CreateRandItem(_trayItemContainer, false);
         else if(next_item.IsRandMoveItem)
-          item = GameData.Prefabs.CreateRandItem(_nextItemContainer, true);
+          item = GameData.Prefabs.CreateRandItem(_trayItemContainer, true);
         else if(next_item.IsRandPush)
-          item = GameData.Prefabs.CreatePushItem(_nextItemContainer, (Random.value < 0.5f)? Item.Push.One : Item.Push.Line);
+          item = GameData.Prefabs.CreatePushItem(_trayItemContainer, (Random.value < 0.5f)? Item.Push.One : Item.Push.Line);
         else  
-          item = Instantiate(_listItems[0], _nextItemContainer);
+          item = Instantiate(_listItems[0], _trayItemContainer);
         //item.name = _listItems[0].name;
       }
       else
       {
         List<string> names = _items.Select((Item it) => it.name).Distinct().ToList();
         if(names.Count > 0)
-          item = GameData.Prefabs.CreateRandItem(names, _nextItemContainer);
+          item = GameData.Prefabs.CreateRandItem(names, _trayItemContainer);
         else
-          item = GameData.Prefabs.CreateRandItem(_nextItemContainer, false);
+          item = GameData.Prefabs.CreateRandItem(_trayItemContainer, false);
       }
       _listItems.RemoveAt(0);
+      _ballInfo.text = "" + _listItems.Count + "x moves";
     }
 
     if(item)
+    {
       item.transform.localPosition = Vector3.zero;
+    }
 
     return item;
   }
