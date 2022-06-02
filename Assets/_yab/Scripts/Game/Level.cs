@@ -30,11 +30,18 @@ public class Level : MonoBehaviour
     Vector2Int _dim = Vector2Int.zero;
     Item[,]    _grid = null;
     GridElem[,] _elems = null;
+    bool[,]    _fields = null;
 
     public void init(Vector2Int dims)
     {
       _grid = new Item[dims.y, dims.x];
       _elems = new GridElem[dims.y, dims.x];
+      _fields = new bool[dims.y, dims.x];
+      for(int y = 0;y < dims.y; ++y)
+      {
+        for(int x = 0; x < dims.x; ++x)
+          _fields[y,x] = true;
+      }
       _dim = dims;
     }
 
@@ -43,7 +50,14 @@ public class Level : MonoBehaviour
       System.Array.Clear(_grid, 0, _grid.Length);
     }
     public Vector2Int dim() => _dim;
-    public bool isInside(Vector2Int v) => v.x >= -_dim.x/2  && v.x <= _dim.x/2 && v.y >= -_dim.y/2  && v.y <= _dim.y/2;
+    public bool isInside(Vector2Int v)
+    {
+      bool inside = v.x >= -_dim.x/2  && v.x <= _dim.x/2 && v.y >= -_dim.y/2  && v.y <= _dim.y/2;
+      if(inside)
+        inside &= isField(v); 
+
+      return inside;
+    }
 
     public void set(Item item)
     {
@@ -60,10 +74,11 @@ public class Level : MonoBehaviour
     }
     public Item geta(Vector2Int grid)
     {
+      Item item = null;
       if(grid.x >= 0 && grid.x < dim().x && grid.y >= 0 && grid.y < dim().y)
-        return _grid[grid.y, grid.x];
-      else
-        return null;  
+        item = _grid[grid.y, grid.x];
+      
+      return item;
     }
     public Vector2Int clamp(Vector2Int igrid)
     {
@@ -137,6 +152,7 @@ public class Level : MonoBehaviour
         {
           var v = _dim / 2 + items[q].grid;
           _elems[v.y, v.x].gameObject.SetActive(false);
+          _fields[v.y, v.x] = false;
         }
       }      
     }
@@ -145,10 +161,17 @@ public class Level : MonoBehaviour
       var v = _dim / 2 + elem.grid;
       _elems[v.y, v.x] = elem;
     }
-    // public Item seta(Vector2Int grid, Item item)
-    // {
-    //   _grid[grid.y, grid.x] = item;
-    // }
+    public bool isField(Vector2Int v, bool outside_ret = false)
+    {
+      if(!(v.x >= -_dim.x / 2 && v.x <= _dim.x / 2 && v.y >= -_dim.y / 2 && v.y <= _dim.y / 2))
+        return outside_ret;
+      var vv = v + _dim / 2;
+      return _fields[vv.y, vv.x];
+    }
+    public bool isBlocked(Vector2Int grid)
+    {
+      return geti(grid) != null || !isField(grid);
+    }
   }
   public struct Match3
   {
@@ -288,6 +311,16 @@ public class Level : MonoBehaviour
     }
     _grid.update(_items);
     _grid.updateElems(_items);
+    _items.RemoveAll((item) => 
+    { 
+      if(item.IsRemoveElem)
+      {
+        _grid.set(item.grid, null);
+        return true;
+      }
+      else
+        return false;
+    });
 
     _nextItemContainer.gameObject.SetActive(true);
     _nextItem = CreateNextItem();
@@ -325,7 +358,7 @@ public class Level : MonoBehaviour
 
     for(int q = 0; q < _arrowsSelected.Count; ++q)
     {
-      _arrowsSelected[q].IsBlocked = _grid.geti(_arrowsSelected[q].grid + _arrowsSelected[q].dir) != null;
+      _arrowsSelected[q].IsBlocked = _grid.isBlocked(_arrowsSelected[q].grid + _arrowsSelected[q].dir); //_grid.geti(_arrowsSelected[q].grid + _arrowsSelected[q].dir) != null;
       if(_arrowsSelected[q].IsBlocked)
       {
         _arrowsSelected.RemoveAt(q);
@@ -357,7 +390,7 @@ public class Level : MonoBehaviour
   {
     for(int q = 0; q < _arrows.Count; ++q)
     {
-      if(_grid.geti(_arrows[q].grid + _arrows[q].dir) != null)
+      if(_grid.isBlocked(_arrows[q].grid + _arrows[q].dir)) // _grid.geti(_arrows[q].grid + _arrows[q].dir) != null)
         _arrows[q].IsBlocked = true;
     }
   }
@@ -485,7 +518,7 @@ public class Level : MonoBehaviour
           }
           else //if(_gameplayPushType == PushType.PushOne || _gameplayPushType == PushType.PushLine)
           {
-            if(!_grid.geti(vg).IsStatic && !_grid.geti(vg).IsRemoveElem)
+            if(!_grid.geti(vg).IsStatic)
             {
               toMove = _grid.geti(vg);
               toMove.dir = _pushing[p].dir;
@@ -501,7 +534,7 @@ public class Level : MonoBehaviour
         }
         else
         {
-          if(!_grid.isInside(_pushing[p].grid) && !next_inside)
+          if((!_grid.isInside(_pushing[p].grid) && !next_inside) || !_grid.isField(_pushing[p].grid, true))
           {
             _pushing[p].Hide();
             _pushing.RemoveAt(p);
@@ -535,7 +568,7 @@ public class Level : MonoBehaviour
           if(_grid.isInside(v))
           {
             var item = _grid.geti(v);
-            if(item != null && !item.IsStatic && !item.IsRemoveElem)
+            if(item != null && !item.IsStatic) // && !item.IsRemoveElem)
               pushToMove.Add(item);
             else
               break;
@@ -581,7 +614,15 @@ public class Level : MonoBehaviour
     for(int q = 0; q < _moving.Count; ++q)
     {
       var dir = _moving[q].dir;
-      if(!_moving[q].Move(Time.deltaTime * _speed, _grid.dim()))
+      bool moving = _moving[q].Move(Time.deltaTime * _speed, _grid.dim());
+      if(!_grid.isInside(_moving[q].grid))
+      {
+        _moving[q].Hide();
+        _moving.RemoveAt(q);
+        --q;
+        checkItems |= true;
+      }
+      else if(!moving)
       {
         var nextFieldItem = _grid.geti(_moving[q].gridNext);
         _moving[q].Hit(nextFieldItem);

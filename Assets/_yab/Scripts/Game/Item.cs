@@ -64,7 +64,7 @@ public class Item : MonoBehaviour
     var v = transform.localRotation * new Vector3(0, 0, 1);
     _vturn.x = Mathf.RoundToInt(v.x);
     _vturn.y = Mathf.RoundToInt(v.z);
-
+    name = name.Replace("(Clone)", "");
     if(!IsRemoveElem)
     {
       _activatable.ActivateObject();
@@ -173,6 +173,7 @@ public class Item : MonoBehaviour
 
     bool ret = true;
     transform.localPosition = Vector3.MoveTowards(transform.localPosition, toPos(_gridEnd), dt);
+    grid = toGridT(transform.localPosition, _dir);
     if(Mathf.Approximately(Vector3.Distance(transform.localPosition, toPos(_gridEnd)), 0))
     {
       _dir = Vector2Int.zero;
