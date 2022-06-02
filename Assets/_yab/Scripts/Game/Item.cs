@@ -29,6 +29,8 @@ public class Item : MonoBehaviour
     RandomPush,
     RandomItem,
     RandomMoveItem,
+    
+    RemoveElem = 2200,
   }
 
   MeshRenderer _mr = null;
@@ -63,8 +65,11 @@ public class Item : MonoBehaviour
     _vturn.x = Mathf.RoundToInt(v.x);
     _vturn.y = Mathf.RoundToInt(v.z);
 
-    _activatable.ActivateObject();
-    onShow?.Invoke(this);
+    if(!IsRemoveElem)
+    {
+      _activatable.ActivateObject();
+      onShow?.Invoke(this);
+    }
   }
   public int   id { get => _id; set{ _id = value;}}
   public Color color
@@ -106,6 +111,7 @@ public class Item : MonoBehaviour
   public bool IsRandItem => _special == Spec.RandomItem;
   public bool IsRandMoveItem => _special == Spec.RandomMoveItem;
   public bool IsRandPush => _special == Spec.RandomPush;
+  public bool IsRemoveElem => _special == Spec.RemoveElem;
 
   public void Hide()
   {
@@ -140,7 +146,7 @@ public class Item : MonoBehaviour
   }
   public void PushBy(Vector2Int pushDir)
   {
-    if(IsStatic)
+    if(IsStatic || IsRemoveElem)
       return;
       
     _dir = pushDir;
@@ -148,7 +154,7 @@ public class Item : MonoBehaviour
   }
   public void PushTo(Vector2Int gridDest)
   {
-    if(IsStatic)
+    if(IsStatic || IsRemoveElem)
       return;
 
     _dir = (gridDest - grid).to_units();

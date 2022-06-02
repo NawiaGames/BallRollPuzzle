@@ -11,8 +11,9 @@ public class GridElem : MonoBehaviour
   [SerializeField] AnimationCurve animCurve;
   
   bool _even = true;
-
   public bool even{get => _even; set{_even = value; SetColor();}}
+  public Vector2Int grid {get; set;}
+
 
   void SetColor()
   {

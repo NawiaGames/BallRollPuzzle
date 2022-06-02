@@ -29,10 +29,12 @@ public class Level : MonoBehaviour
   {
     Vector2Int _dim = Vector2Int.zero;
     Item[,]    _grid = null;
+    GridElem[,] _elems = null;
 
     public void init(Vector2Int dims)
     {
       _grid = new Item[dims.y, dims.x];
+      _elems = new GridElem[dims.y, dims.x];
       _dim = dims;
     }
 
@@ -46,7 +48,7 @@ public class Level : MonoBehaviour
     public void set(Item item)
     {
       set(item.grid, item);
-    } 
+    }
     public Item geti(Vector2Int igrid)
     {
       return geta(igrid + _dim/2);
@@ -126,6 +128,22 @@ public class Level : MonoBehaviour
           q--;
         } 
       }
+    }
+    public void updateElems(List<Item> items)
+    {
+      for(int q = 0; q < items.Count; ++q)
+      {
+        if(items[q].IsRemoveElem)
+        {
+          var v = _dim / 2 + items[q].grid;
+          _elems[v.y, v.x].gameObject.SetActive(false);
+        }
+      }      
+    }
+    public void setElem(GridElem elem)
+    {
+      var v = _dim / 2 + elem.grid;
+      _elems[v.y, v.x] = elem;
     }
     // public Item seta(Vector2Int grid, Item item)
     // {
@@ -251,23 +269,25 @@ public class Level : MonoBehaviour
       arrow.transform.localPosition = new Vector3(vgrid.x, 0, yy);
       arrow.transform.Rotate(new Vector3(0, -90, 0));
     }
-    
+
     int t = 0;
     for(int y = 0; y < _dim.y; ++y)
     {
-      float yy = (-_dim.y + 1) * 0.5f + y;
+      float yy = Mathf.RoundToInt((-_dim.y + 1) * 0.5f + y);
       for(int x = 0; x < _dim.x; ++x)
       {
-        float xx = (-_dim.x + 1) * 0.5f + x;
+        float xx = Mathf.RoundToInt((-_dim.x + 1) * 0.5f + x);
         var ge = GameData.Prefabs.CreateGridElem(_gridContainer);
         ge.even = ((x ^ y) & 1) == 0;
         ge.transform.localPosition = new Vector3(xx * scale, 0.05f, yy * scale);
+        ge.grid = new Vector2Int((int)xx, (int)yy);
         //ge.Touch(t);
+        _grid.setElem(ge);
         t--;
       }
-      
     }
     _grid.update(_items);
+    _grid.updateElems(_items);
 
     _nextItemContainer.gameObject.SetActive(true);
     _nextItem = CreateNextItem();
@@ -464,7 +484,7 @@ public class Level : MonoBehaviour
           }
           else //if(_gameplayPushType == PushType.PushOne || _gameplayPushType == PushType.PushLine)
           {
-            if(!_grid.geti(vg).IsStatic)
+            if(!_grid.geti(vg).IsStatic && !_grid.geti(vg).IsRemoveElem)
             {
               toMove = _grid.geti(vg);
               toMove.dir = _pushing[p].dir;
@@ -514,7 +534,7 @@ public class Level : MonoBehaviour
           if(_grid.isInside(v))
           {
             var item = _grid.geti(v);
-            if(item != null && !item.IsStatic)
+            if(item != null && !item.IsStatic && !item.IsRemoveElem)
               pushToMove.Add(item);
             else
               break;
@@ -541,7 +561,7 @@ public class Level : MonoBehaviour
             }
             else
             {
-              if(!(itemNext && itemNext.IsStatic))
+              if(!(itemNext && (itemNext.IsStatic || itemNext.IsRemoveElem)))
                 pushToMove.ForEach((item) => item.PushBy(toMove.dir));
               else
                 pushToMove.Clear();  
@@ -657,7 +677,7 @@ public class Level : MonoBehaviour
       List<Item> items =_grid.getNB(bomb.grid);
       for(int n = 0; n <items.Count; ++n)
       {
-        if(!items[n].IsStatic)
+        if(!items[n].IsStatic && !items[n].IsRemoveElem)
         {
           items[n].Hide();
           toRemove.Add(items[n]);
@@ -722,8 +742,6 @@ public class Level : MonoBehaviour
       _inputBlocked = !_inputBlocked;
       BlockArrows(_inputBlocked);
     }
-    // if(_allowInput && !_inputBlocked)
-    //   UpdateArrows();
   }
 
   void OnDrawGizmos()
