@@ -395,6 +395,7 @@ public class Level : MonoBehaviour
     if(item)
     {
       item.transform.localPosition = Vector3.zero;
+      item.name = item.name.Replace("(Clone)", "");
     }
 
     return item;

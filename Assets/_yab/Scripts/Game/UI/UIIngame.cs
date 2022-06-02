@@ -38,7 +38,7 @@ public class UIIngame : MonoBehaviour
     // else if(lvl.pushType == Level.PushType.PushLine)
     //   push = "push to obstacle";
     // lblLevelInfo.text += "pushType: " + push + "\n";
-    lblLevelInfo.text += "push outside gamefield: " + (lvl.gameOutside).ToString();
+    //lblLevelInfo.text += "push outside gamefield: " + (lvl.gameOutside).ToString();
   }
   public void OnBtnRestart()
   {
