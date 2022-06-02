@@ -725,4 +725,24 @@ public class Level : MonoBehaviour
     // if(_allowInput && !_inputBlocked)
     //   UpdateArrows();
   }
+
+  void OnDrawGizmos()
+  {
+    Gizmos.color = Color.red;
+    Vector3 vLB = new Vector3(-_dim.x * 0.5f, 0, -_dim.y * 0.5f);
+    Vector3 vRT = new Vector3( _dim.x * 0.5f, 0, _dim.y * 0.5f);
+    var v1 = Vector3.zero;
+    v1.x = vLB.x;
+    v1.z = vRT.z;
+    Gizmos.DrawLine(vLB, v1);
+    v1.x = vRT.x;
+    v1.z = vLB.z;
+    Gizmos.DrawLine(vLB, v1);
+    v1.x = vRT.x;
+    v1.z = vLB.z;
+    Gizmos.DrawLine(vRT, v1);
+    v1.x = vLB.x;
+    v1.z = vRT.z;
+    Gizmos.DrawLine(vRT, v1);
+  }
 }
