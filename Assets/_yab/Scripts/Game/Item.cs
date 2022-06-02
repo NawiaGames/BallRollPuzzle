@@ -181,14 +181,14 @@ public class Item : MonoBehaviour
   {
     if(item == null)
       return;
-    if(this.IsColorChanger)
+    if(this.IsColorChanger && item.IsRegular)
     {
       id = item.id;
       color = item.color;
       _special = Item.Spec.None;
       name = item.gameObject.name;
     }
-    else if(item.IsColorChanger)
+    else if(item.IsColorChanger && this.IsRegular)
     {
       item.id = id;
       item.color = color;

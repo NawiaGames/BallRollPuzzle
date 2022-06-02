@@ -271,6 +271,7 @@ public class Level : MonoBehaviour
 
     _nextItemContainer.gameObject.SetActive(true);
     _nextItem = CreateNextItem();
+    UpdateArrows();
   }
   List<Item> _pushing = new List<Item>();
 
@@ -313,6 +314,7 @@ public class Level : MonoBehaviour
       else
         _arrowsSelected[q].IsSelected = _arrowsSelected[q].IsSelected;
     }
+    UpdateArrows();
   }
   void ClearArrows()
   {
@@ -320,11 +322,24 @@ public class Level : MonoBehaviour
     arrowEnd = null;
     for(int q = 0; q < _arrows.Count; ++q)
       _arrows[q].IsSelected = false;
+
+    UpdateArrows();  
   }
   void BlockArrows(bool block)
   {
     for(int q = 0; q < _arrows.Count; ++q)
-      _arrows[q].IsBlocked = block;   
+    {
+      _arrows[q].IsBlocked = block;
+    }
+    UpdateArrows();
+  }
+  void UpdateArrows()
+  {
+    for(int q = 0; q < _arrows.Count; ++q)
+    {
+      if(_grid.geti(_arrows[q].grid + _arrows[q].dir) != null)
+        _arrows[q].IsBlocked = true;
+    }
   }
 
   Item CreateNextItem()
@@ -418,6 +433,7 @@ public class Level : MonoBehaviour
     }
     _arrowsSelected.Clear();
     _arrows.ForEach((ar) => ar.IsSelected = false);
+    UpdateArrows();
   }
 
   void MoveItems()
@@ -594,7 +610,7 @@ public class Level : MonoBehaviour
       {
         v.x = x; v.y = y;
         var item0 = _grid.geta(v);
-        if(item0 && (item0.IsRegular || item0.IsColorChanger))
+        if(item0 && item0.IsRegular) // || item0.IsColorChanger))
         {
           {
             List<Item> match_items = new List<Item>();
@@ -706,5 +722,7 @@ public class Level : MonoBehaviour
       _inputBlocked = !_inputBlocked;
       BlockArrows(_inputBlocked);
     }
+    // if(_allowInput && !_inputBlocked)
+    //   UpdateArrows();
   }
 }
