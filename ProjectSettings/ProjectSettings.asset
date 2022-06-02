@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: Nawia Games
-  productName: YAB
+  productName: RollBallPuzzle
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -153,14 +153,14 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.nawiagames.yab
+    Android: com.nawiagames.roll.ball.puzzle
     Standalone: com.NawiaGames.YAB
   buildNumber:
     Standalone: 0
     iPhone: 0
     tvOS: 0
   overrideDefaultApplicationIdentifier: 1
-  AndroidBundleVersionCode: 3
+  AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 23
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
@@ -729,7 +729,7 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
-    Android: LK_HAS_LION_ANALYTICS;HAS_LION_GAME_ANALYTICS_SDK;HAS_LION_APPLOVIN_SDK;gameanalytics_max_enabled;HAS_LION_ADJUST_SDK;HAS_LION_FACEBOOK_SDK;HAS_LION_GOOGLE_REVIEW_SDK;GOOGLE_PLAY_SERVICES
+    Android: 
     iPhone: LK_HAS_LION_ANALYTICS;gameanalytics_max_enabled
   additionalCompilerArguments: {}
   platformArchitecture: {}
