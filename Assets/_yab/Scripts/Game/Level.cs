@@ -646,7 +646,7 @@ public class Level : MonoBehaviour
     if(_moving.Count == 0 && _pushing.Count == 0 && _matching.Count == 0 && checkItems)
     {
       _grid.update(_items);
-      CheckMove();
+      this.Invoke(()=>CheckMove(),0.2f);
       //CheckBombs();
       if(_nextItem == null)
       {
@@ -768,8 +768,10 @@ public class Level : MonoBehaviour
       if(!AnyColorItem || movesAvail == 0)
       {
         Finished = true;
-        Succeed = !AnyColorItem;
-        this.Invoke(() => uiSummary.Show(this), 0.5f);
+        this.Invoke(() => 
+        {
+          Succeed = !AnyColorItem; uiSummary.Show(this);
+        }, 0.5f);
       }
     }
   }
