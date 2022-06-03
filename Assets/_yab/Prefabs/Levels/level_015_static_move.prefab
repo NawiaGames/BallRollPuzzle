@@ -401,7 +401,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4327388485657350923, guid: 123166e07584f6f4fad8d79e1a5fa475, type: 3}
       propertyPath: m_Name
-      value: specStaticItem (1)
+      value: specStaticItem
       objectReference: {fileID: 0}
     - target: {fileID: 7504906227862767392, guid: 123166e07584f6f4fad8d79e1a5fa475, type: 3}
       propertyPath: m_RootOrder
