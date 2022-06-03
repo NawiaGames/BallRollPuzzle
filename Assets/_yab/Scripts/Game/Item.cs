@@ -149,8 +149,8 @@ public class Item : MonoBehaviour
     if(IsStatic || IsRemoveElem)
       return;
       
-    _dir = pushDir;
-    _gridEnd = grid + _dir;
+    _dir = pushDir.to_units();
+    _gridEnd = grid + pushDir;
   }
   public void PushTo(Vector2Int gridDest)
   {
