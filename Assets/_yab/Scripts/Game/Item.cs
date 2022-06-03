@@ -60,11 +60,14 @@ public class Item : MonoBehaviour
     _mr.GetPropertyBlock(_mpb, 0);
 
     color = _color;
+    transform.localPosition = transform.localPosition.round();
     grid = new Vector2Int(Mathf.RoundToInt(transform.localPosition.x), Mathf.RoundToInt(transform.localPosition.z));
     var v = transform.localRotation * new Vector3(0, 0, 1);
     _vturn.x = Mathf.RoundToInt(v.x);
     _vturn.y = Mathf.RoundToInt(v.z);
+
     name = name.Replace("(Clone)", "");
+
     if(!IsRemoveElem)
     {
       _activatable.ActivateObject();

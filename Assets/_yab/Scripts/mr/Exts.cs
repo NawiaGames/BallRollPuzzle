@@ -49,23 +49,27 @@ public static class Vector3Ex
   {
     return new Vector2(vec.x, vec.z);
   }
-  public static void set_x(this Vector3? v, float x)
-  {
-    var vt = v.Value;
-    vt.x = x;
-    v = vt;
-  }
-  public static void set_y(this Vector3? v, float y)
-  {
-    var vt = v.Value;
-    vt.y = y;
-    v = vt;
-  }
+  // public static void set_x(this Vector3? v, float x)
+  // {
+  //   var vt = v.Value;
+  //   vt.x = x;
+  //   v = vt;
+  // }
+  // public static void set_y(this Vector3? v, float y)
+  // {
+  //   var vt = v.Value;
+  //   vt.y = y;
+  //   v = vt;
+  // }
   public static void set_z(this Vector3? v, float z)
   {
     var vt = v.Value;
     vt.z = z;
     v = vt;
+  }
+  public static Vector3 round(this Vector3 v)
+  {
+    return new Vector3(Mathf.Round(v.x), Mathf.Round(v.y), Mathf.Round(v.z));
   }
 }
 public static class TrasformEx
