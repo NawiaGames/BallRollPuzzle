@@ -67,12 +67,6 @@ public class Item : MonoBehaviour
     _vturn.y = Mathf.RoundToInt(v.z);
 
     name = name.Replace("(Clone)", "");
-
-    if(!IsRemoveElem)
-    {
-      _activatable.ActivateObject();
-      onShow?.Invoke(this);
-    }
   }
   public int   id { get => _id; set{ _id = value;}}
   public Color color
@@ -116,6 +110,14 @@ public class Item : MonoBehaviour
   public bool IsRandPush => _special == Spec.RandomPush;
   public bool IsRemoveElem => _special == Spec.RemoveElem;
 
+  public void Show()
+  {
+    if(!IsRemoveElem)
+    {
+      _activatable.ActivateObject();
+      onShow?.Invoke(this);
+    }
+  }
   public void Hide()
   {
     onHide?.Invoke(this);

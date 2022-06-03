@@ -247,8 +247,16 @@ public class Level : MonoBehaviour
   {
     yield return null;
     Init();
+
+    yield return new WaitForSeconds(0.125f * 0.5f);
     _started = true;
     onStart?.Invoke(this);
+    _items.Sort((Item i0, Item i1) => (int)(i0.grid.y * 100 + i0.grid.x) - (i1.grid.y * 100 + i1.grid.x));
+    for(int q = 0; q < _items.Count; ++q)
+    {
+      yield return new WaitForSeconds(0.0625f / 4);
+      _items[q].Show();
+    }
   }
   
   void Init()
