@@ -60,14 +60,14 @@ public class GridElem : MonoBehaviour
   {
     ProcessSelection();
 
-    var _voff = _vpos;
-    _vforce = -0.05f * _voff;
-    _vvel += _vforce;
-    _vpos += _vvel * Time.deltaTime;
-    _fx.transform.localPosition = _vpos;
-    _vvel *= 0.975f;
-
-    if(Input.GetKeyDown(KeyCode.Alpha0))
-      TouchRandom();
+    //if(_vvel.sqrMagnitude > 0.01f)
+    {
+      var _voff = _vpos;
+      _vforce = -0.15f * _voff;
+      _vvel += _vforce;
+      _vpos += _vvel * Time.deltaTime * 4;
+      _fx.transform.localPosition = _vpos;
+      _vvel *= 0.95f;
+    }
   }
 }
