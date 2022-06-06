@@ -293,6 +293,7 @@ public class Level : MonoBehaviour
   {
     float scale = 1;
     Vector2Int vgrid = Vector2Int.zero;
+    List<Arrow> listT = new List<Arrow>(),listR = new List<Arrow>(), listB = new List<Arrow>(), listL = new List<Arrow>();
     for(int x = 0; x < _dim.x; ++x)
     {
       vgrid.x = -_dim.x / 2 + x;
@@ -300,7 +301,8 @@ public class Level : MonoBehaviour
       var arrow = GameData.Prefabs.CreateArrow(_arrowsContainer);
       arrow.grid = vgrid;
       arrow.dir = new Vector2Int(0, -1);
-      _arrows.Add(arrow);
+      //_arrows.Add(arrow);
+      listT.Add(arrow);
       float xx = (-_dim.x + 1) * 0.5f + x;
       arrow.transform.localPosition = new Vector3(xx, 0, vgrid.y);
       arrow.transform.Rotate(new Vector3(0, 180, 0));
@@ -308,7 +310,8 @@ public class Level : MonoBehaviour
       vgrid.y = -_dim.y / 2 - 1;
       arrow.grid = vgrid;
       arrow.dir = new Vector2Int(0, 1);
-      _arrows.Add(arrow);
+      //_arrows.Add(arrow);
+      listB.Add(arrow);
       arrow.transform.localPosition = new Vector3(xx, 0, vgrid.y);
     }
     for(int y = 0; y < _dim.y; ++y)
@@ -318,7 +321,8 @@ public class Level : MonoBehaviour
       var arrow = GameData.Prefabs.CreateArrow(_arrowsContainer);
       arrow.grid = vgrid;
       arrow.dir = new Vector2Int(1, 0);      
-      _arrows.Add(arrow);
+      //_arrows.Add(arrow);
+      listL.Add(arrow);
       float yy = (-_dim.y + 1) * 0.5f + y;
       arrow.transform.localPosition = new Vector3(vgrid.x, 0, yy);
       arrow.transform.Rotate(new Vector3(0, 90, 0));
@@ -326,10 +330,17 @@ public class Level : MonoBehaviour
       vgrid.x = _dim.x / 2 + 1;
       arrow.grid = vgrid;
       arrow.dir = new Vector2Int(-1, 0);
-      _arrows.Add(arrow);
+      //_arrows.Add(arrow);
+      listR.Add(arrow);
       arrow.transform.localPosition = new Vector3(vgrid.x, 0, yy);
       arrow.transform.Rotate(new Vector3(0, -90, 0));
     }
+    _arrows.AddRange(listT);
+    listR.Reverse();
+    _arrows.AddRange(listR);
+    listB.Reverse();
+    _arrows.AddRange(listB);
+    _arrows.AddRange(listL);
 
     int t = 0;
     for(int y = 0; y < _dim.y; ++y)
