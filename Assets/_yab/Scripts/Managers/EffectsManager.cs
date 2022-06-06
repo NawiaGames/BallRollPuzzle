@@ -33,12 +33,14 @@ public class EffectsManager : MonoBehaviour
     {
       Item.onHide += OnItemDestroy;
       Item.onBombExplode += OnItemBombExplo;
+      Level.onItemsMatched += OnItemsMatched;
       Level.onFinished += OnLevelFinished;
     }
     private void OnDisable()
     {
       Item.onHide -= OnItemDestroy;
       Item.onBombExplode -= OnItemBombExplo;
+      Level.onItemsMatched += OnItemsMatched;
       Level.onFinished -= OnLevelFinished;
     }
 
@@ -64,6 +66,13 @@ public class EffectsManager : MonoBehaviour
       psmain.startColor = sender.color;
 
       PlayFXAtPosition(fxPaintSplat, sender.transform.position, 5);
+    }
+    void OnItemsMatched(Level.Match3 match)
+    {
+      Vector3 v = match.MidPos();
+      //PlayFXAtPosition(fxPaintSplat, v, 5);
+      infoLblMan.ShowTextPopup(v, "match!", match.GetColor());
+      cameraShakeContainer.Shake(objShakePresetLo);
     }
     void OnFx00(object sender)
     {

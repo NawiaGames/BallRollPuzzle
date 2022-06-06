@@ -14,6 +14,7 @@ public class Level : MonoBehaviour
   public static System.Action<Vector3> onIntroFx;
   public static System.Action<Level>   onStart, onPlay, onFirstInteraction, onTutorialStart;
   public static System.Action<Level>   onFinished;
+  public static System.Action<Match3>  onItemsMatched;
 
   [Header("Refs")]
   [SerializeField] Transform _arrowsContainer;
@@ -218,6 +219,21 @@ public class Level : MonoBehaviour
     public Match3(List<Item> list)
     {
       _matches = new List<Item>(list);
+    }
+
+    public Vector3 MidPos()
+    {
+      Vector3 v = Vector3.zero;
+      for(int q = 0; q < _matches.Count; ++q)
+        v += _matches[q].transform.position;
+      if(_matches.Count > 0)
+        v /= (float)_matches.Count;
+      
+      return v;  
+    }
+    public Color GetColor()
+    {
+      return (_matches.Count > 0)? _matches[0].color : Color.red;
     }
   }
 
@@ -849,7 +865,10 @@ public class Level : MonoBehaviour
     List<Item> toDestroy = new List<Item>();
 
     for(int q = 0; q < _matching.Count; ++q)
+    {
+      onItemsMatched?.Invoke(_matching[q]);
       toDestroy.AddRange(_matching[q]._matches);
+    }
 
     toDestroy = toDestroy.Distinct().ToList();
     toDestroy.ForEach((item) => item.Hide());
