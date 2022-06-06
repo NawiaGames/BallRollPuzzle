@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameLib;
+using GameLib.Utilities;
 
 public class Arrow : MonoBehaviour
 {
   [SerializeField] SpriteRenderer _sr;
   [SerializeField] Color _colorNormal;
   [SerializeField] Color _colorSelected;
+  [SerializeField] ActivatableObject _actObj;
 
   bool    _selected = false;
   bool    _blocked = false;
@@ -15,6 +18,14 @@ public class Arrow : MonoBehaviour
   void Awake()
   {
     _sr.color = _colorNormal;
+  }
+  public void Show()
+  {
+    _actObj.ActivateObject();
+  }
+  public void Hide()
+  {
+    _actObj.DeactivateObject();
   }
   public bool        IsSelected { get => _selected; set { _selected = value; _sr.color = (_selected) ? _colorSelected : _colorNormal; } }
   public bool        IsBlocked { get => _blocked; set { _blocked = value; _sr.color = (_blocked)? Color.grey : _colorNormal;}}

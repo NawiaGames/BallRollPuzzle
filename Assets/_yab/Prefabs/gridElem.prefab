@@ -106,6 +106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7459876227328514941}
+  - component: {fileID: 754124700330301741}
   m_Layer: 0
   m_Name: fx
   m_TagString: Untagged
@@ -129,6 +130,26 @@ Transform:
   m_Father: {fileID: 1421375701003176085}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &754124700330301741
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1168956773435686824}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bf88177c207f11a4995fc8a7a8a600ce, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3355612129303573206
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,6 +160,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1421375701003176085}
   - component: {fileID: 7566253647186876143}
+  - component: {fileID: 1206926774182358625}
   m_Layer: 0
   m_Name: gridElem
   m_TagString: Untagged
@@ -178,39 +200,20 @@ MonoBehaviour:
   _fx: {fileID: 1168956773435686824}
   colorEven: {r: 0.6132076, g: 0.6132076, b: 0.6132076, a: 1}
   colorOdd: {r: 0.27, g: 0.27, b: 0.27, a: 1}
-  animCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.4433657
-      value: 1.0019493
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  _actObj: {fileID: 1206926774182358625}
+--- !u!114 &1206926774182358625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3355612129303573206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 193f46466a377ef45bc5f1d67bf5b08e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 754124700330301741}
 --- !u!1 &6221967738371626008
 GameObject:
   m_ObjectHideFlags: 0

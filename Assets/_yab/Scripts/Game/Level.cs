@@ -50,11 +50,15 @@ public class Level : MonoBehaviour
       System.Array.Clear(_grid, 0, _grid.Length);
     }
     public Vector2Int dim() => _dim;
-    public bool isInside(Vector2Int v)
+    bool insideDim(Vector2Int v)
     {
-      bool inside = v.x >= -_dim.x/2  && v.x <= _dim.x/2 && v.y >= -_dim.y/2  && v.y <= _dim.y/2;
+      return v.x >= -_dim.x / 2 && v.x <= _dim.x / 2 && v.y >= -_dim.y / 2 && v.y <= _dim.y / 2;
+    }
+    public bool isFieldInside(Vector2Int v)
+    {
+      bool inside = insideDim(v);
       if(inside)
-        inside &= isField(v); 
+        inside &= isField(v);
 
       return inside;
     }
@@ -134,7 +138,7 @@ public class Level : MonoBehaviour
       clear();
       for(int q = 0; q < _items.Count; ++q)
       {
-        if(isInside(_items[q].grid))
+        if(isFieldInside(_items[q].grid))
           set(_items[q]);
         else
         {
@@ -161,6 +165,15 @@ public class Level : MonoBehaviour
       var v = _dim / 2 + elem.grid;
       _elems[v.y, v.x] = elem;
     }
+    public GridElem getElem(Vector2Int vi)
+    {
+      var v = _dim / 2 + vi;
+      if(insideDim(v))
+        return _elems[v.y, v.x];      
+      else
+        return null;  
+    }
+    public GridElem[,] elems => _elems;
     public bool isField(Vector2Int v, bool outside_ret = false)
     {
       if(!(v.x >= -_dim.x / 2 && v.x <= _dim.x / 2 && v.y >= -_dim.y / 2 && v.y <= _dim.y / 2))
@@ -249,14 +262,31 @@ public class Level : MonoBehaviour
     Init();
 
     yield return new WaitForSeconds(0.125f * 0.5f);
-    _started = true;
     onStart?.Invoke(this);
+
+    foreach(var ge in _grid.elems)
+    {
+      yield return null;
+      ge?.Show();
+    }
+
     _items.Sort((Item i0, Item i1) => (int)(i0.grid.y * 100 + i0.grid.x) - (i1.grid.y * 100 + i1.grid.x));
+    yield return new WaitForSeconds(0.5f);
     for(int q = 0; q < _items.Count; ++q)
     {
       yield return new WaitForSeconds(0.0625f / 4);
       _items[q].Show();
     }
+
+    yield return new WaitForSeconds(0.5f);
+    foreach(var arr in _arrows)
+    {
+      yield return null;
+      arr?.Show();
+    }
+
+    
+    _started = true;
   }
   
   void Init()
@@ -510,7 +540,7 @@ public class Level : MonoBehaviour
       Item toMove = null;
       checkItems |= _pushing[p].MoveP(Time.deltaTime * _speed);
       var vg = _pushing[p].gridNext;
-      bool next_inside = _grid.isInside(vg);
+      bool next_inside = _grid.isFieldInside(vg);
       var pushType = _pushing[p].push;
       var pusher = _pushing[p];
       if(next_inside || _gameplayOutside)
@@ -544,7 +574,7 @@ public class Level : MonoBehaviour
         }
         else
         {
-          if((!_grid.isInside(_pushing[p].grid) && !next_inside) || !_grid.isField(_pushing[p].grid, true))
+          if((!_grid.isFieldInside(_pushing[p].grid) && !next_inside) || !_grid.isField(_pushing[p].grid, true))
           {
             _pushing[p].Hide();
             _pushing.RemoveAt(p);
@@ -575,7 +605,7 @@ public class Level : MonoBehaviour
         int cnt = Mathf.Max(_dim.x, _dim.y);
         for(int q = 0; q < cnt; ++q)
         {
-          if(_grid.isInside(v))
+          if(_grid.isFieldInside(v))
           {
             var item = _grid.geti(v);
             if(item != null && !item.IsStatic) // && !item.IsRemoveElem)
@@ -587,7 +617,7 @@ public class Level : MonoBehaviour
         }
         if(pushToMove.Count > 0)
         {
-          bool inside = _grid.isInside(pushToMove.last().grid + toMove.dir);
+          bool inside = _grid.isFieldInside(pushToMove.last().grid + toMove.dir);
           if(inside || _gameplayOutside)
           {
             var gridDest = pushToMove.last().grid + toMove.dir;
@@ -595,7 +625,7 @@ public class Level : MonoBehaviour
             if(pushType == Item.Push.Line)//_gameplayPushType == PushType.PushLine)
             {
               gridDest = _grid.getDest(pushToMove.last().grid, toMove.dir, !_gameplayOutside);
-              if(_grid.isInside(gridDest))
+              if(_grid.isFieldInside(gridDest))
               {
                 var vdir = gridDest - pushToMove.last().grid;
                 pushToMove.ForEach((item) => item.PushBy(vdir));// toMove.dir));
@@ -625,7 +655,7 @@ public class Level : MonoBehaviour
     {
       var dir = _moving[q].dir;
       bool moving = _moving[q].Move(Time.deltaTime * _speed, _grid.dim());
-      if(!_grid.isInside(_moving[q].grid))
+      if(!_grid.isFieldInside(_moving[q].grid))
       {
         _moving[q].Hide();
         _moving.RemoveAt(q);
