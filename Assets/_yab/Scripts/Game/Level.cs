@@ -437,6 +437,7 @@ public class Level : MonoBehaviour
     {
       item.transform.localPosition = Vector3.zero;
       item.name = item.name.Replace("(Clone)", "");
+      item.Show();
     }
 
     return item;
@@ -483,6 +484,7 @@ public class Level : MonoBehaviour
       push.transform.localPosition = _arrowsSelected[q].transform.localPosition - new Vector3Int(_arrowsSelected[q].dir.x/2, 0, _arrowsSelected[q].dir.y/2);
       push.dir = _arrowsSelected[q].dir;
       _pushing.Add(push);
+      push.Show();
     }
     if(_arrowsSelected.Count > 0 && _nextItem)
     {
