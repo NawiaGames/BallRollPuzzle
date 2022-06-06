@@ -187,6 +187,17 @@ public class Level : MonoBehaviour
     {
       return geti(grid) != null || !isField(grid);
     }
+    public void selectElems(Vector2Int v, Vector2Int vdir, bool sel)
+    {
+      Vector2Int vbeg = v + vdir;
+      for(int q = 0; q < Mathf.Max(dim().x, dim().y); ++q)
+      {
+        var elem = getElem(vbeg);
+        if(elem)
+          elem.selected = sel;
+        vbeg += vdir;
+      }
+    }
   }
   public struct Match3
   {
@@ -452,8 +463,13 @@ public class Level : MonoBehaviour
   {
     for(int q = 0; q < _arrows.Count; ++q)
     {
+      _grid.selectElems(_arrows[q].grid, _arrows[q].dir, false);
       if(_grid.isBlocked(_arrows[q].grid + _arrows[q].dir)) // _grid.geti(_arrows[q].grid + _arrows[q].dir) != null)
         _arrows[q].IsBlocked = true;
+    }
+    for(int q = 0; q < _arrowsSelected.Count; ++q)
+    {
+      _grid.selectElems(_arrowsSelected[q].grid, _arrowsSelected[q].dir, true);
     }
   }
 

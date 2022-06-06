@@ -9,11 +9,14 @@ public class GridElem : MonoBehaviour
   [SerializeField] GameObject _fx;
   [SerializeField] Color      colorEven;
   [SerializeField] Color      colorOdd;
+  [SerializeField] SpriteRenderer _sr;
   [SerializeField] ActivatableObject _actObj;
   
   bool _even = true;
   public bool even{get => _even; set{_even = value; SetColor();}}
   public Vector2Int grid {get; set;}
+  public bool selected {get; set;} = false;
+
   bool _shown = false;
 
 
@@ -44,5 +47,17 @@ public class GridElem : MonoBehaviour
   void Update()
   {
     //var _voff = _vpos - Vecto3
+    if(selected)
+    {
+      var color = _sr.material.color;
+      color.a = Mathf.Clamp01(color.a + Time.deltaTime * 4);
+      _sr.material.color = color;
+    }
+    else
+    {
+      var color = _sr.material.color;
+      color.a = Mathf.Clamp01(color.a - Time.deltaTime * 4);
+      _sr.material.color = color;
+    }
   }
 }
