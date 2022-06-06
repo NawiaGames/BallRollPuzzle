@@ -27,17 +27,18 @@ public class EffectsManager : MonoBehaviour
       cameraShakeContainer = Camera.main.GetComponentInParent<ObjectShake>();
       fxConfetti = GameObject.FindGameObjectWithTag("ConfettiFX").GetComponent<ParticleSystem>();
       infoLblMan = FindObjectOfType<UIInfoLabelManager>(true);
-
     }
     private void OnEnable() 
     {
       Item.onHide += OnItemDestroy;
-      //Level.onFinished += OnLevelFinished;
+      Item.onBombExplode += OnItemBombExplo;
+      Level.onFinished += OnLevelFinished;
     }
     private void OnDisable()
     {
       Item.onHide -= OnItemDestroy;
-      //Level.onFinished -= OnLevelFinished;
+      Item.onBombExplode -= OnItemBombExplo;
+      Level.onFinished -= OnLevelFinished;
     }
 
     Vector3 GetFxPosition(Vector3 objectPostion) => objectPostion + (objectPostion - Camera.main.transform.position).normalized * -offsetToCamera;
@@ -50,6 +51,12 @@ public class EffectsManager : MonoBehaviour
         ps.Play();
     }
 
+    void OnItemBombExplo(Item sender)
+    {
+      var psmain = fxPaintSplat.main;
+      psmain.startColor = sender.color;
+      PlayFXAtPosition(fxPaintSplat, sender.transform.position, 5);      
+    }
     void OnItemDestroy(Item sender)
     {
       var psmain = fxPaintSplat.main;
@@ -74,10 +81,10 @@ public class EffectsManager : MonoBehaviour
       //SparksFX(item.vPos);
     }
 
-    // void OnLevelFinished(Level lvl) 
-    // {
-    //   if(lvl.Succeed)
-    //     fxConfetti.Play();
-    //   cameraShakeContainer.Shake(objShakePresetHi);
-    // }
+    void OnLevelFinished(Level lvl) 
+    {
+      if(lvl.Succeed)
+        fxConfetti.Play();
+      cameraShakeContainer.Shake(objShakePresetHi);
+    }
 }

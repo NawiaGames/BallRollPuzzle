@@ -50,8 +50,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objShakePreset: {fileID: 11400000, guid: e507e33c375fd9c4a9f7dc2edd4e770f, type: 2}
-  objShakePresetLo: {fileID: 0}
-  objShakePresetHi: {fileID: 0}
+  objShakePresetLo: {fileID: 11400000, guid: fb6db08f6b431a848ab3894142ffb394, type: 2}
+  objShakePresetHi: {fileID: 11400000, guid: 96a47d80e34fc7d4fa5b769b38c123e6, type: 2}
   offsetToCamera: 1
   fxSparks: {fileID: 8074653854841478624}
   fxItemCompleted: {fileID: 4250207793750041220}

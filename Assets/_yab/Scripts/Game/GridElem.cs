@@ -14,6 +14,7 @@ public class GridElem : MonoBehaviour
   bool _even = true;
   public bool even{get => _even; set{_even = value; SetColor();}}
   public Vector2Int grid {get; set;}
+  bool _shown = false;
 
 
   Vector3 _vvel = Vector3.zero;
@@ -23,7 +24,9 @@ public class GridElem : MonoBehaviour
 
   public void Show()
   {
-    _actObj.ActivateObject();
+    if(!_shown)
+      _actObj.ActivateObject();
+    _shown = true;
   }
   public void Hide()
   {

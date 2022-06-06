@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 439062f10b36b3648966f1fa7f755b5d, type: 3}
-  m_Name: ObjectShakeDefaultPresetCopy
+  m_Name: ObjectShakeLo
   m_EditorClassIdentifier: 
-  shakeTime: 0.25
-  shakeMultiplier: 0.5
+  shakeTime: 0.125
+  shakeMultiplier: 0.25
   amplitudeCurve:
     serializedVersion: 2
     m_Curve:

@@ -13,11 +13,19 @@ public class HapticManager : GameLib.Haptics.HapticsManager //MonoBehaviour
   {
     Level.onPlay += VibMed;
     Level.onFinished += VibHi;
+    //Level.onItemsMatch += VibHi;
+
+    Item.onHide += VibHi;
+    Item.onHit += VibMed;
   }
   void OnDisable()
   {
     Level.onPlay -= VibMed;
     Level.onFinished -= VibHi;
+    //Level.onItemsMatch -= VibHi;
+
+    Item.onHide -= VibHi;
+    Item.onHit -= VibMed;
   }
 
 

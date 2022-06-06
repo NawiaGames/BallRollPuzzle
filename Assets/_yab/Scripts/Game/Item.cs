@@ -43,7 +43,7 @@ public class Item : MonoBehaviour
   float      _lifetime = 0;
 
 
-  public static System.Action<Item> onShow, onHide; 
+  public static System.Action<Item> onShow, onHide, onHit, onBombExplode;
 
   static Vector2Int  toGridT(Vector3 vpos, Vector2Int vdir) => new Vector2Int((int)Mathf.Round(vpos.x - vdir.x * 0.5f), (int)Mathf.Round(vpos.z - vdir.y * 0.5f));  
   static Vector3     toPos(Vector2Int grid) => new Vector3(grid.x, 0,  grid.y);
@@ -138,16 +138,21 @@ public class Item : MonoBehaviour
     }
     gameObject.SetActive(false);
   }
-
   public bool MoveP(float dt)
   {
     if(!IsReady)
       return false;
-    transform.localPosition += vdir * dt;
-    var grid_prev = grid;
-    grid = toGridT(transform.localPosition, dir);
+
+    bool chpos = false;
+    for(int q = 0; q < 2 & !chpos; ++q)
+    {
+      transform.localPosition += vdir * dt * 0.5f;
+      var grid_prev = grid;
+      grid = toGridT(transform.localPosition, dir);
+      chpos |= grid != grid_prev;
+    }
     
-    return grid != grid_prev;
+    return chpos;
   }
   public void PushBy(Vector2Int pushDir)
   {
@@ -177,14 +182,17 @@ public class Item : MonoBehaviour
       return false;
 
     bool ret = true;
-    transform.localPosition = Vector3.MoveTowards(transform.localPosition, toPos(_gridEnd), dt);
-    grid = toGridT(transform.localPosition, _dir);
-    if(Mathf.Approximately(Vector3.Distance(transform.localPosition, toPos(_gridEnd)), 0))
+    for(int q = 0; q < 2 && ret; ++q)
     {
-      _dir = Vector2Int.zero;
-      grid = _gridEnd;
-      transform.localPosition = toPos(_gridEnd);
-      ret = false;
+      transform.localPosition = Vector3.MoveTowards(transform.localPosition, toPos(_gridEnd), dt * 0.5f);
+      grid = toGridT(transform.localPosition, _dir);
+      if(Mathf.Approximately(Vector3.Distance(transform.localPosition, toPos(_gridEnd)), 0))
+      {
+        _dir = Vector2Int.zero;
+        grid = _gridEnd;
+        transform.localPosition = toPos(_gridEnd);
+        ret = false;
+      }
     }
    
     return ret;
@@ -207,6 +215,11 @@ public class Item : MonoBehaviour
       item._special = Item.Spec.None;
       item.gameObject.name = name;
     }
+    onHit?.Invoke(this);
+  }
+  public void Explode()
+  {
+    onBombExplode?.Invoke(this);
   }
   void Update()
   {

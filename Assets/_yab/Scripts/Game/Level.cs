@@ -167,9 +167,11 @@ public class Level : MonoBehaviour
     }
     public GridElem getElem(Vector2Int vi)
     {
-      var v = _dim / 2 + vi;
-      if(insideDim(v))
+      if(insideDim(vi))
+      {
+        var v = _dim / 2 + vi;
         return _elems[v.y, v.x];      
+      }
       else
         return null;  
     }
@@ -264,28 +266,39 @@ public class Level : MonoBehaviour
     yield return new WaitForSeconds(0.125f * 0.5f);
     onStart?.Invoke(this);
 
-    foreach(var ge in _grid.elems)
+    // foreach(var ge in _grid.elems)
+    // {
+    //   yield return null;
+    //   ge?.Show();
+    // }
+
+    for(int q = 0; q < Mathf.Max(_grid.dim().x, _grid.dim().y); q++)
     {
-      yield return null;
-      ge?.Show();
+      yield return new WaitForSeconds(1/60.0f);
+      for(int w = -q; w <= q; ++w)
+      {
+        _grid.getElem(new Vector2Int(-q, w))?.Show();
+        _grid.getElem(new Vector2Int(q, w))?.Show();
+        _grid.getElem(new Vector2Int(w, -q))?.Show();
+        _grid.getElem(new Vector2Int(w, q))?.Show();
+      }
     }
 
     _items.Sort((Item i0, Item i1) => (int)(i0.grid.y * 100 + i0.grid.x) - (i1.grid.y * 100 + i1.grid.x));
-    yield return new WaitForSeconds(0.5f);
+    yield return new WaitForSeconds(0.25f);
     for(int q = 0; q < _items.Count; ++q)
     {
       yield return new WaitForSeconds(0.0625f / 4);
       _items[q].Show();
     }
 
-    yield return new WaitForSeconds(0.5f);
+    yield return new WaitForSeconds(0.25f);
     foreach(var arr in _arrows)
     {
-      yield return null;
+      yield return new WaitForSeconds(1 / 60.0f);
       arr?.Show();
     }
 
-    
     _started = true;
   }
   
@@ -767,6 +780,7 @@ public class Level : MonoBehaviour
     {
       var bomb = _exploding[q];
       bomb.Hide();
+      bomb.Explode();
       List<Item> items =_grid.getNB(bomb.grid);
       for(int n = 0; n <items.Count; ++n)
       {
@@ -819,6 +833,7 @@ public class Level : MonoBehaviour
       if(!AnyColorItem || movesAvail == 0)
       {
         Finished = true;
+        onFinished?.Invoke(this);
         this.Invoke(() => 
         {
           Succeed = !AnyColorItem; uiSummary.Show(this);
