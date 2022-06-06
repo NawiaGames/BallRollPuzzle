@@ -38,6 +38,7 @@ public class Item : MonoBehaviour
 
   Vector2Int _vturn = new Vector2Int(0,1);
   Vector2Int _dir = Vector2Int.zero;
+  Vector2Int _gridPrev = Vector2Int.zero;
   Vector2Int _gridBeg = Vector2Int.zero;
   Vector2Int _gridEnd = Vector2Int.zero;
   float      _lifetime = 0;
@@ -81,6 +82,7 @@ public class Item : MonoBehaviour
     }
   }
   public Vector2Int grid /*{get; set;}*/ = Vector2Int.zero;
+  public Vector2Int gridPrev => _gridPrev;
   public Vector2Int gridNext => grid + _dir.to_units();
   public Vector2Int dir {get => _dir; set{_dir = value;}}
   public Vector2Int vturn 
@@ -112,6 +114,7 @@ public class Item : MonoBehaviour
 
   public void Show()
   {
+    _gridPrev = grid;
     if(!IsRemoveElem)
     {
       _activatable.ActivateObject();
@@ -185,6 +188,7 @@ public class Item : MonoBehaviour
     for(int q = 0; q < 2 && ret; ++q)
     {
       transform.localPosition = Vector3.MoveTowards(transform.localPosition, toPos(_gridEnd), dt * 0.5f);
+      _gridPrev = grid;
       grid = toGridT(transform.localPosition, _dir);
       if(Mathf.Approximately(Vector3.Distance(transform.localPosition, toPos(_gridEnd)), 0))
       {

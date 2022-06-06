@@ -198,6 +198,15 @@ public class Level : MonoBehaviour
         vbeg += vdir;
       }
     }
+    public void touchElems(Vector2Int v, Vector2Int vdir)
+    {
+      getElem(v)?.Touch();
+      getElem(v + vdir)?.Touch(0.5f);
+      getElem(v + new Vector2Int(-vdir.y, -vdir.x))?.Touch(0.5f);
+      getElem(v + new Vector2Int(vdir.y, vdir.x))?.Touch(0.5f);
+      //getElem(v + vdir + new Vector2Int(-vdir.y, -vdir.x))?.Touch(0.33f);
+      //getElem(v + vdir + new Vector2Int(vdir.y, vdir.x))?.Touch(0.33f);
+    }
   }
   public struct Match3
   {
@@ -277,12 +286,6 @@ public class Level : MonoBehaviour
     yield return new WaitForSeconds(0.125f * 0.5f);
     onStart?.Invoke(this);
 
-    // foreach(var ge in _grid.elems)
-    // {
-    //   yield return null;
-    //   ge?.Show();
-    // }
-
     for(int q = 0; q < Mathf.Max(_grid.dim().x, _grid.dim().y); q++)
     {
       yield return new WaitForSeconds(1/60.0f);
@@ -301,6 +304,7 @@ public class Level : MonoBehaviour
     {
       yield return new WaitForSeconds(0.0625f / 4);
       _items[q].Show();
+      _grid.getElem(_items[q].grid)?.Touch();
     }
 
     yield return new WaitForSeconds(0.25f);
@@ -579,6 +583,12 @@ public class Level : MonoBehaviour
         continue;
       Item toMove = null;
       checkItems |= _pushing[p].MoveP(Time.deltaTime * _speed);
+      if(checkItems)
+      {
+        //_grid.getElem(_pushing[p].grid)?.Touch();
+        if(_pushing[p].grid != _pushing[p].gridPrev)
+          _grid.touchElems(_pushing[p].grid, _pushing[p].dir);
+      }
       var vg = _pushing[p].gridNext;
       bool next_inside = _grid.isFieldInside(vg);
       var pushType = _pushing[p].push;
@@ -713,6 +723,11 @@ public class Level : MonoBehaviour
         checkItems |= true;
         _moving.RemoveAt(q);
         --q;
+      }
+      else //moving
+      {
+        if(_moving[q].grid != _moving[q].gridPrev)
+          _grid.touchElems(_moving[q].grid, _moving[q].dir);
       }
     }
 

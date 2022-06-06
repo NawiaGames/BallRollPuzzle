@@ -39,25 +39,35 @@ public class GridElem : MonoBehaviour
   {
     rend.material.color = (_even)? colorEven : colorOdd;
   }
-  public void Touch(float delay)
+  public void Touch(float velmult = 1.0f)
   {
-    //StartCoroutine(coTouch(delay));
-    _vvel += new Vector3(0, -Random.Range(0, 1), 0);
+    _vvel.y += -0.5f * velmult;
+  }
+  public void TouchRandom()
+  {
+    _vvel.y -= Random.Range(0.1f, 0.5f);
+  }  
+  void ProcessSelection()
+  {
+    var color = _sr.material.color;
+    if(selected)
+      color.a = Mathf.Clamp01(color.a + Time.deltaTime * 4);
+    else
+      color.a = Mathf.Clamp01(color.a - Time.deltaTime * 4);
+    _sr.material.color = color;
   }
   void Update()
   {
-    //var _voff = _vpos - Vecto3
-    if(selected)
-    {
-      var color = _sr.material.color;
-      color.a = Mathf.Clamp01(color.a + Time.deltaTime * 4);
-      _sr.material.color = color;
-    }
-    else
-    {
-      var color = _sr.material.color;
-      color.a = Mathf.Clamp01(color.a - Time.deltaTime * 4);
-      _sr.material.color = color;
-    }
+    ProcessSelection();
+
+    var _voff = _vpos;
+    _vforce = -0.05f * _voff;
+    _vvel += _vforce;
+    _vpos += _vvel * Time.deltaTime;
+    _fx.transform.localPosition = _vpos;
+    _vvel *= 0.975f;
+
+    if(Input.GetKeyDown(KeyCode.Alpha0))
+      TouchRandom();
   }
 }
