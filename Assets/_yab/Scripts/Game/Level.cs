@@ -143,6 +143,7 @@ public class Level : MonoBehaviour
           set(_items[q]);
         else
         {
+          _items[q].PushedOut();
           _items[q].Hide();
           _items.RemoveAt(q);
           q--;

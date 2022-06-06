@@ -44,7 +44,7 @@ public class Item : MonoBehaviour
   float      _lifetime = 0;
 
 
-  public static System.Action<Item> onShow, onHide, onHit, onBombExplode;
+  public static System.Action<Item> onShow, onHide, onHit, onBombExplode, onPushedOut;
 
   static Vector2Int  toGridT(Vector3 vpos, Vector2Int vdir) => new Vector2Int((int)Mathf.Round(vpos.x - vdir.x * 0.5f), (int)Mathf.Round(vpos.z - vdir.y * 0.5f));  
   static Vector3     toPos(Vector2Int grid) => new Vector3(grid.x, 0,  grid.y);
@@ -221,6 +221,10 @@ public class Item : MonoBehaviour
     }
     onHit?.Invoke(this);
   }
+  public void PushedOut()
+  {
+    onPushedOut?.Invoke(this);
+  }  
   public void Explode()
   {
     onBombExplode?.Invoke(this);

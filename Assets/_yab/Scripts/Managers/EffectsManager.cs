@@ -33,6 +33,7 @@ public class EffectsManager : MonoBehaviour
     {
       Item.onHide += OnItemDestroy;
       Item.onBombExplode += OnItemBombExplo;
+      Item.onPushedOut += OnItemPushedOut;
       Level.onItemsMatched += OnItemsMatched;
       Level.onFinished += OnLevelFinished;
     }
@@ -40,7 +41,8 @@ public class EffectsManager : MonoBehaviour
     {
       Item.onHide -= OnItemDestroy;
       Item.onBombExplode -= OnItemBombExplo;
-      Level.onItemsMatched += OnItemsMatched;
+      Item.onPushedOut -= OnItemPushedOut;
+      Level.onItemsMatched -= OnItemsMatched;
       Level.onFinished -= OnLevelFinished;
     }
 
@@ -48,24 +50,21 @@ public class EffectsManager : MonoBehaviour
     void PlayFXAtPosition(ParticleSystem ps, Vector3 worldPosition, int emitCount = 0)
     {
       ps.transform.position = GetFxPosition(worldPosition);
-      if (emitCount > 0)
+      if(emitCount > 0)
         ps.Emit(emitCount);
       else
         ps.Play();
     }
-
+    
+    void OnItemPushedOut(Item sender)
+    {
+      infoLblMan.ShowTextPopup(sender.transform.position, "pushed out!");
+    }
     void OnItemBombExplo(Item sender)
     {
       var psmain = fxPaintSplat.main;
       psmain.startColor = sender.color;
       PlayFXAtPosition(fxPaintSplat, sender.transform.position, 5);      
-    }
-    void OnItemDestroy(Item sender)
-    {
-      var psmain = fxPaintSplat.main;
-      psmain.startColor = sender.color;
-
-      PlayFXAtPosition(fxPaintSplat, sender.transform.position, 5);
     }
     void OnItemsMatched(Level.Match3 match)
     {
@@ -73,6 +72,13 @@ public class EffectsManager : MonoBehaviour
       //PlayFXAtPosition(fxPaintSplat, v, 5);
       infoLblMan.ShowTextPopup(v, "match!", match.GetColor());
       cameraShakeContainer.Shake(objShakePresetLo);
+    }
+    void OnItemDestroy(Item sender)
+    {
+      var psmain = fxPaintSplat.main;
+      psmain.startColor = sender.color;
+
+      PlayFXAtPosition(fxPaintSplat, sender.transform.position, 5);
     }
     void OnFx00(object sender)
     {
