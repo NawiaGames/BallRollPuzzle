@@ -15,6 +15,7 @@ public class EffectsManager : MonoBehaviour
     [SerializeField] ParticleSystem fxSparks = null;
     [SerializeField] ParticleSystem fxItemCompleted = null;
     [SerializeField] ParticleSystem fxConfettiIngame = null;
+    [SerializeField] ParticleSystem fxConfettiLevel = null;
     [SerializeField] ParticleSystem fxPaintSplat = null;
 
     ParticleSystem fxConfetti;
@@ -25,7 +26,7 @@ public class EffectsManager : MonoBehaviour
     private void Awake() 
     {
       cameraShakeContainer = Camera.main.GetComponentInParent<ObjectShake>();
-      fxConfetti = GameObject.FindGameObjectWithTag("ConfettiFX").GetComponent<ParticleSystem>();
+      //fxConfetti = GameObject.FindGameObjectWithTag("ConfettiFX").GetComponent<ParticleSystem>();
       infoLblMan = FindObjectOfType<UIInfoLabelManager>(true);
     }
     private void OnEnable() 
@@ -84,7 +85,10 @@ public class EffectsManager : MonoBehaviour
     void OnLevelFinished(Level lvl) 
     {
       if(lvl.Succeed)
-        fxConfetti.Play();
+      {
+      //fxConfetti.Play();
+      }
+    fxConfettiLevel.Play();
       cameraShakeContainer.Shake(objShakePresetHi);
     }
 }

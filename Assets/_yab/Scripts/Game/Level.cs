@@ -833,11 +833,13 @@ public class Level : MonoBehaviour
       if(!AnyColorItem || movesAvail == 0)
       {
         Finished = true;
-        onFinished?.Invoke(this);
+        Succeed = !AnyColorItem;
+        this.Invoke(() => onFinished?.Invoke(this), 0.5f);
         this.Invoke(() => 
         {
-          Succeed = !AnyColorItem; uiSummary.Show(this);
-        }, 0.5f);
+          Succeed = !AnyColorItem; 
+          uiSummary.Show(this);
+        }, 0.85f);
       }
     }
   }
