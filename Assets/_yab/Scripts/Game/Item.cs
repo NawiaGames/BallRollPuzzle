@@ -12,6 +12,8 @@ public class Item : MonoBehaviour
   [SerializeField] Push       _push = Push.None;
   [SerializeField] Spec       _special = Spec.None;
   [SerializeField] bool       _autoMove = false;
+  [SerializeField] float      _radius = 0.5f;
+  [SerializeField] Transform  _rollTransf;
    
 
   public enum Push
@@ -43,7 +45,7 @@ public class Item : MonoBehaviour
   Vector2Int _gridEnd = Vector2Int.zero;
   float      _lifetime = 0;
   bool       _frozen = false;
-
+  float      _circum = 2 * Mathf.PI;
 
   public static System.Action<Item> onShow, onHide, onHit, onBombExplode, onPushedOut;
 
@@ -67,6 +69,7 @@ public class Item : MonoBehaviour
     var v = transform.localRotation * new Vector3(0, 0, 1);
     _vturn.x = Mathf.RoundToInt(v.x);
     _vturn.y = Mathf.RoundToInt(v.z);
+    _circum = 2 * Mathf.PI * _radius;
 
     name = name.Replace("(Clone)", "");
   }
@@ -143,6 +146,10 @@ public class Item : MonoBehaviour
     }
     gameObject.SetActive(false);
   }
+  void Rotate()
+  {
+
+  }
   public bool MoveP(float dt)
   {
     if(!IsReady)
@@ -152,6 +159,7 @@ public class Item : MonoBehaviour
     for(int q = 0; q < 2 & !chpos; ++q)
     {
       transform.localPosition += vdir * dt * 0.5f;
+      Rotate(_rollTransf, dt * 0.5f);
       var grid_prev = grid;
       grid = toGridT(transform.localPosition, dir);
       chpos |= grid != grid_prev;
@@ -190,6 +198,7 @@ public class Item : MonoBehaviour
     for(int q = 0; q < 2 && ret; ++q)
     {
       transform.localPosition = Vector3.MoveTowards(transform.localPosition, toPos(_gridEnd), dt * 0.5f);
+      Rotate(_rollTransf, dt * 0.5f);
       _gridPrev = grid;
       grid = toGridT(transform.localPosition, _dir);
       if(Mathf.Approximately(Vector3.Distance(transform.localPosition, toPos(_gridEnd)), 0))
@@ -230,6 +239,12 @@ public class Item : MonoBehaviour
   public void Explode()
   {
     onBombExplode?.Invoke(this);
+  }
+  void Rotate(Transform _model, float dt)
+  {
+    Vector3 vdirp = new Vector3(_dir.y, 0, -_dir.x);
+    float angle = (dt * 360 / _circum);
+    _model.Rotate(vdirp, angle, Space.World);
   }
   void Update()
   {

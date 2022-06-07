@@ -256,6 +256,14 @@ public class Level : MonoBehaviour
     Match3,
     Match3Move,
   }
+
+  enum Check
+  {
+    Match3,
+    AutoMoves,
+    End,
+  }
+
   [Header("Gameplay Variants")]
   [SerializeField] bool       _gameplayOutside = false;
   [Header("Settings")]
@@ -283,6 +291,7 @@ public class Level : MonoBehaviour
   List<Item> _moving = new List<Item>();
   List<Item> _exploding = new List<Item>();
   List<Match3> _matching = new List<Match3>();
+  List<Check> _checks = new List<Check>();
 
   Item _nextItem = null;
   Item _lastItemMove = null;
@@ -892,6 +901,8 @@ public class Level : MonoBehaviour
     _matching.Clear();
     _grid.update(_items);
     _nextItem = CreateNextItem();
+
+    //this.Invoke(()=>CheckMove(), 0.2f);
   }
   void DestroyMatch()
   {
