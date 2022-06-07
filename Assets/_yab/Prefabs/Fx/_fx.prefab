@@ -60,6 +60,7 @@ MonoBehaviour:
   fxConfettiIngame: {fileID: 3899901870631301802}
   fxConfettiLevel: {fileID: 5235623256206366283}
   fxPaintSplat: {fileID: 5654794271917263824}
+  fxHit: {fileID: 5483926277836527142}
 --- !u!114 &8108016443953103903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,6 +441,11 @@ PrefabInstance:
 --- !u!4 &1666888555959619620 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6606974936500408771, guid: a2b31b90dea9c1348a504825d73a1d42, type: 3}
+  m_PrefabInstance: {fileID: 5517273466579386855}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &5483926277836527142 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 39295555398490049, guid: a2b31b90dea9c1348a504825d73a1d42, type: 3}
   m_PrefabInstance: {fileID: 5517273466579386855}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7745458667887893476

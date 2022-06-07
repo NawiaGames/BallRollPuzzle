@@ -15,6 +15,7 @@ public class Level : MonoBehaviour
   public static System.Action<Level>   onStart, onPlay, onFirstInteraction, onTutorialStart;
   public static System.Action<Level>   onFinished;
   public static System.Action<Match3>  onItemsMatched;
+  public static System.Action<Item, Item> onItemsHit;
 
   [Header("Refs")]
   [SerializeField] Transform _arrowsContainer;
@@ -292,11 +293,13 @@ public class Level : MonoBehaviour
   List<Item> _exploding = new List<Item>();
   List<Match3> _matching = new List<Match3>();
   List<Check> _checks = new List<Check>();
+  List<ObjectFracture> _fractures = new List<ObjectFracture>();
 
   Item _nextItem = null;
   Item _lastItemMove = null;
   bool _inputBlocked = false;
   bool _firstInteraction = false;
+  bool _checkMoves = false;
 
   void Awake()
   {
@@ -311,7 +314,9 @@ public class Level : MonoBehaviour
   }
   void OnDestroy()
   {
-
+    foreach(var frac in _fractures)
+      Destroy(frac.gameObject);
+    _fractures.Clear();  
   }
   IEnumerator Start()
   {
@@ -521,7 +526,7 @@ public class Level : MonoBehaviour
   Item CreateNextItem()
   {
     Item item = null;
-    if(movesAvail > 0)
+    if(movesAvail > 0 && _nextItem == null)
     {
       var next_item = _listItems[0];
       if(next_item != null)
@@ -556,6 +561,12 @@ public class Level : MonoBehaviour
     }
 
     return item;
+  }
+
+  public void AddFractures(ObjectFracture frac)
+  {
+    _fractures.Add(frac);
+    this.Invoke(() => {frac.ResetFracture(); _fractures.Remove(frac); Destroy(frac.gameObject);}, 2.0f);
   }
 
   public void OnInputBeg(TouchInputData tid)
@@ -646,6 +657,7 @@ public class Level : MonoBehaviour
         {
           if(_pushing[p].push == Item.Push.None) //_gameplayPushType == PushType.None)
           {
+            onItemsHit?.Invoke(item, _pushing[p]);
             item.Hit(_pushing[p]);
             _items.Add(_pushing[p]);
             _pushing[p].Stop();
@@ -659,6 +671,7 @@ public class Level : MonoBehaviour
               toMove = _grid.geti(vg);
               toMove.dir = _pushing[p].dir;
             }
+            onItemsHit?.Invoke(item, _pushing[p]);
             _pushing[p].Hide();
             _pushing.RemoveAt(p);
             p--;
@@ -761,6 +774,8 @@ public class Level : MonoBehaviour
       else if(!moving)
       {
         var nextFieldItem = _grid.geti(_moving[q].gridNext);
+        // if(nextFieldItem)
+        //   onItemsHit?.Invoke(_moving[q], nextFieldItem); //intentionally rem
         _moving[q].Hit(nextFieldItem);
         if(nextFieldItem && nextFieldItem.IsBomb)
           _exploding.Add(nextFieldItem);
@@ -784,21 +799,16 @@ public class Level : MonoBehaviour
       CheckMatch3();
       CheckEnd();
     }
-    if(_moving.Count == 0 && _pushing.Count == 0 && _matching.Count == 0) // && checkItems)
+    if(_moving.Count == 0 && _pushing.Count == 0 && _matching.Count == 0 && (checkItems || _checkMoves))
     {
       _grid.update(_items);
       this.Invoke(()=>CheckMove(),0.2f);
-      //CheckBombs();
       if(_nextItem == null)
       {
         if(AnyColorItem)
-        {
           _nextItem = CreateNextItem();
-        }
         else
-        {
           CheckEnd();
-        }
       }
     }
   }
@@ -873,24 +883,42 @@ public class Level : MonoBehaviour
     _exploding.Clear();
     _items.RemoveAll((item) => toRemove.Contains(item));
     _grid.update(_items);
-  }    
+  }
+  Vector2Int[] vdirections = new Vector2Int[4]
+  {
+    new Vector2Int(-1, 0),
+    new Vector2Int(0, 1),
+    new Vector2Int(1, 0),
+    new Vector2Int(0, -1),
+  };
+
   void CheckMove()
   {
+    List<Item> itemsToPush = new List<Item>();
     _grid.update(_items);
-    for(int q = 0; q < _items.Count; ++q)
+    bool _pushed = false;
+    for(int d = 0; d < vdirections.Length && !_pushed; ++d)
     {
-      if(_items[q].IsRegular && _items[q].IsMoveable)
+      for(int q = 0; q < _items.Count; ++q)
       {
-        var dest = _grid.getDest(_items[q].grid, _items[q].vturn, !_gameplayOutside);
-        if(dest != _items[q].grid)
+        if(_items[q].IsRegular && _items[q].IsMoveable)
         {
-          _items[q].PushTo(dest);
-          _moving.Add(_items[q]);
-          _lastItemMove = _items[q];
-          break;
+          if(_items[q].vturn == vdirections[d])
+          {
+            var dest = _grid.getDest(_items[q].grid, _items[q].vturn, !_gameplayOutside);
+            if(dest != _items[q].grid)
+            {
+              itemsToPush.Add(_items[q]);
+              _items[q].PushTo(dest);
+              _moving.Add(_items[q]);
+              _lastItemMove = _items[q];
+              _pushed = true;
+            }
+          }
         }
       }
     }
+    _checkMoves = false;
   }
   IEnumerator coDestroyMatch()
   {
@@ -913,6 +941,7 @@ public class Level : MonoBehaviour
     _matching.Clear();
     _grid.update(_items);
     _nextItem = CreateNextItem();
+    _checkMoves = true;
 
     CheckEnd();
   }

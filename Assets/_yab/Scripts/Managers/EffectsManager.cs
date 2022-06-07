@@ -17,11 +17,13 @@ public class EffectsManager : MonoBehaviour
     [SerializeField] ParticleSystem fxConfettiIngame = null;
     [SerializeField] ParticleSystem fxConfettiLevel = null;
     [SerializeField] ParticleSystem fxPaintSplat = null;
+    [SerializeField] ParticleSystem fxHit = null;
 
     ParticleSystem fxConfetti;
 
     ObjectShake cameraShakeContainer;
     UIInfoLabelManager infoLblMan;
+    Level _lvl = null;
 
     List<GameLib.ObjectFracture> listFractures = new List<GameLib.ObjectFracture>();
 
@@ -36,7 +38,9 @@ public class EffectsManager : MonoBehaviour
       Item.onHide += OnItemDestroy;
       Item.onBombExplode += OnItemBombExplo;
       Item.onPushedOut += OnItemPushedOut;
+      Level.onStart += OnLevelStart;
       Level.onItemsMatched += OnItemsMatched;
+      Level.onItemsHit += OnItemsHit;
       Level.onFinished += OnLevelFinished;
     }
     private void OnDisable()
@@ -44,7 +48,9 @@ public class EffectsManager : MonoBehaviour
       Item.onHide -= OnItemDestroy;
       Item.onBombExplode -= OnItemBombExplo;
       Item.onPushedOut -= OnItemPushedOut;
+      Level.onStart -= OnLevelStart;
       Level.onItemsMatched -= OnItemsMatched;
+      Level.onItemsHit -= OnItemsHit;
       Level.onFinished -= OnLevelFinished;
     }
 
@@ -58,6 +64,10 @@ public class EffectsManager : MonoBehaviour
         ps.Play();
     }
     
+    void OnLevelStart(Level lvl)
+    {
+      _lvl = lvl;
+    }
     void OnItemPushedOut(Item sender)
     {
       infoLblMan.ShowTextPopup(sender.transform.position, "pushed out!");
@@ -67,6 +77,11 @@ public class EffectsManager : MonoBehaviour
       var psmain = fxPaintSplat.main;
       psmain.startColor = sender.color;
       PlayFXAtPosition(fxPaintSplat, sender.transform.position, 5);      
+    }
+    void OnItemsHit(Item itemA, Item itemB)
+    {
+      if(itemA && itemB)
+        PlayFXAtPosition(fxHit, (itemA.transform.position + itemB.transform.position) * 0.5f, 10);
     }
     void OnItemsMatched(Level.Match3 match)
     {
@@ -79,13 +94,13 @@ public class EffectsManager : MonoBehaviour
     {
       var psmain = fxPaintSplat.main;
       psmain.startColor = sender.color;
-
       //PlayFXAtPosition(fxPaintSplat, sender.transform.position, 5);
-      //Instantiate
+
       var fo = GameData.Prefabs.CreateObjectFracture(sender.transform.parent);
       fo.transform.position = sender.transform.position;
       fo.Fracture(sender.vdir * 2);
-      this.Invoke(()=> {fo.ResetFracture(); Destroy(fo.gameObject);}, 2.0f);
+      if(_lvl)
+        _lvl.AddFractures(fo);
     }
     void OnFx00(object sender)
     {
@@ -109,5 +124,6 @@ public class EffectsManager : MonoBehaviour
       if(lvl.Succeed)
         fxConfettiLevel.Play();
       cameraShakeContainer.Shake(objShakePresetHi);
+      _lvl = null;
     }
 }
