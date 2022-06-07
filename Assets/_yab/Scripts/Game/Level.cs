@@ -914,32 +914,11 @@ public class Level : MonoBehaviour
     _grid.update(_items);
     _nextItem = CreateNextItem();
 
-    //this.Invoke(()=>CheckMove(), 0.2f);
     CheckEnd();
   }
   void DestroyMatch()
   {
     StartCoroutine(coDestroyMatch());
-    // if(_matching.Count > 0)
-    // {
-    //   if(_matching[0]._matches.Count > 0)
-    //   {
-
-    //   }
-    // }
-    // List<Item> toDestroy = new List<Item>();
-
-    // for(int q = 0; q < _matching.Count; ++q)
-    // {
-    //   onItemsMatched?.Invoke(_matching[q]);
-    //   toDestroy.AddRange(_matching[q]._matches);
-    // }
-
-    // toDestroy = toDestroy.Distinct().ToList();
-    // toDestroy.ForEach((item) => item.Hide());
-    // _items.RemoveAll((item) => toDestroy.Contains(item));
-    // _matching.Clear();
-    // _grid.update(_items);    
   }
   void CheckEnd()
   {

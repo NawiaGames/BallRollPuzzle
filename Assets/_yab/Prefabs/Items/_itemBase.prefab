@@ -190,6 +190,10 @@ MonoBehaviour:
   _special: 0
   _autoMove: 0
   _radius: 0.5
+  _startSpeed: 0.2
+  _accConst: 0.035
+  _accNonConst: 1.035
+  _accTypeConst: 1
   _rollTransf: {fileID: 2238382564477020698}
   grid: {x: 0, y: 0}
 --- !u!114 &7798136041665752175

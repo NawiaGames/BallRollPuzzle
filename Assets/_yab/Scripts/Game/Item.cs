@@ -13,6 +13,11 @@ public class Item : MonoBehaviour
   [SerializeField] Spec       _special = Spec.None;
   [SerializeField] bool       _autoMove = false;
   [SerializeField] float      _radius = 0.5f;
+  [SerializeField] float      _startSpeed = 0.2f;
+  [SerializeField] float      _accConst = 0.035f;
+  [SerializeField] float      _accNonConst = 1.035f;
+  [SerializeField] bool       _accTypeConst = true;
+
   [SerializeField] Transform  _rollTransf;
    
 
@@ -46,6 +51,7 @@ public class Item : MonoBehaviour
   float      _lifetime = 0;
   bool       _frozen = false;
   float      _circum = 2 * Mathf.PI;
+  float      _speed = 0;
 
   public static System.Action<Item> onShow, onHide, onHit, onBombExplode, onPushedOut;
 
@@ -146,20 +152,33 @@ public class Item : MonoBehaviour
     }
     gameObject.SetActive(false);
   }
-  void Rotate()
+  void Speed()
   {
-
+    if(_accTypeConst)
+    {
+      if(_speed == 0)
+        _speed = _startSpeed;
+      _speed = Mathf.Clamp01(_speed + 0.035f);
+    }
+    else
+    {
+      if(_speed == 0)
+        _speed = _startSpeed;
+      _speed = Mathf.Clamp01(_speed * 1.035f);
+    }
   }
   public bool MoveP(float dt)
   {
     if(!IsReady)
       return false;
 
+    Speed();
+
     bool chpos = false;
     for(int q = 0; q < 2 & !chpos; ++q)
     {
-      transform.localPosition += vdir * dt * 0.5f;
-      Rotate(_rollTransf, dt * 0.5f);
+      transform.localPosition += vdir * dt * 0.5f * _speed;
+      Rotate(_rollTransf, dt * 0.5f * _speed);
       var grid_prev = grid;
       grid = toGridT(transform.localPosition, dir);
       chpos |= grid != grid_prev;
@@ -167,6 +186,32 @@ public class Item : MonoBehaviour
     
     return chpos;
   }
+  public bool Move(float dt, Vector2Int _dim)
+  {
+    if(!IsReady)
+      return false;
+
+    Speed();
+
+    bool ret = true;
+    for(int q = 0; q < 2 && ret; ++q)
+    {
+      transform.localPosition = Vector3.MoveTowards(transform.localPosition, toPos(_gridEnd), dt * 0.5f * _speed);
+      Rotate(_rollTransf, dt * 0.5f * _speed);
+      _gridPrev = grid;
+      grid = toGridT(transform.localPosition, _dir);
+      if(Mathf.Approximately(Vector3.Distance(transform.localPosition, toPos(_gridEnd)), 0))
+      {
+        _dir = Vector2Int.zero;
+        grid = _gridEnd;
+        transform.localPosition = toPos(_gridEnd);
+        _speed = 0;
+        ret = false;
+      }
+    }
+
+    return ret;
+  }  
   public void PushBy(Vector2Int pushDir)
   {
     if(IsStatic || IsRemoveElem)
@@ -174,6 +219,7 @@ public class Item : MonoBehaviour
       
     _dir = pushDir.to_units();
     _gridEnd = grid + pushDir;
+    _speed = 0;
   }
   public void PushTo(Vector2Int gridDest)
   {
@@ -182,35 +228,14 @@ public class Item : MonoBehaviour
 
     _dir = (gridDest - grid).to_units();
     _gridEnd = gridDest;
+    _speed = 0;
   }
   public void Stop()
   {
     _dir = Vector2Int.zero;
     _gridEnd = grid;
+    _speed = 0;
     transform.localPosition = toPos(grid);
-  }
-  public bool Move(float dt, Vector2Int _dim)
-  {
-    if(!IsReady)
-      return false;
-
-    bool ret = true;
-    for(int q = 0; q < 2 && ret; ++q)
-    {
-      transform.localPosition = Vector3.MoveTowards(transform.localPosition, toPos(_gridEnd), dt * 0.5f);
-      Rotate(_rollTransf, dt * 0.5f);
-      _gridPrev = grid;
-      grid = toGridT(transform.localPosition, _dir);
-      if(Mathf.Approximately(Vector3.Distance(transform.localPosition, toPos(_gridEnd)), 0))
-      {
-        _dir = Vector2Int.zero;
-        grid = _gridEnd;
-        transform.localPosition = toPos(_gridEnd);
-        ret = false;
-      }
-    }
-   
-    return ret;
   }
   public void Hit(Item item)
   {
