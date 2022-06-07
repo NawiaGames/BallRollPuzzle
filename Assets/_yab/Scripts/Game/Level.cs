@@ -779,8 +779,8 @@ public class Level : MonoBehaviour
       }
       else if(!moving)
       {
-        var nextFieldItem = _grid.geti(_moving[q].gridNext);
-        if(nextFieldItem)
+        var nextFieldItem = _grid.geti(_moving[q].gridNextLast);
+        if(nextFieldItem && !nextFieldItem.IsMoving)
           onItemsHit?.Invoke(_moving[q], nextFieldItem); //intentionally rem
         _moving[q].Hit(nextFieldItem);
         if(nextFieldItem && nextFieldItem.IsBomb)

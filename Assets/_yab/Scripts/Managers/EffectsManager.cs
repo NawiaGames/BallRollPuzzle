@@ -81,7 +81,7 @@ public class EffectsManager : MonoBehaviour
     void OnItemsHit(Item itemA, Item itemB)
     {
       if(itemA && itemB)
-        PlayFXAtPosition(fxHit, (itemA.transform.position + itemB.transform.position) * 0.5f, 10);
+        PlayFXAtPosition(fxHit, (itemA.transform.position + itemB.transform.position) * 0.5f, 30);
     }
     void OnItemsMatched(Level.Match3 match)
     {
