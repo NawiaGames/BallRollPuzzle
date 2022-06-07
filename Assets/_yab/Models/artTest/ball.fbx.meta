@@ -9,6 +9,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: ball
     second: {fileID: 2100000, guid: 2847e929ef5687d4099e417d747bf13d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ball2
+    second: {fileID: 2100000, guid: 3bf08837fd21bee43950ba9772debff2, type: 2}
   materials:
     materialImportMode: 2
     materialName: 1
