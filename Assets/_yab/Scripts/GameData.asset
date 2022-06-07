@@ -41,7 +41,7 @@ MonoBehaviour:
   - {fileID: 5382338121493344219, guid: 7c31a60ec6b004d79ba139f1cbba9ffd, type: 3}
   - {fileID: 5382338121493344219, guid: b11416c2805404e0aa863aeaad906ed4, type: 3}
   - {fileID: 5382338121493344219, guid: 5e3b1ee7549834524a55e0282ed14727, type: 3}
-  - {fileID: 5382338121493344219, guid: b202b9313d2b14f01a14a279f45d9b9c, type: 3}
+  - {fileID: 5382338121493344219, guid: 4be395e64a2494321a25e8026996842d, type: 3}
   - {fileID: 5382338121493344219, guid: a85a64337e5df4d1e9e1d1040585ecf7, type: 3}
   - {fileID: 5382338121493344219, guid: 840bfdcf855074626a1e976bff8428c7, type: 3}
   - {fileID: 5382338121493344219, guid: 127b378ab60a14264be98b4aac2055c0, type: 3}
@@ -50,6 +50,7 @@ MonoBehaviour:
   - {fileID: 5382338121493344219, guid: e03e3f4db01634d1e901ad3dcb1739e4, type: 3}
   - {fileID: 5382338121493344219, guid: bcb5431d478de4f3f93babeef038350b, type: 3}
   - {fileID: 5382338121493344219, guid: 0010f9670ae4d4f16956d461be5f9494, type: 3}
+  - {fileID: 5382338121493344219, guid: b202b9313d2b14f01a14a279f45d9b9c, type: 3}
   pointBallOut: 50
   pointBallOutEveryNext: 10
   pointMatchStandard: 100
