@@ -296,6 +296,7 @@ public class Level : MonoBehaviour
   Item _nextItem = null;
   Item _lastItemMove = null;
   bool _inputBlocked = false;
+  bool _firstInteraction = false;
 
   void Awake()
   {
@@ -332,15 +333,6 @@ public class Level : MonoBehaviour
       }
     }
 
-    _items.Sort((Item i0, Item i1) => (int)(i0.grid.y * 100 + i0.grid.x) - (i1.grid.y * 100 + i1.grid.x));
-    yield return new WaitForSeconds(0.25f);
-    for(int q = 0; q < _items.Count; ++q)
-    {
-      yield return new WaitForSeconds(0.0625f / 4);
-      _items[q].Show();
-      _grid.getElem(_items[q].grid)?.Touch();
-    }
-
     yield return new WaitForSeconds(0.25f);
     foreach(var arr in _arrows)
     {
@@ -350,7 +342,22 @@ public class Level : MonoBehaviour
 
     _started = true;
   }
-  
+  IEnumerator coShowBalls()
+  {
+    _items.Sort((Item i0, Item i1) => (int)(i0.grid.y * 100 + i0.grid.x) - (i1.grid.y * 100 + i1.grid.x));
+    //yield return new WaitForSeconds(0.25f);
+    for(int q = 0; q < _items.Count; ++q)
+    {
+      yield return new WaitForSeconds(0.0625f / 4);
+      _items[q].Show();
+      _grid.getElem(_items[q].grid)?.Touch();
+    }
+  }
+  void ShowBalls()
+  {
+    StartCoroutine(coShowBalls());
+  }
+
   void Init()
   {
     float scale = 1;
@@ -554,7 +561,7 @@ public class Level : MonoBehaviour
   public void OnInputBeg(TouchInputData tid)
   {
     arrowBeg = arrowEnd = null;
-    if(!_allowInput || !AnyColorItem)
+    if(!_allowInput || !AnyColorItem || !_firstInteraction)
       return;
 
     arrowBeg = tid.GetClosestCollider(0.5f)?.GetComponent<Arrow>() ?? null;
@@ -566,7 +573,7 @@ public class Level : MonoBehaviour
   }
   public void OnInputMov(TouchInputData tid)
   {
-    if(!_allowInput || !AnyColorItem)
+    if(!_allowInput || !AnyColorItem || !_firstInteraction)
       return;
 
     arrowEnd = tid.GetClosestCollider(0.5f)?.GetComponent<Arrow>() ?? null;
@@ -579,6 +586,11 @@ public class Level : MonoBehaviour
   {
     arrowBeg = null;
     arrowEnd = null;
+    if(!_firstInteraction)
+    {
+      _firstInteraction = true;
+      ShowBalls();
+    }
 
     if(!_allowInput || !AnyColorItem)
       return;
@@ -903,6 +915,7 @@ public class Level : MonoBehaviour
     _nextItem = CreateNextItem();
 
     //this.Invoke(()=>CheckMove(), 0.2f);
+    CheckEnd();
   }
   void DestroyMatch()
   {
