@@ -32,6 +32,7 @@ MonoBehaviour:
   arrowPrefab: {fileID: 2933700911192963553, guid: 2bed5b5b69f214548a6aad57e9115e0b, type: 3}
   gridElemPrefab: {fileID: 7566253647186876143, guid: 0e0b47018aa1f2648b626fdb9a2ff321, type: 3}
   listLevels:
+  - {fileID: 5382338121493344219, guid: 356c1d94afdbe444fb9bb11bdc70a0f1, type: 3}
   - {fileID: 5382338121493344219, guid: 6c9fd3a8543144c55903e3e08e66b04f, type: 3}
   - {fileID: 5382338121493344219, guid: bb014437da7ab4913ac64a72916a7e3d, type: 3}
   - {fileID: 5382338121493344219, guid: e60c9c96ccc7c4833a85857fecbc9ed0, type: 3}
@@ -47,6 +48,10 @@ MonoBehaviour:
   - {fileID: 5382338121493344219, guid: e03e3f4db01634d1e901ad3dcb1739e4, type: 3}
   - {fileID: 5382338121493344219, guid: bcb5431d478de4f3f93babeef038350b, type: 3}
   - {fileID: 5382338121493344219, guid: 0010f9670ae4d4f16956d461be5f9494, type: 3}
+  pointBallOut: 50
+  pointBallOutEveryNext: 10
+  pointMatchStandard: 100
+  pointMatchSpec: 200
   themeColors:
   - {r: 0.78, g: 0.7532353, b: 0.7532353, a: 1}
   - {r: 0.1882353, g: 0.17254902, b: 0.17254902, a: 1}
