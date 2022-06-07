@@ -23,6 +23,8 @@ public class EffectsManager : MonoBehaviour
     ObjectShake cameraShakeContainer;
     UIInfoLabelManager infoLblMan;
 
+    List<GameLib.ObjectFracture> listFractures = new List<GameLib.ObjectFracture>();
+
     private void Awake() 
     {
       cameraShakeContainer = Camera.main.GetComponentInParent<ObjectShake>();
@@ -78,7 +80,12 @@ public class EffectsManager : MonoBehaviour
       var psmain = fxPaintSplat.main;
       psmain.startColor = sender.color;
 
-      PlayFXAtPosition(fxPaintSplat, sender.transform.position, 5);
+      //PlayFXAtPosition(fxPaintSplat, sender.transform.position, 5);
+      //Instantiate
+      var fo = GameData.Prefabs.CreateObjectFracture(sender.transform.parent);
+      fo.transform.position = sender.transform.position;
+      fo.Fracture(sender.vdir * 2);
+      this.Invoke(()=> {fo.ResetFracture(); Destroy(fo.gameObject);}, 2.0f);
     }
     void OnFx00(object sender)
     {

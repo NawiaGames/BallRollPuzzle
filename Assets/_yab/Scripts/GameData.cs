@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using GameLib;
 
 
 [CreateAssetMenu, DefaultExecutionOrder(-2)]
@@ -23,6 +24,8 @@ public class GameData : ScriptableObject
   [SerializeField] Item bombItem;
   [SerializeField] Item staticItem;
   [SerializeField] Item colorChangeItem;
+  [SerializeField] ObjectFracture fractureItem;
+  //[SerializeField] Frac
   [Header("Field Elems")]
   [SerializeField] Arrow    arrowPrefab;
   [SerializeField] GridElem gridElemPrefab;
@@ -51,7 +54,10 @@ public class GameData : ScriptableObject
       item.name = get().pushItem.name;
       return item;
     }
-
+    public static ObjectFracture CreateObjectFracture(Transform parent)
+    {
+      return Instantiate(get().fractureItem, parent);
+    }
     public static Item CreateBombItem(Transform parent)
     {
       var item = Instantiate(get().bombItem, parent);

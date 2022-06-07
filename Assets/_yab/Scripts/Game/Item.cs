@@ -52,6 +52,7 @@ public class Item : MonoBehaviour
   bool       _frozen = false;
   float      _circum = 2 * Mathf.PI;
   float      _speed = 0;
+  bool       _hidding = false;
 
   public static System.Action<Item> onShow, onHide, onHit, onBombExplode, onPushedOut;
 
@@ -106,7 +107,7 @@ public class Item : MonoBehaviour
     }
   }
  
-  Vector3 vdir => new Vector3(dir.x, 0, dir.y);
+  public Vector3 vdir => new Vector3(dir.x, 0, dir.y);
   public Push push {get => _push; set{ _push = value;}}
   public bool IsReady => !_activatable.InTransition && _lifetime > 0.125f;
   public bool IsMoving => grid != _gridEnd;
@@ -134,10 +135,13 @@ public class Item : MonoBehaviour
   }
   public void Hide()
   {
-    onHide?.Invoke(this);
-    _activatable.DeactivateObject();
-    StartCoroutine(WaitForEnd());
-    //gameObject.SetActive(false);
+    if(!_hidding)
+    {
+      _hidding = true;  
+      onHide?.Invoke(this);
+      _activatable.DeactivateObject();
+      StartCoroutine(WaitForEnd());
+    }
   }
   public void Deactivate()
   {

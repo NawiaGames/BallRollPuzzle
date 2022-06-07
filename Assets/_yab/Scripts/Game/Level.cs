@@ -784,7 +784,7 @@ public class Level : MonoBehaviour
       CheckMatch3();
       CheckEnd();
     }
-    if(_moving.Count == 0 && _pushing.Count == 0 && _matching.Count == 0 && checkItems)
+    if(_moving.Count == 0 && _pushing.Count == 0 && _matching.Count == 0) // && checkItems)
     {
       _grid.update(_items);
       this.Invoke(()=>CheckMove(),0.2f);
