@@ -42,6 +42,7 @@ public class Item : MonoBehaviour
   Vector2Int _gridBeg = Vector2Int.zero;
   Vector2Int _gridEnd = Vector2Int.zero;
   float      _lifetime = 0;
+  bool       _frozen = false;
 
 
   public static System.Action<Item> onShow, onHide, onHit, onBombExplode, onPushedOut;
@@ -102,6 +103,7 @@ public class Item : MonoBehaviour
   public bool IsMoving => grid != _gridEnd;
   //public bool IsArrowVis {get => _arrow.activeSelf; set{_arrow.SetActive(value || IsStatic || IsBomb || _autoMove || _push != Item.Push.None && );}}
   public bool IsStatic => _special == Spec.Static;
+  public bool IsFrozen {get =>_frozen; set{ _frozen = value;}}
   public bool IsBomb => _special == Spec.Bomb;
   public bool IsColorChanger => _special == Spec.ColorChange;
   public bool IsRegular => _special == Spec.None;

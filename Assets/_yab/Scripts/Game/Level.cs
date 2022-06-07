@@ -212,14 +212,21 @@ public class Level : MonoBehaviour
   }
   public struct Match3
   {
+    public bool _byMoving;
     public List<Item> _matches;
     public Match3(Item i0, Item i1, Item i2)
     {
       _matches = new List<Item>(){i0, i1, i2};
+      for(int q = 0; q < _matches.Count; ++q)
+        _matches[q].IsFrozen = true;      
+      _byMoving = false;
     }
     public Match3(List<Item> list)
     {
       _matches = new List<Item>(list);
+      for(int q = 0; q < _matches.Count; ++q)
+        _matches[q].IsFrozen = true;
+      _byMoving = false;
     }
 
     public Vector3 MidPos()
@@ -278,6 +285,7 @@ public class Level : MonoBehaviour
   List<Match3> _matching = new List<Match3>();
 
   Item _nextItem = null;
+  Item _lastItemMove = null;
   bool _inputBlocked = false;
 
   void Awake()
@@ -625,7 +633,7 @@ public class Level : MonoBehaviour
           }
           else //if(_gameplayPushType == PushType.PushOne || _gameplayPushType == PushType.PushLine)
           {
-            if(!_grid.geti(vg).IsStatic)
+            if(!item.IsStatic && !item.IsFrozen)
             {
               toMove = _grid.geti(vg);
               toMove.dir = _pushing[p].dir;
@@ -778,6 +786,7 @@ public class Level : MonoBehaviour
     Vector2Int v = Vector2Int.zero;
     Vector2Int vnx = new Vector2Int(1,0);
     Vector2Int vny = new Vector2Int(0,1);
+
     for(int y = 0; y < _grid.dim().y /*&& _matching.Count == 0*/; ++y)
     {
       for(int x = 0; x < _grid.dim().x; ++x)
@@ -856,26 +865,57 @@ public class Level : MonoBehaviour
         {
           _items[q].PushTo(dest);
           _moving.Add(_items[q]);
+          _lastItemMove = _items[q];
           break;
         }
       }
     }
   }
-  void DestroyMatch()
+  IEnumerator coDestroyMatch()
   {
     List<Item> toDestroy = new List<Item>();
 
+    yield return new WaitForSeconds(0.05f);
     for(int q = 0; q < _matching.Count; ++q)
     {
-      onItemsMatched?.Invoke(_matching[q]);
       toDestroy.AddRange(_matching[q]._matches);
+      onItemsMatched?.Invoke(_matching[q]);
     }
-
     toDestroy = toDestroy.Distinct().ToList();
-    toDestroy.ForEach((item) => item.Hide());
+    for(int q = 0; q < toDestroy.Count; ++q)
+    {
+      toDestroy[q].Hide();
+      yield return new WaitForSeconds(0.05f);
+      //toDestroy.ForEach((item) => item.Hide());
+    }
     _items.RemoveAll((item) => toDestroy.Contains(item));
     _matching.Clear();
-    _grid.update(_items);    
+    _grid.update(_items);
+    _nextItem = CreateNextItem();
+  }
+  void DestroyMatch()
+  {
+    StartCoroutine(coDestroyMatch());
+    // if(_matching.Count > 0)
+    // {
+    //   if(_matching[0]._matches.Count > 0)
+    //   {
+
+    //   }
+    // }
+    // List<Item> toDestroy = new List<Item>();
+
+    // for(int q = 0; q < _matching.Count; ++q)
+    // {
+    //   onItemsMatched?.Invoke(_matching[q]);
+    //   toDestroy.AddRange(_matching[q]._matches);
+    // }
+
+    // toDestroy = toDestroy.Distinct().ToList();
+    // toDestroy.ForEach((item) => item.Hide());
+    // _items.RemoveAll((item) => toDestroy.Contains(item));
+    // _matching.Clear();
+    // _grid.update(_items);    
   }
   void CheckEnd()
   {

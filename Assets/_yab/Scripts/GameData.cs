@@ -28,6 +28,11 @@ public class GameData : ScriptableObject
   [SerializeField] GridElem gridElemPrefab;
   [Header("Levels")]
   [SerializeField] List<Level> listLevels;
+  [Header("Points")]
+  [SerializeField] int pointBallOut = 50;
+  [SerializeField] int pointBallOutEveryNext = 10;
+  [SerializeField] int pointMatchStandard = 100;
+  [SerializeField] int pointMatchSpec = 200;
 
   [SerializeField] Color[]    themeColors;
   public static Color[] GetThemeColors() => get().themeColors;
