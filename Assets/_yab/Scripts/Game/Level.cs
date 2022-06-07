@@ -315,7 +315,10 @@ public class Level : MonoBehaviour
   void OnDestroy()
   {
     foreach(var frac in _fractures)
+    {
+      frac.ResetFracture();
       Destroy(frac.gameObject);
+    }
     _fractures.Clear();  
   }
   IEnumerator Start()
@@ -337,6 +340,9 @@ public class Level : MonoBehaviour
         _grid.getElem(new Vector2Int(w, q))?.Show();
       }
     }
+
+    yield return new WaitForSeconds(0.25f);
+    ShowBalls();
 
     yield return new WaitForSeconds(0.25f);
     foreach(var arr in _arrows)
@@ -600,7 +606,7 @@ public class Level : MonoBehaviour
     if(!_firstInteraction)
     {
       _firstInteraction = true;
-      ShowBalls();
+      //ShowBalls();
     }
 
     if(!_allowInput || !AnyColorItem)
@@ -731,16 +737,16 @@ public class Level : MonoBehaviour
           {
             var gridDest = pushToMove.last().grid + toMove.dir;
             Item itemNext = _grid.geti(gridDest);
-            if(pushType == Item.Push.Line)//_gameplayPushType == PushType.PushLine)
+            if(pushType == Item.Push.Line)
             {
               gridDest = _grid.getDest(pushToMove.last().grid, toMove.dir, !_gameplayOutside);
               if(_grid.isFieldInside(gridDest))
               {
                 var vdir = gridDest - pushToMove.last().grid;
-                pushToMove.ForEach((item) => item.PushBy(vdir));// toMove.dir));
+                pushToMove.ForEach((item) => item.PushBy(vdir));
               }
               else
-                pushToMove.ForEach((item) => item.PushTo(gridDest));// toMove.dir));
+                pushToMove.ForEach((item) => item.PushTo(gridDest));
             }
             else
             {
@@ -774,8 +780,8 @@ public class Level : MonoBehaviour
       else if(!moving)
       {
         var nextFieldItem = _grid.geti(_moving[q].gridNext);
-        // if(nextFieldItem)
-        //   onItemsHit?.Invoke(_moving[q], nextFieldItem); //intentionally rem
+        if(nextFieldItem)
+          onItemsHit?.Invoke(_moving[q], nextFieldItem); //intentionally rem
         _moving[q].Hit(nextFieldItem);
         if(nextFieldItem && nextFieldItem.IsBomb)
           _exploding.Add(nextFieldItem);
@@ -935,7 +941,6 @@ public class Level : MonoBehaviour
     {
       toDestroy[q].Hide();
       yield return new WaitForSeconds(0.05f);
-      //toDestroy.ForEach((item) => item.Hide());
     }
     _items.RemoveAll((item) => toDestroy.Contains(item));
     _matching.Clear();

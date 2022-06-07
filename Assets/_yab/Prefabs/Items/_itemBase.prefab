@@ -191,7 +191,7 @@ MonoBehaviour:
   _autoMove: 0
   _radius: 0.5
   _startSpeed: 0.1
-  _accConst: 0.025
+  _accConst: 0.02
   _accNonConst: 1.03
   _accTypeConst: 1
   _rollTransf: {fileID: 2238382564477020698}
@@ -417,6 +417,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0fc8daadb73fc04f8aa4910848cf74d, type: 3}
+--- !u!1 &418891391208186750 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f0fc8daadb73fc04f8aa4910848cf74d, type: 3}
+  m_PrefabInstance: {fileID: 653402728514706991}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &3863858326371318901
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418891391208186750}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0.00000011920929, y: -0.00000008940695, z: 0.000000014901159}
 --- !u!4 &1052684718838823364 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f0fc8daadb73fc04f8aa4910848cf74d, type: 3}
