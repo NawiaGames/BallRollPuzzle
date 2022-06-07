@@ -19,6 +19,10 @@ public class EffectsManager : MonoBehaviour
     [SerializeField] ParticleSystem fxPaintSplat = null;
     [SerializeField] ParticleSystem fxHit = null;
 
+  [Header("FX string")]
+    [SerializeField] string strPushedOut = "pushed out";
+    [SerializeField] string strBallsMatched = "Match x{0}!";
+
     ParticleSystem fxConfetti;
 
     ObjectShake cameraShakeContainer;
@@ -70,7 +74,7 @@ public class EffectsManager : MonoBehaviour
     }
     void OnItemPushedOut(Item sender)
     {
-      infoLblMan.ShowTextPopup(sender.transform.position, "pushed out!");
+      infoLblMan.ShowTextPopup(sender.transform.position, strPushedOut);
     }
     void OnItemBombExplo(Item sender)
     {
@@ -87,7 +91,7 @@ public class EffectsManager : MonoBehaviour
     {
       Vector3 v = match.MidPos();
       //PlayFXAtPosition(fxPaintSplat, v, 5);
-      infoLblMan.ShowTextPopup(v, "match!", match.GetColor());
+      infoLblMan.ShowTextPopup(v, string.Format(strBallsMatched, match._matches.Count), match.GetColor());
       cameraShakeContainer.Shake(objShakePresetLo);
     }
     void OnItemDestroy(Item sender)

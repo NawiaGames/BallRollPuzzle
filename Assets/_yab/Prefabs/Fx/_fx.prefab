@@ -61,6 +61,8 @@ MonoBehaviour:
   fxConfettiLevel: {fileID: 5235623256206366283}
   fxPaintSplat: {fileID: 5654794271917263824}
   fxHit: {fileID: 5483926277836527142}
+  strPushedOut: Pushed out!
+  strBallsMatched: Match x{0}!
 --- !u!114 &8108016443953103903
 MonoBehaviour:
   m_ObjectHideFlags: 0
