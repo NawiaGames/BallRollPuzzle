@@ -361,7 +361,7 @@ public class Level : MonoBehaviour
     {
       yield return new WaitForSeconds(0.0625f / 4);
       _items[q].Show();
-      _grid.getElem(_items[q].grid)?.Touch();
+      //_grid.getElem(_items[q].grid)?.Touch();
     }
   }
   void ShowBalls()
