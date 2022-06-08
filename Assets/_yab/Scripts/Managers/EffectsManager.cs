@@ -102,7 +102,7 @@ public class EffectsManager : MonoBehaviour
 
       var fo = GameData.Prefabs.CreateObjectFracture(sender.transform.parent);
       fo.transform.position = sender.transform.position;
-      fo.Fracture(sender.vdir * 2);
+      fo.Fracture(Vector3.up * 3);//  sender.vdir * 2);
       if(_lvl)
         _lvl.AddFractures(fo);
     }

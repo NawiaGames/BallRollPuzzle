@@ -314,7 +314,7 @@ public class Level : MonoBehaviour
     _items = _itemsContainer.GetComponentsInChildren<Item>().ToList();
     uiSummary = FindObjectOfType<UISummary>(true);
     
-    _nextItemContainer.gameObject.SetActive(true);
+    _nextItemContainer.gameObject.SetActive(false);
     _nextItemContainer.transform.position = new Vector3(0, 0, _grid.dim().y / 2 + 3);
   }
   void OnDestroy()
@@ -456,7 +456,7 @@ public class Level : MonoBehaviour
         return false;
     });
 
-    _nextItemContainer.gameObject.SetActive(true);
+    //_nextItemContainer.gameObject.SetActive(true);
     _nextItem = CreateNextItem();
     UpdateArrows();
   }
