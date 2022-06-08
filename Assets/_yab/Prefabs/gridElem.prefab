@@ -103,6 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rend: {fileID: 4758683683641222698}
   _fx: {fileID: 1168956773435686824}
+  _model: {fileID: 6221967738371626008}
   colorEven: {r: 0.40677968, g: 0.5974576, b: 0.75, a: 1}
   colorOdd: {r: 0.5647059, g: 0.75, b: 0.7441176, a: 1}
   _sr: {fileID: 3388929737842931895}

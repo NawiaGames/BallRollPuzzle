@@ -7,6 +7,7 @@ public class GridElem : MonoBehaviour
 {
   [SerializeField] Renderer   rend;
   [SerializeField] GameObject _fx;
+  [SerializeField] GameObject _model;
   [SerializeField] Color      colorEven;
   [SerializeField] Color      colorOdd;
   [SerializeField] SpriteRenderer _sr;
@@ -66,7 +67,7 @@ public class GridElem : MonoBehaviour
       _vforce = -0.15f * _voff;
       _vvel += _vforce;
       _vpos += _vvel * Time.deltaTime * 4;
-      _fx.transform.localPosition = _vpos;
+      _model.transform.localPosition = _vpos;
       _vvel *= 0.95f;
     }
   }

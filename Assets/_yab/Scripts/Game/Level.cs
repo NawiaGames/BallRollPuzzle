@@ -578,7 +578,7 @@ public class Level : MonoBehaviour
   public void OnInputBeg(TouchInputData tid)
   {
     arrowBeg = arrowEnd = null;
-    if(!_allowInput || !AnyColorItem || !_firstInteraction)
+    if(!_allowInput || !AnyColorItem) // || !_firstInteraction)
       return;
 
     arrowBeg = tid.GetClosestCollider(0.5f)?.GetComponent<Arrow>() ?? null;
@@ -590,7 +590,7 @@ public class Level : MonoBehaviour
   }
   public void OnInputMov(TouchInputData tid)
   {
-    if(!_allowInput || !AnyColorItem || !_firstInteraction)
+    if(!_allowInput || !AnyColorItem) // || !_firstInteraction)
       return;
 
     arrowEnd = tid.GetClosestCollider(0.5f)?.GetComponent<Arrow>() ?? null;
@@ -604,10 +604,7 @@ public class Level : MonoBehaviour
     arrowBeg = null;
     arrowEnd = null;
     if(!_firstInteraction)
-    {
       _firstInteraction = true;
-      //ShowBalls();
-    }
 
     if(!_allowInput || !AnyColorItem)
       return;
