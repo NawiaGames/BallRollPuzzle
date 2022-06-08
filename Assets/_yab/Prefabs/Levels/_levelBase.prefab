@@ -242,6 +242,8 @@ MonoBehaviour:
   _poiLT: {fileID: 3603963989846532697}
   _poiRB: {fileID: 7699192860217285146}
   _ballInfo: {fileID: 2407292245737820046}
+  _activationInterval: 0.06666667
+  _deactivationInterval: 0.016666668
   _gameplayOutside: 0
   _dim: {x: 5, y: 5}
   _speed: 16

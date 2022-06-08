@@ -153,8 +153,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sr: {fileID: 6606579547322460701}
-  _colorNormal: {r: 0.60960305, g: 0.8536452, b: 0.9716981, a: 1}
-  _colorSelected: {r: 1, g: 0.5235849, b: 0.5235849, a: 1}
+  _colorNormal: {r: 1, g: 0.52755904, b: 0, a: 0.5019608}
+  _colorSelected: {r: 1, g: 0.53333336, b: 0, a: 1}
+  _colorBlocked: {r: 1, g: 0.53333336, b: 0, a: 0.050980393}
+  blendSpeed: 4
   _actObj: {fileID: 5006249832342351804}
 --- !u!65 &7277004885358282157
 BoxCollider:
