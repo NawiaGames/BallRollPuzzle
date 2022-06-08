@@ -369,10 +369,10 @@ public class Level : MonoBehaviour
   // }
   IEnumerator coShowArrows()
   {
-    yield return new WaitForSeconds(0.25f);
+    //yield return new WaitForSeconds(0.25f);
     foreach(var arr in _arrows)
     {
-      yield return new WaitForSeconds(_activationInterval);
+      yield return null;//new WaitForSeconds(_activationInterval);
       arr?.Show();
     }
   }
@@ -915,7 +915,7 @@ public class Level : MonoBehaviour
     {
       for(int q = 0; q < _items.Count; ++q)
       {
-        if(_items[q].IsRegular && _items[q].IsMoveable)
+        if(_items[q].IsRegular && _items[q].IsMoveable && !_items[q].IsMoving)
         {
           if(_items[q].vturn == vdirections[d])
           {

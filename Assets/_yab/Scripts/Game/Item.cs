@@ -133,7 +133,6 @@ public class Item : MonoBehaviour
     _gridEnd = grid;
     if(!IsRemoveElem)
     {
-      
       _activatable.ActivateObject();
       onShow?.Invoke(this);
     }
