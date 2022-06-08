@@ -348,14 +348,8 @@ public class Level : MonoBehaviour
     }
 
     yield return new WaitForSeconds(0.25f);
-    ShowBalls();
-
-    yield return new WaitForSeconds(0.25f);
-    foreach(var arr in _arrows)
-    {
-      yield return new WaitForSeconds(_activationInterval);
-      arr?.Show();
-    }
+    StartCoroutine(coShowBalls());
+    StartCoroutine(coShowArrows());
 
     _started = true;
   }
@@ -367,12 +361,20 @@ public class Level : MonoBehaviour
     {
       yield return new WaitForSeconds(0.0625f / 4);
       _items[q].Show();
-      //_grid.getElem(_items[q].grid)?.Touch();
     }
   }
-  void ShowBalls()
+  // void ShowBalls()
+  // {
+  //   StartCoroutine(coShowBalls());
+  // }
+  IEnumerator coShowArrows()
   {
-    StartCoroutine(coShowBalls());
+    yield return new WaitForSeconds(0.25f);
+    foreach(var arr in _arrows)
+    {
+      yield return new WaitForSeconds(_activationInterval);
+      arr?.Show();
+    }
   }
 
   void Init()
@@ -651,18 +653,17 @@ public class Level : MonoBehaviour
       checkItems |= _pushing[p].MoveP(Time.deltaTime * _speed);
       if(checkItems)
       {
-        //_grid.getElem(_pushing[p].grid)?.Touch();
         if(_pushing[p].grid != _pushing[p].gridPrev)
           _grid.touchElems(_pushing[p].grid, _pushing[p].dir);
       }
       var vg = _pushing[p].gridNext;
-      bool next_inside = _grid.isFieldInside(vg);
+      bool next_inside = _grid.IsInsideDim(vg); //_grid.isFieldInside(vg);
       var pushType = _pushing[p].push;
       var pusher = _pushing[p];
       if(next_inside || _gameplayOutside)
       {
         Item item = _grid.geti(vg);
-        if(item)
+        if(item && !item.IsRandMoveItem)
         {
           if(_pushing[p].push == Item.Push.None) //_gameplayPushType == PushType.None)
           {
@@ -675,12 +676,14 @@ public class Level : MonoBehaviour
           }
           else //if(_gameplayPushType == PushType.PushOne || _gameplayPushType == PushType.PushLine)
           {
-            if(!item.IsStatic && !item.IsFrozen)
+            bool isField = _grid.isField(_pushing[p].grid);
+            if(!item.IsStatic && !item.IsFrozen && isField)
             {
               toMove = _grid.geti(vg);
               toMove.dir = _pushing[p].dir;
             }
-            onItemsHit?.Invoke(item, _pushing[p]);
+            if(isField)
+              onItemsHit?.Invoke(item, _pushing[p]);
             _pushing[p].Hide();
             _pushing.RemoveAt(p);
             p--;
