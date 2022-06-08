@@ -165,13 +165,13 @@ public class Item : MonoBehaviour
     {
       if(_speed == 0)
         _speed = _startSpeed;
-      _speed = Mathf.Clamp01(_speed + 0.035f);
+      _speed = Mathf.Clamp01(_speed + _accConst);
     }
     else
     {
       if(_speed == 0)
         _speed = _startSpeed;
-      _speed = Mathf.Clamp01(_speed * 1.035f);
+      _speed = Mathf.Clamp01(_speed * _accNonConst);
     }
   }
   public bool MoveP(float dt)
