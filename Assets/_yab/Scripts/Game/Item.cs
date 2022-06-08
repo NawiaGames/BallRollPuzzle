@@ -17,6 +17,7 @@ public class Item : MonoBehaviour
   [SerializeField] float      _accConst = 0.035f;
   [SerializeField] float      _accNonConst = 1.035f;
   [SerializeField] bool       _accTypeConst = true;
+  [SerializeField] ObjectColorBlender _ocb;
 
   [SerializeField] Transform  _rollTransf;
    
@@ -277,6 +278,12 @@ public class Item : MonoBehaviour
   public void Explode()
   {
     onBombExplode?.Invoke(this);
+  }
+  public void Matched()
+  {
+    _ocb.SetColor(color);
+    Color c = new Color(color.r * 2, color.g * 2, color.b * 2, color.a);
+    _ocb.BlendTo(c);
   }
   void Rotate(Transform _model, float dt)
   {

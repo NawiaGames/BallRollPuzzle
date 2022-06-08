@@ -942,13 +942,20 @@ public class Level : MonoBehaviour
     for(int q = 0; q < _matching.Count; ++q)
     {
       toDestroy.AddRange(_matching[q]._matches);
+      // foreach(var item in _matching[q]._matches)
+      // {
+      //   item.Matched();
+      //   yield return new WaitForSeconds(1/30f);
+      // }
       onItemsMatched?.Invoke(_matching[q]);
     }
     toDestroy = toDestroy.Distinct().ToList();
+    toDestroy.ForEach((item) => item.Matched());
+    yield return new WaitForSeconds(0.25f);
     for(int q = 0; q < toDestroy.Count; ++q)
     {
-      toDestroy[q].Hide();
       yield return new WaitForSeconds(_deactivationInterval);
+      toDestroy[q].Hide();
     }
     _items.RemoveAll((item) => toDestroy.Contains(item));
     _matching.Clear();

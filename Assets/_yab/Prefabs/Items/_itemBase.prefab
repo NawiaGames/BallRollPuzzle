@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 7845557772794626158}
   - component: {fileID: 6752348163733698667}
   - component: {fileID: 7798136041665752175}
+  - component: {fileID: 7273517201562458461}
   m_Layer: 0
   m_Name: _itemBase
   m_TagString: Untagged
@@ -194,6 +195,7 @@ MonoBehaviour:
   _accConst: 0.025
   _accNonConst: 1.03
   _accTypeConst: 1
+  _ocb: {fileID: 7273517201562458461}
   _rollTransf: {fileID: 2238382564477020698}
   grid: {x: 0, y: 0}
 --- !u!114 &7798136041665752175
@@ -209,6 +211,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 3429963110977579355}
+--- !u!114 &7273517201562458461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4092142241397789765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39a14500fdb319742b5360e4c264da8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loop: 1
+  rendererContainers: []
+  blendCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  blendTime: 0.25
+  speedMultiplier: 1
+  baseColor: {r: 1, g: 1, b: 1, a: 1}
+  targetColor: {r: 2.1185474, g: 2.1185474, b: 2.1185474, a: 1}
 --- !u!1 &4325351002143765733
 GameObject:
   m_ObjectHideFlags: 0
