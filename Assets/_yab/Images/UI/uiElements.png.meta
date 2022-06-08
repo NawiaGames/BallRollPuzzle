@@ -15,6 +15,12 @@ TextureImporter:
       213: 3141900230587812362
     second: icoCoin
   - first:
+      213: 5161116690010460925
+    second: starsStandFill
+  - first:
+      213: -4641822362924299624
+    second: starsStand
+  - first:
       213: 3838556853171494735
     second: icoHeart
   - first:
@@ -27,14 +33,17 @@ TextureImporter:
       213: 4921157955859175283
     second: button2
   - first:
+      213: 8632624238333640991
+    second: summaryBG
+  - first:
       213: 2409716446333867411
     second: starFill
   - first:
       213: -8320315927120653687
     second: starFrame
   - first:
-      213: 2045693908544233143
-    second: topPanel
+      213: -1922417273455563661
+    second: Panel
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -152,13 +161,13 @@ TextureImporter:
       name: barFill
       rect:
         serializedVersion: 2
-        x: 0
-        y: 116
-        width: 1024
-        height: 98
+        x: 192
+        y: 496
+        width: 512
+        height: 104
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 512, y: 0, z: 512, w: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -173,13 +182,13 @@ TextureImporter:
       name: barBase
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1024
-        height: 116
+        x: 192
+        y: 392
+        width: 512
+        height: 105
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 512, y: 0, z: 512, w: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -200,7 +209,7 @@ TextureImporter:
         height: 192
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 96, y: 96, z: 96, w: 96}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -216,9 +225,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 583
-        width: 97
-        height: 97
+        y: 584
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -233,13 +242,55 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
+      name: starsStandFill
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 680
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 48, z: 0, w: 48}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df2d968e848ff9740800000000000000
+      internalID: 5161116690010460925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: starsStand
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 680
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 48, z: 0, w: 48}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89ace63872fe49fb0800000000000000
+      internalID: -4641822362924299624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
       name: icoHeart
       rect:
         serializedVersion: 2
         x: 96
-        y: 583
-        width: 97
-        height: 97
+        y: 584
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -258,9 +309,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 192
-        y: 679
-        width: 97
-        height: 97
+        y: 680
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -279,9 +330,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 96
-        y: 679
-        width: 97
-        height: 97
+        y: 680
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -300,9 +351,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 679
-        width: 97
-        height: 97
+        y: 680
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -320,19 +371,19 @@ TextureImporter:
       name: summaryBG
       rect:
         serializedVersion: 2
-        x: 512
-        y: 768
-        width: 512
-        height: 256
+        x: 0
+        y: 0
+        width: 960
+        height: 329
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 256, y: 128, z: 256, w: 128}
+      border: {x: 480, y: 72, z: 480, w: 257}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 669871e4000000000800000000000000
-      internalID: 1310165350
+      spriteID: f11cd45d10e3dc770800000000000000
+      internalID: 8632624238333640991
       vertices: []
       indices: 
       edges: []
@@ -380,7 +431,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: topPanel
+      name: Panel
       rect:
         serializedVersion: 2
         x: 0
@@ -394,8 +445,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7be95f175c3c36c10800000000000000
-      internalID: 2045693908544233143
+      spriteID: 37c2b99dca33255e0800000000000000
+      internalID: -1922417273455563661
       vertices: []
       indices: 
       edges: []
@@ -403,7 +454,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: daf3f86e805b61c4a958bceaf4d44bf9
+    spriteID: 598ef4756312bb44584ca12e755968b0
     internalID: 0
     vertices: []
     indices: 
@@ -411,18 +462,20 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      topPanel: 2045693908544233143
       barFill: -780752133151919145
       starFill: 2409716446333867411
       icoCoin: 3141900230587812362
+      starsStand: -4641822362924299624
       barBase: -3323582823482275691
       starFrame: -8320315927120653687
       button2: 4921157955859175283
+      starsStandFill: 5161116690010460925
       button1: 1764023767887857751
       icoHeart: 3838556853171494735
       btnBase: 3361918274068334627
       iconBomb: -4603156472066961037
-      summaryBG: 1310165350
+      Panel: -1922417273455563661
+      summaryBG: 8632624238333640991
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
