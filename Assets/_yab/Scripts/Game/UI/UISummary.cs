@@ -14,8 +14,8 @@ public class UISummary : MonoBehaviour
 
   [SerializeField] GameObject winContainer;
   [SerializeField] GameObject failContainer;
-  [SerializeField] TMPLbl  lblScore;
-  [SerializeField] TMPLbl  lblInfo;
+  //[SerializeField] TMPLbl  lblScore;
+  //[SerializeField] TMPLbl  lblInfo;
   [SerializeField] Slider  slider;
 
   float destValue = 0;

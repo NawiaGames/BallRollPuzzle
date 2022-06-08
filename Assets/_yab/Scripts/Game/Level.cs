@@ -12,8 +12,8 @@ using TMPLbl = TMPro.TextMeshPro;
 public class Level : MonoBehaviour
 {
   public static System.Action<Vector3> onIntroFx;
-  public static System.Action<Level>   onStart, onPlay, onFirstInteraction, onTutorialStart;
-  public static System.Action<Level>   onFinished;
+  public static System.Action<Level>   onCreate, onStart, onPlay, onFirstInteraction, onTutorialStart;
+  public static System.Action<Level>   onFinished, onItemThrow;
   public static System.Action<Match3>  onItemsMatched;
   public static System.Action<Item, Item> onItemsHit;
 
@@ -30,7 +30,6 @@ public class Level : MonoBehaviour
   [Header("Animations")]
   [SerializeField] float _activationInterval = 1/30f;
   [SerializeField] float _deactivationInterval = 1/30f;
-
 
   public class Grid
   {
@@ -57,13 +56,13 @@ public class Level : MonoBehaviour
       System.Array.Clear(_grid, 0, _grid.Length);
     }
     public Vector2Int dim() => _dim;
-    bool insideDim(Vector2Int v)
+    public bool IsInsideDim(Vector2Int v)
     {
       return v.x >= -_dim.x / 2 && v.x <= _dim.x / 2 && v.y >= -_dim.y / 2 && v.y <= _dim.y / 2;
     }
     public bool isFieldInside(Vector2Int v)
     {
-      bool inside = insideDim(v);
+      bool inside = IsInsideDim(v);
       if(inside)
         inside &= isField(v);
 
@@ -175,7 +174,7 @@ public class Level : MonoBehaviour
     }
     public GridElem getElem(Vector2Int vi)
     {
-      if(insideDim(vi))
+      if(IsInsideDim(vi))
       {
         var v = _dim / 2 + vi;
         return _elems[v.y, v.x];      
@@ -316,6 +315,8 @@ public class Level : MonoBehaviour
     
     _nextItemContainer.gameObject.SetActive(false);
     _nextItemContainer.transform.position = new Vector3(0, 0, _grid.dim().y / 2 + 3);
+
+    onCreate?.Invoke(this);
   }
   void OnDestroy()
   {
@@ -630,12 +631,9 @@ public class Level : MonoBehaviour
     }
     if(_arrowsSelected.Count > 0 && _nextItem)
     {
-      _nextItem.Deactivate();
-      this.Invoke(()=>
-      {
-        Destroy(_nextItem.gameObject);
-        _nextItem = null;
-      },0.25f);
+      onItemThrow?.Invoke(this);
+      Destroy(_nextItem.gameObject);
+      _nextItem = null;
     }
     _arrowsSelected.Clear();
     _arrows.ForEach((ar) => ar.IsSelected = false);
@@ -725,14 +723,16 @@ public class Level : MonoBehaviour
         int cnt = Mathf.Max(_dim.x, _dim.y);
         for(int q = 0; q < cnt; ++q)
         {
-          if(_grid.isFieldInside(v))
+          if(_grid.IsInsideDim(v)) //isFieldInside(v))
           {
             var item = _grid.geti(v);
-            if(item != null && !item.IsStatic) // && !item.IsRemoveElem)
+            if(item != null && !item.IsStatic && !item.IsRemoveElem)
               pushToMove.Add(item);
             else
               break;
           }
+          // else
+          //   break;
           v += toMove.dir;
         }
         if(pushToMove.Count > 0)

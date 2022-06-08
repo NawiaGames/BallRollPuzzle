@@ -15,20 +15,23 @@ public class UIIngame : MonoBehaviour
   [Header("TopPanelRefs")]
   [SerializeField] TMPLbl  lblLevelInfo;
   [SerializeField] TMPLbl  lblCash;
-  [SerializeField] TMPLbl  lblCustomers;
+  [SerializeField] TMPLbl  lblBallsLeft;
 
   void Awake()
   {
     GetComponent<UIPanel>().ActivatePanel();
-    Level.onStart += OnLevelStart;
+    Level.onCreate += OnLevelStart;
+    Level.onItemThrow += OnItemThrow;
   }
   void OnDestroy()
   {
-    Level.onStart -= OnLevelStart;
+    Level.onCreate -= OnLevelStart;
+    Level.onItemThrow -= OnItemThrow;
   }
   void OnLevelStart(Level lvl)
   {
     lblLevelInfo.text = "level: " + lvl.LevelIdx + "\n";
+    lblBallsLeft.text = lvl.movesAvail.ToString();
     //lblLevelInfo.text += "gameType: " + ((lvl.gameType == Level.GameType.Match3Move)? "Match3 + move" : "Match3") + "\n";
     // string push = "";
     // if(lvl.pushType == Level.PushType.None)
@@ -39,6 +42,10 @@ public class UIIngame : MonoBehaviour
     //   push = "push to obstacle";
     // lblLevelInfo.text += "pushType: " + push + "\n";
     //lblLevelInfo.text += "push outside gamefield: " + (lvl.gameOutside).ToString();
+  }
+  void OnItemThrow(Level lvl)
+  {
+    lblBallsLeft.text = lvl.movesAvail.ToString();
   }
   public void OnBtnRestart()
   {

@@ -132,6 +132,7 @@ public class Item : MonoBehaviour
     _gridEnd = grid;
     if(!IsRemoveElem)
     {
+      
       _activatable.ActivateObject();
       onShow?.Invoke(this);
     }
@@ -173,6 +174,10 @@ public class Item : MonoBehaviour
         _speed = _startSpeed;
       _speed = Mathf.Clamp01(_speed * _accNonConst);
     }
+  }
+  public void ResetSpeed()
+  {
+    _speed = 0;
   }
   public bool MoveP(float dt)
   {

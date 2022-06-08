@@ -1597,7 +1597,7 @@ MonoBehaviour:
   sliderSpeed: {fileID: 7324228444446663542}
   lblLevelInfo: {fileID: 9168044651966242795}
   lblCash: {fileID: 2652852661150355971}
-  lblCustomers: {fileID: 4419647755812363176}
+  lblBallsLeft: {fileID: 4648838179470629782}
 --- !u!114 &5453268848639807899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3898,6 +3898,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5279295458596591819, guid: 39fcc812c1f222f45a9a6edea79135aa, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5279295458596591819, guid: 39fcc812c1f222f45a9a6edea79135aa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8851067632771146524, guid: 39fcc812c1f222f45a9a6edea79135aa, type: 3}
       propertyPath: m_Name
       value: infoFrame
@@ -3909,6 +3917,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2754233224562739650, guid: 39fcc812c1f222f45a9a6edea79135aa, type: 3}
   m_PrefabInstance: {fileID: 2596557326473202739}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4648838179470629782 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7244935621746186149, guid: 39fcc812c1f222f45a9a6edea79135aa, type: 3}
+  m_PrefabInstance: {fileID: 2596557326473202739}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3395334648705925801
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3998,6 +4017,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2754233224562739650, guid: 39fcc812c1f222f45a9a6edea79135aa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5279295458596591819, guid: 39fcc812c1f222f45a9a6edea79135aa, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5279295458596591819, guid: 39fcc812c1f222f45a9a6edea79135aa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8851067632771146524, guid: 39fcc812c1f222f45a9a6edea79135aa, type: 3}
