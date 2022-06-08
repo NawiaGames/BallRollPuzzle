@@ -27,6 +27,11 @@ public class Level : MonoBehaviour
   [SerializeField] Transform _poiRB;
   [SerializeField] TMPLbl    _ballInfo;
 
+  [Header("Animations")]
+  [SerializeField] float _activationInterval = 1/30f;
+  [SerializeField] float _deactivationInterval = 1/30f;
+
+
   public class Grid
   {
     Vector2Int _dim = Vector2Int.zero;
@@ -331,7 +336,7 @@ public class Level : MonoBehaviour
 
     for(int q = 0; q < Mathf.Max(_grid.dim().x, _grid.dim().y); q++)
     {
-      yield return new WaitForSeconds(1/60.0f);
+      yield return new WaitForSeconds(_activationInterval);
       for(int w = -q; w <= q; ++w)
       {
         _grid.getElem(new Vector2Int(-q, w))?.Show();
@@ -347,7 +352,7 @@ public class Level : MonoBehaviour
     yield return new WaitForSeconds(0.25f);
     foreach(var arr in _arrows)
     {
-      yield return new WaitForSeconds(1 / 60.0f);
+      yield return new WaitForSeconds(_activationInterval);
       arr?.Show();
     }
 
@@ -937,7 +942,7 @@ public class Level : MonoBehaviour
     for(int q = 0; q < toDestroy.Count; ++q)
     {
       toDestroy[q].Hide();
-      yield return new WaitForSeconds(0.05f);
+      yield return new WaitForSeconds(_deactivationInterval);
     }
     _items.RemoveAll((item) => toDestroy.Contains(item));
     _matching.Clear();
