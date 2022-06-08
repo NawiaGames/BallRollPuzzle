@@ -190,6 +190,10 @@ PrefabInstance:
       value: fxSparksBomb
       objectReference: {fileID: 0}
     - target: {fileID: 1392903049362095046, guid: 23d7cb1014cd6df499657c9a694b2d87, type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1392903049362095046, guid: 23d7cb1014cd6df499657c9a694b2d87, type: 3}
       propertyPath: ShapeModule.type
       value: 4
       objectReference: {fileID: 0}
