@@ -148,7 +148,7 @@ public class Item : MonoBehaviour
   }
   public void Deactivate()
   {
-    _activatable.DeactivateObject();
+    //_activatable.DeactivateObject();
   }
   IEnumerator WaitForEnd()
   {

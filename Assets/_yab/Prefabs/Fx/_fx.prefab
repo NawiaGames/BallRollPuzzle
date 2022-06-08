@@ -61,6 +61,8 @@ MonoBehaviour:
   fxConfettiIngame: {fileID: 3899901870631301802}
   fxConfettiLevel: {fileID: 5235623256206366283}
   fxPaintSplat: {fileID: 5654794271917263824}
+  fxBallFractures: {fileID: 8654854198287132523}
+  ballFracturesEmitCnt: 1
   fxHit: {fileID: 5483926277836527142}
   strPushedOut: Pushed out!
   strBallsMatched: Match x{0}!
@@ -142,11 +144,20 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8899751940149744943, guid: b1f40add61ac51749ac4295e905e5173, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1f40add61ac51749ac4295e905e5173, type: 3}
 --- !u!4 &330583385283904746 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 506666929268045486, guid: b1f40add61ac51749ac4295e905e5173, type: 3}
+  m_PrefabInstance: {fileID: 260783495592014404}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &8654854198287132523 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8899751940149744943, guid: b1f40add61ac51749ac4295e905e5173, type: 3}
   m_PrefabInstance: {fileID: 260783495592014404}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1688803668093457519

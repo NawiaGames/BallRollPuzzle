@@ -202,7 +202,7 @@ public class Level : MonoBehaviour
       {
         var elem = getElem(vbeg);
         if(elem)
-          elem.selected = sel;
+          elem.SetSelected(sel, vdir);
         vbeg += vdir;
       }
     }
@@ -224,7 +224,7 @@ public class Level : MonoBehaviour
     {
       _matches = new List<Item>(){i0, i1, i2};
       for(int q = 0; q < _matches.Count; ++q)
-        _matches[q].IsFrozen = true;      
+        _matches[q].IsFrozen = true;
       _byMoving = false;
     }
     public Match3(List<Item> list)
@@ -469,6 +469,8 @@ public class Level : MonoBehaviour
     if(arrowBeg == null || arrowEnd == null)
       return;
 
+    bool horz = Mathf.Abs(arrowBeg.vPos.z) == (_grid.dim().y/2 + 1);
+
     Vector3 dir = arrowBeg.vPos - arrowEnd.vPos;
     dir.x = Mathf.Abs(dir.x);
     dir.z = Mathf.Abs(dir.z);
@@ -476,20 +478,21 @@ public class Level : MonoBehaviour
     for(int q = 0; q < _arrows.Count; ++q)
     {
       var ar = _arrows[q];
-      if(dir.x > dir.z)
-        _sel = Mathf.Sign(ar.grid.x - arrowBeg.grid.x) != Mathf.Sign(ar.grid.x - arrowEnd.grid.x) && ar.grid.y == arrowEnd.grid.y;
+      if(horz)
+        _sel = _sel = Mathf.Sign(ar.grid.x - arrowBeg.grid.x) != Mathf.Sign(ar.grid.x - arrowEnd.grid.x) && ar.grid.y == arrowBeg.grid.y;
       else
-        _sel = Mathf.Sign(ar.grid.y - arrowBeg.grid.y) != Mathf.Sign(ar.grid.y - arrowEnd.grid.y) && ar.grid.x == arrowEnd.grid.x;
+        _sel = _sel = Mathf.Sign(ar.grid.y - arrowBeg.grid.y) != Mathf.Sign(ar.grid.y - arrowEnd.grid.y) && ar.grid.x == arrowBeg.grid.x;
       _arrows[q].IsSelected = _sel;
-      if(_sel)
+      if(_arrows[q].IsSelected)
         _arrowsSelected.Add(_arrows[q]);
     }
     arrowBeg.IsSelected = true;
-    arrowEnd.IsSelected = true;
     _arrowsSelected.Add(arrowBeg);
-    _arrowsSelected.Add(arrowEnd);
-    _arrowsSelected = _arrowsSelected.Distinct().ToList();
+    arrowEnd.IsSelected = (horz)? arrowBeg.grid.y == arrowEnd.grid.y : arrowBeg.grid.x == arrowEnd.grid.x;
+    if(arrowEnd.IsSelected)
+       _arrowsSelected.Add(arrowEnd);
 
+    _arrowsSelected = _arrowsSelected.Distinct().ToList();
     for(int q = 0; q < _arrowsSelected.Count; ++q)
     {
       _arrowsSelected[q].IsBlocked = _grid.isBlocked(_arrowsSelected[q].grid + _arrowsSelected[q].dir); //_grid.geti(_arrowsSelected[q].grid + _arrowsSelected[q].dir) != null;
@@ -568,7 +571,7 @@ public class Level : MonoBehaviour
     {
       item.transform.localPosition = Vector3.zero;
       item.name = item.name.Replace("(Clone)", "");
-      item.Show();
+      //item.Show();
     }
 
     return item;

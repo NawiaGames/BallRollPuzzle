@@ -17,6 +17,8 @@ public class EffectsManager : MonoBehaviour
     [SerializeField] ParticleSystem fxConfettiIngame = null;
     [SerializeField] ParticleSystem fxConfettiLevel = null;
     [SerializeField] ParticleSystem fxPaintSplat = null;
+    [SerializeField] ParticleSystem fxBallFractures = null;
+    [SerializeField] int            ballFracturesEmitCnt = 1;
     [SerializeField] ParticleSystem fxHit = null;
 
   [Header("FX string")]
@@ -27,7 +29,7 @@ public class EffectsManager : MonoBehaviour
 
     ObjectShake cameraShakeContainer;
     UIInfoLabelManager infoLblMan;
-    Level _lvl = null;
+    //Level _lvl = null;
 
     List<GameLib.ObjectFracture> listFractures = new List<GameLib.ObjectFracture>();
 
@@ -70,7 +72,7 @@ public class EffectsManager : MonoBehaviour
     
     void OnLevelStart(Level lvl)
     {
-      _lvl = lvl;
+      //_lvl = lvl;
     }
     void OnItemPushedOut(Item sender)
     {
@@ -96,15 +98,12 @@ public class EffectsManager : MonoBehaviour
     }
     void OnItemDestroy(Item sender)
     {
-      var psmain = fxPaintSplat.main;
+      var psmain = fxBallFractures.main;
       psmain.startColor = sender.color;
-      //PlayFXAtPosition(fxPaintSplat, sender.transform.position, 5);
-
-      var fo = GameData.Prefabs.CreateObjectFracture(sender.transform.parent);
-      fo.transform.position = sender.transform.position;
-      fo.Fracture(Vector3.up * 3);//  sender.vdir * 2);
-      if(_lvl)
-        _lvl.AddFractures(fo);
+      PlayFXAtPosition(fxBallFractures, sender.transform.position, 4);
+      //var emitParams = new ParticleSystem.EmitParams();
+      //emitParams.position = sender.transform.position;
+      //fxBallFractures.Emit(emitParams, 4);
     }
     void OnFx00(object sender)
     {
@@ -128,6 +127,6 @@ public class EffectsManager : MonoBehaviour
       if(lvl.Succeed)
         fxConfettiLevel.Play();
       cameraShakeContainer.Shake(objShakePresetHi);
-      _lvl = null;
+      //_lvl = null;
     }
 }

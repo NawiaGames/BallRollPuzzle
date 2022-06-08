@@ -14,10 +14,10 @@ public class GridElem : MonoBehaviour
   [SerializeField] ActivatableObject _actObj;
   
   bool _even = true;
+  Vector2Int vdir = new Vector2Int(0, 1);
   public bool even{get => _even; set{_even = value; SetColor();}}
   public Vector2Int grid {get; set;}
-  public bool selected {get; set;} = false;
-
+  bool _selected = false;
   bool _shown = false;
 
 
@@ -40,6 +40,15 @@ public class GridElem : MonoBehaviour
   {
     rend.material.color = (_even)? colorEven : colorOdd;
   }
+  public void SetSelected(bool sel, Vector2Int dir)
+  {
+    if(sel)
+    {
+      vdir = dir;
+      _sr.transform.localRotation = Quaternion.LookRotation(new Vector3(vdir.x, -90, vdir.y), Vector3.up);
+    }
+    _selected = sel;
+  }
   public void Touch(float velmult = 1.0f)
   {
     _vvel.y += -0.5f * velmult;
@@ -51,10 +60,11 @@ public class GridElem : MonoBehaviour
   void ProcessSelection()
   {
     var color = _sr.material.color;
-    if(selected)
+    if(_selected)
       color.a = Mathf.Clamp01(color.a + Time.deltaTime * 4);
     else
       color.a = Mathf.Clamp01(color.a - Time.deltaTime * 4);
+
     _sr.material.color = color;
   }
   void Update()
