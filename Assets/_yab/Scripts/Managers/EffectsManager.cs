@@ -13,7 +13,7 @@ public class EffectsManager : MonoBehaviour
     [SerializeField] float offsetToCamera = .25f;
   [Header("FX Systems")]
     [SerializeField] ParticleSystem fxSparks = null;
-    [SerializeField] ParticleSystem fxItemCompleted = null;
+    //[SerializeField] ParticleSystem fxItemCompleted = null;
     [SerializeField] ParticleSystem fxConfettiIngame = null;
     [SerializeField] ParticleSystem fxConfettiLevel = null;
     [SerializeField] ParticleSystem fxPaintSplat = null;

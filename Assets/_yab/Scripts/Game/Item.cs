@@ -141,7 +141,7 @@ public class Item : MonoBehaviour
       _activatable.ActivateObject();
       onShow?.Invoke(this);
     }
-    if(IsRegular)
+    if(IsRegular && push == Push.None)
     {
       _rollTransf.GetChild(0).localRotation = Random.rotation;
     }

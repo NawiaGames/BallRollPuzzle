@@ -292,7 +292,7 @@ public class Level : MonoBehaviour
   public int  PointsMax => _maxPoints;
 
   bool _started = false;
-  bool _allowInput => (movesAvail > 0 || _nextItem != null) && _pushing.Count == 0 && _moving.Count == 0 && _matching.Count == 0;
+  bool _allowInput => (movesAvail > 0 || _nextItem != null) && _pushing.Count == 0 && _moving.Count == 0 && _matching.Count == 0 && !_sequence;
   UISummary uiSummary = null;
 
   Grid _grid = new Grid();
@@ -309,7 +309,6 @@ public class Level : MonoBehaviour
   [SerializeField] List<Item> _listNextItems = new List<Item>();
 
   [SerializeField] Item _nextItem = null;
-  Item _lastItemMove = null;
   bool _inputBlocked = false;
   bool _firstInteraction = false;
   bool _checkMoves = false;
@@ -570,7 +569,6 @@ public class Level : MonoBehaviour
           item = GameData.Prefabs.CreatePushItem(_trayItemContainer, (Random.value < 0.5f)? Item.Push.One : Item.Push.Line);
         else
           item = Instantiate(_listItems[0], _trayItemContainer);
-        //item.name = _listItems[0].name;
       }
       else
       {
@@ -687,8 +685,6 @@ public class Level : MonoBehaviour
 
   void MoveItems()
   {
-    if(_sequence)
-      return;
     bool checkItems = false;
     for(int p = 0; p < _pushing.Count; ++p)
     {
@@ -847,36 +843,17 @@ public class Level : MonoBehaviour
       else //moving
       {
         if(_moving[q].grid != _moving[q].gridPrev)
+        {
           _grid.touchElems(_moving[q].grid, _moving[q].dir);
+          checkItems |= true;
+        }
       }
     }
 
     if(checkItems)
-      Sequence();
-    if(_moving.Count == 0 && _pushing.Count == 0 && _matching.Count == 0 && checkItems)
     {
-      this.Invoke(() => CheckEnd(), 1.0f);  
+      Sequence();
     }
-
-    // if(checkItems)
-    // {
-    //   AddPoints(_grid.update(_items));
-    //   ExplodeBombs();
-    //   CheckMatch3();
-    //   this.Invoke(()=>CheckEnd(), 1.0f);
-    // }
-    // if(_moving.Count == 0 && _pushing.Count == 0 && _matching.Count == 0 && _destroying.Count == 0)
-    // {
-    //   AddPoints(_grid.update(_items));
-    //   this.Invoke(()=>CheckMove(),0.2f);
-    //   if(_nextItem == null)
-    //   {
-    //     if(AnyColorItem)
-    //       _nextItem = CreateNextItem();
-    //     else
-    //       this.Invoke(() => CheckEnd(), 1.0f);
-    //   }
-    // }
   }
   IEnumerator coSequenece()
   {
@@ -889,7 +866,16 @@ public class Level : MonoBehaviour
     yield return coExplodeBombs();
     CheckMove();
     yield return null;
-    _nextItem = CreateNextItem();
+
+    if(_moving.Count == 0 && _pushing.Count == 0 && _matching.Count == 0)
+    {
+      CheckEnd();
+      //if(_nextItem == null)
+      {
+        if(AnyColorItem)
+          _nextItem = CreateNextItem();
+      }
+    }
     _sequence = false;
   }
   void Sequence()
@@ -974,12 +960,9 @@ public class Level : MonoBehaviour
     _items.RemoveAll((item) => toDestroy.Contains(item));
     _matching.Clear();
     _grid.update(_items);
-    //_nextItem = CreateNextItem();
-}
+  }
   void DestroyMatch()
   {
-    // for(int q = 0; q < _matching.Count; ++q)
-    //   _matching[q]._matches.ForEach((Item item) => item.Matched());
     StartCoroutine(coDestroyMatch());
   }
   void ExplodeBombs()
@@ -1018,7 +1001,6 @@ public class Level : MonoBehaviour
     new Vector2Int(1, 0),
     new Vector2Int(0, -1),
   };
-
   void CheckMove()
   {
     List<Item> itemsToPush = new List<Item>();
@@ -1038,7 +1020,6 @@ public class Level : MonoBehaviour
               itemsToPush.Add(_items[q]);
               _items[q].PushTo(dest);
               _moving.Add(_items[q]);
-              _lastItemMove = _items[q];
               _pushed = true;
             }
           }
