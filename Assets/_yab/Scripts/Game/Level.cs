@@ -831,6 +831,7 @@ public class Level : MonoBehaviour
     Vector2Int v = Vector2Int.zero;
     Vector2Int vnx = new Vector2Int(1,0);
     Vector2Int vny = new Vector2Int(0,1);
+    List<Match3> localMatch = new List<Match3>();
 
     for(int y = 0; y < _grid.dim().y /*&& _matching.Count == 0*/; ++y)
     {
@@ -853,7 +854,7 @@ public class Level : MonoBehaviour
                   break;      
               }
               if(match_items.Count >= 3)
-                _matching.Add(new Match3(match_items));
+                localMatch.Add(new Match3(match_items));
             }
           }
           {
@@ -869,13 +870,14 @@ public class Level : MonoBehaviour
                   break;
               }
               if(match_items.Count >= 3)
-                _matching.Add(new Match3(match_items));
+                localMatch.Add(new Match3(match_items));
             }
           }
         }
       }
     }
-    if(_matching.Count > 0)
+    _matching.AddRange(localMatch);
+    if(localMatch.Count > 0)
       DestroyMatch();
   }
   IEnumerator coDestroyMatch()

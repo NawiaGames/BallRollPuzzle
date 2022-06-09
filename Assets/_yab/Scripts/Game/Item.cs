@@ -284,7 +284,7 @@ public class Item : MonoBehaviour
   }
   public void Matched()
   {
-    //if(!IsMatching)
+    if(!IsMatching)
     {
       _ocb.SetColor(color);
       Color c = _colorMatchPing;
