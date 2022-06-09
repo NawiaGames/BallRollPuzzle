@@ -24,11 +24,12 @@ public class EffectsManager : MonoBehaviour
   [Header("FX string")]
     [SerializeField] string strPushedOut = "pushed out";
     [SerializeField] string strBallsMatched = "Match x{0}!";
+    [SerializeField] string[] strGreetings;
 
     ParticleSystem fxConfetti;
 
     ObjectShake cameraShakeContainer;
-    UIInfoLabelManager infoLblMan;
+    UIInfoLabelManager infoLblMan, infoLblBigMan;
     //Level _lvl = null;
 
     List<GameLib.ObjectFracture> listFractures = new List<GameLib.ObjectFracture>();
@@ -37,7 +38,8 @@ public class EffectsManager : MonoBehaviour
     {
       cameraShakeContainer = Camera.main.GetComponentInParent<ObjectShake>();
       //fxConfetti = GameObject.FindGameObjectWithTag("ConfettiFX").GetComponent<ParticleSystem>();
-      infoLblMan = FindObjectOfType<UIInfoLabelManager>(true);
+      infoLblMan = GameObject.Find("infoCanvas").GetComponent<UIInfoLabelManager>(); //FindObjectOfType<UIInfoLabelManager>(true);
+      infoLblBigMan = GameObject.Find("infoCanvasBig").GetComponent<UIInfoLabelManager>();
     }
     private void OnEnable() 
     {
@@ -48,6 +50,7 @@ public class EffectsManager : MonoBehaviour
       Level.onItemsMatched += OnItemsMatched;
       Level.onItemsHit += OnItemsHit;
       Level.onFinished += OnLevelFinished;
+      Level.onCombo += OnLevelCombo;
     }
     private void OnDisable()
     {
@@ -58,6 +61,7 @@ public class EffectsManager : MonoBehaviour
       Level.onItemsMatched -= OnItemsMatched;
       Level.onItemsHit -= OnItemsHit;
       Level.onFinished -= OnLevelFinished;
+      Level.onCombo -= OnLevelCombo;
     }
 
     Vector3 GetFxPosition(Vector3 objectPosition) => objectPosition + (objectPosition - Camera.main.transform.position).normalized * -offsetToCamera;
@@ -121,7 +125,10 @@ public class EffectsManager : MonoBehaviour
       //infoLblMan.ShowTextPopup(item.vPos, GameData.Satisfy.GetSatisfyString(3), Color.green);
       //SparksFX(item.vPos);
     }
-
+    void OnLevelCombo()
+    {
+      infoLblBigMan.ShowTextPopup(Vector3.zero, strGreetings.get_random(), Color.white);
+    }
     void OnLevelFinished(Level lvl) 
     {
       if(lvl.Succeed)

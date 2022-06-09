@@ -57,7 +57,6 @@ MonoBehaviour:
   objShakePresetHi: {fileID: 11400000, guid: 96a47d80e34fc7d4fa5b769b38c123e6, type: 2}
   offsetToCamera: 1
   fxSparks: {fileID: 8074653854841478624}
-  fxItemCompleted: {fileID: 4250207793750041220}
   fxConfettiIngame: {fileID: 3899901870631301802}
   fxConfettiLevel: {fileID: 1289099544380902658}
   fxPaintSplat: {fileID: 5654794271917263824}
@@ -66,6 +65,11 @@ MonoBehaviour:
   fxHit: {fileID: 5483926277836527142}
   strPushedOut: +{0}!
   strBallsMatched: +{0}!
+  strGreetings:
+  - Great!
+  - Awesome!
+  - Fantastic!
+  - Impresive!
 --- !u!114 &8108016443953103903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,11 +276,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87505af8af9bbe24ba38247b63223c77, type: 3}
---- !u!198 &4250207793750041220 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 2832480890437179164, guid: 87505af8af9bbe24ba38247b63223c77, type: 3}
-  m_PrefabInstance: {fileID: 2140682226164463000}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7043892403703522438 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8968309488693301534, guid: 87505af8af9bbe24ba38247b63223c77, type: 3}

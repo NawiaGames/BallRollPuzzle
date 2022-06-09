@@ -16,6 +16,7 @@ public class Level : MonoBehaviour
   public static System.Action<Level>   onFinished, onItemThrow;
   public static System.Action<Match3>  onItemsMatched;
   public static System.Action<Item, Item> onItemsHit;
+  public static System.Action onCombo;
 
   [Header("Refs")]
   [SerializeField] Transform _arrowsContainer;
@@ -139,9 +140,8 @@ public class Level : MonoBehaviour
       }
       return list;
     }
-    public int update(List<Item> _items)
+    public void update(List<Item> _items)
     {
-      int ret = 0;
       clear();
       for(int q = 0; q < _items.Count; ++q)
       {
@@ -149,17 +149,13 @@ public class Level : MonoBehaviour
           set(_items[q]);
         else
         {
-          var points = GameData.Points.ballOut(0);
-          ret += points;
-
-          _items[q].Points = points;
+          _items[q].Points = GameData.Points.ballOut(0);
           _items[q].PushedOut();
           _items[q].Hide();
           _items.RemoveAt(q);
           q--;
         }
       }
-      return ret;
     }
     public void updateElems(List<Item> items)
     {
@@ -313,6 +309,8 @@ public class Level : MonoBehaviour
   bool _firstInteraction = false;
   bool _checkMoves = false;
   bool _sequence = false;
+  int  _matchesInMove = 0;
+  int  _pushesInMove = 0;
 
   void Awake()
   {
@@ -326,12 +324,14 @@ public class Level : MonoBehaviour
     _nextItemContainer.transform.position = new Vector3(0, 0, _grid.dim().y / 2 + 3);
 
     UIIngame.onPowerupChanged += OnPowerupChanged;
+    Item.onPushedOut += OnItemPushedOut;
 
     onCreate?.Invoke(this);
   }
   void OnDestroy()
   {
     UIIngame.onPowerupChanged -= OnPowerupChanged;
+    Item.onPushedOut -= OnItemPushedOut;
     // foreach(var frac in _fractures)
     // {
     //   frac.ResetFracture();
@@ -458,11 +458,10 @@ public class Level : MonoBehaviour
         t--;
       }
     }
-    int points = _grid.update(_items);
-    AddPoints(points);
+    _grid.update(_items);
     _grid.updateElems(_items);
     _items.RemoveAll((item) => 
-    { 
+    {
       if(item.IsRemoveElem)
       {
         _grid.set(item.grid, null);
@@ -597,6 +596,17 @@ public class Level : MonoBehaviour
     if(points > 0)
       onPointsAdded?.Invoke(this);
   }
+  void OnItemPushedOut(Item item)
+  {
+    _pushesInMove++;
+  }
+  void ShowBigGreets()
+  {
+    if(_matchesInMove > 1 || _pushesInMove > 2)
+    {
+      onCombo?.Invoke();
+    }
+  }
   public void AddFractures(ObjectFracture frac)
   {
     // _fractures.Add(frac);
@@ -637,6 +647,8 @@ public class Level : MonoBehaviour
     if(!_allowInput || !AnyColorItem)
       return;
 
+    _matchesInMove = 0;
+    _pushesInMove = 0;
     for(int q = 0; q < _arrowsSelected.Count; ++q)
     {
       Item push = null;
@@ -857,7 +869,7 @@ public class Level : MonoBehaviour
   }
   IEnumerator coSequenece()
   {
-    AddPoints(_grid.update(_items));
+    _grid.update(_items);
 
     _sequence = true;
     bool hasMatches = CheckMatch3();
@@ -869,6 +881,7 @@ public class Level : MonoBehaviour
 
     if(_moving.Count == 0 && _pushing.Count == 0 && _matching.Count == 0)
     {
+      ShowBigGreets();
       CheckEnd();
       //if(_nextItem == null)
       {
@@ -937,6 +950,8 @@ public class Level : MonoBehaviour
       }
     }
     _matching.AddRange(localMatch);
+    _matchesInMove += localMatch.Count;
+
     return localMatch.Count > 0;
   }
   IEnumerator coDestroyMatch()
