@@ -8,6 +8,9 @@ public class Item : MonoBehaviour
 {
   [SerializeField] int        _id = 0;
   [SerializeField] Color      _color;
+  [ColorUsage(false, true)]
+  [SerializeField] Color      _colorMatchPing;
+
   [SerializeField] ActivatableObject _activatable;
   [SerializeField] Push       _push = Push.None;
   [SerializeField] Spec       _special = Spec.None;
@@ -281,7 +284,7 @@ public class Item : MonoBehaviour
   public void Matched()
   {
     _ocb.SetColor(color);
-    Color c = new Color(color.r * 2, color.g * 2, color.b * 2, color.a);
+    Color c = _colorMatchPing;
     _ocb.BlendTo(c);
   }
   void Rotate(Transform _model, float dt)

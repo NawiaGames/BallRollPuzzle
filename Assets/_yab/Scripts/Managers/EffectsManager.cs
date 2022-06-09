@@ -60,10 +60,10 @@ public class EffectsManager : MonoBehaviour
       Level.onFinished -= OnLevelFinished;
     }
 
-    Vector3 GetFxPosition(Vector3 objectPostion) => objectPostion + (objectPostion - Camera.main.transform.position).normalized * -offsetToCamera;
-    void PlayFXAtPosition(ParticleSystem ps, Vector3 worldPosition, int emitCount = 0)
+    Vector3 GetFxPosition(Vector3 objectPosition) => objectPosition + (objectPosition - Camera.main.transform.position).normalized * -offsetToCamera;
+    void PlayFXAtPosition(ParticleSystem ps, Vector3 worldPosition, int emitCount = 0, bool useCameraOffset = true)
     {
-      ps.transform.position = GetFxPosition(worldPosition);
+      ps.transform.position = useCameraOffset ? GetFxPosition(worldPosition) : worldPosition;
       if(emitCount > 0)
         ps.Emit(emitCount);
       else
@@ -100,7 +100,7 @@ public class EffectsManager : MonoBehaviour
     {
       var psmain = fxBallFractures.main;
       psmain.startColor = sender.color;
-      PlayFXAtPosition(fxBallFractures, sender.transform.position, 4);
+      PlayFXAtPosition(fxBallFractures, sender.transform.position, ballFracturesEmitCnt, false);
       //var emitParams = new ParticleSystem.EmitParams();
       //emitParams.position = sender.transform.position;
       //fxBallFractures.Emit(emitParams, 4);
