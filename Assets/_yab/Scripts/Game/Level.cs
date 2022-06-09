@@ -273,9 +273,11 @@ public class Level : MonoBehaviour
   [SerializeField] bool       _gameplayOutside = false;
   [Header("Settings")]
   [SerializeField] Vector2Int _dim;
+  [SerializeField] int        _maxPoints = 10;
   [SerializeField] float      _speed = 8;
   [Header("Items")]
   [SerializeField] List<Item> _listItems;
+
 
   public int  LevelIdx => GameState.Progress.Level;
   public bool Succeed {get; private set;}
