@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 34f7722828922b44e9b977ba486c8847, type: 3}
-  m_Name: slideIn
+  m_Name: slideInFromTop
   m_EditorClassIdentifier: 
   unscaledTimePlayback: 1
   animationTime: 1
   animatePosition: 1
-  positionAxis: {x: 0, y: -512, z: 0}
+  positionAxis: {x: 0, y: 400, z: 0}
   positionCurve:
     serializedVersion: 2
     m_Curve:
