@@ -302,8 +302,10 @@ public class Level : MonoBehaviour
   List<Item> _moving = new List<Item>();
   List<Item> _exploding = new List<Item>();
   List<Match3> _matching = new List<Match3>();
+  List<Item> _destroying = new List<Item>();
   List<Check> _checks = new List<Check>();
-  List<ObjectFracture> _fractures = new List<ObjectFracture>();
+
+  //List<ObjectFracture> _fractures = new List<ObjectFracture>();
   [SerializeField] List<Item> _listNextItems = new List<Item>();
 
   [SerializeField] Item _nextItem = null;
@@ -311,6 +313,7 @@ public class Level : MonoBehaviour
   bool _inputBlocked = false;
   bool _firstInteraction = false;
   bool _checkMoves = false;
+  bool _sequence = false;
 
   void Awake()
   {
@@ -330,12 +333,12 @@ public class Level : MonoBehaviour
   void OnDestroy()
   {
     UIIngame.onPowerupChanged -= OnPowerupChanged;
-    foreach(var frac in _fractures)
-    {
-      frac.ResetFracture();
-      Destroy(frac.gameObject);
-    }
-    _fractures.Clear();  
+    // foreach(var frac in _fractures)
+    // {
+    //   frac.ResetFracture();
+    //   Destroy(frac.gameObject);
+    // }
+    // _fractures.Clear();  
   }
   IEnumerator Start()
   {
@@ -598,8 +601,8 @@ public class Level : MonoBehaviour
   }
   public void AddFractures(ObjectFracture frac)
   {
-    _fractures.Add(frac);
-    this.Invoke(() => {frac.ResetFracture(); _fractures.Remove(frac); Destroy(frac.gameObject);}, 2.0f);
+    // _fractures.Add(frac);
+    // this.Invoke(() => {frac.ResetFracture(); _fractures.Remove(frac); Destroy(frac.gameObject);}, 2.0f);
   }
 
   public void OnInputBeg(TouchInputData tid)
@@ -684,6 +687,8 @@ public class Level : MonoBehaviour
 
   void MoveItems()
   {
+    if(_sequence)
+      return;
     bool checkItems = false;
     for(int p = 0; p < _pushing.Count; ++p)
     {
@@ -847,26 +852,55 @@ public class Level : MonoBehaviour
     }
 
     if(checkItems)
+      Sequence();
+    if(_moving.Count == 0 && _pushing.Count == 0 && _matching.Count == 0 && checkItems)
     {
-      AddPoints(_grid.update(_items));
-      ExplodeBombs();
-      CheckMatch3();
-      this.Invoke(()=>CheckEnd(), 1.0f);
+      this.Invoke(() => CheckEnd(), 1.0f);  
     }
-    if(_moving.Count == 0 && _pushing.Count == 0 && _matching.Count == 0 && (checkItems || _checkMoves))
+
+    // if(checkItems)
+    // {
+    //   AddPoints(_grid.update(_items));
+    //   ExplodeBombs();
+    //   CheckMatch3();
+    //   this.Invoke(()=>CheckEnd(), 1.0f);
+    // }
+    // if(_moving.Count == 0 && _pushing.Count == 0 && _matching.Count == 0 && _destroying.Count == 0)
+    // {
+    //   AddPoints(_grid.update(_items));
+    //   this.Invoke(()=>CheckMove(),0.2f);
+    //   if(_nextItem == null)
+    //   {
+    //     if(AnyColorItem)
+    //       _nextItem = CreateNextItem();
+    //     else
+    //       this.Invoke(() => CheckEnd(), 1.0f);
+    //   }
+    // }
+  }
+  IEnumerator coSequenece()
+  {
+    AddPoints(_grid.update(_items));
+
+    _sequence = true;
+    bool hasMatches = CheckMatch3();
+    if(hasMatches)
+      yield return StartCoroutine(coDestroyMatch());
+    yield return coExplodeBombs();
+    CheckMove();
+    yield return null;
+    _nextItem = CreateNextItem();
+    _sequence = false;
+  }
+  void Sequence()
+  {
+    if(!_sequence)
     {
-      AddPoints(_grid.update(_items));
-      this.Invoke(()=>CheckMove(),0.2f);
-      if(_nextItem == null)
-      {
-        if(AnyColorItem)
-          _nextItem = CreateNextItem();
-        else
-          this.Invoke(() => CheckEnd(), 1.0f);
-      }
+      _sequence = true;
+      StartCoroutine(coSequenece());
     }
   }
-  void CheckMatch3()
+  bool CheckMatch3()
   {
     Vector2Int v = Vector2Int.zero;
     Vector2Int vnx = new Vector2Int(1,0);
@@ -917,8 +951,7 @@ public class Level : MonoBehaviour
       }
     }
     _matching.AddRange(localMatch);
-    if(localMatch.Count > 0)
-      DestroyMatch();
+    return localMatch.Count > 0;
   }
   IEnumerator coDestroyMatch()
   {
@@ -940,19 +973,20 @@ public class Level : MonoBehaviour
     }
     _items.RemoveAll((item) => toDestroy.Contains(item));
     _matching.Clear();
-    AddPoints(_grid.update(_items));
-    _nextItem = CreateNextItem();
-    _checkMoves = true;
-
-    CheckEnd();
-  }
+    _grid.update(_items);
+    //_nextItem = CreateNextItem();
+}
   void DestroyMatch()
   {
     // for(int q = 0; q < _matching.Count; ++q)
     //   _matching[q]._matches.ForEach((Item item) => item.Matched());
     StartCoroutine(coDestroyMatch());
-  }  
+  }
   void ExplodeBombs()
+  {
+    StartCoroutine(coExplodeBombs());
+  }
+  IEnumerator coExplodeBombs()
   {
     List<Item> toRemove = new List<Item>();
     for(int q = 0; q < _exploding.Count; ++q)
@@ -963,6 +997,7 @@ public class Level : MonoBehaviour
       List<Item> items =_grid.getNB(bomb.grid);
       for(int n = 0; n <items.Count; ++n)
       {
+        yield return new WaitForSeconds(1/15f);
         if(!items[n].IsStatic && !items[n].IsRemoveElem)
         {
           items[n].Hide();
@@ -973,8 +1008,9 @@ public class Level : MonoBehaviour
     toRemove.AddRange(_exploding);
     _exploding.Clear();
     _items.RemoveAll((item) => toRemove.Contains(item));
-    AddPoints(_grid.update(_items));
+    _grid.update(_items);
   }
+
   Vector2Int[] vdirections = new Vector2Int[4]
   {
     new Vector2Int(-1, 0),
@@ -1009,13 +1045,12 @@ public class Level : MonoBehaviour
         }
       }
     }
-    _checkMoves = false;
   }
   void CheckEnd()
   {
     if(!Finished)
     {
-      if(!AnyColorItem || (movesAvail == 0 && _nextItem == null))
+      if((!AnyColorItem && _moving.Count == 0 && _pushing.Count == 0) || (movesAvail == 0 && _nextItem == null))
       {
         Finished = true;
         Succeed = !AnyColorItem;
