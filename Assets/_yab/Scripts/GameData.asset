@@ -60,6 +60,10 @@ MonoBehaviour:
   pointBallOutEveryNext: 10
   pointMatchStandard: 100
   pointMatchSpec: 200
+  percentOfPointsForStars:
+  - 0.4
+  - 0.6
+  - 1
   themeColors:
   - {r: 0.78, g: 0.7532353, b: 0.7532353, a: 1}
   - {r: 0.1882353, g: 0.17254902, b: 0.17254902, a: 1}

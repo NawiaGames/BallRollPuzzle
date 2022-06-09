@@ -246,7 +246,7 @@ MonoBehaviour:
   _deactivationInterval: 0.016666668
   _gameplayOutside: 0
   _dim: {x: 5, y: 5}
-  _maxPoints: 1000
+  _maxPoints: 200
   _speed: 16
   _listItems: []
   _listNextItems: []

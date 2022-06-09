@@ -36,6 +36,7 @@ public class GameData : ScriptableObject
   [SerializeField] int pointBallOutEveryNext = 10;
   [SerializeField] int pointMatchStandard = 100;
   [SerializeField] int pointMatchSpec = 200;
+  [SerializeField] float[] percentOfPointsForStars;
 
   [SerializeField] Color[]    themeColors;
   public static Color[] GetThemeColors() => get().themeColors;
@@ -119,5 +120,6 @@ public class GameData : ScriptableObject
   {
     public static int ballOut(int num) => get().pointBallOut + get().pointBallOutEveryNext * num;
     public static int matchStandard() => get().pointMatchStandard;
+    public static float percentForStars(int stars) => get().percentOfPointsForStars[Mathf.Clamp(stars, 0, get().percentOfPointsForStars.Length-1)];
   }
 }

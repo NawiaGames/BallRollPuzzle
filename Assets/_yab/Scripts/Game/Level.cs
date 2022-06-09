@@ -271,8 +271,8 @@ public class Level : MonoBehaviour
   [SerializeField] bool       _gameplayOutside = false;
   [Header("Settings")]
   [SerializeField] Vector2Int _dim;
-  [SerializeField] int        _maxPoints = 10;
   [SerializeField] float      _speed = 8;
+  [SerializeField] int        _maxPoints = 10;
   [Header("Items")]
   [SerializeField] List<Item> _listItems;
 
@@ -286,6 +286,7 @@ public class Level : MonoBehaviour
   public bool AnyColorItem => _items.Count((item) => item.IsRegular) > 0;
   public int  Points {get; set;} = 0;
   public int  PointsMax => _maxPoints;
+  public int  Stars {get; set;}
 
   bool _started = false;
   bool _allowInput => (movesAvail > 0 || _nextItem != null) && _pushing.Count == 0 && _moving.Count == 0 && _matching.Count == 0 && !_sequence;
@@ -593,12 +594,20 @@ public class Level : MonoBehaviour
   void AddPoints(int points)
   {
     Points += points;
+    if(Points >= _maxPoints * GameData.Points.percentForStars(2))
+      Stars = 3;
+    else if(Points >= _maxPoints * GameData.Points.percentForStars(1))
+      Stars = 2;
+    else if(Points >= _maxPoints * GameData.Points.percentForStars(0))
+      Stars = 1;
+
     if(points > 0)
       onPointsAdded?.Invoke(this);
   }
   void OnItemPushedOut(Item item)
   {
     _pushesInMove++;
+    AddPoints(item.Points);
   }
   void ShowBigGreets()
   {

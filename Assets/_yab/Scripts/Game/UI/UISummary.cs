@@ -17,6 +17,7 @@ public class UISummary : MonoBehaviour
   //[SerializeField] TMPLbl  lblScore;
   //[SerializeField] TMPLbl  lblInfo;
   [SerializeField] Slider  slider;
+  [SerializeField] Image[] stars;
 
   float destValue = 0;
   public void Show(Level level)
@@ -33,6 +34,13 @@ public class UISummary : MonoBehaviour
     slider.maxValue = 0;
     slider.value = 0;
     destValue = 0;
+
+    for(int q = 0; q < stars.Length; ++q)
+    {
+      var c = stars[q].color;
+      c.a = (level.Stars > q)? 1.0f : 0.25f;
+      stars[q].color = c;
+    }
 
     onShow?.Invoke();
 
@@ -55,6 +63,6 @@ public class UISummary : MonoBehaviour
   }
   void Update()
   {
-    slider.value = Mathf.MoveTowards(slider.value, destValue, Time.deltaTime * 4);
+    //slider.value = Mathf.MoveTowards(slider.value, destValue, Time.deltaTime * 4);
   }
 }
