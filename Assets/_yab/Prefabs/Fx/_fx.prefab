@@ -64,8 +64,8 @@ MonoBehaviour:
   fxBallFractures: {fileID: 8654854198287132523}
   ballFracturesEmitCnt: 4
   fxHit: {fileID: 5483926277836527142}
-  strPushedOut: Pushed out!
-  strBallsMatched: Match x{0}!
+  strPushedOut: +{0}!
+  strBallsMatched: +{0}!
 --- !u!114 &8108016443953103903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,6 +336,10 @@ PrefabInstance:
     - target: {fileID: 6970228068868423935, guid: c004dcbfbcd46de48bbf4e90c71e5f3c, type: 3}
       propertyPath: m_Name
       value: fxConfetti
+      objectReference: {fileID: 0}
+    - target: {fileID: 7598190305503254835, guid: c004dcbfbcd46de48bbf4e90c71e5f3c, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c004dcbfbcd46de48bbf4e90c71e5f3c, type: 3}

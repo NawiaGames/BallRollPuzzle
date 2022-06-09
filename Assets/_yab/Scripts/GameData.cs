@@ -115,4 +115,9 @@ public class GameData : ScriptableObject
       return (int)Mathf.Repeat(lvl_idx + 1.0f, get().listLevels.Count); // - 1.0f);
     }
   }
+  public static class Points
+  {
+    public static int ballOut(int num) => get().pointBallOut + get().pointBallOutEveryNext * num;
+    public static int matchStandard() => get().pointMatchStandard;
+  }
 }

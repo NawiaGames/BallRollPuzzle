@@ -12,7 +12,7 @@ using TMPLbl = TMPro.TextMeshPro;
 public class Level : MonoBehaviour
 {
   public static System.Action<Vector3> onIntroFx;
-  public static System.Action<Level>   onCreate, onStart, onPlay, onFirstInteraction, onTutorialStart;
+  public static System.Action<Level>   onCreate, onStart, onPlay, onFirstInteraction, onTutorialStart, onPointsAdded;
   public static System.Action<Level>   onFinished, onItemThrow;
   public static System.Action<Match3>  onItemsMatched;
   public static System.Action<Item, Item> onItemsHit;
@@ -139,8 +139,9 @@ public class Level : MonoBehaviour
       }
       return list;
     }
-    public void update(List<Item> _items)
+    public int update(List<Item> _items)
     {
+      int ret = 0;
       clear();
       for(int q = 0; q < _items.Count; ++q)
       {
@@ -148,12 +149,17 @@ public class Level : MonoBehaviour
           set(_items[q]);
         else
         {
+          var points = GameData.Points.ballOut(0);
+          ret += points;
+
+          _items[q].Points = points;
           _items[q].PushedOut();
           _items[q].Hide();
           _items.RemoveAt(q);
           q--;
-        } 
+        }
       }
+      return ret;
     }
     public void updateElems(List<Item> items)
     {
@@ -217,21 +223,22 @@ public class Level : MonoBehaviour
   }
   public struct Match3
   {
-    public bool _byMoving;
+    //public bool ByMoving;
+    public int  Points;
     public List<Item> _matches;
-    public Match3(Item i0, Item i1, Item i2)
+    public Match3(Item i0, Item i1, Item i2, int points)
     {
       _matches = new List<Item>(){i0, i1, i2};
       for(int q = 0; q < _matches.Count; ++q)
         _matches[q].IsFrozen = true;
-      _byMoving = false;
+      Points = points;
     }
-    public Match3(List<Item> list)
+    public Match3(List<Item> list, int points)
     {
       _matches = new List<Item>(list);
       for(int q = 0; q < _matches.Count; ++q)
         _matches[q].IsFrozen = true;
-      _byMoving = false;
+      Points = points;
     }
 
     public Vector3 MidPos()
@@ -286,6 +293,8 @@ public class Level : MonoBehaviour
   public int  movesAvail => _listItems.Count;
   public int  ColorItems => _items.Count((item) => item.IsRegular);
   public bool AnyColorItem => _items.Count((item) => item.IsRegular) > 0;
+  public int  Points {get; set;} = 0;
+  public int  PointsMax => _maxPoints;
 
   bool _started = false;
   bool _allowInput => (movesAvail > 0 || _nextItem != null) && _pushing.Count == 0 && _moving.Count == 0 && _matching.Count == 0;
@@ -452,7 +461,8 @@ public class Level : MonoBehaviour
         t--;
       }
     }
-    _grid.update(_items);
+    int points = _grid.update(_items);
+    AddPoints(points);
     _grid.updateElems(_items);
     _items.RemoveAll((item) => 
     { 
@@ -585,7 +595,12 @@ public class Level : MonoBehaviour
 
     return item;
   }
-
+  void AddPoints(int points)
+  {
+    Points += points;
+    if(points > 0)
+      onPointsAdded?.Invoke(this);
+  }
   public void AddFractures(ObjectFracture frac)
   {
     _fractures.Add(frac);
@@ -838,14 +853,14 @@ public class Level : MonoBehaviour
 
     if(checkItems)
     {
-      _grid.update(_items);
+      AddPoints(_grid.update(_items));
       ExplodeBombs();
       CheckMatch3();
       this.Invoke(()=>CheckEnd(), 1.0f);
     }
     if(_moving.Count == 0 && _pushing.Count == 0 && _matching.Count == 0 && (checkItems || _checkMoves))
     {
-      _grid.update(_items);
+      AddPoints(_grid.update(_items));
       this.Invoke(()=>CheckMove(),0.2f);
       if(_nextItem == null)
       {
@@ -884,7 +899,7 @@ public class Level : MonoBehaviour
                   break;      
               }
               if(match_items.Count >= 3)
-                localMatch.Add(new Match3(match_items));
+                localMatch.Add(new Match3(match_items, GameData.Points.matchStandard()));
             }
           }
           {
@@ -900,7 +915,7 @@ public class Level : MonoBehaviour
                   break;
               }
               if(match_items.Count >= 3)
-                localMatch.Add(new Match3(match_items));
+                localMatch.Add(new Match3(match_items, GameData.Points.matchStandard()));
             }
           }
         }
@@ -916,6 +931,7 @@ public class Level : MonoBehaviour
     for(int q = 0; q < _matching.Count; ++q)
     {
       toDestroy.AddRange(_matching[q]._matches);
+      AddPoints(GameData.Points.matchStandard());
       onItemsMatched?.Invoke(_matching[q]);
     }
     toDestroy = toDestroy.Distinct().ToList();
@@ -929,7 +945,7 @@ public class Level : MonoBehaviour
     }
     _items.RemoveAll((item) => toDestroy.Contains(item));
     _matching.Clear();
-    _grid.update(_items);
+    AddPoints(_grid.update(_items));
     _nextItem = CreateNextItem();
     _checkMoves = true;
 
@@ -962,7 +978,7 @@ public class Level : MonoBehaviour
     toRemove.AddRange(_exploding);
     _exploding.Clear();
     _items.RemoveAll((item) => toRemove.Contains(item));
-    _grid.update(_items);
+    AddPoints(_grid.update(_items));
   }
   Vector2Int[] vdirections = new Vector2Int[4]
   {

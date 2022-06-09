@@ -76,7 +76,7 @@ public class EffectsManager : MonoBehaviour
     }
     void OnItemPushedOut(Item sender)
     {
-      infoLblMan.ShowTextPopup(sender.transform.position, strPushedOut);
+      infoLblMan.ShowTextPopup(sender.transform.position, string.Format(strPushedOut, sender.Points));
     }
     void OnItemBombExplo(Item sender)
     {
@@ -93,7 +93,7 @@ public class EffectsManager : MonoBehaviour
     {
       Vector3 v = match.MidPos();
       //PlayFXAtPosition(fxPaintSplat, v, 5);
-      infoLblMan.ShowTextPopup(v, string.Format(strBallsMatched, match._matches.Count), match.GetColor());
+      infoLblMan.ShowTextPopup(v, string.Format(strBallsMatched, match.Points), match.GetColor());
       cameraShakeContainer.Shake(objShakePresetLo);
     }
     void OnItemDestroy(Item sender)

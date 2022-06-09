@@ -8,9 +8,8 @@ using GameLib.UI;
 public class UIIngame : MonoBehaviour
 {
   [Header("Refs")]
-  [SerializeField] GameObject speedPanelContainer;
-  [SerializeField] TMPLbl lblSpeed;
-  [SerializeField] Slider sliderSpeed;
+  [SerializeField] Slider progress;
+  [SerializeField] TMPLbl score;
 
   [Header("TopPanelRefs")]
   [SerializeField] TMPLbl  lblLevelInfo;
@@ -23,30 +22,49 @@ public class UIIngame : MonoBehaviour
 
   public static System.Action<int, bool> onPowerupChanged;
 
+  int _pointDest = 0;
+
   void Awake()
   {
     GetComponent<UIPanel>().ActivatePanel();
 
     Level.onCreate += OnLevelStart;
     Level.onItemThrow += OnItemThrow;
+    Level.onPointsAdded += OnPointsAdded;
   }
   void OnDestroy()
   {
     Level.onCreate -= OnLevelStart;
     Level.onItemThrow -= OnItemThrow;
+    Level.onPointsAdded -= OnPointsAdded;
   }
   void OnLevelStart(Level lvl)
   {
     lblLevelInfo.text = "level: " + lvl.LevelIdx + "\n";
     lblBallsLeft.text = lvl.movesAvail.ToString();
 
+    progress.minValue = 0;
+    progress.value = 0;
+    progress.maxValue = lvl.PointsMax;
+    _pointDest = 0;
+    UpdateScore();
+
+
     PowerupsDeselect();
     bottomPanel.ActivatePanel();
+  }
+  void UpdateScore()
+  {
+    score.text = "Score: " + (int)progress.value;
   }
   void OnItemThrow(Level lvl)
   {
     lblBallsLeft.text = lvl.movesAvail.ToString();
     PowerupsDeselect();
+  }
+  void OnPointsAdded(Level lvl)
+  {
+    _pointDest = lvl.Points;
   }
   public void OnBtnRestart()
   {
@@ -73,6 +91,15 @@ public class UIIngame : MonoBehaviour
   public void OnBtnPowerup2()
   {
     PowerupChangeSel(2);
+  }
+
+  void Update()
+  {
+    if(progress.value != _pointDest)
+    {
+      progress.value = Mathf.MoveTowards(progress.value, _pointDest, Time.deltaTime * 200.0f);
+      UpdateScore();
+    }
   }
   // public void Show(Level level)
   // {

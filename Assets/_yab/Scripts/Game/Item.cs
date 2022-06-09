@@ -130,6 +130,7 @@ public class Item : MonoBehaviour
   public bool IsRandPush => _special == Spec.RandomPush;
   public bool IsRemoveElem => _special == Spec.RemoveElem;
   public bool IsMatching {get;set;} = false;
+  public int  Points {get; set;} = 0;
 
   public void Show()
   {
@@ -247,6 +248,10 @@ public class Item : MonoBehaviour
     _gridEnd = gridDest;
     _speed = 0;
   }
+  public void PushedOut()
+  {
+    onPushedOut?.Invoke(this);
+  }
   public void Stop()
   {
     _dir = Vector2Int.zero;
@@ -274,10 +279,6 @@ public class Item : MonoBehaviour
     }
     onHit?.Invoke(this);
   }
-  public void PushedOut()
-  {
-    onPushedOut?.Invoke(this);
-  }  
   public void Explode()
   {
     onBombExplode?.Invoke(this);
