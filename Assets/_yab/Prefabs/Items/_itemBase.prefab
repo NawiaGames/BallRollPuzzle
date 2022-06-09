@@ -103,7 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 0
   _color: {r: 0, g: 0, b: 0, a: 1}
-  _colorMatchPing: {r: 0, g: 0, b: 0, a: 0}
+  _colorMatchPing: {r: 2.270603, g: 0.78439015, b: 0.22706035, a: 0}
   _activatable: {fileID: 7798136041665752175}
   _push: 0
   _special: 0
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39a14500fdb319742b5360e4c264da8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loop: 1
+  loop: 0
   rendererContainers: []
   blendCurve:
     serializedVersion: 2
@@ -149,34 +149,34 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 11.940001
-      outSlope: 11.940001
-      tangentMode: 0
+      inSlope: 6.6666665
+      outSlope: 6.6666665
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.1005025
+      outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.1
+      time: 0.15
       value: 1
-      inSlope: -1.980996
-      outSlope: -1.980996
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.12339474
-    - serializedVersion: 3
-      time: 1
-      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -2.6059508
+      outSlope: -2.6059508
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.117253006
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  blendTime: 2
+  blendTime: 1
   speedMultiplier: 1
   baseColor: {r: 1, g: 1, b: 1, a: 1}
   targetColor: {r: 2.1185474, g: 2.1185474, b: 2.1185474, a: 1}
