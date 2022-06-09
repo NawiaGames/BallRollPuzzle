@@ -263,11 +263,6 @@ public class Level : MonoBehaviour
     PushOne,
     PushLine,
   };
-  public enum GameType
-  {
-    Match3,
-    Match3Move,
-  }
 
   enum Check
   {
