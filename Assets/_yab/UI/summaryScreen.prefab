@@ -181,6 +181,7 @@ GameObject:
   - component: {fileID: 7387527993249730951}
   - component: {fileID: 5268303942288543112}
   - component: {fileID: 4891921388847623197}
+  - component: {fileID: 1511544619296862931}
   m_Layer: 5
   m_Name: winTMP
   m_TagString: Untagged
@@ -279,7 +280,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -334,6 +335,20 @@ MonoBehaviour:
   activateAnimationPreset: {fileID: 11400000, guid: 77505c0c0726874419b8ca0010be36e6, type: 2}
   deactivateAnimationPreset: {fileID: 11400000, guid: a528e4653df7b3d41bf6afa9d49d2a41, type: 2}
   affectedTransform: {fileID: 0}
+--- !u!114 &1511544619296862931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837719849533863246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a74341d867ca7841bf1967f7c4418fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationPreset: {fileID: 11400000, guid: 7b7e010ca9af8d946af53eb1b6662ea7, type: 2}
+  realtimeUpdate: 0
 --- !u!1 &1775821557688616392
 GameObject:
   m_ObjectHideFlags: 0
@@ -713,7 +728,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2602842999575453888}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d6b52b5f161781b4797a023af9695f84, type: 3}
   m_Name: 
@@ -854,7 +869,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2610234257127955360}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d6b52b5f161781b4797a023af9695f84, type: 3}
   m_Name: 
@@ -2388,7 +2403,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 122962929683822516}
-  - component: {fileID: 2238556914559151221}
   m_Layer: 5
   m_Name: scorePanel
   m_TagString: Untagged
@@ -2417,23 +2431,6 @@ RectTransform:
   m_AnchoredPosition: {x: 476, y: -576}
   m_SizeDelta: {x: 824, y: 384}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2238556914559151221
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7398919108035943174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b743dcd2764e7f24387667ee12614f4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effectMultiplier: 1
-  useRandomPhaseOffset: 1
-  jitterAxis: {x: 0, y: 0, z: 1}
-  maxAngle: 3
-  speed: 1
 --- !u!1 &7873808072193276481
 GameObject:
   m_ObjectHideFlags: 0
@@ -2667,7 +2664,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8335644555367620373}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d6b52b5f161781b4797a023af9695f84, type: 3}
   m_Name: 
