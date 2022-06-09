@@ -811,7 +811,7 @@ public class Level : MonoBehaviour
       _grid.update(_items);
       ExplodeBombs();
       CheckMatch3();
-      CheckEnd();
+      this.Invoke(()=>CheckEnd(), 1.0f);
     }
     if(_moving.Count == 0 && _pushing.Count == 0 && _matching.Count == 0 && (checkItems || _checkMoves))
     {
@@ -822,7 +822,7 @@ public class Level : MonoBehaviour
         if(AnyColorItem)
           _nextItem = CreateNextItem();
         else
-          CheckEnd();
+          this.Invoke(() => CheckEnd(), 1.0f);
       }
     }
   }
@@ -972,7 +972,7 @@ public class Level : MonoBehaviour
   {
     if(!Finished)
     {
-      if(!AnyColorItem || movesAvail == 0)
+      if(!AnyColorItem || (movesAvail == 0 && _nextItem == null))
       {
         Finished = true;
         Succeed = !AnyColorItem;
