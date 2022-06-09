@@ -17,9 +17,14 @@ public class UIIngame : MonoBehaviour
   [SerializeField] TMPLbl  lblCash;
   [SerializeField] TMPLbl  lblBallsLeft;
 
+  [Header("powerupsRefs")]
+  [SerializeField] UIPanel  bottomPanel;
+  [SerializeField] UIPowerupBtn[] powerups;
+
   void Awake()
   {
     GetComponent<UIPanel>().ActivatePanel();
+
     Level.onCreate += OnLevelStart;
     Level.onItemThrow += OnItemThrow;
   }
@@ -42,6 +47,8 @@ public class UIIngame : MonoBehaviour
     //   push = "push to obstacle";
     // lblLevelInfo.text += "pushType: " + push + "\n";
     //lblLevelInfo.text += "push outside gamefield: " + (lvl.gameOutside).ToString();
+
+    bottomPanel.ActivatePanel();
   }
   void OnItemThrow(Level lvl)
   {
@@ -51,12 +58,36 @@ public class UIIngame : MonoBehaviour
   {
     FindObjectOfType<Game>()?.RestartLevel();
   }
-  public void Show(Level level)
+  void ChangeSel(int idx)
   {
-    GetComponent<UIPanel>().ActivatePanel();
+    System.Array.ForEach(powerups, (UIPowerupBtn btn) => 
+      { 
+        if(btn != powerups[0]) btn.IsSelected = false; }
+      );
+    powerups[0].IsSelected = !powerups[0].IsSelected;
   }
-  void Hide()
+  public void OnBtnPowerup0()
   {
-    GetComponent<UIPanel>().ActivatePanel();
+    ChangeSel(0);
   }
+  public void OnBtnPowerup1()
+  {
+    // System.Array.ForEach(powerups, (UIPowerupBtn btn) => btn.Deselect());
+    // powerups[1].Select();
+  }
+  public void OnBtnPowerup2()
+  {
+    // System.Array.ForEach(powerups, (UIPowerupBtn btn) => btn.Deselect());
+    // powerups[2].Select();
+  }
+  // public void Show(Level level)
+  // {
+  //   GetComponent<UIPanel>().ActivatePanel();
+  //   bottomPanel.ActivatePanel();
+  // }
+  // void Hide()
+  // {
+  //   //GetComponent<UIPanel>().DeactivatePanel();
+  //   bottomPanel.DeactivatePanel();
+  // }
 }
