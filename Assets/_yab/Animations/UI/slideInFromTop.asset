@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: slideInFromTop
   m_EditorClassIdentifier: 
   unscaledTimePlayback: 1
-  animationTime: 1
+  animationTime: 3
   animatePosition: 1
-  positionAxis: {x: 0, y: 400, z: 0}
+  positionAxis: {x: 0, y: 800, z: 0}
   positionCurve:
     serializedVersion: 2
     m_Curve:
@@ -28,6 +28,15 @@ MonoBehaviour:
       weightedMode: 0
       inWeight: 0
       outWeight: 0
+    - serializedVersion: 3
+      time: 0.0389079
+      value: 0.45047253
+      inSlope: -1.1712282
+      outSlope: -1.1712282
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 0
