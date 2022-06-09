@@ -102,7 +102,7 @@ MonoBehaviour:
   _autoUpdateTrackedPOI: 1
   _autoFit: 1
   _uniformFit: 0
-  _margin: 2
+  _margin: 3
   _positionSmoothing: 0.3
   _dollyDistanceSmoothing: 0.3
 --- !u!1 &8491482513625605615
