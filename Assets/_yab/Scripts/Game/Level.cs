@@ -838,36 +838,39 @@ public class Level : MonoBehaviour
       {
         v.x = x; v.y = y;
         var item0 = _grid.geta(v);
-        if(item0 && item0.IsRegular) // || item0.IsColorChanger))
+        if(item0 && item0.IsRegular && !item0.IsMatching) // || item0.IsColorChanger))
         {
           {
             List<Item> match_items = new List<Item>();
-            match_items.Add(item0);
-            for(int q = 0; q < _grid.dim().x; ++q)
             {
-              var item1 = _grid.geta(v + vnx * (q+1));
-              if(Item.EqType(item0, item1))
-                match_items.Add(item1);
-              else
-                break;      
+              match_items.Add(item0);
+              for(int q = 0; q < _grid.dim().x; ++q)
+              {
+                var item1 = _grid.geta(v + vnx * (q+1));
+                if(Item.EqType(item0, item1) && !item1.IsMatching)
+                  match_items.Add(item1);
+                else
+                  break;      
+              }
+              if(match_items.Count >= 3)
+                _matching.Add(new Match3(match_items));
             }
-            if(match_items.Count >= 3)
-              _matching.Add(new Match3(match_items));
           }
-          //if(_matching.Count == 0)
           {
             List<Item> match_items = new List<Item>();
-            match_items.Add(item0);
-            for(int q = 0; q < _grid.dim().y; ++q)
             {
-              var item1 = _grid.geta(v + vny * (q + 1));
-              if(Item.EqType(item0, item1))
-                match_items.Add(item1);
-              else
-                break;
+              match_items.Add(item0);
+              for(int q = 0; q < _grid.dim().y; ++q)
+              {
+                var item1 = _grid.geta(v + vny * (q + 1));
+                if(Item.EqType(item0, item1) && !item1.IsMatching)
+                  match_items.Add(item1);
+                else
+                  break;
+              }
+              if(match_items.Count >= 3)
+                _matching.Add(new Match3(match_items));
             }
-            if(match_items.Count >= 3)
-              _matching.Add(new Match3(match_items));
           }
         }
       }
@@ -875,6 +878,37 @@ public class Level : MonoBehaviour
     if(_matching.Count > 0)
       DestroyMatch();
   }
+  IEnumerator coDestroyMatch()
+  {
+    List<Item> toDestroy = new List<Item>();
+    for(int q = 0; q < _matching.Count; ++q)
+    {
+      toDestroy.AddRange(_matching[q]._matches);
+      onItemsMatched?.Invoke(_matching[q]);
+    }
+    toDestroy = toDestroy.Distinct().ToList();
+    toDestroy.ForEach((item) => item.Matched());
+
+    yield return new WaitForSeconds(0.25f);
+    for(int q = 0; q < toDestroy.Count; ++q)
+    {
+      yield return new WaitForSeconds(_deactivationInterval);
+      toDestroy[q].Hide();
+    }
+    _items.RemoveAll((item) => toDestroy.Contains(item));
+    _matching.Clear();
+    _grid.update(_items);
+    _nextItem = CreateNextItem();
+    _checkMoves = true;
+
+    CheckEnd();
+  }
+  void DestroyMatch()
+  {
+    // for(int q = 0; q < _matching.Count; ++q)
+    //   _matching[q]._matches.ForEach((Item item) => item.Matched());
+    StartCoroutine(coDestroyMatch());
+  }  
   void ExplodeBombs()
   {
     List<Item> toRemove = new List<Item>();
@@ -933,41 +967,6 @@ public class Level : MonoBehaviour
       }
     }
     _checkMoves = false;
-  }
-  IEnumerator coDestroyMatch()
-  {
-    List<Item> toDestroy = new List<Item>();
-
-    yield return new WaitForSeconds(0.05f);
-    for(int q = 0; q < _matching.Count; ++q)
-    {
-      toDestroy.AddRange(_matching[q]._matches);
-      // foreach(var item in _matching[q]._matches)
-      // {
-      //   item.Matched();
-      //   yield return new WaitForSeconds(1/30f);
-      // }
-      onItemsMatched?.Invoke(_matching[q]);
-    }
-    toDestroy = toDestroy.Distinct().ToList();
-    toDestroy.ForEach((item) => item.Matched());
-    yield return new WaitForSeconds(0.25f);
-    for(int q = 0; q < toDestroy.Count; ++q)
-    {
-      yield return new WaitForSeconds(_deactivationInterval);
-      toDestroy[q].Hide();
-    }
-    _items.RemoveAll((item) => toDestroy.Contains(item));
-    _matching.Clear();
-    _grid.update(_items);
-    _nextItem = CreateNextItem();
-    _checkMoves = true;
-
-    CheckEnd();
-  }
-  void DestroyMatch()
-  {
-    StartCoroutine(coDestroyMatch());
   }
   void CheckEnd()
   {

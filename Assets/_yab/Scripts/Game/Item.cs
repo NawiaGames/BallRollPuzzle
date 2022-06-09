@@ -8,6 +8,9 @@ public class Item : MonoBehaviour
 {
   [SerializeField] int        _id = 0;
   [SerializeField] Color      _color;
+  [ColorUsage(false, true)]
+  [SerializeField] Color      _colorMatchPing;
+
   [SerializeField] ActivatableObject _activatable;
   [SerializeField] Push       _push = Push.None;
   [SerializeField] Spec       _special = Spec.None;
@@ -126,6 +129,7 @@ public class Item : MonoBehaviour
   public bool IsRandMoveItem => _special == Spec.RandomMoveItem;
   public bool IsRandPush => _special == Spec.RandomPush;
   public bool IsRemoveElem => _special == Spec.RemoveElem;
+  public bool IsMatching {get;set;} = false;
 
   public void Show()
   {
@@ -280,9 +284,13 @@ public class Item : MonoBehaviour
   }
   public void Matched()
   {
-    _ocb.SetColor(color);
-    Color c = new Color(color.r * 2, color.g * 2, color.b * 2, color.a);
-    _ocb.BlendTo(c);
+    //if(!IsMatching)
+    {
+      _ocb.SetColor(color);
+      Color c = _colorMatchPing;
+      _ocb.BlendTo(c);
+    }
+    IsMatching = true;
   }
   void Rotate(Transform _model, float dt)
   {
