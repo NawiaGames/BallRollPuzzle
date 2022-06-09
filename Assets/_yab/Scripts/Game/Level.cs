@@ -298,8 +298,9 @@ public class Level : MonoBehaviour
   List<Match3> _matching = new List<Match3>();
   List<Check> _checks = new List<Check>();
   List<ObjectFracture> _fractures = new List<ObjectFracture>();
+  [SerializeField] List<Item> _listNextItems = new List<Item>();
 
-  Item _nextItem = null;
+  [SerializeField] Item _nextItem = null;
   Item _lastItemMove = null;
   bool _inputBlocked = false;
   bool _firstInteraction = false;
@@ -316,10 +317,13 @@ public class Level : MonoBehaviour
     _nextItemContainer.gameObject.SetActive(false);
     _nextItemContainer.transform.position = new Vector3(0, 0, _grid.dim().y / 2 + 3);
 
+    UIIngame.onPowerupChanged += OnPowerupChanged;
+
     onCreate?.Invoke(this);
   }
   void OnDestroy()
   {
+    UIIngame.onPowerupChanged -= OnPowerupChanged;
     foreach(var frac in _fractures)
     {
       frac.ResetFracture();
@@ -554,7 +558,7 @@ public class Level : MonoBehaviour
           item = GameData.Prefabs.CreateRandItem(_trayItemContainer, true);
         else if(next_item.IsRandPush)
           item = GameData.Prefabs.CreatePushItem(_trayItemContainer, (Random.value < 0.5f)? Item.Push.One : Item.Push.Line);
-        else  
+        else
           item = Instantiate(_listItems[0], _trayItemContainer);
         //item.name = _listItems[0].name;
       }
@@ -623,8 +627,17 @@ public class Level : MonoBehaviour
     for(int q = 0; q < _arrowsSelected.Count; ++q)
     {
       Item push = null;
-      push = Instantiate(_nextItem, _itemsContainer);
-      push.name = _nextItem.name;
+      if(_listNextItems.Count > 0)
+      {
+        push = Instantiate(_listNextItems[0], _itemsContainer);
+        push.name = _listNextItems[0].name;
+        _listNextItems.RemoveAt(0);
+      }
+      else
+      {
+        push = Instantiate(_nextItem, _itemsContainer);
+        push.name = _nextItem.name;
+      }
       push.vturn = new Vector2Int(Mathf.RoundToInt(_arrowsSelected[q].vDir.x), Mathf.RoundToInt(_arrowsSelected[q].vDir.z));
       push.transform.localPosition = _arrowsSelected[q].transform.localPosition - new Vector3Int(_arrowsSelected[q].dir.x/2, 0, _arrowsSelected[q].dir.y/2);
       push.dir = _arrowsSelected[q].dir;
@@ -640,6 +653,21 @@ public class Level : MonoBehaviour
     _arrowsSelected.Clear();
     _arrows.ForEach((ar) => ar.IsSelected = false);
     UpdateArrows();
+  }
+  public void OnPowerupChanged(int idx, bool state)
+  {
+    if(state)
+    {
+      if(idx == 0)
+        _listNextItems.Add(GameData.Prefabs.BombPrefab);
+      if(idx == 1)
+        _listNextItems.Add(GameData.Prefabs.ColorChangeItem);
+    }
+    else
+    {
+      if(_listNextItems.Count > 0)
+        _listNextItems.RemoveAt(0);
+    }
   }
 
   void MoveItems()
@@ -839,7 +867,7 @@ public class Level : MonoBehaviour
       {
         v.x = x; v.y = y;
         var item0 = _grid.geta(v);
-        if(item0 && item0.IsRegular && !item0.IsMatching) // || item0.IsColorChanger))
+        if(item0 && item0.IsRegular && !item0.IsMatching && !item0.IsMoving) // || item0.IsColorChanger))
         {
           {
             List<Item> match_items = new List<Item>();
@@ -848,7 +876,7 @@ public class Level : MonoBehaviour
               for(int q = 0; q < _grid.dim().x; ++q)
               {
                 var item1 = _grid.geta(v + vnx * (q+1));
-                if(Item.EqType(item0, item1) && !item1.IsMatching)
+                if(Item.EqType(item0, item1) && !item1.IsMatching && !item1.IsMoving)
                   match_items.Add(item1);
                 else
                   break;      
@@ -864,7 +892,7 @@ public class Level : MonoBehaviour
               for(int q = 0; q < _grid.dim().y; ++q)
               {
                 var item1 = _grid.geta(v + vny * (q + 1));
-                if(Item.EqType(item0, item1) && !item1.IsMatching)
+                if(Item.EqType(item0, item1) && !item1.IsMatching && !item1.IsMoving)
                   match_items.Add(item1);
                 else
                   break;

@@ -21,6 +21,8 @@ public class UIIngame : MonoBehaviour
   [SerializeField] UIPanel  bottomPanel;
   [SerializeField] UIPowerupBtn[] powerups;
 
+  public static System.Action<int, bool> onPowerupChanged;
+
   void Awake()
   {
     GetComponent<UIPanel>().ActivatePanel();
@@ -37,48 +39,40 @@ public class UIIngame : MonoBehaviour
   {
     lblLevelInfo.text = "level: " + lvl.LevelIdx + "\n";
     lblBallsLeft.text = lvl.movesAvail.ToString();
-    //lblLevelInfo.text += "gameType: " + ((lvl.gameType == Level.GameType.Match3Move)? "Match3 + move" : "Match3") + "\n";
-    // string push = "";
-    // if(lvl.pushType == Level.PushType.None)
-    //   push = "No push - new balls";
-    // else if(lvl.pushType == Level.PushType.PushOne)
-    //   push = "push to next field";
-    // else if(lvl.pushType == Level.PushType.PushLine)
-    //   push = "push to obstacle";
-    // lblLevelInfo.text += "pushType: " + push + "\n";
-    //lblLevelInfo.text += "push outside gamefield: " + (lvl.gameOutside).ToString();
 
+    PowerupsDeselect();
     bottomPanel.ActivatePanel();
   }
   void OnItemThrow(Level lvl)
   {
     lblBallsLeft.text = lvl.movesAvail.ToString();
+    PowerupsDeselect();
   }
   public void OnBtnRestart()
   {
     FindObjectOfType<Game>()?.RestartLevel();
   }
-  void ChangeSel(int idx)
+  void PowerupsDeselect()
   {
-    System.Array.ForEach(powerups, (UIPowerupBtn btn) => 
-      { 
-        if(btn != powerups[0]) btn.IsSelected = false; }
-      );
-    powerups[0].IsSelected = !powerups[0].IsSelected;
+    System.Array.ForEach(powerups, (UIPowerupBtn btn) => {btn.IsSelected = false;});
+  }
+  void PowerupChangeSel(int idx)
+  {
+    System.Array.ForEach(powerups, (UIPowerupBtn btn) => { if(btn != powerups[idx]) btn.IsSelected = false; });
+    powerups[idx].IsSelected = !powerups[idx].IsSelected;
+    onPowerupChanged?.Invoke(idx, powerups[idx].IsSelected);
   }
   public void OnBtnPowerup0()
   {
-    ChangeSel(0);
+    PowerupChangeSel(0);
   }
   public void OnBtnPowerup1()
   {
-    // System.Array.ForEach(powerups, (UIPowerupBtn btn) => btn.Deselect());
-    // powerups[1].Select();
+    PowerupChangeSel(1);
   }
   public void OnBtnPowerup2()
   {
-    // System.Array.ForEach(powerups, (UIPowerupBtn btn) => btn.Deselect());
-    // powerups[2].Select();
+    PowerupChangeSel(2);
   }
   // public void Show(Level level)
   // {

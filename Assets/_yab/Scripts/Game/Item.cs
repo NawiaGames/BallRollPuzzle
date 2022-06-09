@@ -116,7 +116,7 @@ public class Item : MonoBehaviour
   public Vector3 vdir => new Vector3(dir.x, 0, dir.y);
   public Push push {get => _push; set{ _push = value;}}
   public bool IsReady => !_activatable.InTransition && _lifetime > 0.125f;
-  public bool IsMoving => grid != _gridEnd;
+  public bool IsMoving => grid != _gridEnd || !Mathf.Approximately(Vector3.Distance(transform.position, toPos(_gridEnd)), 0);
   //public bool IsArrowVis {get => _arrow.activeSelf; set{_arrow.SetActive(value || IsStatic || IsBomb || _autoMove || _push != Item.Push.None && );}}
   public bool IsStatic => _special == Spec.Static;
   public bool IsFrozen {get =>_frozen; set{ _frozen = value;}}
@@ -147,7 +147,7 @@ public class Item : MonoBehaviour
     {
       _hidding = true;  
       onHide?.Invoke(this);
-      _activatable.DeactivateObject();
+      //_activatable.DeactivateObject();
       StartCoroutine(WaitForEnd());
     }
   }

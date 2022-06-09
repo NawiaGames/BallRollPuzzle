@@ -42,9 +42,11 @@ public class GameData : ScriptableObject
 
   public static class Prefabs
   {
+    public static Item BombPrefab => get().bombItem;
+    public static Item ColorChangeItem => get().colorChangeItem;
     public static Arrow CreateArrow(Transform parent){return Instantiate(get().arrowPrefab, parent);}
     public static GridElem CreateGridElem(Transform parent) { return Instantiate(get().gridElemPrefab, parent); }
-    public static Item CreatePushItem(Transform parent, Item.Push push_type) 
+    public static Item CreatePushItem(Transform parent, Item.Push push_type)
     { 
       Item item = null;
       if(push_type == Item.Push.One)
