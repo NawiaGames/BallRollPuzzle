@@ -2,6 +2,7 @@ barFill,192,496,512,104
 barBase,192,392,512,105
 btnBase,0,392,192,192
 icoCoin,0,584,96,96
+iconColorBall,480,680,96,96
 starsStandFill,384,680,96,96
 starsStand,288,680,96,96
 icoHeart,96,584,96,96

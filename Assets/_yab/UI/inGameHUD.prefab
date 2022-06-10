@@ -4068,10 +4068,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3457515854109017311, guid: 92368459d0900da41a395cbf155ba691, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 8987703992672242553}
+    - target: {fileID: 7545586319500312907, guid: 92368459d0900da41a395cbf155ba691, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8851067632771146524, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_Name
       value: infoFramePwrButton (2)
@@ -4101,6 +4109,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7531805965945500127}
     m_Modifications:
+    - target: {fileID: 2167736753000262899, guid: 92368459d0900da41a395cbf155ba691, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0, guid: 4c378e377072cf145ad5d536b9aba7de, type: 3}
     - target: {fileID: 2754233224562739650, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
