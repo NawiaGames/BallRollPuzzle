@@ -273,6 +273,7 @@ public class Level : MonoBehaviour
   [SerializeField] Vector2Int _dim;
   [SerializeField] float      _speed = 8;
   [SerializeField] int        _maxPoints = 10;
+  [SerializeField] float      _bombExplodeDelay = 1/10f;
   [Header("Items")]
   [SerializeField] List<Item> _listItems;
 
@@ -884,7 +885,7 @@ public class Level : MonoBehaviour
     bool hasMatches = CheckMatch3();
     if(hasMatches)
       yield return StartCoroutine(coDestroyMatch());
-    yield return coExplodeBombs();
+    yield return StartCoroutine(coExplodeBombs());
     CheckMove();
     yield return null;
 
@@ -998,13 +999,14 @@ public class Level : MonoBehaviour
     List<Item> toRemove = new List<Item>();
     for(int q = 0; q < _exploding.Count; ++q)
     {
+      yield return new WaitForSeconds(_bombExplodeDelay);
       var bomb = _exploding[q];
       bomb.Hide();
       bomb.Explode();
       List<Item> items =_grid.getNB(bomb.grid);
       for(int n = 0; n <items.Count; ++n)
       {
-        yield return new WaitForSeconds(1/15f);
+        yield return new WaitForSeconds(_bombExplodeDelay);
         if(!items[n].IsStatic && !items[n].IsRemoveElem)
         {
           items[n].Hide();
