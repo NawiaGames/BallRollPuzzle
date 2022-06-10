@@ -31,14 +31,15 @@ public class Level : MonoBehaviour
   [Header("Animations")]
   [SerializeField] float _activationInterval = 1/30f;
   [SerializeField] float _deactivationInterval = 1/30f;
+  [SerializeField] float _bombExplodeDelay = 1 / 10f;
 
   [Header("Gameplay Variants")]
   [SerializeField] bool _gameplayOutside = false;
   [Header("Settings")]
   [SerializeField] Vector2Int _dim;
   [SerializeField] float _speed = 8;
-  [SerializeField] int _maxPoints = 10;
-  [SerializeField] float _bombExplodeDelay = 1 / 10f;
+  [SerializeField] int   _maxPoints = 10;
+  [SerializeField] bool  _multiArrowSelection = false;
   [Header("Items")]
   [SerializeField] List<Item> _listItems;
   [Header("Powerus")]
@@ -534,7 +535,7 @@ public class Level : MonoBehaviour
     _arrowsSelected.Add(arrowBeg);
     arrowEnd.IsSelected = (horz)? arrowBeg.grid.y == arrowEnd.grid.y : arrowBeg.grid.x == arrowEnd.grid.x;
     if(arrowEnd.IsSelected)
-       _arrowsSelected.Add(arrowEnd);
+      _arrowsSelected.Add(arrowEnd);
 
     _arrowsSelected = _arrowsSelected.Distinct().ToList();
     for(int q = 0; q < _arrowsSelected.Count; ++q)
@@ -644,12 +645,6 @@ public class Level : MonoBehaviour
       onCombo?.Invoke();
     }
   }
-  public void AddFractures(ObjectFracture frac)
-  {
-    // _fractures.Add(frac);
-    // this.Invoke(() => {frac.ResetFracture(); _fractures.Remove(frac); Destroy(frac.gameObject);}, 2.0f);
-  }
-
   public void OnInputBeg(TouchInputData tid)
   {
     arrowBeg = arrowEnd = null;
@@ -670,7 +665,12 @@ public class Level : MonoBehaviour
 
     arrowEnd = tid.GetClosestCollider(0.5f)?.GetComponent<Arrow>() ?? null;
     if(arrowEnd)
-      SelectArrows();
+    {
+      if(_multiArrowSelection)
+        SelectArrows();
+      else if(arrowBeg != arrowEnd)
+        ClearArrows();
+    }
     else
       ClearArrows();
   }
