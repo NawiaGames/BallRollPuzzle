@@ -84,9 +84,12 @@ public class EffectsManager : MonoBehaviour
     }
     void OnItemBombExplo(Item sender)
     {
-      var psmain = fxPaintSplat.main;
+    // var psmain = fxPaintSplat.main;
+    // psmain.startColor = sender.color;
+    // PlayFXAtPosition(fxPaintSplat, sender.transform.position, 20);    
+      var psmain = fxBallFractures.main;
       psmain.startColor = sender.color;
-      PlayFXAtPosition(fxPaintSplat, sender.transform.position, 5);      
+      PlayFXAtPosition(fxBallFractures, sender.transform.position, ballFracturesEmitCnt, false);        
     }
     void OnItemsHit(Item itemA, Item itemB)
     {

@@ -287,6 +287,12 @@ public class Item : MonoBehaviour
   {
     onBombExplode?.Invoke(this);
   }
+  public void PreExplode()
+  {
+    _ocb.SetColor(color);
+    Color c = _colorMatchPing;
+    _ocb.BlendTo(c);
+  }
   public void Matched()
   {
     if(!IsMatching)
