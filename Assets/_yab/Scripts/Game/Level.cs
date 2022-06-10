@@ -912,9 +912,9 @@ public class Level : MonoBehaviour
     while(hasMatches = CheckMatch3())
     {
       yield return StartCoroutine(coDestroyMatch());
-      yield return StartCoroutine(coExplodeBombs());
       yield return null;
     };
+    yield return StartCoroutine(coExplodeBombs());
     CheckMove();
 
     if(_moving.Count == 0 && _pushing.Count == 0 && _matching.Count == 0)
