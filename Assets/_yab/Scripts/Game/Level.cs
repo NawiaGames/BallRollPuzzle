@@ -499,6 +499,8 @@ public class Level : MonoBehaviour
     //_nextItemContainer.gameObject.SetActive(true);
     _nextItem = CreateNextItem();
     UpdateArrows();
+    
+    FindObjectOfType<UIIngame>()?.SetLevel(this);
   }
   List<Item> _pushing = new List<Item>();
 

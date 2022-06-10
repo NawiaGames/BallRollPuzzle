@@ -41,6 +41,7 @@ public class UIIngame : MonoBehaviour
     Level.onItemThrow += OnItemThrow;
     Level.onPointsAdded += OnPointsAdded;
     Level.onDestroy += OnLevelDestroy;
+    Level.onCreate += OnLevelCreated;
     Level.onCombo += OnCombo;
     Item.onHide += UpdateBallsInfo;
   }
@@ -50,8 +51,13 @@ public class UIIngame : MonoBehaviour
     Level.onItemThrow -= OnItemThrow;
     Level.onPointsAdded -= OnPointsAdded;
     Level.onDestroy -= OnLevelDestroy;
+    Level.onCreate -= OnLevelCreated;
     Level.onCombo -= OnCombo;
     Item.onHide -= UpdateBallsInfo;
+  }
+  void OnLevelCreated(Level lvl)
+  {
+    _lvl = lvl;
   }
   void OnLevelStart(Level lvl)
   {
@@ -69,6 +75,10 @@ public class UIIngame : MonoBehaviour
 
     PowerupsDeselect();
     bottomPanel.ActivatePanel();
+  }
+  public void SetLevel(Level lvl)
+  {
+    _lvl = lvl;
   }
   void UpdateScore()
   {
