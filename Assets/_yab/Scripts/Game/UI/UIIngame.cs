@@ -20,6 +20,10 @@ public class UIIngame : MonoBehaviour
   [SerializeField] UIPanel  bottomPanel;
   [SerializeField] UIPowerupBtn[] powerups;
 
+  [SerializeField] UIPanel  comboPanel;
+  [SerializeField] TMPLbl   comboText;
+  [SerializeField] float    comboAnimDuration;
+
   public static System.Action<int, bool> onPowerupChanged;
 
   int _pointDest = 0;
@@ -31,12 +35,14 @@ public class UIIngame : MonoBehaviour
     Level.onCreate += OnLevelStart;
     Level.onItemThrow += OnItemThrow;
     Level.onPointsAdded += OnPointsAdded;
+    Level.onCombo += OnCombo;
   }
   void OnDestroy()
   {
     Level.onCreate -= OnLevelStart;
     Level.onItemThrow -= OnItemThrow;
     Level.onPointsAdded -= OnPointsAdded;
+    Level.onCombo -= OnCombo;
   }
   void OnLevelStart(Level lvl)
   {
@@ -65,6 +71,11 @@ public class UIIngame : MonoBehaviour
   void OnPointsAdded(Level lvl)
   {
     _pointDest = lvl.Points;
+  }
+  void OnCombo()
+  {
+    comboPanel.ActivatePanel();
+    this.Invoke(() => comboPanel.DeactivatePanel(), comboAnimDuration);
   }
   public void OnBtnRestart()
   {

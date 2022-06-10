@@ -65,11 +65,7 @@ MonoBehaviour:
   fxHit: {fileID: 5483926277836527142}
   strPushedOut: +{0}!
   strBallsMatched: +{0}!
-  strGreetings:
-  - Great!
-  - Awesome!
-  - Fantastic!
-  - Impresive!
+  strGreetings: []
 --- !u!114 &8108016443953103903
 MonoBehaviour:
   m_ObjectHideFlags: 0

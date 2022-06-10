@@ -1267,6 +1267,9 @@ MonoBehaviour:
   - {fileID: 5874376823121757102}
   - {fileID: 6592994840511990515}
   - {fileID: 308000479766147793}
+  comboPanel: {fileID: 8941008515050388451}
+  comboText: {fileID: 3768138619535299990}
+  comboAnimDuration: 2
 --- !u!114 &5453268848639807899
 MonoBehaviour:
   m_ObjectHideFlags: 0
