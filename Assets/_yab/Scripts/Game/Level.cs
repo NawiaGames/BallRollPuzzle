@@ -229,12 +229,12 @@ public class Level : MonoBehaviour
         _matches[q].IsFrozen = true;
       Points = points;
     }
-    public Match3(List<Item> list, int points)
+    public Match3(List<Item> list)
     {
       _matches = new List<Item>(list);
       for(int q = 0; q < _matches.Count; ++q)
         _matches[q].IsFrozen = true;
-      Points = points;
+      Points = GameData.Points.matchStandard() * _matches.Count;
     }
 
     public Vector3 MidPos()
@@ -956,7 +956,7 @@ public class Level : MonoBehaviour
                   break;      
               }
               if(match_items.Count >= 3)
-                localMatch.Add(new Match3(match_items, GameData.Points.matchStandard()));
+                localMatch.Add(new Match3(match_items));
             }
           }
           {
@@ -972,7 +972,7 @@ public class Level : MonoBehaviour
                   break;
               }
               if(match_items.Count >= 3)
-                localMatch.Add(new Match3(match_items, GameData.Points.matchStandard()));
+                localMatch.Add(new Match3(match_items));
             }
           }
         }
@@ -989,7 +989,7 @@ public class Level : MonoBehaviour
     for(int q = 0; q < _matching.Count; ++q)
     {
       toDestroy.AddRange(_matching[q]._matches);
-      AddPoints(GameData.Points.matchStandard());
+      AddPoints(_matching[q].Points);
       onItemsMatched?.Invoke(_matching[q]);
     }
     toDestroy = toDestroy.Distinct().ToList();
@@ -1080,13 +1080,14 @@ public class Level : MonoBehaviour
       {
         Finished = true;
         Succeed = !AnyColorItem;
-        DestroyGrid();
+        if(Succeed)
+          DestroyGrid();
         this.Invoke(() => onFinished?.Invoke(this), 0.5f);
         this.Invoke(() => 
         {
           Succeed = !AnyColorItem; 
           uiSummary.Show(this);
-        }, 1f);
+        }, 1.5f);
       }
     }
   }
