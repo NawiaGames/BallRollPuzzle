@@ -17,7 +17,7 @@ public class UISummary : MonoBehaviour
   //[SerializeField] TMPLbl  lblScore;
   //[SerializeField] TMPLbl  lblInfo;
   [SerializeField] Slider  slider;
-  [SerializeField] UIToggleButton[] stars;
+  [SerializeField] UITwoState[] stars;
 
   float destValue = 0;
   public void Show(Level level)

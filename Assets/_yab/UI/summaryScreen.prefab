@@ -887,7 +887,7 @@ GameObject:
   - component: {fileID: 7529980846750228544}
   - component: {fileID: 8082388045395316301}
   - component: {fileID: 8260015311765464780}
-  - component: {fileID: 8098299544165395252}
+  - component: {fileID: 8881035245917875787}
   m_Layer: 5
   m_Name: star (0)
   m_TagString: Untagged
@@ -971,7 +971,7 @@ MonoBehaviour:
   activateAnimationPreset: {fileID: 11400000, guid: 77505c0c0726874419b8ca0010be36e6, type: 2}
   deactivateAnimationPreset: {fileID: 11400000, guid: a528e4653df7b3d41bf6afa9d49d2a41, type: 2}
   affectedTransform: {fileID: 0}
---- !u!114 &8098299544165395252
+--- !u!114 &8881035245917875787
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -980,7 +980,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2075471730618152348}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32846cfb6cc0ee94db6c77bff1150312, type: 3}
+  m_Script: {fileID: 11500000, guid: 7713a11b3d0f075419dfe947762bb054, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   offState: {fileID: 317854196453701306}
@@ -1097,9 +1097,9 @@ MonoBehaviour:
   failContainer: {fileID: 6846907690555509439}
   slider: {fileID: 3686703617490899793}
   stars:
-  - {fileID: 8098299544165395252}
-  - {fileID: 4754140173803252606}
-  - {fileID: 5257337729298998510}
+  - {fileID: 8881035245917875787}
+  - {fileID: 6517317696890801759}
+  - {fileID: 5045662605562412821}
 --- !u!1 &2602842999575453888
 GameObject:
   m_ObjectHideFlags: 0
@@ -1560,7 +1560,7 @@ GameObject:
   - component: {fileID: 6136258951768983119}
   - component: {fileID: 4659521185155222314}
   - component: {fileID: 3971963035451529343}
-  - component: {fileID: 5257337729298998510}
+  - component: {fileID: 5045662605562412821}
   m_Layer: 5
   m_Name: star (2)
   m_TagString: Untagged
@@ -1644,7 +1644,7 @@ MonoBehaviour:
   activateAnimationPreset: {fileID: 11400000, guid: 77505c0c0726874419b8ca0010be36e6, type: 2}
   deactivateAnimationPreset: {fileID: 11400000, guid: a528e4653df7b3d41bf6afa9d49d2a41, type: 2}
   affectedTransform: {fileID: 0}
---- !u!114 &5257337729298998510
+--- !u!114 &5045662605562412821
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1653,7 +1653,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4518565052179906022}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32846cfb6cc0ee94db6c77bff1150312, type: 3}
+  m_Script: {fileID: 11500000, guid: 7713a11b3d0f075419dfe947762bb054, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   offState: {fileID: 5292288198995935437}
@@ -3092,7 +3092,7 @@ GameObject:
   - component: {fileID: 1404562901966125131}
   - component: {fileID: 8660394371824760346}
   - component: {fileID: 2227947078460794511}
-  - component: {fileID: 4754140173803252606}
+  - component: {fileID: 6517317696890801759}
   m_Layer: 5
   m_Name: star (1)
   m_TagString: Untagged
@@ -3176,7 +3176,7 @@ MonoBehaviour:
   activateAnimationPreset: {fileID: 11400000, guid: 77505c0c0726874419b8ca0010be36e6, type: 2}
   deactivateAnimationPreset: {fileID: 11400000, guid: a528e4653df7b3d41bf6afa9d49d2a41, type: 2}
   affectedTransform: {fileID: 0}
---- !u!114 &4754140173803252606
+--- !u!114 &6517317696890801759
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3185,7 +3185,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7682604852197614912}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32846cfb6cc0ee94db6c77bff1150312, type: 3}
+  m_Script: {fileID: 11500000, guid: 7713a11b3d0f075419dfe947762bb054, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   offState: {fileID: 6374838087637534605}
