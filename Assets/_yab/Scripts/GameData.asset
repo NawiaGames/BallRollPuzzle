@@ -56,6 +56,7 @@ MonoBehaviour:
   - {fileID: 5382338121493344219, guid: 3921f55b16a194c3cb3641768534e531, type: 3}
   - {fileID: 5382338121493344219, guid: 13d1eb18c2b5b4b9da510a085b429e0d, type: 3}
   - {fileID: 5382338121493344219, guid: 5ef75569732754cecacd4d0787472aa7, type: 3}
+  - {fileID: 5382338121493344219, guid: a24b9964c09284fc0910f6b0a167952d, type: 3}
   pointBallOut: 50
   pointBallOutEveryNext: 10
   pointMatchStandard: 100

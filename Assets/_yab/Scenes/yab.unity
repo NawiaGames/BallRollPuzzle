@@ -1417,22 +1417,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1656759793}
     m_Modifications:
-    - target: {fileID: 3974041691956590158, guid: b674fd62f5e85c747b59fcbaeed572b3, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3974041691956590158, guid: b674fd62f5e85c747b59fcbaeed572b3, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3974041691956590158, guid: b674fd62f5e85c747b59fcbaeed572b3, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3974041691956590158, guid: b674fd62f5e85c747b59fcbaeed572b3, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4270927307264537144, guid: b674fd62f5e85c747b59fcbaeed572b3, type: 3}
       propertyPath: m_Name
       value: inGameHUD
@@ -1521,28 +1505,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4997367860633096490, guid: b674fd62f5e85c747b59fcbaeed572b3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0, guid: 4c378e377072cf145ad5d536b9aba7de, type: 3}
     - target: {fileID: 7841861317585947262, guid: b674fd62f5e85c747b59fcbaeed572b3, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7841861317585947262, guid: b674fd62f5e85c747b59fcbaeed572b3, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8022609747307910161, guid: b674fd62f5e85c747b59fcbaeed572b3, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8022609747307910161, guid: b674fd62f5e85c747b59fcbaeed572b3, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8022609747307910161, guid: b674fd62f5e85c747b59fcbaeed572b3, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8022609747307910161, guid: b674fd62f5e85c747b59fcbaeed572b3, type: 3}
-      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

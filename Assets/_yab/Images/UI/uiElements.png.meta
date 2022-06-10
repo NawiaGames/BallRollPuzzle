@@ -242,6 +242,27 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
+      name: iconColorBall
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 680
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00000000000000000800000000000000
+      internalID: 0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
       name: starsStandFill
       rect:
         serializedVersion: 2
@@ -474,6 +495,7 @@ TextureImporter:
       icoHeart: 3838556853171494735
       btnBase: 3361918274068334627
       iconBomb: -4603156472066961037
+      iconColorBall: 0
       Panel: -1922417273455563661
       summaryBG: 8632624238333640991
   spritePackingTag: 
