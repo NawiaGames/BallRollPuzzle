@@ -18,6 +18,8 @@ public class UISummary : MonoBehaviour
   //[SerializeField] TMPLbl  lblInfo;
   [SerializeField] Slider  slider;
   [SerializeField] UITwoState[] stars;
+  [SerializeField] TMPLbl  scores;
+  [SerializeField] string  strScoresFmt = "score: {0}";
 
   float destValue = 0;
   public void Show(Level level)
@@ -34,6 +36,7 @@ public class UISummary : MonoBehaviour
     slider.maxValue = 0;
     slider.value = 0;
     destValue = 0;
+    scores.text = string.Format(strScoresFmt, level.Points.ToString());
 
     for(int q = 0; q < stars.Length; ++q)
     {

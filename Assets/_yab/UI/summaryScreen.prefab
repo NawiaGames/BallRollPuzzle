@@ -1100,6 +1100,7 @@ MonoBehaviour:
   - {fileID: 8881035245917875787}
   - {fileID: 6517317696890801759}
   - {fileID: 5045662605562412821}
+  scores: {fileID: 97430650381838281}
 --- !u!1 &2602842999575453888
 GameObject:
   m_ObjectHideFlags: 0
@@ -2515,7 +2516,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2629190682634580241
 RectTransform:
   m_ObjectHideFlags: 0
