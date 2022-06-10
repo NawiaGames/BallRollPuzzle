@@ -913,19 +913,16 @@ public class Level : MonoBehaviour
     {
       yield return StartCoroutine(coDestroyMatch());
       yield return StartCoroutine(coExplodeBombs());
-      CheckMove();
       yield return null;
     };
+    CheckMove();
 
     if(_moving.Count == 0 && _pushing.Count == 0 && _matching.Count == 0)
     {
       ShowBigGreets();
       CheckEnd();
-      //if(_nextItem == null)
-      {
-        if(AnyColorItem)
-          _nextItem = CreateNextItem();
-      }
+      if(AnyColorItem)
+        _nextItem = CreateNextItem();
     }    
     _sequence = false;
   }
@@ -1059,7 +1056,7 @@ public class Level : MonoBehaviour
     new Vector2Int(1, 0),
     new Vector2Int(0, -1),
   };
-  void CheckMove()
+  IEnumerator coCheckMove()
   {
     List<Item> itemsToPush = new List<Item>();
     _grid.update(_items);
@@ -1084,6 +1081,11 @@ public class Level : MonoBehaviour
         }
       }
     }
+    yield return null;
+  }
+  void CheckMove()
+  {
+    StartCoroutine(coCheckMove());
   }
   void CheckEnd()
   {
