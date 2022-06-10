@@ -13,6 +13,7 @@ public class UIIngame : MonoBehaviour
 
   [Header("TopPanelRefs")]
   [SerializeField] TMPLbl  lblLevelInfo;
+  [SerializeField] TMPLbl  lblBallsCnt;
   [SerializeField] TMPLbl  lblCash;
   [SerializeField] TMPLbl  lblBallsLeft;
 
@@ -26,7 +27,11 @@ public class UIIngame : MonoBehaviour
 
   public static System.Action<int, bool> onPowerupChanged;
 
-  int _pointDest = 0;
+  int   _pointDest = 0;
+  float _pointCurr = 0;
+  int   _maxBalls = 0;
+
+  Level _lvl = null;
 
   void Awake()
   {
@@ -35,33 +40,48 @@ public class UIIngame : MonoBehaviour
     Level.onCreate += OnLevelStart;
     Level.onItemThrow += OnItemThrow;
     Level.onPointsAdded += OnPointsAdded;
+    Level.onDestroy += OnLevelDestroy;
     Level.onCombo += OnCombo;
+    Item.onHide += UpdateBallsInfo;
   }
   void OnDestroy()
   {
     Level.onCreate -= OnLevelStart;
     Level.onItemThrow -= OnItemThrow;
     Level.onPointsAdded -= OnPointsAdded;
+    Level.onDestroy -= OnLevelDestroy;
     Level.onCombo -= OnCombo;
+    Item.onHide -= UpdateBallsInfo;
   }
   void OnLevelStart(Level lvl)
   {
+    _lvl = lvl;
     lblLevelInfo.text = "level: " + lvl.LevelIdx + "\n";
     lblBallsLeft.text = lvl.movesAvail.ToString();
 
     progress.minValue = 0;
     progress.value = 0;
     progress.maxValue = lvl.PointsMax;
+    _pointCurr = 0;
     _pointDest = 0;
     UpdateScore();
-
+    UpdateBallsInfo(null);
 
     PowerupsDeselect();
     bottomPanel.ActivatePanel();
   }
   void UpdateScore()
   {
-    score.text = "Score: " + (int)progress.value;
+    score.text = "Score: " + (int)_pointCurr;
+  }
+  void UpdateBallsInfo(Item sender)
+  {
+    if(_lvl)
+      lblBallsCnt.text = "" + (_lvl.BallsInitialCnt-_lvl.ColorItems) + "/" + _lvl.BallsInitialCnt;
+  }
+  void OnLevelDestroy(Level lvl)
+  {
+    _lvl = null;
   }
   void OnItemThrow(Level lvl)
   {
@@ -106,11 +126,13 @@ public class UIIngame : MonoBehaviour
 
   void Update()
   {
-    if(progress.value != _pointDest)
+    if(_pointCurr != _pointDest)
     {
-      progress.value = Mathf.MoveTowards(progress.value, _pointDest, Time.deltaTime * 200.0f);
+      _pointCurr = Mathf.MoveTowards(_pointCurr, _pointDest, Time.deltaTime * 200.0f);
+      progress.value = _pointCurr;
       UpdateScore();
     }
+    UpdateBallsInfo(null);
   }
   // public void Show(Level level)
   // {

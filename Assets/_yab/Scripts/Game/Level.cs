@@ -13,7 +13,7 @@ public class Level : MonoBehaviour
 {
   public static System.Action<Vector3> onIntroFx;
   public static System.Action<Level>   onCreate, onStart, onPlay, onFirstInteraction, onTutorialStart, onPointsAdded;
-  public static System.Action<Level>   onFinished, onItemThrow;
+  public static System.Action<Level>   onFinished, onDestroy, onItemThrow;
   public static System.Action<Match3>  onItemsMatched;
   public static System.Action<Item, Item> onItemsHit;
   public static System.Action onCombo;
@@ -288,6 +288,7 @@ public class Level : MonoBehaviour
   public int  Points {get; set;} = 0;
   public int  PointsMax => _maxPoints;
   public int  Stars {get; set;}
+  public int  BallsInitialCnt {get; set;}
 
   bool _started = false;
   bool _allowInput => (movesAvail > 0 || _nextItem != null) && _pushing.Count == 0 && _moving.Count == 0 && _matching.Count == 0 && !_sequence;
@@ -328,10 +329,13 @@ public class Level : MonoBehaviour
     UIIngame.onPowerupChanged += OnPowerupChanged;
     Item.onPushedOut += OnItemPushedOut;
 
+    BallsInitialCnt = _items.Count;
+
     onCreate?.Invoke(this);
   }
   void OnDestroy()
   {
+    onDestroy?.Invoke(this);
     UIIngame.onPowerupChanged -= OnPowerupChanged;
     Item.onPushedOut -= OnItemPushedOut;
     // foreach(var frac in _fractures)

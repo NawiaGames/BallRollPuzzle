@@ -1260,6 +1260,7 @@ MonoBehaviour:
   progress: {fileID: 3241451194289900726}
   score: {fileID: 7888435016114951359}
   lblLevelInfo: {fileID: 9168044651966242795}
+  lblBallsCnt: {fileID: 5446409200067417356}
   lblCash: {fileID: 2652852661150355971}
   lblBallsLeft: {fileID: 4648838179470629782}
   bottomPanel: {fileID: 3521147724447804420}
@@ -4041,6 +4042,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2754233224562739650, guid: 39fcc812c1f222f45a9a6edea79135aa, type: 3}
   m_PrefabInstance: {fileID: 3395334648705925801}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5446409200067417356 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7244935621746186149, guid: 39fcc812c1f222f45a9a6edea79135aa, type: 3}
+  m_PrefabInstance: {fileID: 3395334648705925801}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4411678748290518343
 PrefabInstance:
   m_ObjectHideFlags: 0
