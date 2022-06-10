@@ -107,6 +107,7 @@ MonoBehaviour:
   colorOdd: {r: 0.6, g: 0.6, b: 0.6, a: 1}
   _sr: {fileID: 3388929737842931895}
   _actObj: {fileID: 1206926774182358625}
+  _fracture: {fileID: 1915229379248989713}
 --- !u!114 &1206926774182358625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -734,6 +735,21 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: eea1005c1a7d442499e6db8d3977aa3d, type: 3}
   m_PrefabInstance: {fileID: 5972742006559010429}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1915229379248989713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6783011356842775340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80c54c9cc3a30334791bd143c86bb7a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fracturedContainer: {fileID: 6783011356842775340}
+  defaultFractureDirection: {x: 0, y: 1, z: 0}
+  fractureForceMultiplier: 1
 --- !u!1 &7060718591668789179 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5539490129549528634, guid: eea1005c1a7d442499e6db8d3977aa3d, type: 3}

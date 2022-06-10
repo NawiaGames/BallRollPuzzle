@@ -12,6 +12,7 @@ public class GridElem : MonoBehaviour
   [SerializeField] Color      colorOdd;
   [SerializeField] SpriteRenderer _sr;
   [SerializeField] ActivatableObject _actObj;
+  [SerializeField] ObjectFracture _fracture;
   
   bool _even = true;
   Vector2Int vdir = new Vector2Int(0, 1);
@@ -26,6 +27,11 @@ public class GridElem : MonoBehaviour
   Vector3 _vpos = Vector3.zero;
   Vector3 _voffs = Vector3.zero;
 
+  void OnDestroy()
+  {
+    _fracture.ResetFracture();
+  }
+
   public void Show()
   {
     if(!_shown)
@@ -39,6 +45,11 @@ public class GridElem : MonoBehaviour
   void SetColor()
   {
     rend.material.color = (_even)? colorEven : colorOdd;
+  }
+  public void Fracture()
+  {
+    rend.gameObject.SetActive(false);
+    _fracture.Fracture(Vector3.up * 4);
   }
   public void SetSelected(bool sel, Vector2Int dir)
   {

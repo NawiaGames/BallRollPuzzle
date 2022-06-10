@@ -391,6 +391,25 @@ public class Level : MonoBehaviour
     }
   }
 
+  IEnumerator coDestroyGrid()
+  {
+    Vector2Int va = Vector2Int.zero;
+    for(int y = 0; y < _grid.dim().y; ++y)
+    {
+      va.y = y - _grid.dim().y/2;
+      for(int x = 0; x < _grid.dim().x; ++x)
+      {
+        va.x = x - _grid.dim().x/2;
+        _grid.getElem(va).Fracture();
+        yield return new WaitForSeconds(1/60f);
+      }
+    }
+  }
+  void DestroyGrid()
+  {
+    StartCoroutine(coDestroyGrid());
+  }
+
   void Init()
   {
     float scale = 1;
@@ -1061,12 +1080,13 @@ public class Level : MonoBehaviour
       {
         Finished = true;
         Succeed = !AnyColorItem;
+        DestroyGrid();
         this.Invoke(() => onFinished?.Invoke(this), 0.5f);
         this.Invoke(() => 
         {
           Succeed = !AnyColorItem; 
           uiSummary.Show(this);
-        }, 0.85f);
+        }, 1f);
       }
     }
   }
