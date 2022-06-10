@@ -275,7 +275,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4446299567161575965}
-  - {fileID: 9040534276650234907}
+  - {fileID: 8858982859721469098}
   - {fileID: 8201135853195600452}
   m_Father: {fileID: 2302524720579120}
   m_RootOrder: 1
@@ -1264,7 +1264,7 @@ MonoBehaviour:
   bottomPanel: {fileID: 3521147724447804420}
   powerups:
   - {fileID: 4964786018781571103}
-  - {fileID: 298492620040328729}
+  - {fileID: 262183543127821992}
   - {fileID: 613143660604620870}
   comboPanel: {fileID: 8941008515050388451}
   comboText: {fileID: 3768138619535299990}
@@ -3396,6 +3396,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7531805965945500127}
     m_Modifications:
+    - target: {fileID: 2167736753000262899, guid: 92368459d0900da41a395cbf155ba691, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -4603156472066961037, guid: 4c378e377072cf145ad5d536b9aba7de, type: 3}
     - target: {fileID: 2754233224562739650, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3984,6 +3988,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7531805965945500127}
     m_Modifications:
+    - target: {fileID: 2167736753000262899, guid: 92368459d0900da41a395cbf155ba691, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -3557221895903419285, guid: 45bb4ec5116b36d49a55ff45e97ba6b6, type: 3}
     - target: {fileID: 2754233224562739650, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4102,7 +4110,7 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2754233224562739650, guid: 92368459d0900da41a395cbf155ba691, type: 3}
   m_PrefabInstance: {fileID: 6334674740159294342}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &6579599080570158553
+--- !u!1001 &6685714039770506600
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -4203,7 +4211,7 @@ PrefabInstance:
       objectReference: {fileID: 8987703992672242553}
     - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnBtnPowerup1
+      value: OnBtnPowerup0
       objectReference: {fileID: 0}
     - target: {fileID: 8851067632771146524, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_Name
@@ -4211,10 +4219,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92368459d0900da41a395cbf155ba691, type: 3}
---- !u!114 &298492620040328729 stripped
+--- !u!114 &262183543127821992 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6875619991707364288, guid: 92368459d0900da41a395cbf155ba691, type: 3}
-  m_PrefabInstance: {fileID: 6579599080570158553}
+  m_PrefabInstance: {fileID: 6685714039770506600}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -4222,10 +4230,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6ece07da483e3841854a0a3d651e29a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &9040534276650234907 stripped
+--- !u!224 &8858982859721469098 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2754233224562739650, guid: 92368459d0900da41a395cbf155ba691, type: 3}
-  m_PrefabInstance: {fileID: 6579599080570158553}
+  m_PrefabInstance: {fileID: 6685714039770506600}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6867033479266658513
 PrefabInstance:
