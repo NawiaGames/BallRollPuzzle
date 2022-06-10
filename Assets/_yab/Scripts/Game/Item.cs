@@ -10,6 +10,8 @@ public class Item : MonoBehaviour
   [SerializeField] Color      _color;
   [ColorUsage(false, true)]
   [SerializeField] Color      _colorMatchPing;
+  [SerializeField] GameObject _ballModel = null;
+  [SerializeField] GameObject _customModel = null;
 
   [SerializeField] ActivatableObject _activatable;
   [SerializeField] Push       _push = Push.None;
@@ -59,7 +61,7 @@ public class Item : MonoBehaviour
   float      _speed = 0;
   bool       _hidding = false;
 
-  public static System.Action<Item> onShow, onHide, onHit, onBombExplode, onPushedOut;
+  public static System.Action<Item> onShow, onHide, onHit, onBombExplode, onExplode, onPushedOut;
 
   static Vector2Int  toGridT(Vector3 vpos, Vector2Int vdir) => new Vector2Int((int)Mathf.Round(vpos.x - vdir.x * 0.5f), (int)Mathf.Round(vpos.z - vdir.y * 0.5f));  
   static Vector3     toPos(Vector2Int grid) => new Vector3(grid.x, 0,  grid.y);
@@ -71,7 +73,10 @@ public class Item : MonoBehaviour
 
   void Awake()
   {
-    _mr = GetComponentInChildren<MeshRenderer>();
+    if(IsRegular || IsColorChanger)
+      _mr = _ballModel.GetComponent<MeshRenderer>();
+    else
+      _mr = GetComponentInChildren<MeshRenderer>();
     _mpb = new MaterialPropertyBlock();
     _mr.GetPropertyBlock(_mpb, 0);
 
@@ -270,6 +275,8 @@ public class Item : MonoBehaviour
     if(this.IsColorChanger && item.IsRegular)
     {
       id = item.id;
+      _ballModel.SetActive(true);
+      _customModel.SetActive(false);
       color = item.color;
       _special = Item.Spec.None;
       name = item.gameObject.name;
@@ -277,15 +284,21 @@ public class Item : MonoBehaviour
     else if(item.IsColorChanger && this.IsRegular)
     {
       item.id = id;
+      item._ballModel.SetActive(true);
+      item._customModel.SetActive(false);
       item.color = color;
       item._special = Item.Spec.None;
       item.gameObject.name = name;
     }
     onHit?.Invoke(this);
   }
-  public void Explode()
+  public void ExplodeBomb()
   {
     onBombExplode?.Invoke(this);
+  }
+  public void Explode()
+  {
+    onExplode?.Invoke(this);
   }
   public void PreExplode()
   {

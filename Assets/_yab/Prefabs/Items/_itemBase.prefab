@@ -104,6 +104,8 @@ MonoBehaviour:
   _id: 0
   _color: {r: 0, g: 0, b: 0, a: 1}
   _colorMatchPing: {r: 2.270603, g: 0.78439015, b: 0.22706035, a: 0}
+  _ballModel: {fileID: 8462825574880922697}
+  _colorBallModel: {fileID: 0}
   _activatable: {fileID: 7798136041665752175}
   _push: 0
   _special: 0
@@ -289,6 +291,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0fc8daadb73fc04f8aa4910848cf74d, type: 3}
+--- !u!1 &8462825574880922697 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f0fc8daadb73fc04f8aa4910848cf74d, type: 3}
+  m_PrefabInstance: {fileID: 8768674313358504216}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9095634800868202227 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f0fc8daadb73fc04f8aa4910848cf74d, type: 3}

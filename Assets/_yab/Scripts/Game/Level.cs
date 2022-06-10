@@ -32,6 +32,20 @@ public class Level : MonoBehaviour
   [SerializeField] float _activationInterval = 1/30f;
   [SerializeField] float _deactivationInterval = 1/30f;
 
+  [Header("Gameplay Variants")]
+  [SerializeField] bool _gameplayOutside = false;
+  [Header("Settings")]
+  [SerializeField] Vector2Int _dim;
+  [SerializeField] float _speed = 8;
+  [SerializeField] int _maxPoints = 10;
+  [SerializeField] float _bombExplodeDelay = 1 / 10f;
+  [Header("Items")]
+  [SerializeField] List<Item> _listItems;
+  [Header("Powerus")]
+  [SerializeField] int bombsCnt = 0;
+  [SerializeField] int colorOneCnt = 0;
+  [SerializeField] int colorLineCnt = 0;
+
   public class Grid
   {
     Vector2Int _dim = Vector2Int.zero;
@@ -267,17 +281,6 @@ public class Level : MonoBehaviour
     End,
   }
 
-  [Header("Gameplay Variants")]
-  [SerializeField] bool       _gameplayOutside = false;
-  [Header("Settings")]
-  [SerializeField] Vector2Int _dim;
-  [SerializeField] float      _speed = 8;
-  [SerializeField] int        _maxPoints = 10;
-  [SerializeField] float      _bombExplodeDelay = 1/10f;
-  [Header("Items")]
-  [SerializeField] List<Item> _listItems;
-
-
   public int  LevelIdx => GameState.Progress.Level;
   public bool Succeed {get; private set;}
   public bool Finished {get; private set;}
@@ -291,7 +294,7 @@ public class Level : MonoBehaviour
   public int  BallsInitialCnt {get; set;}
 
   bool _started = false;
-  bool _allowInput => (movesAvail > 0 || _nextItem != null) && _pushing.Count == 0 && _moving.Count == 0 && _matching.Count == 0 && !_sequence;
+  bool _allowInput => _started && (movesAvail > 0 || _nextItem != null) && _pushing.Count == 0 && _moving.Count == 0 && _matching.Count == 0 && !_sequence;
   UISummary uiSummary = null;
 
   Grid _grid = new Grid();
@@ -303,11 +306,10 @@ public class Level : MonoBehaviour
   List<Match3> _matching = new List<Match3>();
   List<Item> _destroying = new List<Item>();
   List<Check> _checks = new List<Check>();
-
   //List<ObjectFracture> _fractures = new List<ObjectFracture>();
-  [SerializeField] List<Item> _listNextItems = new List<Item>();
+  List<Item> _listNextItems = new List<Item>();
 
-  [SerializeField] Item _nextItem = null;
+  Item _nextItem = null;
   bool _inputBlocked = false;
   bool _firstInteraction = false;
   bool _checkMoves = false;
@@ -367,7 +369,7 @@ public class Level : MonoBehaviour
 
     yield return new WaitForSeconds(0.25f);
     StartCoroutine(coShowBalls());
-    StartCoroutine(coShowArrows());
+    yield return StartCoroutine(coShowArrows());
 
     _started = true;
   }
@@ -905,14 +907,15 @@ public class Level : MonoBehaviour
   IEnumerator coSequenece()
   {
     _grid.update(_items);
-
     _sequence = true;
-    bool hasMatches = CheckMatch3();
-    if(hasMatches)
+    bool hasMatches;
+    while(hasMatches = CheckMatch3())
+    {
       yield return StartCoroutine(coDestroyMatch());
-    yield return StartCoroutine(coExplodeBombs());
-    CheckMove();
-    yield return null;
+      yield return StartCoroutine(coExplodeBombs());
+      CheckMove();
+      yield return null;
+    };
 
     if(_moving.Count == 0 && _pushing.Count == 0 && _matching.Count == 0)
     {
@@ -923,7 +926,7 @@ public class Level : MonoBehaviour
         if(AnyColorItem)
           _nextItem = CreateNextItem();
       }
-    }
+    }    
     _sequence = false;
   }
   void Sequence()
@@ -1027,7 +1030,7 @@ public class Level : MonoBehaviour
       yield return new WaitForSeconds(_bombExplodeDelay);
       var bomb = _exploding[q];
       bomb.Hide();
-      bomb.Explode();
+      bomb.ExplodeBomb();
       List<Item> items =_grid.getNB(bomb.grid);
       items.ForEach((item)=> item.PreExplode());
       yield return new WaitForSeconds(0.125f);
@@ -1036,6 +1039,8 @@ public class Level : MonoBehaviour
         yield return new WaitForSeconds(_bombExplodeDelay);
         if(!items[n].IsStatic && !items[n].IsRemoveElem)
         {
+          AddPoints(GameData.Points.bombExplode());
+          items[n].Explode();
           items[n].Hide();
           toRemove.Add(items[n]);
         }
