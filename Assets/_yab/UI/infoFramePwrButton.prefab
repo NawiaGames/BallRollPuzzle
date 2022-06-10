@@ -640,6 +640,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6ece07da483e3841854a0a3d651e29a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ico: {fileID: 0}
-  lbl: {fileID: 0}
+  ico: {fileID: 2167736753000262899}
+  lbl: {fileID: 3953592416894064898}
   _selScale: 1.2
