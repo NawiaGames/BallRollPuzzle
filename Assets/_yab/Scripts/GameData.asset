@@ -33,6 +33,7 @@ MonoBehaviour:
   arrowPrefab: {fileID: 2933700911192963553, guid: 2bed5b5b69f214548a6aad57e9115e0b, type: 3}
   gridElemPrefab: {fileID: 7566253647186876143, guid: 0e0b47018aa1f2648b626fdb9a2ff321, type: 3}
   listLevels:
+  - {fileID: 5382338121493344219, guid: 5f340d877681256419ef66fb1dd4c5b5, type: 3}
   - {fileID: 5382338121493344219, guid: 356c1d94afdbe444fb9bb11bdc70a0f1, type: 3}
   - {fileID: 5382338121493344219, guid: 6c9fd3a8543144c55903e3e08e66b04f, type: 3}
   - {fileID: 5382338121493344219, guid: bb014437da7ab4913ac64a72916a7e3d, type: 3}
@@ -61,6 +62,7 @@ MonoBehaviour:
   pointBallOutEveryNext: 10
   pointMatchStandard: 100
   pointMatchSpec: 200
+  pointBombExplode: 100
   percentOfPointsForStars:
   - 0.5
   - 0.7

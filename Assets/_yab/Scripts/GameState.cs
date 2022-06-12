@@ -29,6 +29,15 @@ public class GameState : SavableScriptableObject
   }
   [SerializeField] Economy economy;
 
+  [System.Serializable]
+  class PowerUps
+  {
+    public int bombs;
+    public int colors;
+    public int others;
+  }
+  [SerializeField] PowerUps powerups;
+
   public static class Progress
   {
     public static int   Level {get => get().progress.level; set{get().progress.level = value;}}
@@ -37,6 +46,20 @@ public class GameState : SavableScriptableObject
   public static class Econo
   {
     public static int Cash {get => get().economy.cash; set{ get().economy.cash = value;}}
+  }
+
+  public static class Powerups
+  {
+    public static int BombsCnt {get => get().powerups.bombs; set{ get().powerups.bombs = value;}}
+    public static int ColorsCnt {get => get().powerups.colors; set{ get().powerups.colors = value;}}
+    public static int GetCount(int idx) 
+    {
+      if(idx == 0)
+        return BombsCnt;
+      else if(idx == 1)
+        return ColorsCnt;
+      return 0; 
+    }   
   }
 
   [Header("Customization")]
