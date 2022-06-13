@@ -1189,6 +1189,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7372671273792241628}
     m_Modifications:
+    - target: {fileID: 8121904550407080, guid: 4ef29f6705df1da4d8ae5155a2831f91, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2988145813576565752, guid: 4ef29f6705df1da4d8ae5155a2831f91, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2988145813576565752, guid: 4ef29f6705df1da4d8ae5155a2831f91, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2988145813576565752, guid: 4ef29f6705df1da4d8ae5155a2831f91, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2988145813576565752, guid: 4ef29f6705df1da4d8ae5155a2831f91, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5870571897684954106, guid: 4ef29f6705df1da4d8ae5155a2831f91, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5870571897684954106, guid: 4ef29f6705df1da4d8ae5155a2831f91, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5870571897684954106, guid: 4ef29f6705df1da4d8ae5155a2831f91, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5870571897684954106, guid: 4ef29f6705df1da4d8ae5155a2831f91, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6747504782689301644, guid: 4ef29f6705df1da4d8ae5155a2831f91, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7313996295450148234, guid: 4ef29f6705df1da4d8ae5155a2831f91, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

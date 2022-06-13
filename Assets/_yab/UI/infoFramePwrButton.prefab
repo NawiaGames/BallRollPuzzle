@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7152066270008777941}
   - component: {fileID: 5461439146743700930}
   - component: {fileID: 3953592416894064898}
+  - component: {fileID: 5917096566915820160}
   m_Layer: 5
   m_Name: lblText (1)
   m_TagString: Untagged
@@ -76,7 +77,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0.9176471, g: 0.10588236, b: 0.44705886, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -135,6 +136,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5917096566915820160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3338905622385699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61ec2acd765832c49a4052ac33eaf62d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <ThemeID>k__BackingField: 4
 --- !u!1 &2476189455469905069
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,6 +583,7 @@ GameObject:
   - component: {fileID: 4858837730939363297}
   - component: {fileID: 8022127307715969092}
   - component: {fileID: 3817760473148858693}
+  - component: {fileID: 6985011892110119393}
   m_Layer: 5
   m_Name: lblText (1)
   m_TagString: Untagged
@@ -633,8 +648,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4285668330
+  m_fontColor: {r: 0.9176471, g: 0.10588236, b: 0.44705886, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -693,6 +708,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6985011892110119393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7654172135253961818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61ec2acd765832c49a4052ac33eaf62d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <ThemeID>k__BackingField: 4
 --- !u!1 &8259214240116329635
 GameObject:
   m_ObjectHideFlags: 0
@@ -705,6 +733,7 @@ GameObject:
   - component: {fileID: 1553738623201685604}
   - component: {fileID: 2650714622058195770}
   - component: {fileID: 6853364836637694956}
+  - component: {fileID: 6455907329263064926}
   m_Layer: 5
   m_Name: counter
   m_TagString: Untagged
@@ -754,7 +783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.91764706, g: 0.45882353, b: 0.6509803, a: 1}
+  m_Color: {r: 1, g: 0.7960785, b: 0.94117653, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -786,6 +815,19 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.2509804}
   m_EffectDistance: {x: 1, y: -10}
   m_UseGraphicAlpha: 1
+--- !u!114 &6455907329263064926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8259214240116329635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61ec2acd765832c49a4052ac33eaf62d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <ThemeID>k__BackingField: 3
 --- !u!1 &8367516344158812768
 GameObject:
   m_ObjectHideFlags: 0
@@ -874,6 +916,7 @@ GameObject:
   - component: {fileID: 4758311419211772948}
   - component: {fileID: 5231269290172192200}
   - component: {fileID: 8127309261035059055}
+  - component: {fileID: 7850649304266775547}
   m_Layer: 5
   m_Name: counter (1)
   m_TagString: Untagged
@@ -923,7 +966,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.91764706, g: 0.45882353, b: 0.6509803, a: 1}
+  m_Color: {r: 1, g: 0.7960785, b: 0.94117653, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -955,6 +998,19 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.2509804}
   m_EffectDistance: {x: 1, y: -10}
   m_UseGraphicAlpha: 1
+--- !u!114 &7850649304266775547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8479491626026330275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61ec2acd765832c49a4052ac33eaf62d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <ThemeID>k__BackingField: 3
 --- !u!1 &8851067632771146524
 GameObject:
   m_ObjectHideFlags: 0
@@ -972,6 +1028,7 @@ GameObject:
   - component: {fileID: 5342145956621855151}
   - component: {fileID: 3977416306997598175}
   - component: {fileID: 6875619991707364288}
+  - component: {fileID: 1195754382207551275}
   m_Layer: 5
   m_Name: infoFramePwrButton
   m_TagString: Untagged
@@ -1175,3 +1232,16 @@ MonoBehaviour:
   ico: {fileID: 8144556680359016719}
   lbl: {fileID: 3817760473148858693}
   _selScale: 1.2
+--- !u!114 &1195754382207551275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8851067632771146524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61ec2acd765832c49a4052ac33eaf62d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <ThemeID>k__BackingField: 0
