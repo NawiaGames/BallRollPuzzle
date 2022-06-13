@@ -42,7 +42,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 3d1977838db5baf479963b76a339e978, type: 2}
+  m_Motion: {fileID: 7400000, guid: f4db04b1cedfedf4a9c0c0b04182392d, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -104,7 +104,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 497b67418f7fa424cba775658b4547f5, type: 2}
+  m_Motion: {fileID: 7400000, guid: aa04f9c4277b76343bf02872329d6477, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -167,7 +167,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _ArrowAnimator
+  m_Name: _bombAnimator
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: activate
@@ -293,7 +293,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 3b102ab053c4df04896a84fbf7baf83e, type: 2}
+  m_Motion: {fileID: 7400000, guid: f3500e0ced771c849b42efe1d6a4de21, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
