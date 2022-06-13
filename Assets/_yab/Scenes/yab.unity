@@ -2743,6 +2743,10 @@ PrefabInstance:
       propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minMaxState
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3316971078693565668, guid: e0db3b670ee5c6d408f68b018272d657, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6576437312509335966, guid: e0db3b670ee5c6d408f68b018272d657, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1

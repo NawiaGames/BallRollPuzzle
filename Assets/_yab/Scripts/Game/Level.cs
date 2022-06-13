@@ -792,6 +792,20 @@ public class Level : MonoBehaviour
             _pushing.RemoveAt(p);
             p--;
           }
+          else
+          {
+            var ci = _grid.geti(_pushing[p].grid);
+            if(ci && ci.IsDirectional && _pushing[p].Redirected != null)
+            {
+              _pushing[p].Redirected = ci.vturn;
+              _pushing[p].Stop();
+              _pushing[p].dir = ci.vturn;
+              _pushing[p].MoveP(Time.deltaTime * _speed * 5);
+              //_items.Add(_pushing[p]);
+              // _pushing.RemoveAt(p);
+              // p--;
+            }
+          }
         }
       }
       else

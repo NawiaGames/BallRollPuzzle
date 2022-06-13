@@ -137,6 +137,7 @@ public class Item : MonoBehaviour
   public bool IsRemoveElem => _special == Spec.RemoveElem;
   public bool IsMatching {get;set;} = false;
   public bool IsDirectional => _special == Spec.DirectionalItem;
+  public Vector2Int? Redirected {get; set;}
   public int  Points {get; set;} = 0;
 
   public void Show()

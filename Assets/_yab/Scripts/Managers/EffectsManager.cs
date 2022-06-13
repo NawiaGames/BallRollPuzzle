@@ -73,7 +73,7 @@ public class EffectsManager : MonoBehaviour
       if(emitCount > 0)
         ps.Emit(emitCount);
       else
-        ps.Play();
+        ps.Play(true);
     }
     
     void OnLevelStart(Level lvl)
@@ -91,7 +91,7 @@ public class EffectsManager : MonoBehaviour
     // PlayFXAtPosition(fxPaintSplat, sender.transform.position, 20);    
       var psmain = fxBombDestroy.main;
       psmain.startColor = sender.color;
-      PlayFXAtPosition(fxBombDestroy, sender.transform.position, fxBombDestroyEmitCnt, true);
+      PlayFXAtPosition(fxBombDestroy, sender.transform.position); //, fxBombDestroyEmitCnt, true);
     }
     void OnItemsHit(Item itemA, Item itemB)
     {
