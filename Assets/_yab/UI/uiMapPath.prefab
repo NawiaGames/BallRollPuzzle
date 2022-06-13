@@ -172,7 +172,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7372671273787241932}
+  - {fileID: 8655290419849128022}
   m_Father: {fileID: 7372671273504290127}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -964,7 +964,7 @@ GameObject:
   - component: {fileID: 7372671274547097337}
   - component: {fileID: 7372671274547097334}
   m_Layer: 0
-  m_Name: uiMap 1
+  m_Name: uiMapPath
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1182,7 +1182,7 @@ MonoBehaviour:
   activateAnimationPreset: {fileID: 11400000, guid: 77505c0c0726874419b8ca0010be36e6, type: 2}
   deactivateAnimationPreset: {fileID: 11400000, guid: a528e4653df7b3d41bf6afa9d49d2a41, type: 2}
   affectedTransform: {fileID: 0}
---- !u!1001 &274848869626710086
+--- !u!1001 &2133945525880673756
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1275,14 +1275,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8600027277736904925, guid: 4ef29f6705df1da4d8ae5155a2831f91, type: 3}
       propertyPath: m_Name
-      value: stage
+      value: uiMapStage
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ef29f6705df1da4d8ae5155a2831f91, type: 3}
---- !u!224 &7372671273787241932 stripped
+--- !u!224 &8655290419849128022 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7313996295450148234, guid: 4ef29f6705df1da4d8ae5155a2831f91, type: 3}
-  m_PrefabInstance: {fileID: 274848869626710086}
+  m_PrefabInstance: {fileID: 2133945525880673756}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7372671273983913614
 PrefabInstance:
