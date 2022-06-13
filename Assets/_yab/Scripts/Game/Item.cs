@@ -160,13 +160,12 @@ public class Item : MonoBehaviour
     {
       _hidding = true;  
       onHide?.Invoke(this);
-      //_activatable.DeactivateObject();
       StartCoroutine(WaitForEnd());
     }
   }
   public void Deactivate()
   {
-    //_activatable.DeactivateObject();
+    _activatable.DeactivateObject();
   }
   IEnumerator WaitForEnd()
   {

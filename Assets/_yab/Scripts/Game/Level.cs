@@ -407,7 +407,8 @@ public class Level : MonoBehaviour
       for(int x = 0; x < _grid.dim().x; ++x)
       {
         va.x = x - _grid.dim().x/2;
-        _grid.getElem(va).Fracture();
+        //_grid.getElem(va).Fracture();
+        _grid.getElem(va).Hide();
         yield return new WaitForSeconds(1/60f);
       }
     }
@@ -415,6 +416,18 @@ public class Level : MonoBehaviour
   void DestroyGrid()
   {
     StartCoroutine(coDestroyGrid());
+  }
+  IEnumerator coOutroBalls()
+  {
+    foreach(var item in _items)
+    {
+      item.Deactivate();
+      yield return new WaitForSeconds(1 / 15f);
+    }
+  }
+  void OutroBalls()
+  {
+    StartCoroutine(coOutroBalls());
   }
 
   void Init()
@@ -1131,6 +1144,7 @@ public class Level : MonoBehaviour
       {
         Finished = true;
         Succeed = !AnyColorItem;
+        OutroBalls();
         if(Succeed)
           DestroyGrid();
         this.Invoke(() => onFinished?.Invoke(this), 0.5f);
