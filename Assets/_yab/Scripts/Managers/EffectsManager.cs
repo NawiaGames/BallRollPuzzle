@@ -20,6 +20,8 @@ public class EffectsManager : MonoBehaviour
     [SerializeField] ParticleSystem fxBallFractures = null;
     [SerializeField] int            ballFracturesEmitCnt = 1;
     [SerializeField] ParticleSystem fxHit = null;
+    [SerializeField] ParticleSystem fxBombDestroy = null;
+    [SerializeField] int fxBombDestroyEmitCnt = 5;
 
   [Header("FX string")]
     [SerializeField] string strPushedOut = "pushed out";
@@ -87,9 +89,9 @@ public class EffectsManager : MonoBehaviour
     // var psmain = fxPaintSplat.main;
     // psmain.startColor = sender.color;
     // PlayFXAtPosition(fxPaintSplat, sender.transform.position, 20);    
-      var psmain = fxBallFractures.main;
+      var psmain = fxBombDestroy.main;
       psmain.startColor = sender.color;
-      PlayFXAtPosition(fxBallFractures, sender.transform.position, ballFracturesEmitCnt, false);        
+      PlayFXAtPosition(fxBombDestroy, sender.transform.position, fxBombDestroyEmitCnt, true);
     }
     void OnItemsHit(Item itemA, Item itemB)
     {

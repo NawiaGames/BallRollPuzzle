@@ -64,6 +64,8 @@ MonoBehaviour:
   fxBallFractures: {fileID: 8654854198287132523}
   ballFracturesEmitCnt: 4
   fxHit: {fileID: 5483926277836527142}
+  fxBombDestroy: {fileID: 2876338096343389615}
+  fxBombDestroyEmitCnt: 5
   strPushedOut: +{0}!
   strBallsMatched: +{0}!
 --- !u!114 &8108016443953103903
@@ -637,6 +639,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8144212072392526233, guid: 875f07a603afcd0488d07232d3bd1118, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8796438165910010177, guid: 875f07a603afcd0488d07232d3bd1118, type: 3}
       propertyPath: m_Name
       value: fxBombDestroy
@@ -646,6 +652,11 @@ PrefabInstance:
 --- !u!4 &1877512279294166509 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5540131783105599963, guid: 875f07a603afcd0488d07232d3bd1118, type: 3}
+  m_PrefabInstance: {fileID: 6263596653968563254}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2876338096343389615 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8144212072392526233, guid: 875f07a603afcd0488d07232d3bd1118, type: 3}
   m_PrefabInstance: {fileID: 6263596653968563254}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8108016443214776865

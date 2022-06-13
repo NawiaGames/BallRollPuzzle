@@ -16,11 +16,11 @@ MonoBehaviour:
   dataPath: Data
   version: 0
   progress:
-    level: 0
+    level: 23
   economy:
     cash: 0
   powerups:
-    bombs: 0
+    bombs: 3
     colors: 0
     others: 0
   selectedTheme: 0
