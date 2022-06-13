@@ -370,7 +370,7 @@ public class Level : MonoBehaviour
 
     yield return new WaitForSeconds(0.25f);
     StartCoroutine(coShowBalls());
-    yield return StartCoroutine(coShowArrows());
+    yield return StartCoroutine(coShowArrows(true));
 
     _started = true;
   }
@@ -388,13 +388,16 @@ public class Level : MonoBehaviour
   // {
   //   StartCoroutine(coShowBalls());
   // }
-  IEnumerator coShowArrows()
+  IEnumerator coShowArrows(bool act)
   {
     //yield return new WaitForSeconds(0.25f);
     foreach(var arr in _arrows)
     {
       yield return null;//new WaitForSeconds(_activationInterval);
-      arr?.Show();
+      if(act)
+        arr?.Show();
+      else
+        arr?.Hide();  
     }
   }
 
@@ -416,6 +419,10 @@ public class Level : MonoBehaviour
   void DestroyGrid()
   {
     StartCoroutine(coDestroyGrid());
+  }
+  void DestroyArrows()
+  {
+    StartCoroutine(coShowArrows(false));
   }
   IEnumerator coOutroBalls()
   {
@@ -1079,6 +1086,7 @@ public class Level : MonoBehaviour
     {
       yield return new WaitForSeconds(_bombExplodeDelay);
       var bomb = _exploding[q];
+      bomb.Deactivate();
       bomb.Hide();
       bomb.ExplodeBomb();
       List<Item> items =_grid.getNB(bomb.grid);
@@ -1150,7 +1158,10 @@ public class Level : MonoBehaviour
         Succeed = !AnyColorItem;
         OutroBalls();
         if(Succeed)
+        {
           DestroyGrid();
+          DestroyArrows();
+        }
         this.Invoke(() => onFinished?.Invoke(this), 0.5f);
         this.Invoke(() => 
         {
