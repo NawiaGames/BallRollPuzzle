@@ -249,7 +249,7 @@ PlayerSettings:
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
   AndroidKeystoreName: '{inproject}: ProjectData/ballrollpuzzle.keystore'
-  AndroidKeyaliasName: 
+  AndroidKeyaliasName: ballrollpuzzle
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
   AndroidIsGame: 1

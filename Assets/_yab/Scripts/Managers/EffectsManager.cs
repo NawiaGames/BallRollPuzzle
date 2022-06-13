@@ -24,8 +24,10 @@ public class EffectsManager : MonoBehaviour
     [SerializeField] int fxBombDestroyEmitCnt = 5;
 
   [Header("FX string")]
-    [SerializeField] string strPushedOut = "pushed out";
-    [SerializeField] string strBallsMatched = "Match x{0}!";
+    [SerializeField] string strPushedOut = "{0}!";
+    [SerializeField] string strBallsMatched = "{0}!";
+    [SerializeField] string strItemExplo = "{0}!";
+
 
     ParticleSystem fxConfetti;
 
@@ -47,6 +49,7 @@ public class EffectsManager : MonoBehaviour
     {
       Item.onHide += OnItemDestroy;
       Item.onBombExplode += OnItemBombExplo;
+      Item.onExplode += OnItemExplo;
       Item.onPushedOut += OnItemPushedOut;
       Level.onStart += OnLevelStart;
       Level.onItemsMatched += OnItemsMatched;
@@ -58,6 +61,7 @@ public class EffectsManager : MonoBehaviour
     {
       Item.onHide -= OnItemDestroy;
       Item.onBombExplode -= OnItemBombExplo;
+      Item.onExplode -= OnItemExplo;
       Item.onPushedOut -= OnItemPushedOut;
       Level.onStart -= OnLevelStart;
       Level.onItemsMatched -= OnItemsMatched;
@@ -92,6 +96,10 @@ public class EffectsManager : MonoBehaviour
       var psmain = fxBombDestroy.main;
       psmain.startColor = sender.color;
       PlayFXAtPosition(fxBombDestroy, sender.transform.position); //, fxBombDestroyEmitCnt, true);
+    }
+    void OnItemExplo(Item sender)
+    {
+      infoLblMan.ShowTextPopup(sender.transform.position, string.Format(strItemExplo, sender.Points));
     }
     void OnItemsHit(Item itemA, Item itemB)
     {

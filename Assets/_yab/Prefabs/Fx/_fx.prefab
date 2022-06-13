@@ -68,6 +68,7 @@ MonoBehaviour:
   fxBombDestroyEmitCnt: 5
   strPushedOut: +{0}!
   strBallsMatched: +{0}!
+  strItemExplo: +{0}!
 --- !u!114 &8108016443953103903
 MonoBehaviour:
   m_ObjectHideFlags: 0

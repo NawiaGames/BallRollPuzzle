@@ -1106,6 +1106,7 @@ public class Level : MonoBehaviour
         if(!items[n].IsStatic && !items[n].IsRemoveElem)
         {
           AddPoints(GameData.Points.bombExplode());
+          items[n].Points = GameData.Points.bombExplode();
           items[n].Explode();
           items[n].Hide();
           toRemove.Add(items[n]);
