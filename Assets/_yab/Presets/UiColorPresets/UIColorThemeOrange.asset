@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ba1c47f6327de1499aa98610a95690d, type: 3}
-  m_Name: GreenUIColorTheme
+  m_Name: UIColorThemeOrange
   m_EditorClassIdentifier: 
   colors:
-  - {r: 0.15287594, g: 0.58431375, b: 0.015686274, a: 1}
-  - {r: 0.8875, g: 1, b: 0.85, a: 1}
+  - {r: 0.9528302, g: 0.6029348, b: 0.17528482, a: 1}
+  - {r: 0.9529412, g: 0.8887635, b: 0.81, a: 1}
   - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 0.8862745, g: 1, b: 0.8509804, a: 1}
-  - {r: 0.15294118, g: 0.58431375, b: 0.015686275, a: 1}
+  - {r: 0.9529412, g: 0.8887635, b: 0.81, a: 1}
+  - {r: 0.9529412, g: 0.6039216, b: 0.1764706, a: 1}

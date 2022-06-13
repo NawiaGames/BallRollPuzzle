@@ -64,7 +64,7 @@ public class UIIngame : MonoBehaviour
   void OnLevelStart(Level lvl)
   {
     _lvl = lvl;
-    lblLevelInfo.text = "level: " + lvl.LevelIdx + "\n";
+    lblLevelInfo.text = "Level " + lvl.LevelIdx;
     lblBallsLeft.text = lvl.movesAvail.ToString();
 
     progress.minValue = 0;
@@ -84,7 +84,7 @@ public class UIIngame : MonoBehaviour
   }
   void UpdateScore()
   {
-    score.text = "Score: " + (int)_pointCurr;
+    score.text = "Score " + (int)_pointCurr;
   }
   void UpdateBallsInfo(Item sender)
   {
