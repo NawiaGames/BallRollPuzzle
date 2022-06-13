@@ -18,17 +18,7 @@ public class UIPowerupBtn : MonoBehaviour
     get => _selected;
     set { _selected = value; _scaleEnd = (_selected)? _selScale : 1.0f;}
   }
-
-  // public void Select()
-  // {
-  //   _scaleEnd = _selScale;
-  //   IsSelected = true;
-  // }
-  // public void Deselect()
-  // {
-  //   _scaleEnd = 1.0f;
-  //   IsSelected = false;
-  // }
+  public void SetCount(int cnt){lbl.text = cnt.ToString();}
   public void Reset()
   {
     ico.transform.localScale = Vector3.one;

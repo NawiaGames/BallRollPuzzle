@@ -39,21 +39,23 @@ public class UIIngame : MonoBehaviour
 
     Level.onCreate += OnLevelStart;
     Level.onItemThrow += OnItemThrow;
+    Level.onPowerupUsed += OnPowerupUsed;
     Level.onPointsAdded += OnPointsAdded;
     Level.onDestroy += OnLevelDestroy;
     Level.onCreate += OnLevelCreated;
     Level.onCombo += OnCombo;
-    Item.onHide += UpdateBallsInfo;
+    Item.onHide += OnItemHide;
   }
   void OnDestroy()
   {
     Level.onCreate -= OnLevelStart;
     Level.onItemThrow -= OnItemThrow;
+    Level.onPowerupUsed -= OnPowerupUsed;
     Level.onPointsAdded -= OnPointsAdded;
     Level.onDestroy -= OnLevelDestroy;
     Level.onCreate -= OnLevelCreated;
     Level.onCombo -= OnCombo;
-    Item.onHide -= UpdateBallsInfo;
+    Item.onHide -= OnItemHide;
   }
   void OnLevelCreated(Level lvl)
   {
@@ -93,10 +95,24 @@ public class UIIngame : MonoBehaviour
   {
     _lvl = null;
   }
+  void OnItemHide(Item sender)
+  {
+    this.Invoke(()=>UpdateBallsInfo(null), 0.5f);
+  }
   void OnItemThrow(Level lvl)
   {
     lblBallsLeft.text = lvl.movesAvail.ToString();
     PowerupsDeselect();
+    UpdateBallsInfo(null);
+  }
+  void OnPowerupUsed(Item item)
+  {
+    PowerupsDeselect();
+    if(item.IsBomb)
+      GameState.Powerups.BombsCnt = Mathf.Max(GameState.Powerups.BombsCnt - 1, 0);
+    else if(item.IsColorChanger)
+      GameState.Powerups.ColorsCnt = Mathf.Max(GameState.Powerups.ColorsCnt - 1, 0);
+    PowerupsUpdate();
   }
   void OnPointsAdded(Level lvl)
   {
@@ -111,15 +127,25 @@ public class UIIngame : MonoBehaviour
   {
     FindObjectOfType<Game>()?.RestartLevel();
   }
+  void PowerupsUpdate()
+  {
+    powerups[0].SetCount(GameState.Powerups.BombsCnt);
+    powerups[1].SetCount(GameState.Powerups.ColorsCnt);
+  }
   void PowerupsDeselect()
   {
     System.Array.ForEach(powerups, (UIPowerupBtn btn) => {btn.IsSelected = false;});
+    PowerupsUpdate();
   }
   void PowerupChangeSel(int idx)
   {
     System.Array.ForEach(powerups, (UIPowerupBtn btn) => { if(btn != powerups[idx]) btn.IsSelected = false; });
-    powerups[idx].IsSelected = !powerups[idx].IsSelected;
-    onPowerupChanged?.Invoke(idx, powerups[idx].IsSelected);
+    if(GameState.Powerups.GetCount(idx) > 0)
+    {
+      powerups[idx].IsSelected = !powerups[idx].IsSelected;
+      onPowerupChanged?.Invoke(idx, powerups[idx].IsSelected);
+    }
+    PowerupsUpdate();
   }
   public void OnBtnPowerup0()
   {

@@ -15,6 +15,7 @@ public class Level : MonoBehaviour
   public static System.Action<Level>   onCreate, onStart, onPlay, onFirstInteraction, onTutorialStart, onPointsAdded;
   public static System.Action<Level>   onFinished, onDestroy, onItemThrow;
   public static System.Action<Match3>  onItemsMatched;
+  public static System.Action<Item>    onPowerupUsed;
   public static System.Action<Item, Item> onItemsHit;
   public static System.Action onCombo;
 
@@ -26,7 +27,6 @@ public class Level : MonoBehaviour
   [SerializeField] Transform _trayItemContainer;
   [SerializeField] Transform _poiLT;
   [SerializeField] Transform _poiRB;
-  [SerializeField] TMPLbl    _ballInfo;
 
   [Header("Animations")]
   [SerializeField] float _activationInterval = 1/30f;
@@ -42,7 +42,7 @@ public class Level : MonoBehaviour
   [SerializeField] bool  _multiArrowSelection = false;
   [Header("Items")]
   [SerializeField] List<Item> _listItems;
-  [Header("Powerus")]
+  [Header("Powerups")]
   [SerializeField] int bombsCnt = 0;
   [SerializeField] int colorOneCnt = 0;
   [SerializeField] int colorLineCnt = 0;
@@ -286,7 +286,7 @@ public class Level : MonoBehaviour
   public bool Succeed {get; private set;}
   public bool Finished {get; private set;}
   public bool gameOutside => _gameplayOutside;
-  public int  movesAvail => _listItems.Count;
+  public int  movesAvail => _listItems.Count + ((_nextItem)?1:0);
   public int  ColorItems => _items.Count((item) => item.IsRegular);
   public bool AnyColorItem => _items.Count((item) => item.IsRegular) > 0;
   public int  Points {get; set;} = 0;
@@ -295,7 +295,7 @@ public class Level : MonoBehaviour
   public int  BallsInitialCnt {get; set;}
 
   bool _started = false;
-  bool _allowInput => _started && (movesAvail > 0 || _nextItem != null) && _pushing.Count == 0 && _moving.Count == 0 && _matching.Count == 0 && !_sequence;
+  bool _allowInput => _started && movesAvail > 0 && _pushing.Count == 0 && _moving.Count == 0 && _matching.Count == 0 && !_sequence;
   UISummary uiSummary = null;
 
   Grid _grid = new Grid();
@@ -585,7 +585,7 @@ public class Level : MonoBehaviour
   Item CreateNextItem()
   {
     Item item = null;
-    if(movesAvail > 0 && _nextItem == null)
+    if(_listItems.Count > 0 && _nextItem == null)
     {
       var next_item = _listItems[0];
       if(next_item != null)
@@ -608,7 +608,6 @@ public class Level : MonoBehaviour
           item = GameData.Prefabs.CreateRandItem(_trayItemContainer, false);
       }
       _listItems.RemoveAt(0);
-      _ballInfo.text = "" + _listItems.Count + "x moves";
     }
 
     if(item)
@@ -705,6 +704,8 @@ public class Level : MonoBehaviour
       push.dir = _arrowsSelected[q].dir;
       _pushing.Add(push);
       push.Show();
+      if(push.IsBomb || push.IsColorChanger)
+        onPowerupUsed?.Invoke(push);
     }
     if(_arrowsSelected.Count > 0 && _nextItem)
     {
@@ -941,7 +942,7 @@ public class Level : MonoBehaviour
     Vector2Int vny = new Vector2Int(0,1);
     List<Match3> localMatch = new List<Match3>();
 
-    for(int y = 0; y < _grid.dim().y /*&& _matching.Count == 0*/; ++y)
+    for(int y = 0; y < _grid.dim().y; ++y)
     {
       for(int x = 0; x < _grid.dim().x; ++x)
       {
@@ -949,41 +950,53 @@ public class Level : MonoBehaviour
         var item0 = _grid.geta(v);
         if(item0 && item0.IsRegular && !item0.IsMatching && !item0.IsMoving) // || item0.IsColorChanger))
         {
+          List<Item> match_items = new List<Item>();
           {
-            List<Item> match_items = new List<Item>();
+            match_items.Add(item0);
+            for(int q = 0; q < _grid.dim().x; ++q)
             {
-              match_items.Add(item0);
-              for(int q = 0; q < _grid.dim().x; ++q)
+              var item1 = _grid.geta(v + vnx * (q+1));
+              if(Item.EqType(item0, item1) && !item1.IsMatching && !item1.IsMoving)
               {
-                var item1 = _grid.geta(v + vnx * (q+1));
-                if(Item.EqType(item0, item1) && !item1.IsMatching && !item1.IsMoving)
-                  match_items.Add(item1);
-                else
-                  break;      
+                match_items.Add(item1);
+                x++;
               }
-              if(match_items.Count >= 3)
-                localMatch.Add(new Match3(match_items));
+              else
+                break;      
             }
-          }
-          {
-            List<Item> match_items = new List<Item>();
-            {
-              match_items.Add(item0);
-              for(int q = 0; q < _grid.dim().y; ++q)
-              {
-                var item1 = _grid.geta(v + vny * (q + 1));
-                if(Item.EqType(item0, item1) && !item1.IsMatching && !item1.IsMoving)
-                  match_items.Add(item1);
-                else
-                  break;
-              }
-              if(match_items.Count >= 3)
-                localMatch.Add(new Match3(match_items));
-            }
+            if(match_items.Count >= 3)
+              localMatch.Add(new Match3(match_items));
           }
         }
       }
     }
+    for(int x = 0; x < _grid.dim().x; ++x)
+    {
+      for(int y = 0; y < _grid.dim().y; ++y)
+      {
+        v.x = x; v.y = y;
+        var item0 = _grid.geta(v);
+        if(item0 && item0.IsRegular && !item0.IsMatching && !item0.IsMoving) // || item0.IsColorChanger))
+        {
+          List<Item> match_items = new List<Item>();
+          match_items.Add(item0);
+          for(int q = 0; q < _grid.dim().y; ++q)
+          {
+            var item1 = _grid.geta(v + vny * (q + 1));
+            if(Item.EqType(item0, item1) && !item1.IsMatching && !item1.IsMoving)
+            {
+              match_items.Add(item1);
+              y++;
+            }
+            else
+              break;
+          }
+          if(match_items.Count >= 3)
+            localMatch.Add(new Match3(match_items));
+        }
+      }
+    }
+
     _matching.AddRange(localMatch);
     _matchesInMove += localMatch.Count;
 
@@ -1091,7 +1104,7 @@ public class Level : MonoBehaviour
   {
     if(!Finished)
     {
-      if((!AnyColorItem && _moving.Count == 0 && _pushing.Count == 0) || (movesAvail == 0 && _nextItem == null))
+      if((!AnyColorItem && _moving.Count == 0 && _pushing.Count == 0) || movesAvail == 0)
       {
         Finished = true;
         Succeed = !AnyColorItem;
