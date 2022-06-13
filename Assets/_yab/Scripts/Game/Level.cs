@@ -126,7 +126,7 @@ public class Level : MonoBehaviour
         else
         {
           Item block = geti(vend);
-          if(block && block.grid != vbeg)
+          if(block && block.grid != vbeg && !block.IsDirectional)
           {
             vend = block.grid - vdir;
             break;
@@ -822,6 +822,7 @@ public class Level : MonoBehaviour
                 _pushing[p].Redirected = ci.vturn;
                 _pushing[p].Stop();
                 _pushing[p].dir = ci.vturn;
+                _pushing[p].vturn = ci.vturn;
               }
             }
             else
@@ -906,6 +907,7 @@ public class Level : MonoBehaviour
     {
       var dir = _moving[q].dir;
       bool moving = _moving[q].Move(Time.deltaTime * _speed, _grid.dim());
+      var item = _grid.geti(_moving[q].grid);
       if(!_grid.isFieldInside(_moving[q].grid))
       {
         _moving[q].Hide();
@@ -915,7 +917,6 @@ public class Level : MonoBehaviour
       }
       else if(!moving)
       {
-        var item = _grid.geti(_moving[q].grid);
         if(item && item.IsDirectional && _moving[q].Redirected == null)
         {
           _pushing.Add(_moving[q]);
@@ -944,6 +945,12 @@ public class Level : MonoBehaviour
           _grid.touchElems(_moving[q].grid, _moving[q].dir);
           checkItems |= true;
         }
+        if(item && item.IsDirectional && _moving[q].Redirected == null)
+        {
+          _pushing.Add(_moving[q]);
+          _moving[q].Stop();
+          _moving[q].dir = item.vturn;
+        }       
       }
     }
 
