@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textField: {fileID: 6749633061429044356}
-  effectTime: 0.75
+  effectTime: 1.5
   positionAnimationAxis: {x: 0, y: 128, z: 0}
   positionAnimationCurve:
     serializedVersion: 2
