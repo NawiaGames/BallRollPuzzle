@@ -194,7 +194,19 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
+      propertyPath: bombsCnt
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _maxPoints
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
+      propertyPath: colorOneCnt
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
+      propertyPath: colorLineCnt
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
@@ -231,20 +243,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _listItems.Array.size
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _listItems.Array.data[0]
       value: 
-      objectReference: {fileID: 6445466529311080229, guid: d954e5e9c4683724cb6e4b05273af295, type: 3}
+      objectReference: {fileID: 6445466529311080229, guid: 47a470869a49fe347a43f28b5c56fad3, type: 3}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _listItems.Array.data[1]
       value: 
-      objectReference: {fileID: 6445466529311080229, guid: d954e5e9c4683724cb6e4b05273af295, type: 3}
+      objectReference: {fileID: 6445466529311080229, guid: 47a470869a49fe347a43f28b5c56fad3, type: 3}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _listItems.Array.data[2]
       value: 
-      objectReference: {fileID: 6445466529311080229, guid: d954e5e9c4683724cb6e4b05273af295, type: 3}
+      objectReference: {fileID: 6445466529311080229, guid: 47a470869a49fe347a43f28b5c56fad3, type: 3}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _listItems.Array.data[3]
       value: 
