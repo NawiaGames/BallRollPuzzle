@@ -101,7 +101,7 @@ public class UIIngame : MonoBehaviour
   }
   void OnItemThrow(Level lvl)
   {
-    lblBallsLeft.text = lvl.movesAvail.ToString();
+    lblBallsLeft.text = (lvl.movesAvail-1).ToString();
     PowerupsDeselect();
     UpdateBallsInfo(null);
   }
