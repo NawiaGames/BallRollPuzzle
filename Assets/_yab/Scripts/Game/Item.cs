@@ -42,8 +42,9 @@ public class Item : MonoBehaviour
     RandomPush,
     RandomItem,
     RandomMoveItem,
-    
+   
     RemoveElem = 2200,
+    DirectionalItem = 3000
   }
 
   MeshRenderer _mr = null;
@@ -135,6 +136,7 @@ public class Item : MonoBehaviour
   public bool IsRandPush => _special == Spec.RandomPush;
   public bool IsRemoveElem => _special == Spec.RemoveElem;
   public bool IsMatching {get;set;} = false;
+  public bool IsDirectional => _special == Spec.DirectionalItem;
   public int  Points {get; set;} = 0;
 
   public void Show()

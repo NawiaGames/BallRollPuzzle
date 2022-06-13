@@ -754,7 +754,7 @@ public class Level : MonoBehaviour
       if(next_inside || _gameplayOutside)
       {
         Item item = _grid.geti(vg);
-        if(item && !item.IsRandMoveItem)
+        if(item && !item.IsDirectional)
         {
           if(_pushing[p].push == Item.Push.None) //_gameplayPushType == PushType.None)
           {
@@ -897,6 +897,12 @@ public class Level : MonoBehaviour
           _grid.touchElems(_moving[q].grid, _moving[q].dir);
           checkItems |= true;
         }
+        // var item = _grid.geti(_moving[q].grid);
+        // if(item && item.IsDirectional)
+        // {
+        //   item.Stop();
+        //   checkItems |= true;
+        // }
       }
     }
 
