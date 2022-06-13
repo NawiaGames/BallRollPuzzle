@@ -149,8 +149,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textField: {fileID: 6749633061429044356}
-  effectTime: 2
-  positionAnimationAxis: {x: 0, y: 256, z: 0}
+  effectTime: 0.75
+  positionAnimationAxis: {x: 0, y: 128, z: 0}
   positionAnimationCurve:
     serializedVersion: 2
     m_Curve:
@@ -205,16 +205,16 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
-      inSlope: 2
-      outSlope: 2
+      value: 0.5
+      inSlope: 0.0005851226
+      outSlope: 0.0005851226
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.52318853
     - serializedVersion: 3
       time: 1
-      value: 1
+      value: 0.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
