@@ -154,12 +154,13 @@ public class Item : MonoBehaviour
       _rollTransf.GetChild(0).localRotation = Random.rotation;
     }
   }
-  public void Hide()
+  public void Hide(bool silent = false)
   {
     if(!_hidding)
     {
       _hidding = true;  
-      onHide?.Invoke(this);
+      if(!silent)
+        onHide?.Invoke(this);
       StartCoroutine(WaitForEnd());
     }
   }

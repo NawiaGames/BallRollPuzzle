@@ -1094,11 +1094,12 @@ public class Level : MonoBehaviour
       yield return new WaitForSeconds(_bombExplodeDelay);
       var bomb = _exploding[q];
       bomb.Deactivate();
-      bomb.Hide();
+      bomb.Hide(true);
       bomb.ExplodeBomb();
       List<Item> items =_grid.getNB(bomb.grid);
+      yield return new WaitForSeconds(0.1f);
       items.ForEach((item)=> item.PreExplode());
-      yield return new WaitForSeconds(0.125f);
+      yield return new WaitForSeconds(0.1f);
       for(int n = 0; n <items.Count; ++n)
       {
         yield return new WaitForSeconds(_bombExplodeDelay);
