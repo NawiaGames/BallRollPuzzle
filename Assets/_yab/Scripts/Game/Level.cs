@@ -850,7 +850,7 @@ public class Level : MonoBehaviour
           if(_grid.IsInsideDim(v)) //isFieldInside(v))
           {
             var item = _grid.geti(v);
-            if(item != null && !item.IsStatic && !item.IsRemoveElem)
+            if(item != null && !item.IsStatic && !item.IsRemoveElem && !item.IsDirectional)
               pushToMove.Add(item);
             else
               break;
@@ -908,14 +908,24 @@ public class Level : MonoBehaviour
       }
       else if(!moving)
       {
-        var nextFieldItem = _grid.geti(_moving[q].gridNextLast);
-        if(nextFieldItem && !nextFieldItem.IsMoving)
-          onItemsHit?.Invoke(_moving[q], nextFieldItem); //intentionally rem
-        _moving[q].Hit(nextFieldItem);
-        if(nextFieldItem && nextFieldItem.IsBomb)
-          _exploding.Add(nextFieldItem);
-        if(_moving[q].IsBomb)
-          _exploding.Add(_moving[q]);
+        var item = _grid.geti(_moving[q].grid);
+        if(item && item.IsDirectional && _moving[q].Redirected == null)
+        {
+          _pushing.Add(_moving[q]);
+          _moving[q].Stop();
+          _moving[q].dir = item.vturn;
+        }
+        else
+        {
+          var nextFieldItem = _grid.geti(_moving[q].gridNextLast);
+          if(nextFieldItem && !nextFieldItem.IsMoving)
+            onItemsHit?.Invoke(_moving[q], nextFieldItem); //intentionally rem
+          _moving[q].Hit(nextFieldItem);
+          if(nextFieldItem && nextFieldItem.IsBomb)
+            _exploding.Add(nextFieldItem);
+          if(_moving[q].IsBomb)
+            _exploding.Add(_moving[q]);
+        }
         checkItems |= true;
         _moving.RemoveAt(q);
         --q;
@@ -927,12 +937,6 @@ public class Level : MonoBehaviour
           _grid.touchElems(_moving[q].grid, _moving[q].dir);
           checkItems |= true;
         }
-        // var item = _grid.geti(_moving[q].grid);
-        // if(item && item.IsDirectional)
-        // {
-        //   item.Stop();
-        //   checkItems |= true;
-        // }
       }
     }
 
