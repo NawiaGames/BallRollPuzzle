@@ -6,10 +6,10 @@ using GameLib.Utilities;
 
 public class Arrow : MonoBehaviour
 {
-  [SerializeField] SpriteRenderer _sr;
-  [SerializeField] Color _colorNormal;
-  [SerializeField] Color _colorSelected;
-  [SerializeField] Color _colorBlocked;
+  [SerializeField] Renderer _renderer;
+  [SerializeField][ColorUsage(true, true)] Color _colorNormal;
+  [SerializeField][ColorUsage(true, true)] Color _colorSelected;
+  [SerializeField][ColorUsage(true, true)] Color _colorBlocked;
   Color targetColor = Color.white;
   [SerializeField] float blendSpeed = 4f;
   [SerializeField] ActivatableObject _actObj;
@@ -18,10 +18,16 @@ public class Arrow : MonoBehaviour
   bool    _blocked = false;
   Vector2Int _grid = Vector2Int.zero;
 
+  MaterialPropertyBlock materialPropertyBlock;
+  Color lerpColor = Color.white;
+
   void Awake()
   {
-    _sr.color = _colorNormal;
+    materialPropertyBlock = new MaterialPropertyBlock();
+    _renderer.SetPropertyBlock(materialPropertyBlock);
+    // _sr.color = _colorNormal;
     targetColor = _colorNormal;
+    lerpColor = targetColor;
   }
   public void Show()
   {
@@ -39,6 +45,9 @@ public class Arrow : MonoBehaviour
   public Vector3     vDir => new Vector3(dir.x, 0, dir.y);
 
   private void Update() {
-    _sr.color = Color.Lerp(_sr.color, targetColor, Time.deltaTime * blendSpeed);
+    // _sr.color = Color.Lerp(_sr.color, targetColor, Time.deltaTime * blendSpeed);
+    lerpColor = Color.Lerp(lerpColor, targetColor, Time.deltaTime * blendSpeed);
+    materialPropertyBlock.SetColor(Defaults.MaterialBaseColor, lerpColor);
+    _renderer.SetPropertyBlock(materialPropertyBlock);
   }
 }
