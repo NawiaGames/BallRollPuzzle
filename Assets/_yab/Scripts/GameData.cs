@@ -48,16 +48,18 @@ public class GameData : ScriptableObject
   public struct Reward
   { 
     public int level;
-    public int bombs;
-    public int colors;
-    public int painters;
+    public int powerupBombs;
+    public int powerupColors;
+    public int powerupPainters;
+    public int powerupArrows;
 
     public Reward(int lvl = -1)
     {
       level = lvl;
-      bombs = 0;
-      colors = 0;
-      painters = 0;
+      powerupBombs = 0;
+      powerupColors = 0;
+      powerupPainters = 0;
+      powerupArrows = 0;
     }
     public bool IsValid() => level >= 0;
   }
