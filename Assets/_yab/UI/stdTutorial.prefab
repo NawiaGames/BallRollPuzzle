@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 8119022387573526973}
   - component: {fileID: 4131738144346023489}
   - component: {fileID: 3640892424798678552}
+  - component: {fileID: 6934619689656642071}
   m_Layer: 0
   m_Name: infoPanel
   m_TagString: Untagged
@@ -215,6 +216,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6934619689656642071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4210771273150075018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61ec2acd765832c49a4052ac33eaf62d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <ThemeID>k__BackingField: 0
 --- !u!1 &6117593229826693638
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,6 +362,7 @@ GameObject:
   - component: {fileID: 1381996750626375524}
   - component: {fileID: 9181279118668071377}
   - component: {fileID: 1649779124880517202}
+  - component: {fileID: 3323482836105992698}
   m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
@@ -373,7 +388,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -35}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 128, y: 128}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &9181279118668071377
 CanvasRenderer:
@@ -413,6 +428,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3323482836105992698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6417328494406253764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61ec2acd765832c49a4052ac33eaf62d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <ThemeID>k__BackingField: 0
 --- !u!1 &7221081819007152054
 GameObject:
   m_ObjectHideFlags: 0
