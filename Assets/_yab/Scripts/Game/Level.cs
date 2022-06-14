@@ -341,12 +341,6 @@ public class Level : MonoBehaviour
     onDestroy?.Invoke(this);
     UIIngame.onPowerupChanged -= OnPowerupChanged;
     Item.onPushedOut -= OnItemPushedOut;
-    // foreach(var frac in _fractures)
-    // {
-    //   frac.ResetFracture();
-    //   Destroy(frac.gameObject);
-    // }
-    // _fractures.Clear();  
   }
   IEnumerator Start()
   {

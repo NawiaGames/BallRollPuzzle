@@ -38,28 +38,42 @@ public class UIIngame : MonoBehaviour
     GetComponent<UIPanel>().ActivatePanel();
 
     Level.onCreate += OnLevelStart;
+    Level.onFinished += OnLevelFinished;
     Level.onItemThrow += OnItemThrow;
     Level.onPowerupUsed += OnPowerupUsed;
     Level.onPointsAdded += OnPointsAdded;
     Level.onDestroy += OnLevelDestroy;
-    Level.onCreate += OnLevelCreated;
     Level.onCombo += OnCombo;
     Item.onHide += OnItemHide;
   }
   void OnDestroy()
   {
     Level.onCreate -= OnLevelStart;
+    Level.onFinished -= OnLevelFinished;
     Level.onItemThrow -= OnItemThrow;
     Level.onPowerupUsed -= OnPowerupUsed;
     Level.onPointsAdded -= OnPointsAdded;
     Level.onDestroy -= OnLevelDestroy;
-    Level.onCreate -= OnLevelCreated;
     Level.onCombo -= OnCombo;
     Item.onHide -= OnItemHide;
   }
+
+
+  public void Show(Level level)
+  {
+    GetComponent<UIPanel>().ActivatePanel();
+    bottomPanel.ActivatePanel();
+  }
+  void Hide()
+  {
+    GetComponent<UIPanel>().DeactivatePanel();
+    bottomPanel.DeactivatePanel();
+  }
+
   void OnLevelCreated(Level lvl)
   {
     _lvl = lvl;
+    OnLevelStart(lvl);
   }
   void OnLevelStart(Level lvl)
   {
@@ -76,7 +90,11 @@ public class UIIngame : MonoBehaviour
     UpdateBallsInfo(null);
 
     PowerupsDeselect();
-    bottomPanel.ActivatePanel();
+    Show(lvl);
+  }
+  void OnLevelFinished(Level lvl)
+  {
+    Hide();
   }
   public void SetLevel(Level lvl)
   {
@@ -170,14 +188,4 @@ public class UIIngame : MonoBehaviour
     }
     UpdateBallsInfo(null);
   }
-  // public void Show(Level level)
-  // {
-  //   GetComponent<UIPanel>().ActivatePanel();
-  //   bottomPanel.ActivatePanel();
-  // }
-  // void Hide()
-  // {
-  //   //GetComponent<UIPanel>().DeactivatePanel();
-  //   bottomPanel.DeactivatePanel();
-  // }
 }
