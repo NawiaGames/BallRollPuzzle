@@ -31,6 +31,7 @@ public class GameData : ScriptableObject
   [SerializeField] GridElem gridElemPrefab;
   [Header("Levels")]
   [SerializeField] List<Level> listLevels;
+  [SerializeField] List<Reward> listRewards;
   [Header("Points")]
   [SerializeField] int pointBallOut = 50;
   [SerializeField] int pointBallOutEveryNext = 10;
@@ -43,6 +44,23 @@ public class GameData : ScriptableObject
   [SerializeField] Color[]    themeColors;
   public static Color[] GetThemeColors() => get().themeColors;
 
+  [System.Serializable]
+  public struct Reward
+  { 
+    public int level;
+    public int bombs;
+    public int colors;
+    public int painters;
+
+    public Reward(int lvl = -1)
+    {
+      level = lvl;
+      bombs = 0;
+      colors = 0;
+      painters = 0;
+    }
+    public bool IsValid() => level >= 0;
+  }
   public static class Prefabs
   {
     public static Item BombPrefab => get().bombItem;
@@ -125,5 +143,18 @@ public class GameData : ScriptableObject
     public static int bombExplode() => get().pointBombExplode;
     public static float percentForStars(int stars) => get().percentOfPointsForStars[Mathf.Clamp(stars, 0, get().percentOfPointsForStars.Length-1)];
     public static string randomComboText() => get().comboText.get_random();
+  }
+  public static class Rewards
+  {
+    public static Reward? GetReward(int level)
+    {
+      Reward? reward = null;
+
+      int idx = get().listRewards.FindIndex((Reward rew) => rew.level == level);
+      if(idx >= 0)
+        reward = get().listRewards[idx];
+
+      return reward;
+    }
   }
 }
