@@ -12,6 +12,7 @@ public class UIIngame : MonoBehaviour
   [SerializeField] TMPLbl score;
 
   [Header("TopPanelRefs")]
+  [SerializeField] UIPanel topPanel;
   [SerializeField] TMPLbl  lblLevelInfo;
   [SerializeField] TMPLbl  lblBallsCnt;
   [SerializeField] TMPLbl  lblCash;
@@ -35,8 +36,6 @@ public class UIIngame : MonoBehaviour
 
   void Awake()
   {
-    GetComponent<UIPanel>().ActivatePanel();
-
     Level.onCreate += OnLevelStart;
     Level.onFinished += OnLevelFinished;
     Level.onItemThrow += OnItemThrow;
@@ -61,12 +60,13 @@ public class UIIngame : MonoBehaviour
 
   public void Show(Level level)
   {
-    GetComponent<UIPanel>().ActivatePanel();
+    GetComponent<UIPanel>()?.ActivatePanel();
+    topPanel.ActivatePanel();
     bottomPanel.ActivatePanel();
   }
   void Hide()
   {
-    GetComponent<UIPanel>().DeactivatePanel();
+    topPanel.DeactivatePanel();
     bottomPanel.DeactivatePanel();
   }
 

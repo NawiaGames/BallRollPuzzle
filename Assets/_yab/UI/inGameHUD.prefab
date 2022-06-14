@@ -1288,6 +1288,8 @@ GameObject:
   - component: {fileID: 4270927307174365769}
   - component: {fileID: 5068908432666413807}
   - component: {fileID: 2529893065528175830}
+  - component: {fileID: 990494959173494765}
+  - component: {fileID: 5381649582025133276}
   m_Layer: 0
   m_Name: topPanel
   m_TagString: Untagged
@@ -1349,6 +1351,38 @@ MonoBehaviour:
   activateAnimationPreset: {fileID: 11400000, guid: d5940ee2fe03da44fab33a9cd7f9cd52, type: 2}
   deactivateAnimationPreset: {fileID: 0}
   affectedTransform: {fileID: 0}
+--- !u!114 &990494959173494765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4270927307174365774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71ca0b0e4e60da642a8d0f3c77403502, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skipOffScreenItemDelay: 0
+  autoRefreshValidAnimatorsList: 0
+  activationDelay: 0.05
+  deactivationDelay: 0.02
+--- !u!114 &5381649582025133276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4270927307174365774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 697f5e0982c14ee4ea5855c49882ab94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  registerPanel: 1
+  contentContainer: {fileID: 0}
+  activateOnTop: 0
+  activationDelay: 0
 --- !u!1 &4270927307264537144
 GameObject:
   m_ObjectHideFlags: 0
@@ -1407,6 +1441,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progress: {fileID: 3241451194289900726}
   score: {fileID: 5654738739409381937}
+  topPanel: {fileID: 5381649582025133276}
   lblLevelInfo: {fileID: 6646049981724893541}
   lblBallsCnt: {fileID: 5446409200067417356}
   lblCash: {fileID: 2652852661150355971}
@@ -2468,7 +2503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   registerPanel: 1
-  contentContainer: {fileID: 5211914351290172549}
+  contentContainer: {fileID: 0}
   activateOnTop: 0
   activationDelay: 0
 --- !u!1 &8123321570394889304
