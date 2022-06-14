@@ -7,6 +7,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1649779124880517202, guid: 786713e0887e2e44d967cf1186b6224e, type: 3}
+      propertyPath: m_Color.b
+      value: 0.745283
+      objectReference: {fileID: 0}
+    - target: {fileID: 1649779124880517202, guid: 786713e0887e2e44d967cf1186b6224e, type: 3}
+      propertyPath: m_Color.g
+      value: 0.5354432
+      objectReference: {fileID: 0}
+    - target: {fileID: 1649779124880517202, guid: 786713e0887e2e44d967cf1186b6224e, type: 3}
+      propertyPath: m_Color.r
+      value: 0.17225882
+      objectReference: {fileID: 0}
+    - target: {fileID: 3640892424798678552, guid: 786713e0887e2e44d967cf1186b6224e, type: 3}
+      propertyPath: m_Color.b
+      value: 0.745283
+      objectReference: {fileID: 0}
+    - target: {fileID: 3640892424798678552, guid: 786713e0887e2e44d967cf1186b6224e, type: 3}
+      propertyPath: m_Color.g
+      value: 0.5354432
+      objectReference: {fileID: 0}
+    - target: {fileID: 3640892424798678552, guid: 786713e0887e2e44d967cf1186b6224e, type: 3}
+      propertyPath: m_Color.r
+      value: 0.17225882
+      objectReference: {fileID: 0}
     - target: {fileID: 7330738587867326614, guid: 786713e0887e2e44d967cf1186b6224e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -93,7 +117,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7538357537291702772, guid: 786713e0887e2e44d967cf1186b6224e, type: 3}
       propertyPath: m_Name
-      value: stdTutorial
+      value: stdTutorial_Arrows
+      objectReference: {fileID: 0}
+    - target: {fileID: 7772622942939491331, guid: 786713e0887e2e44d967cf1186b6224e, type: 3}
+      propertyPath: m_text
+      value: 'Roller pushes 3 squares.
+
+        Use roller now!'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 786713e0887e2e44d967cf1186b6224e, type: 3}
