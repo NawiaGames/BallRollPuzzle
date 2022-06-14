@@ -18,7 +18,7 @@ PrefabInstance:
     - target: {fileID: 3153182826125854873, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 9d65827a15047fb4386619da5fd03c8e, type: 2}
+      objectReference: {fileID: 22100000, guid: fcdadae139e141043b7af29aa6ed02c8, type: 2}
     - target: {fileID: 4092142241397789765, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
       propertyPath: m_Name
       value: specBombItem
