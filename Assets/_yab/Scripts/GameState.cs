@@ -38,6 +38,20 @@ public class GameState : SavableScriptableObject
     public int colors;
     public int painters;
     public int arrows;
+
+    public int Get(Powerups.Type type)
+    {
+      if(type == Powerups.Type.Bomb)
+        return bombs;
+      else if(type == Powerups.Type.Color)
+        return colors;
+      else if(type == Powerups.Type.Painter)
+        return painters;
+      else if(type == Powerups.Type.Arrows)
+        return arrows;
+
+      return 0;  
+    }
   }
   [SerializeField] PowerUps powerups;
 
@@ -52,6 +66,7 @@ public class GameState : SavableScriptableObject
         get().progress.maxLevelPlayed = Mathf.Max(get().progress.maxLevelPlayed, get().progress.level);
       }
     }
+    public static int LevelPlayed => get().progress.maxLevelPlayed;
   }
 
   public static class Econo
@@ -61,23 +76,22 @@ public class GameState : SavableScriptableObject
 
   public static class Powerups
   {
+    public enum Type
+    {
+      None = -1,
+      Bomb,
+      Color,
+      Painter,
+      Arrows,
+      Cnt,
+    }
     public static int BombsCnt {get => get().powerups.bombs; set{ get().powerups.bombs = value;}}
     public static int ColorsCnt {get => get().powerups.colors; set{ get().powerups.colors = value;}}
     public static int PaintersCnt { get => get().powerups.painters; set { get().powerups.painters = value; } }
     public static int ArrowsCnt { get => get().powerups.arrows; set { get().powerups.arrows = value; } }
     public static int ClaimedOnLevel {get => get().powerups.claimedOnLevel; set{ get().powerups.claimedOnLevel = value;}}
-    public static int GetCount(int idx)
-    {
-      if(idx == 0)
-        return BombsCnt;
-      else if(idx == 1)
-        return ColorsCnt;
-      else if(idx == 2)
-        return PaintersCnt;
-      else if(idx == 3)
-        return ArrowsCnt;
-      return 0; 
-    }
+    public static int GetCount(Type type) => get().powerups.Get(type);
+
     public static void AddReward(GameData.Reward? reward)
     {
       if(reward != null && reward.Value.level > ClaimedOnLevel)

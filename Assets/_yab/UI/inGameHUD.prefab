@@ -1500,6 +1500,7 @@ MonoBehaviour:
   - {fileID: 4964786018781571103}
   - {fileID: 262183543127821992}
   - {fileID: 613143660604620870}
+  - {fileID: 3704775697063288237}
   comboPanel: {fileID: 8941008515050388451}
   comboText: {fileID: 3768138619535299990}
   comboAnimDuration: 1
@@ -3177,7 +3178,7 @@ PrefabInstance:
     - target: {fileID: 2167736753000262899, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -5555134974580488717, guid: 4c378e377072cf145ad5d536b9aba7de, type: 3}
+      objectReference: {fileID: -4603156472066961037, guid: 4c378e377072cf145ad5d536b9aba7de, type: 3}
     - target: {fileID: 2650714622058195770, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_Color.b
       value: 0.745283
@@ -3307,12 +3308,24 @@ PrefabInstance:
       value: 0.15294118
       objectReference: {fileID: 0}
     - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 8987703992672242553}
     - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnBtnPowerup0
+      value: OnBtnPowerup
+      objectReference: {fileID: 0}
+    - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 4964786018781571103}
+    - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UIPowerupBtn, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5231269290172192200, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_Color.b
@@ -4049,6 +4062,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8987703992672242553}
+    - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnBtnPowerup
+      objectReference: {fileID: 0}
+    - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 613143660604620870}
+    - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UIPowerupBtn, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6875619991707364288, guid: 92368459d0900da41a395cbf155ba691, type: 3}
+      propertyPath: _type
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8851067632771146524, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_Name
       value: infoFramePwrButton (2)
@@ -4081,7 +4118,7 @@ PrefabInstance:
     - target: {fileID: 2167736753000262899, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -4603156472066961037, guid: 4c378e377072cf145ad5d536b9aba7de, type: 3}
+      objectReference: {fileID: -5555134974580488717, guid: 4c378e377072cf145ad5d536b9aba7de, type: 3}
     - target: {fileID: 2650714622058195770, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_Color.b
       value: 0.745283
@@ -4211,12 +4248,24 @@ PrefabInstance:
       value: 0.15294118
       objectReference: {fileID: 0}
     - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 8987703992672242553}
     - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnBtnPowerup1
+      value: OnBtnPowerup
+      objectReference: {fileID: 0}
+    - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 262183543127821992}
+    - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UIPowerupBtn, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5231269290172192200, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_Color.b
@@ -4229,6 +4278,10 @@ PrefabInstance:
     - target: {fileID: 5231269290172192200, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_Color.r
       value: 0.17225882
+      objectReference: {fileID: 0}
+    - target: {fileID: 6875619991707364288, guid: 92368459d0900da41a395cbf155ba691, type: 3}
+      propertyPath: _type
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7545586319500312907, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_IsActive
@@ -4626,12 +4679,47 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8987703992672242553}
+    - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnBtnPowerup
+      objectReference: {fileID: 0}
+    - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 3704775697063288237}
+    - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UIPowerupBtn, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6875619991707364288, guid: 92368459d0900da41a395cbf155ba691, type: 3}
+      propertyPath: _type
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8851067632771146524, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_Name
       value: infoFramePwrButton (3)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92368459d0900da41a395cbf155ba691, type: 3}
+--- !u!114 &3704775697063288237 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6875619991707364288, guid: 92368459d0900da41a395cbf155ba691, type: 3}
+  m_PrefabInstance: {fileID: 7782530399095207533}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6ece07da483e3841854a0a3d651e29a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &5348053885168369583 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2754233224562739650, guid: 92368459d0900da41a395cbf155ba691, type: 3}

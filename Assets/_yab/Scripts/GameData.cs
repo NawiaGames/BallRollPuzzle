@@ -47,6 +47,7 @@ public class GameData : ScriptableObject
   [System.Serializable]
   public struct Reward
   { 
+    public static readonly int PowerupsTypesCnt = 4;
     public int level;
     public int powerupBombs;
     public int powerupColors;
@@ -62,6 +63,19 @@ public class GameData : ScriptableObject
       powerupArrows = 0;
     }
     public bool IsValid() => level >= 0;
+    public int  GetPowerupCnt(GameState.Powerups.Type type)
+    {
+      if(type == GameState.Powerups.Type.Bomb)
+        return powerupBombs;
+      else if(type == GameState.Powerups.Type.Color)
+        return powerupColors;
+      else if(type == GameState.Powerups.Type.Painter)
+        return powerupPainters;
+      else if(type == GameState.Powerups.Type.Arrows)
+        return powerupArrows;
+      else 
+        return 0;
+    }
   }
   public static class Prefabs
   {
@@ -148,6 +162,7 @@ public class GameData : ScriptableObject
   }
   public static class Rewards
   {
+    public static int     PowerupsCnt => Reward.PowerupsTypesCnt;
     public static Reward? GetReward(int level)
     {
       Reward? reward = null;
@@ -157,6 +172,20 @@ public class GameData : ScriptableObject
         reward = get().listRewards[idx];
 
       return reward;
+    }
+
+    public static int GetLevelForPowerup(GameState.Powerups.Type type)
+    {
+      int ret = -1;
+      foreach(var reward in get().listRewards)
+      {
+        if(reward.GetPowerupCnt(type) > 0)
+        {
+          ret = reward.level;
+          break;
+        }
+      }
+      return ret;
     }
   }
 }

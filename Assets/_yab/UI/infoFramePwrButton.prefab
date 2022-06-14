@@ -955,7 +955,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ico: {fileID: 8144556680359016719}
-  lbl: {fileID: 3817760473148858693}
+  lblOn: {fileID: 3817760473148858693}
+  lblOff: {fileID: 2351011653378107483}
+  stateOn: {fileID: 7545586319500312907}
+  stateOff: {fileID: 3457515854109017311}
   _selScale: 1.2
 --- !u!114 &1195754382207551275
 MonoBehaviour:

@@ -63,14 +63,24 @@ public class UIIngame : MonoBehaviour
     GetComponent<UIPanel>()?.ActivatePanel();
     topPanel.ActivatePanel();
     if(GameState.Powerups.PowerupsToShow())
+    {
+      SetupPowerupsInfo();
       bottomPanel.ActivatePanel();
+    }
   }
   void Hide()
   {
     topPanel.DeactivatePanel();
     bottomPanel.DeactivatePanel();
   }
-
+  void SetupPowerupsInfo()
+  {
+    for(int q = 0; q < (int)GameState.Powerups.Type.Cnt; ++q)
+    {
+      int lvl = GameData.Rewards.GetLevelForPowerup((GameState.Powerups.Type)q);
+      powerups[q].SetLevel(lvl);
+    }
+  }
   void OnLevelCreated(Level lvl)
   {
     _lvl = lvl;
@@ -79,7 +89,7 @@ public class UIIngame : MonoBehaviour
   void OnLevelStart(Level lvl)
   {
     _lvl = lvl;
-    lblLevelInfo.text = "Level " + lvl.LevelIdx;
+    lblLevelInfo.text = "Level " + (lvl.LevelIdx + 1);
     lblBallsLeft.text = lvl.movesAvail.ToString();
 
     progress.minValue = 0;
@@ -131,6 +141,8 @@ public class UIIngame : MonoBehaviour
       GameState.Powerups.BombsCnt = Mathf.Max(GameState.Powerups.BombsCnt - 1, 0);
     else if(item.IsColorChanger)
       GameState.Powerups.ColorsCnt = Mathf.Max(GameState.Powerups.ColorsCnt - 1, 0);
+    // else if(item.IsColorChanger)
+    //   GameState.Powerups.ColorsCnt = Mathf.Max(GameState.Powerups.ColorsCnt - 1, 0);      
     PowerupsUpdate();
   }
   void OnPointsAdded(Level lvl)
@@ -148,36 +160,49 @@ public class UIIngame : MonoBehaviour
   }
   void PowerupsUpdate()
   {
-    powerups[0].SetCount(GameState.Powerups.BombsCnt);
-    powerups[1].SetCount(GameState.Powerups.ColorsCnt);
+    for(int q = 0; q < powerups.Length; ++q)
+    {
+      powerups[q].SetState(GameState.Progress.LevelPlayed > GameData.Rewards.GetLevelForPowerup((GameState.Powerups.Type)q));
+      powerups[q].SetLevel(GameData.Rewards.GetLevelForPowerup((GameState.Powerups.Type)q));
+      powerups[q].SetCount(GameState.Powerups.GetCount((GameState.Powerups.Type)q));
+    }
   }
   void PowerupsDeselect()
   {
     System.Array.ForEach(powerups, (UIPowerupBtn btn) => {btn.IsSelected = false;});
     PowerupsUpdate();
   }
-  void PowerupChangeSel(int idx)
+  int GetPowerupIdx(GameState.Powerups.Type type) => System.Array.FindIndex(powerups, (btn) => btn.type == type);
+  void PowerupChangeSel(GameState.Powerups.Type type)
   {
-    System.Array.ForEach(powerups, (UIPowerupBtn btn) => { if(btn != powerups[idx]) btn.IsSelected = false; });
-    if(GameState.Powerups.GetCount(idx) > 0)
+    System.Array.ForEach(powerups, (UIPowerupBtn btn) => { if(btn.type != type) btn.IsSelected = false; });
+    if(GameState.Powerups.GetCount(type) > 0)
     {
-      powerups[idx].IsSelected = !powerups[idx].IsSelected;
-      onPowerupChanged?.Invoke(idx, powerups[idx].IsSelected);
+      int idx = GetPowerupIdx(type);
+      if(idx >= 0)
+      {
+        powerups[idx].IsSelected = !powerups[idx].IsSelected;
+        onPowerupChanged?.Invoke(idx, powerups[idx].IsSelected);
+      }
     }
     PowerupsUpdate();
   }
-  public void OnBtnPowerup0()
+  public void OnBtnPowerup(UIPowerupBtn sender)
   {
-    PowerupChangeSel(0);
+    PowerupChangeSel(sender.type);
   }
-  public void OnBtnPowerup1()
-  {
-    PowerupChangeSel(1);
-  }
-  public void OnBtnPowerup2()
-  {
-    PowerupChangeSel(2);
-  }
+  // public void OnBtnPowerup1()
+  // {
+  //   PowerupChangeSel(1);
+  // }
+  // public void OnBtnPowerup2()
+  // {
+  //   PowerupChangeSel(2);
+  // }
+  // public void OnBtnPowerup3()
+  // {
+  //   PowerupChangeSel(3);
+  // }  
 
   void Update()
   {
