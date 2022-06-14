@@ -45,11 +45,19 @@ public class UISummary : MonoBehaviour
 
     onShow?.Invoke();
 
+    AddRewards(level);
+
     this.Invoke(()=> destValue = 0, 1.0f);
   }
   void Hide()
   {
     GetComponent<UIPanel>().DeactivatePanel();
+  }
+  void AddRewards(Level level)
+  {
+    var reward = GameData.Rewards.GetReward(level.LevelIdx);
+    if(reward != null)
+      GameState.Powerups.AddReward(reward);
   }
   public void OnBtnRestart()
   {

@@ -34,7 +34,8 @@ public class GameState : SavableScriptableObject
   {
     public int bombs;
     public int colors;
-    public int others;
+    public int painters;
+    public int arrows;
   }
   [SerializeField] PowerUps powerups;
 
@@ -52,14 +53,30 @@ public class GameState : SavableScriptableObject
   {
     public static int BombsCnt {get => get().powerups.bombs; set{ get().powerups.bombs = value;}}
     public static int ColorsCnt {get => get().powerups.colors; set{ get().powerups.colors = value;}}
-    public static int GetCount(int idx) 
+    public static int PaintersCnt { get => get().powerups.painters; set { get().powerups.painters = value; } }
+    public static int ArrowsCnt { get => get().powerups.arrows; set { get().powerups.arrows = value; } }
+    public static int GetCount(int idx)
     {
       if(idx == 0)
         return BombsCnt;
       else if(idx == 1)
         return ColorsCnt;
+      else if(idx == 2)
+        return PaintersCnt;
+      else if(idx == 3)
+        return ArrowsCnt;
       return 0; 
-    }   
+    }
+    public static void AddReward(GameData.Reward? reward)
+    {
+      if(reward != null)
+      {
+        BombsCnt += reward.Value.powerupBombs;
+        ColorsCnt += reward.Value.powerupColors;
+        PaintersCnt += reward.Value.powerupPainters;
+        ArrowsCnt += reward.Value.powerupArrows;
+      }
+    }
   }
 
   [Header("Customization")]
