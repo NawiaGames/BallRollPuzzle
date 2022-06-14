@@ -19,6 +19,7 @@ public class GameState : SavableScriptableObject
   class StateProgress
   {
     public int level = 0;
+    public int maxLevelPlayed = 0;
   }
   [SerializeField] StateProgress progress;
 
@@ -32,16 +33,27 @@ public class GameState : SavableScriptableObject
   [System.Serializable]
   class PowerUps
   {
+    int        claimedOnLevel = -1;
     public int bombs;
     public int colors;
     public int painters;
     public int arrows;
+
+    public int ClaimedOnLevel {get => claimedOnLevel ;set{claimedOnLevel = value;}}
   }
   [SerializeField] PowerUps powerups;
 
   public static class Progress
   {
-    public static int   Level {get => get().progress.level; set{get().progress.level = value;}}
+    public static int   Level 
+    {
+      get => get().progress.level; 
+      set
+      {
+        get().progress.level = value; 
+        get().progress.maxLevelPlayed = Mathf.Max(get().progress.maxLevelPlayed, get().progress.level);
+      }
+    }
   }
 
   public static class Econo
@@ -55,6 +67,7 @@ public class GameState : SavableScriptableObject
     public static int ColorsCnt {get => get().powerups.colors; set{ get().powerups.colors = value;}}
     public static int PaintersCnt { get => get().powerups.painters; set { get().powerups.painters = value; } }
     public static int ArrowsCnt { get => get().powerups.arrows; set { get().powerups.arrows = value; } }
+    public static int ClaimedOnLevel {get => get().powerups.ClaimedOnLevel; set{ get().powerups.ClaimedOnLevel = value;}}
     public static int GetCount(int idx)
     {
       if(idx == 0)
@@ -69,7 +82,7 @@ public class GameState : SavableScriptableObject
     }
     public static void AddReward(GameData.Reward? reward)
     {
-      if(reward != null)
+      if(reward != null && reward.Value.level > ClaimedOnLevel)
       {
         BombsCnt += reward.Value.powerupBombs;
         ColorsCnt += reward.Value.powerupColors;
