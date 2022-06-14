@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ObjectShakeHi
   m_EditorClassIdentifier: 
   shakeTime: 1
-  shakeMultiplier: 1
+  shakeMultiplier: 0
   amplitudeCurve:
     serializedVersion: 2
     m_Curve:
