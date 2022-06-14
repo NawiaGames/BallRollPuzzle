@@ -154,7 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _renderer: {fileID: 5854545985505574945}
   _colorNormal: {r: 1.0039216, g: 1.0039216, b: 1.0039216, a: 0.101960786}
-  _colorSelected: {r: 1.0039216, g: 1.0039216, b: 1.0039216, a: 0.5019608}
+  _colorSelected: {r: 0.7490196, g: 0.7490196, b: 0.7490196, a: 0.5019608}
   _colorBlocked: {r: 0.5, g: 0.5, b: 0.5, a: 0.039215688}
   blendSpeed: 8
   _actObj: {fileID: 5006249832342351804}
