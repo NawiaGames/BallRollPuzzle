@@ -33,13 +33,11 @@ public class GameState : SavableScriptableObject
   [System.Serializable]
   class PowerUps
   {
-    int        claimedOnLevel = -1;
+    public int claimedOnLevel = -1;
     public int bombs;
     public int colors;
     public int painters;
     public int arrows;
-
-    public int ClaimedOnLevel {get => claimedOnLevel ;set{claimedOnLevel = value;}}
   }
   [SerializeField] PowerUps powerups;
 
@@ -67,7 +65,7 @@ public class GameState : SavableScriptableObject
     public static int ColorsCnt {get => get().powerups.colors; set{ get().powerups.colors = value;}}
     public static int PaintersCnt { get => get().powerups.painters; set { get().powerups.painters = value; } }
     public static int ArrowsCnt { get => get().powerups.arrows; set { get().powerups.arrows = value; } }
-    public static int ClaimedOnLevel {get => get().powerups.ClaimedOnLevel; set{ get().powerups.ClaimedOnLevel = value;}}
+    public static int ClaimedOnLevel {get => get().powerups.claimedOnLevel; set{ get().powerups.claimedOnLevel = value;}}
     public static int GetCount(int idx)
     {
       if(idx == 0)
