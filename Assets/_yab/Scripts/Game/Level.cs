@@ -783,14 +783,10 @@ public class Level : MonoBehaviour
           {
             onItemsHit?.Invoke(item, _pushing[p]);
             item.Hit(_pushing[p]);
-            if(_pushing[p].IsPainter)
-            {
-              CheckPainting(item);
+            if(CheckPainting(_pushing[p], item))
               _pushing[p].Hide();
-            }
-            else  
+            else
               _items.Add(_pushing[p]);
-
             _pushing[p].Stop();
             _pushing.RemoveAt(p);
             p--;
@@ -943,6 +939,16 @@ public class Level : MonoBehaviour
             _exploding.Add(nextFieldItem);
           if(_moving[q].IsBomb)
             _exploding.Add(_moving[q]);
+          if(nextFieldItem != null)
+          {
+            if(CheckPainting(_moving[q], nextFieldItem))
+            {
+              if(_moving[q].IsPainter)
+                _moving[q].Hide();
+              if(nextFieldItem?.IsPainter ?? false)
+                nextFieldItem.Hide();
+            }
+          }
         }
         checkItems |= true;
         _moving.RemoveAt(q);
@@ -952,15 +958,15 @@ public class Level : MonoBehaviour
       {
         if(_moving[q].grid != _moving[q].gridPrev)
         {
-          _grid.touchElems(_moving[q].grid, _moving[q].dir);
           checkItems |= true;
+          _grid.touchElems(_moving[q].grid, _moving[q].dir);
         }
         if(item && item.IsDirectional && _moving[q].Redirected == null)
         {
           _pushing.Add(_moving[q]);
           _moving[q].Stop();
           _moving[q].dir = item.vturn;
-        }       
+        }
       }
     }
 
@@ -981,8 +987,11 @@ public class Level : MonoBehaviour
       _painting.Sort((Item i0, Item i1) => (int)(i1.grid.y * 100 + i1.grid.x) - (i0.grid.y * 100 + i0.grid.x));
       for(int q = 0; q < _painting.Count; ++q)
       { 
-        _painting[q].Paint(hit);
-        yield return new WaitForSeconds(1/10.0f);
+        if(_painting[q].id != hit.id)
+        {
+          _painting[q].Paint(hit);
+          yield return new WaitForSeconds(1/10.0f);
+        }
       }
     }
     _painting.Clear();
@@ -1080,14 +1089,33 @@ public class Level : MonoBehaviour
 
     return localMatch.Count > 0;
   }
-  void CheckPainting(Item itemHit)
+  bool CheckPainting(Item itemMove, Item itemHit)
   {
-    _painting.Add(itemHit);
-    for(int q = 0; q < _items.Count; ++q)
+    Item itemPainter = null;
+    Item itemProp = null;
+    if(itemMove.IsPainter)
     {
-      if(_items[q].IsRegular)
-        _painting.Add(_items[q]);
+      itemPainter = itemMove;
+      itemProp = itemHit;
     }
+    else if(itemHit.IsPainter)
+    {
+      itemPainter = itemHit;
+      itemProp = itemMove;
+    }
+
+    bool painting = itemPainter && itemProp && itemProp.IsRegular;
+    if(painting)
+    {
+      _painting.Add(itemProp);
+      for(int q = 0; q < _items.Count; ++q)
+      {
+        if(_items[q].IsRegular)
+          _painting.Add(_items[q]);
+      }
+    }
+
+    return painting;
   }
   IEnumerator coDestroyMatch()
   {
