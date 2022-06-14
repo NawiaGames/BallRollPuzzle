@@ -15,8 +15,8 @@ public class Level : MonoBehaviour
   public static System.Action<Level>   onCreate, onStart, onPlay, onFirstInteraction, onTutorialStart, onPointsAdded;
   public static System.Action<Level>   onFinished, onDestroy, onItemThrow;
   public static System.Action<Match3>  onItemsMatched;
-  public static System.Action<Item>    onPowerupUsed;
   public static System.Action<Item, Item> onItemsHit;
+  public static System.Action<GameState.Powerups.Type> onPowerupUsed;  
   public static System.Action onCombo;
 
   [Header("Refs")]
@@ -42,10 +42,6 @@ public class Level : MonoBehaviour
   [SerializeField] bool  _multiArrowSelection = false;
   [Header("Items")]
   [SerializeField] List<Item> _listItems;
-  [Header("Powerups")]
-  [SerializeField] int bombsCnt = 0;
-  [SerializeField] int colorOneCnt = 0;
-  [SerializeField] int colorLineCnt = 0;
 
   public class Grid
   {
@@ -317,6 +313,8 @@ public class Level : MonoBehaviour
   bool _sequence = false;
   int  _matchesInMove = 0;
   int  _pushesInMove = 0;
+
+  [SerializeField] GameState.Powerups.Type _powerupSelected = GameState.Powerups.Type.None;
 
   void Awake()
   {
@@ -699,9 +697,9 @@ public class Level : MonoBehaviour
 
     _matchesInMove = 0;
     _pushesInMove = 0;
+    Item push = null;
     for(int q = 0; q < _arrowsSelected.Count; ++q)
     {
-      Item push = null;
       if(_listNextItems.Count > 0)
       {
         push = Instantiate(_listNextItems[0], _itemsContainer);
@@ -718,11 +716,15 @@ public class Level : MonoBehaviour
       push.dir = _arrowsSelected[q].dir;
       _pushing.Add(push);
       push.Show();
-      if(push.IsBomb || push.IsColorChanger)
-        onPowerupUsed?.Invoke(push);
     }
     if(_arrowsSelected.Count > 0 && _nextItem)
     {
+      if(_powerupSelected != GameState.Powerups.Type.None)
+      {
+        onPowerupUsed?.Invoke(_powerupSelected);
+        _powerupSelected = GameState.Powerups.Type.None;
+      }
+
       onItemThrow?.Invoke(this);
       Destroy(_nextItem.gameObject);
       _nextItem = null;
@@ -731,19 +733,25 @@ public class Level : MonoBehaviour
     _arrows.ForEach((ar) => ar.IsSelected = false);
     UpdateArrows();
   }
-  public void OnPowerupChanged(int idx, bool state)
+  public void OnPowerupChanged(GameState.Powerups.Type type, bool state)
   {
+    if(_listNextItems.Count > 0)
+      _listNextItems.RemoveAt(0);
     if(state)
     {
-      if(idx == 0)
+      if(type == GameState.Powerups.Type.Bomb)
         _listNextItems.Add(GameData.Prefabs.BombPrefab);
-      if(idx == 1)
+      else if(type == GameState.Powerups.Type.Color)
         _listNextItems.Add(GameData.Prefabs.ColorChangeItem);
+      else if(type == GameState.Powerups.Type.Painter)
+        _listNextItems.Add(GameData.Prefabs.PainterItem);
+      
+      _powerupSelected = type;
     }
     else
     {
-      if(_listNextItems.Count > 0)
-        _listNextItems.RemoveAt(0);
+      if(_powerupSelected == type)
+        _powerupSelected = GameState.Powerups.Type.None;
     }
   }
 

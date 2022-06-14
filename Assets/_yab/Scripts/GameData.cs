@@ -24,6 +24,8 @@ public class GameData : ScriptableObject
   [SerializeField] Item bombItem;
   [SerializeField] Item staticItem;
   [SerializeField] Item colorChangeItem;
+  [SerializeField] Item painterItem;
+
   [SerializeField] ObjectFracture fractureItem;
   //[SerializeField] Frac
   [Header("Field Elems")]
@@ -81,6 +83,7 @@ public class GameData : ScriptableObject
   {
     public static Item BombPrefab => get().bombItem;
     public static Item ColorChangeItem => get().colorChangeItem;
+    public static Item PainterItem => get().painterItem;
     public static Arrow CreateArrow(Transform parent){return Instantiate(get().arrowPrefab, parent);}
     public static GridElem CreateGridElem(Transform parent) { return Instantiate(get().gridElemPrefab, parent); }
     public static Item CreatePushItem(Transform parent, Item.Push push_type)

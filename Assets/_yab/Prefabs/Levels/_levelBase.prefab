@@ -241,17 +241,19 @@ MonoBehaviour:
   _trayItemContainer: {fileID: 4853727929064313113}
   _poiLT: {fileID: 3603963989846532697}
   _poiRB: {fileID: 7699192860217285146}
-  _ballInfo: {fileID: 2407292245737820046}
   _activationInterval: 0.06666667
   _deactivationInterval: 0.016666668
+  _bombExplodeDelay: 0.1
   _gameplayOutside: 0
   _dim: {x: 5, y: 5}
   _speed: 16
   _maxPoints: 1000
-  _bombExplodeDelay: 0.1
+  _multiArrowSelection: 0
   _listItems: []
-  _listNextItems: []
-  _nextItem: {fileID: 0}
+  bombsCnt: 0
+  colorOneCnt: 0
+  colorLineCnt: 0
+  _powerupSelected: -1
 --- !u!1 &5007030670280906191
 GameObject:
   m_ObjectHideFlags: 0

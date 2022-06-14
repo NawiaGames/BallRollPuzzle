@@ -42,6 +42,8 @@ public class Item : MonoBehaviour
     RandomPush,
     RandomItem,
     RandomMoveItem,
+    Painter,
+    Arrows,
    
     RemoveElem = 2200,
     DirectionalItem = 3000

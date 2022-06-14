@@ -50,7 +50,18 @@ public class GameState : SavableScriptableObject
       else if(type == Powerups.Type.Arrows)
         return arrows;
 
-      return 0;  
+      return 0;
+    }
+    public void Add(Powerups.Type type, int amount)
+    {
+      if(type == Powerups.Type.Bomb)
+        bombs = Mathf.Max(bombs + amount, 0);
+      else if(type == Powerups.Type.Color)
+        colors = Mathf.Max(colors + amount, 0);
+      else if(type == Powerups.Type.Painter)
+        painters = Mathf.Max(painters + amount, 0);
+      else if(type == Powerups.Type.Arrows)
+        arrows = Mathf.Max(arrows + amount, 0);
     }
   }
   [SerializeField] PowerUps powerups;
@@ -85,12 +96,13 @@ public class GameState : SavableScriptableObject
       Arrows,
       Cnt,
     }
-    public static int BombsCnt {get => get().powerups.bombs; set{ get().powerups.bombs = value;}}
-    public static int ColorsCnt {get => get().powerups.colors; set{ get().powerups.colors = value;}}
-    public static int PaintersCnt { get => get().powerups.painters; set { get().powerups.painters = value; } }
-    public static int ArrowsCnt { get => get().powerups.arrows; set { get().powerups.arrows = value; } }
-    public static int ClaimedOnLevel {get => get().powerups.claimedOnLevel; set{ get().powerups.claimedOnLevel = value;}}
-    public static int GetCount(Type type) => get().powerups.Get(type);
+    public static int  BombsCnt {get => get().powerups.bombs; set{ get().powerups.bombs = value;}}
+    public static int  ColorsCnt {get => get().powerups.colors; set{ get().powerups.colors = value;}}
+    public static int  PaintersCnt { get => get().powerups.painters; set { get().powerups.painters = value; } }
+    public static int  ArrowsCnt { get => get().powerups.arrows; set { get().powerups.arrows = value; } }
+    public static int  ClaimedOnLevel {get => get().powerups.claimedOnLevel; set{ get().powerups.claimedOnLevel = value;}}
+    public static int  GetCount(Type type) => get().powerups.Get(type);
+    public static void Used(Type type) => get().powerups.Add(type, -1);
 
     public static void AddReward(GameData.Reward? reward)
     {

@@ -26,7 +26,7 @@ public class UIIngame : MonoBehaviour
   [SerializeField] TMPLbl   comboText;
   [SerializeField] float    comboAnimDuration;
 
-  public static System.Action<int, bool> onPowerupChanged;
+  public static System.Action<GameState.Powerups.Type, bool> onPowerupChanged;
 
   int   _pointDest = 0;
   float _pointCurr = 0;
@@ -134,15 +134,10 @@ public class UIIngame : MonoBehaviour
     PowerupsDeselect();
     UpdateBallsInfo(null);
   }
-  void OnPowerupUsed(Item item)
+  void OnPowerupUsed(GameState.Powerups.Type type)
   {
     PowerupsDeselect();
-    if(item.IsBomb)
-      GameState.Powerups.BombsCnt = Mathf.Max(GameState.Powerups.BombsCnt - 1, 0);
-    else if(item.IsColorChanger)
-      GameState.Powerups.ColorsCnt = Mathf.Max(GameState.Powerups.ColorsCnt - 1, 0);
-    // else if(item.IsColorChanger)
-    //   GameState.Powerups.ColorsCnt = Mathf.Max(GameState.Powerups.ColorsCnt - 1, 0);      
+    GameState.Powerups.Used(type);
     PowerupsUpdate();
   }
   void OnPointsAdded(Level lvl)
@@ -172,7 +167,7 @@ public class UIIngame : MonoBehaviour
     System.Array.ForEach(powerups, (UIPowerupBtn btn) => {btn.IsSelected = false;});
     PowerupsUpdate();
   }
-  int GetPowerupIdx(GameState.Powerups.Type type) => System.Array.FindIndex(powerups, (btn) => btn.type == type);
+  int  GetPowerupIdx(GameState.Powerups.Type type) => System.Array.FindIndex(powerups, (btn) => btn.type == type);
   void PowerupChangeSel(GameState.Powerups.Type type)
   {
     System.Array.ForEach(powerups, (UIPowerupBtn btn) => { if(btn.type != type) btn.IsSelected = false; });
@@ -182,7 +177,7 @@ public class UIIngame : MonoBehaviour
       if(idx >= 0)
       {
         powerups[idx].IsSelected = !powerups[idx].IsSelected;
-        onPowerupChanged?.Invoke(idx, powerups[idx].IsSelected);
+        onPowerupChanged?.Invoke(type, powerups[idx].IsSelected);
       }
     }
     PowerupsUpdate();
@@ -191,18 +186,6 @@ public class UIIngame : MonoBehaviour
   {
     PowerupChangeSel(sender.type);
   }
-  // public void OnBtnPowerup1()
-  // {
-  //   PowerupChangeSel(1);
-  // }
-  // public void OnBtnPowerup2()
-  // {
-  //   PowerupChangeSel(2);
-  // }
-  // public void OnBtnPowerup3()
-  // {
-  //   PowerupChangeSel(3);
-  // }  
 
   void Update()
   {
