@@ -62,7 +62,8 @@ public class UIIngame : MonoBehaviour
   {
     GetComponent<UIPanel>()?.ActivatePanel();
     topPanel.ActivatePanel();
-    bottomPanel.ActivatePanel();
+    if(GameState.Powerups.PowerupsToShow())
+      bottomPanel.ActivatePanel();
   }
   void Hide()
   {

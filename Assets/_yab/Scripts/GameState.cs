@@ -88,8 +88,10 @@ public class GameState : SavableScriptableObject
         ColorsCnt += reward.Value.powerupColors;
         PaintersCnt += reward.Value.powerupPainters;
         ArrowsCnt += reward.Value.powerupArrows;
+        ClaimedOnLevel = reward.Value.level;
       }
     }
+    public static bool PowerupsToShow() => ClaimedOnLevel >= 0;
   }
 
   [Header("Customization")]

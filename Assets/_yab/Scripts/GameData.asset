@@ -61,7 +61,12 @@ MonoBehaviour:
   - {fileID: 5382338121493344219, guid: 3d2d0e944d3e6444dae8ece5d28df0f4, type: 3}
   - {fileID: 5382338121493344219, guid: 3271447b7f6194993bb69bb01a8a2c8b, type: 3}
   - {fileID: 5382338121493344219, guid: 5f340d877681256419ef66fb1dd4c5b5, type: 3}
-  listRewards: []
+  listRewards:
+  - level: 0
+    powerupBombs: 1
+    powerupColors: 1
+    powerupPainters: 1
+    powerupArrows: 1
   pointBallOut: 50
   pointBallOutEveryNext: 10
   pointMatchStandard: 100
