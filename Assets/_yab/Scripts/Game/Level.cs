@@ -291,7 +291,7 @@ public class Level : MonoBehaviour
   public int  BallsInitialCnt {get; set;}
 
   bool _started = false;
-  bool _allowInput => _started && movesAvail > 0 && _pushing.Count == 0 && _moving.Count == 0 && _matching.Count == 0 && !_sequence;
+  bool _allowInput => _started && movesAvail > 0 && _pushing.Count == 0 && _moving.Count == 0 && _matching.Count == 0 && _painting.Count == 0 && !_sequence;
   UISummary uiSummary = null;
 
   Grid _grid = new Grid();
@@ -302,6 +302,7 @@ public class Level : MonoBehaviour
   List<Item> _exploding = new List<Item>();
   List<Match3> _matching = new List<Match3>();
   List<Item> _destroying = new List<Item>();
+  List<Item> _painting = new List<Item>();
   List<Check> _checks = new List<Check>();
   //List<ObjectFracture> _fractures = new List<ObjectFracture>();
   List<Item> _listNextItems = new List<Item>();
@@ -782,7 +783,14 @@ public class Level : MonoBehaviour
           {
             onItemsHit?.Invoke(item, _pushing[p]);
             item.Hit(_pushing[p]);
-            _items.Add(_pushing[p]);
+            if(_pushing[p].IsPainter)
+            {
+              CheckPainting(item);
+              _pushing[p].Hide();
+            }
+            else  
+              _items.Add(_pushing[p]);
+
             _pushing[p].Stop();
             _pushing.RemoveAt(p);
             p--;
@@ -965,6 +973,20 @@ public class Level : MonoBehaviour
   {
     _grid.update(_items);
     _sequence = true;
+
+    if(_painting.Count > 0)
+    {
+      Item hit = _painting[0];
+      _painting.RemoveAt(0);
+      _painting.Sort((Item i0, Item i1) => (int)(i1.grid.y * 100 + i1.grid.x) - (i0.grid.y * 100 + i0.grid.x));
+      for(int q = 0; q < _painting.Count; ++q)
+      { 
+        _painting[q].Paint(hit);
+        yield return new WaitForSeconds(1/10.0f);
+      }
+    }
+    _painting.Clear();
+
     bool hasMatches;
     while(hasMatches = CheckMatch3())
     {
@@ -974,7 +996,7 @@ public class Level : MonoBehaviour
     yield return StartCoroutine(coExplodeBombs());
     CheckMove();
 
-    if(_moving.Count == 0 && _pushing.Count == 0 && _matching.Count == 0)
+    if(_moving.Count == 0 && _pushing.Count == 0 && _matching.Count == 0 && _painting.Count == 0)
     {
       ShowBigGreets();
       CheckEnd();
@@ -1057,6 +1079,15 @@ public class Level : MonoBehaviour
     _matchesInMove += localMatch.Count;
 
     return localMatch.Count > 0;
+  }
+  void CheckPainting(Item itemHit)
+  {
+    _painting.Add(itemHit);
+    for(int q = 0; q < _items.Count; ++q)
+    {
+      if(_items[q].IsRegular)
+        _painting.Add(_items[q]);
+    }
   }
   IEnumerator coDestroyMatch()
   {

@@ -51,6 +51,7 @@ public class EffectsManager : MonoBehaviour
       Item.onBombExplode += OnItemBombExplo;
       Item.onExplode += OnItemExplo;
       Item.onPushedOut += OnItemPushedOut;
+      Item.onPaint += OnItemPainted;
       Level.onStart += OnLevelStart;
       Level.onItemsMatched += OnItemsMatched;
       Level.onItemsHit += OnItemsHit;
@@ -63,6 +64,7 @@ public class EffectsManager : MonoBehaviour
       Item.onBombExplode -= OnItemBombExplo;
       Item.onExplode -= OnItemExplo;
       Item.onPushedOut -= OnItemPushedOut;
+      Item.onPaint -= OnItemPainted;
       Level.onStart -= OnLevelStart;
       Level.onItemsMatched -= OnItemsMatched;
       Level.onItemsHit -= OnItemsHit;
@@ -105,6 +107,12 @@ public class EffectsManager : MonoBehaviour
     {
       if(itemA && itemB)
         PlayFXAtPosition(fxHit, (itemA.transform.position + itemB.transform.position) * 0.5f, 30);
+    }
+    void OnItemPainted(Item sender)
+    {
+      var psmain = fxPaintSplat.main;
+      psmain.startColor = sender.color;      
+      PlayFXAtPosition(fxPaintSplat, sender.transform.position, 20);
     }
     void OnItemsMatched(Level.Match3 match)
     {

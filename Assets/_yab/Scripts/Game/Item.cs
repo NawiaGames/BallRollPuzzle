@@ -64,7 +64,7 @@ public class Item : MonoBehaviour
   float      _speed = 0;
   bool       _hidding = false;
 
-  public static System.Action<Item> onShow, onHide, onHit, onBombExplode, onExplode, onPushedOut;
+  public static System.Action<Item> onShow, onHide, onHit, onBombExplode, onExplode, onPushedOut, onPaint;
 
   static Vector2Int  toGridT(Vector3 vpos, Vector2Int vdir) => new Vector2Int((int)Mathf.Round(vpos.x - vdir.x * 0.5f), (int)Mathf.Round(vpos.z - vdir.y * 0.5f));  
   static Vector3     toPos(Vector2Int grid) => new Vector3(grid.x, 0,  grid.y);
@@ -138,6 +138,7 @@ public class Item : MonoBehaviour
   public bool IsRandPush => _special == Spec.RandomPush;
   public bool IsRemoveElem => _special == Spec.RemoveElem;
   public bool IsMatching {get;set;} = false;
+  public bool IsPainter => _special == Spec.Painter;
   public bool IsDirectional => _special == Spec.DirectionalItem;
   public Vector2Int? Redirected {get; set;}
   public int  Points {get; set;} = 0;
@@ -297,6 +298,13 @@ public class Item : MonoBehaviour
     }
     onHit?.Invoke(this);
   }
+  public void Paint(Item itemSrc)
+  {
+    id = itemSrc.id;
+    color = itemSrc.color;
+    onPaint?.Invoke(this);
+  }
+
   public void ExplodeBomb()
   {
     onBombExplode?.Invoke(this);

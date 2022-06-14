@@ -29,6 +29,7 @@ MonoBehaviour:
   bombItem: {fileID: 6445466529311080229, guid: d954e5e9c4683724cb6e4b05273af295, type: 3}
   staticItem: {fileID: 6445466529311080229, guid: 123166e07584f6f4fad8d79e1a5fa475, type: 3}
   colorChangeItem: {fileID: 6445466529311080229, guid: 86781220c9b2ade499e5bf1d87d3c782, type: 3}
+  painterItem: {fileID: 6445466529311080229, guid: 91ffd64cccca30045b797469ffdbbf7a, type: 3}
   fractureItem: {fileID: 1483002350, guid: bf7b7b3b4ca5c3746af51a9b5b76eb8b, type: 3}
   arrowPrefab: {fileID: 2933700911192963553, guid: 2bed5b5b69f214548a6aad57e9115e0b, type: 3}
   gridElemPrefab: {fileID: 7566253647186876143, guid: 0e0b47018aa1f2648b626fdb9a2ff321, type: 3}
