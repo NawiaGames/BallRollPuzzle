@@ -1271,7 +1271,7 @@ public class Level : MonoBehaviour
     while(_listItems.Count > 0)
     {
       _listItems.RemoveAt(0);
-      AddPoints(GameData.Points.movesLeft);
+      AddPoints(GameData.Points.moveLeft);
       yield return new WaitForSeconds(0.125f);
     }
     OutroBalls();

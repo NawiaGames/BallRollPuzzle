@@ -10,6 +10,7 @@ public class UIPowerupBtn : MonoBehaviour
   [SerializeField] TMPLbl lblOn;
   [SerializeField] TMPLbl lblOff;
   [SerializeField] GameObject stateOn, stateOff;
+  [SerializeField] GameObject _selection;
   [SerializeField] float _selScale = 1.2f;
   [SerializeField] GameState.Powerups.Type _type;
 
@@ -20,7 +21,7 @@ public class UIPowerupBtn : MonoBehaviour
   public bool IsSelected 
   {
     get => _selected;
-    set { _selected = value; _scaleEnd = (_selected)? _selScale : 1.0f;}
+    set { _selected = value; _scaleEnd = (_selected)? _selScale : 1.0f; _selection.SetActive(_selected);}
   }
   public GameState.Powerups.Type type => _type;
   public void SetCount(int cnt){lblOn.text = cnt.ToString();}

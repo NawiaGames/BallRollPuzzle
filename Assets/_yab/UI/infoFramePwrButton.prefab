@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.17225882, g: 0.5354432, b: 0.745283, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1066,6 +1066,7 @@ MonoBehaviour:
   lblOff: {fileID: 2351011653378107483}
   stateOn: {fileID: 7545586319500312907}
   stateOff: {fileID: 3457515854109017311}
+  _selection: {fileID: 1125221755781777992}
   _selScale: 1.2
   _type: 0
 --- !u!114 &1195754382207551275
