@@ -97,7 +97,7 @@ MonoBehaviour:
   _positionContainer: {fileID: 8491482513625605612}
   _dollyContainer: {fileID: 8491482514433418373}
   _dollyAxis: {x: 0, y: 0, z: -1}
-  _minDistance: 0.1
+  _minDistance: 96
   _maxDistance: 1024
   _autoUpdateTrackedPOI: 1
   _autoFit: 1
