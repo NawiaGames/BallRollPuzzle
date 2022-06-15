@@ -64,13 +64,12 @@ MonoBehaviour:
   - {fileID: 5382338121493344219, guid: a24b9964c09284fc0910f6b0a167952d, type: 3}
   - {fileID: 5382338121493344219, guid: c061aa95591a44f80abb74c22d9b7811, type: 3}
   - {fileID: 5382338121493344219, guid: 8377c53ab1a334bdd8c4198111b87488, type: 3}
-  - {fileID: 5382338121493344219, guid: 5f340d877681256419ef66fb1dd4c5b5, type: 3}
   listRewards:
   - level: 6
     powerupBombs: 0
     powerupColors: 0
     powerupPainters: 0
-    powerupArrows: 6
+    powerupArrows: 8
   - level: 12
     powerupBombs: 5
     powerupColors: 0
@@ -81,7 +80,7 @@ MonoBehaviour:
     powerupColors: 4
     powerupPainters: 0
     powerupArrows: 1
-  - level: 26
+  - level: 25
     powerupBombs: 1
     powerupColors: 1
     powerupPainters: 4
@@ -91,6 +90,7 @@ MonoBehaviour:
   pointMatchStandard: 100
   pointMatchSpec: 200
   pointBombExplode: 100
+  pointMoveLeft: 250
   percentOfPointsForStars:
   - 0.5
   - 0.7
