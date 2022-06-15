@@ -331,7 +331,7 @@ public class Level : MonoBehaviour
     UIIngame.onPowerupChanged += OnPowerupChanged;
     Item.onPushedOut += OnItemPushedOut;
 
-    BallsInitialCnt = _items.Count;
+    BallsInitialCnt = ColorItems;
 
     onCreate?.Invoke(this);
   }
@@ -823,6 +823,8 @@ public class Level : MonoBehaviour
         {
           if(_pushing[p].push == Item.Push.None) //_gameplayPushType == PushType.None)
           {
+            if(_pushing[p].IsColorChanger)
+              BallsInitialCnt++;
             onItemsHit?.Invoke(item, _pushing[p]);
             item.Hit(_pushing[p]);
             if(CheckPainting(_pushing[p], item))
