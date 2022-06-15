@@ -146,6 +146,27 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
+      name: circleFrame_192
+      rect:
+        serializedVersion: 2
+        x: 378
+        y: 830
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 96, y: 96, z: 96, w: 96}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1cd37982000000000800000000000000
+      internalID: 681000385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
       name: barBase
       rect:
         serializedVersion: 2
@@ -464,6 +485,7 @@ TextureImporter:
       iconBomb: -4603156472066961037
       iconColorBall: -5555134974580488717
       Panel: -1922417273455563661
+      circleFrame_192: 681000385
       summaryBG: 8632624238333640991
   spritePackingTag: 
   pSDRemoveMatte: 0
