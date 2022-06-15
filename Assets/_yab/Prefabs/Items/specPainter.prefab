@@ -59,6 +59,10 @@ PrefabInstance:
       propertyPath: _staticItem
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6752348163733698667, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
+      propertyPath: _customModel
+      value: 
+      objectReference: {fileID: 5038670812198670050}
     - target: {fileID: 7090054455800460876, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.4
@@ -183,6 +187,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d230e6ee21ae2714287858f3e615c256, type: 3}
+--- !u!1 &5038670812198670050 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d230e6ee21ae2714287858f3e615c256, type: 3}
+  m_PrefabInstance: {fileID: 5273044159722566579}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7642677383973616983
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -18,10 +18,13 @@ public class EffectsManager : MonoBehaviour
     [SerializeField] ParticleSystem fxConfettiLevel = null;
     [SerializeField] ParticleSystem fxPaintSplat = null;
     [SerializeField] ParticleSystem fxBallFractures = null;
-    [SerializeField] int            ballFracturesEmitCnt = 1;
+    [SerializeField] int ballFracturesEmitCnt = 1;
+    [SerializeField] ParticleSystem fxBallFracturesSub = null;
+    [SerializeField] int ballFracturesSubEmitCnt = 1;
     [SerializeField] ParticleSystem fxHit = null;
     [SerializeField] ParticleSystem fxBombDestroy = null;
     [SerializeField] int fxBombDestroyEmitCnt = 5;
+    [SerializeField] ParticleSystem fxPainter = null;
 
   [Header("FX string")]
     [SerializeField] string strPushedOut = "{0}!";
@@ -30,6 +33,7 @@ public class EffectsManager : MonoBehaviour
 
 
     ParticleSystem fxConfetti;
+    ParticleSystem[] fxPainterSubs;
 
     ObjectShake cameraShakeContainer;
     UIInfoLabelManager infoLblMan;//, infoLblBigMan;
@@ -42,8 +46,10 @@ public class EffectsManager : MonoBehaviour
       cameraShakeContainer = Camera.main.GetComponentInParent<ObjectShake>();
       //fxConfetti = GameObject.FindGameObjectWithTag("ConfettiFX").GetComponent<ParticleSystem>();
       infoLblMan = FindObjectOfType<UIInfoLabelManager>(true);
-      //infoLblMan = GameObject.Find("infoCanvas").GetComponent<UIInfoLabelManager>();
-      //infoLblBigMan = GameObject.Find("infoCanvasBig").GetComponent<UIInfoLabelManager>();
+    //infoLblMan = GameObject.Find("infoCanvas").GetComponent<UIInfoLabelManager>();
+    //infoLblBigMan = GameObject.Find("infoCanvasBig").GetComponent<UIInfoLabelManager>();
+
+      fxPainterSubs = fxPainter.GetComponentsInChildren<ParticleSystem>();
     }
     private void OnEnable() 
     {
@@ -81,6 +87,18 @@ public class EffectsManager : MonoBehaviour
       else
         ps.Play(true);
     }
+    void PlayFXAtPosition(ParticleSystem ps, ParticleSystem[] subs, Vector3 worldPosition, int emitCount = 0, bool useCameraOffset = true)
+    {
+      ps.transform.position = useCameraOffset ? GetFxPosition(worldPosition) : worldPosition;
+      if(emitCount > 0)
+      {
+        ps.Emit(emitCount);
+        foreach(var sub in subs)
+          sub.Emit(emitCount);
+      }
+      else
+        ps.Play(true);
+    }    
     
     void OnLevelStart(Level lvl)
     {
@@ -92,12 +110,9 @@ public class EffectsManager : MonoBehaviour
     }
     void OnItemBombExplo(Item sender)
     {
-    // var psmain = fxPaintSplat.main;
-    // psmain.startColor = sender.color;
-    // PlayFXAtPosition(fxPaintSplat, sender.transform.position, 20);    
       var psmain = fxBombDestroy.main;
       psmain.startColor = sender.color;
-      PlayFXAtPosition(fxBombDestroy, sender.transform.position); //, fxBombDestroyEmitCnt, true);
+      PlayFXAtPosition(fxBombDestroy, sender.transform.position);
     }
     void OnItemExplo(Item sender)
     {
@@ -110,9 +125,9 @@ public class EffectsManager : MonoBehaviour
     }
     void OnItemPainted(Item sender)
     {
-      var psmain = fxPaintSplat.main;
+      var psmain = fxPainter.main;
       psmain.startColor = sender.color;      
-      PlayFXAtPosition(fxPaintSplat, sender.transform.position, 1);
+      PlayFXAtPosition(fxPainter, fxPainterSubs, sender.transform.position, 1);
     }
     void OnItemsMatched(Level.Match3 match)
     {
@@ -126,6 +141,10 @@ public class EffectsManager : MonoBehaviour
       var psmain = fxBallFractures.main;
       psmain.startColor = sender.color;
       PlayFXAtPosition(fxBallFractures, sender.transform.position, ballFracturesEmitCnt, false);
+      psmain = fxBallFracturesSub.main;
+      psmain.startColor = sender.color;
+      PlayFXAtPosition(fxBallFracturesSub, sender.transform.position, ballFracturesSubEmitCnt, false);
+      
       //var emitParams = new ParticleSystem.EmitParams();
       //emitParams.position = sender.transform.position;
       //fxBallFractures.Emit(emitParams, 4);

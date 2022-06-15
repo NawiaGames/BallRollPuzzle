@@ -64,9 +64,12 @@ MonoBehaviour:
   fxPaintSplat: {fileID: 5654794271917263824}
   fxBallFractures: {fileID: 8654854198287132523}
   ballFracturesEmitCnt: 4
+  fxBallFracturesSub: {fileID: 5422376879250426958}
+  ballFracturesSubEmitCnt: 4
   fxHit: {fileID: 5483926277836527142}
   fxBombDestroy: {fileID: 2876338096343389615}
   fxBombDestroyEmitCnt: 5
+  fxPainter: {fileID: 2394166267336298602}
   strPushedOut: +{0}!
   strBallsMatched: +{0}!
   strItemExplo: +{0}!
@@ -147,6 +150,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 506666929268045486, guid: b1f40add61ac51749ac4295e905e5173, type: 3}
   m_PrefabInstance: {fileID: 260783495592014404}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &5422376879250426958 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5250733445613141514, guid: b1f40add61ac51749ac4295e905e5173, type: 3}
+  m_PrefabInstance: {fileID: 260783495592014404}
+  m_PrefabAsset: {fileID: 0}
 --- !u!198 &8654854198287132523 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 8899751940149744943, guid: b1f40add61ac51749ac4295e905e5173, type: 3}
@@ -209,6 +217,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 680a09829df4cec4b9cfcdc625327343, type: 3}
+--- !u!198 &2394166267336298602 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4008689529364620039, guid: 680a09829df4cec4b9cfcdc625327343, type: 3}
+  m_PrefabInstance: {fileID: 1628174867429241709}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3235548793409047515 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4214958130402015414, guid: 680a09829df4cec4b9cfcdc625327343, type: 3}

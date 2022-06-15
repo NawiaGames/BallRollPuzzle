@@ -4894,7 +4894,7 @@ GameObject:
   - component: {fileID: 5983310429253805622}
   - component: {fileID: 5250733445613141514}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: fxBallDestroySub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
