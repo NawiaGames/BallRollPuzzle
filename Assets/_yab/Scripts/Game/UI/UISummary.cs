@@ -9,15 +9,13 @@ public class UISummary : MonoBehaviour
 {
   public static System.Action onShow, onBtnPlay;
 
+  [SerializeField] UIPanel winContainer;
   [SerializeField] UIPanel navNextPanel;
+  [SerializeField] UIPanel failContainer;
   [SerializeField] UIPanel navRestartPanel;
+  [SerializeField] UIPanel rewardContainer;
   [SerializeField] UIPanel navClaimPanel;
 
-  [SerializeField] GameObject winContainer;
-  [SerializeField] GameObject failContainer;
-  [SerializeField] GameObject rewardContainer;
-  //[SerializeField] TMPLbl  lblScore;
-  //[SerializeField] TMPLbl  lblInfo;
   [SerializeField] Slider  slider;
   [SerializeField] UITwoState[] stars;
   [SerializeField] TMPLbl  scores;
@@ -31,7 +29,7 @@ public class UISummary : MonoBehaviour
     var range = GameData.Rewards.GetRewardProgress();
 
     slider.minValue = range.beg;
-    slider.maxValue = range.end;
+    slider.maxValue = range.end+1;
     slider.value = Mathf.Max(level.LevelIdx, range.beg);
     destValue = level.LevelIdx+1;
     scores.text = string.Format(strScoresFmt, level.Points.ToString());
@@ -42,19 +40,21 @@ public class UISummary : MonoBehaviour
 
     onShow?.Invoke();
     
-    showReward = level.LevelIdx >= range.end;
+    showReward = (level.LevelIdx >= range.end && GameState.Progress.LevelPlayed <= GameState.Powerups.ClaimedOnLevel);
 
-    winContainer.SetActive(level.Succeed);
-    failContainer.SetActive(!level.Succeed);
+    winContainer.gameObject.SetActive(level.Succeed);
+    failContainer.gameObject.SetActive(!level.Succeed);
     GetComponent<UIPanel>().ActivatePanel();
-
     if(level.Succeed)
     {
-      winContainer.GetComponent<UIPanel>().ActivatePanel();
+      winContainer.ActivatePanel();
       StartCoroutine(Sequence(level));
     }
     else
+    {
+      failContainer.ActivatePanel();
       navRestartPanel.ActivatePanel();   
+    }
 
     // if(level.Succeed)
     // {
@@ -83,17 +83,17 @@ public class UISummary : MonoBehaviour
   }
   IEnumerator Sequence(Level level)
   {
-    yield return new WaitForSeconds(2.0f);
+    yield return new WaitForSeconds(1.0f);
     updateSlider = true;
-    yield return new WaitForSeconds(0.25f);
+    yield return new WaitForSeconds((showReward)?1.0f : 0.5f);
     if(level.Succeed)
     {
       if(!showReward)
         navNextPanel.ActivatePanel();
       else
       {
-        rewardContainer.SetActive(level.Succeed);
-        winContainer.GetComponent<UIPanel>().SwitchPanel(rewardContainer.GetComponent<UIPanel>());
+        rewardContainer.gameObject.SetActive(level.Succeed);
+        winContainer.SwitchPanel(rewardContainer);
         navClaimPanel.ActivatePanel();
       }
     }
@@ -116,6 +116,6 @@ public class UISummary : MonoBehaviour
   void Update()
   {
     if(updateSlider)
-      slider.value = Mathf.MoveTowards(slider.value, destValue, Time.deltaTime * 4);
+      slider.value = Mathf.MoveTowards(slider.value, destValue, Time.deltaTime);
   }
 }

@@ -205,7 +205,7 @@ public class GameData : ScriptableObject
         var lvl2 = get().listRewards[q].level;
         if(lvl > lvl2)
         {
-          range.beg = range.end;
+          range.beg = range.end+1;
           range.end = lvl2;
         }
       }

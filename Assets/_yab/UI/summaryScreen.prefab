@@ -548,9 +548,9 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.75, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -0.0000076295, y: -0.00000040893792}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8085837543958385415
 CanvasRenderer:
@@ -1283,7 +1283,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.75
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1627,12 +1627,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4785da7268a35e4299b49ffe2a4ae0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  winContainer: {fileID: 8714510374974718183}
   navNextPanel: {fileID: 1352173280443761175}
+  failContainer: {fileID: 7064481876280522664}
   navRestartPanel: {fileID: 5084703429188055810}
+  rewardContainer: {fileID: 754983099289871445}
   navClaimPanel: {fileID: 8944762502293987630}
-  winContainer: {fileID: 3751278276026146211}
-  failContainer: {fileID: 6846907690555509439}
-  rewardContainer: {fileID: 4587971421171862289}
   slider: {fileID: 1933666268083704894}
   stars:
   - {fileID: 8881035245917875787}
@@ -2577,8 +2577,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 512, y: 64}
+  m_AnchoredPosition: {x: -24, y: 0}
+  m_SizeDelta: {x: 460, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4249631792168767657
 CanvasRenderer:
@@ -3961,7 +3961,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2629190682634580241
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4460,6 +4460,8 @@ GameObject:
   - component: {fileID: 434301862674700457}
   - component: {fileID: 2873422401360760458}
   - component: {fileID: 2356551854657850139}
+  - component: {fileID: 5529052751599842950}
+  - component: {fileID: 7064481876280522664}
   m_Layer: 5
   m_Name: losePanel
   m_TagString: Untagged
@@ -4567,6 +4569,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &5529052751599842950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6846907690555509439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71ca0b0e4e60da642a8d0f3c77403502, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skipOffScreenItemDelay: 0
+  autoRefreshValidAnimatorsList: 0
+  activationDelay: 0.05
+  deactivationDelay: 0.02
+--- !u!114 &7064481876280522664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6846907690555509439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 697f5e0982c14ee4ea5855c49882ab94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  registerPanel: 1
+  contentContainer: {fileID: 0}
+  activateOnTop: 0
+  activationDelay: 0
 --- !u!1 &7211158031641794844
 GameObject:
   m_ObjectHideFlags: 0
