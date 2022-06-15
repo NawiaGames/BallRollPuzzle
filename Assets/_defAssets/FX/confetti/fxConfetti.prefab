@@ -106,7 +106,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
   randomSeed: 0
@@ -169,7 +169,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 14
+      scalar: 8
       minScalar: 6
       maxCurve:
         serializedVersion: 2
@@ -286,7 +286,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 1.5
-      minScalar: 0.75
+      minScalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -977,7 +977,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 3
-        scalar: 96
+        scalar: 128
         minScalar: 64
         maxCurve:
           serializedVersion: 2
@@ -1028,7 +1028,7 @@ ParticleSystem:
           m_PostInfinity: 2
           m_RotationOrder: 4
       cycleCount: 3
-      repeatInterval: 0.3
+      repeatInterval: 0.65
       probability: 1
   SizeModule:
     enabled: 1
@@ -1207,7 +1207,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 0
-      minScalar: 3.1415925
+      minScalar: 12.56637
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1260,7 +1260,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 0
-      minScalar: 3.1415925
+      minScalar: 12.56637
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1313,7 +1313,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 0
-      minScalar: 3.1415925
+      minScalar: 12.56637
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -3995,7 +3995,7 @@ ParticleSystem:
         m_RotationOrder: 4
     maxLights: 20
   TrailModule:
-    enabled: 1
+    enabled: 0
     mode: 0
     ratio: 0.1
     lifetime:
@@ -4830,7 +4830,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: aa99971b79bd09f41897b34d0adc592e, type: 2}
-  - {fileID: 2100000, guid: d652ad622fe45d44b850ee4945443bbd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

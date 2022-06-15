@@ -3,6 +3,7 @@ circleFrame_192,378,830,192,192
 barBase,192,392,512,105
 btnBase,0,392,192,192
 icoCoin,0,584,96,96
+iconPushThree,672,680,96,96
 iconPaintBall,576,680,96,96
 iconColorBall,480,680,96,96
 starsStandFill,384,680,96,96

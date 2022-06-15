@@ -364,17 +364,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 8108016443953103889}
     m_Modifications:
     - target: {fileID: 2582196476366671279, guid: c004dcbfbcd46de48bbf4e90c71e5f3c, type: 3}
-      propertyPath: simulationSpeed
-      value: 1.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 2582196476366671279, guid: c004dcbfbcd46de48bbf4e90c71e5f3c, type: 3}
-      propertyPath: moveWithTransform
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2582196476366671279, guid: c004dcbfbcd46de48bbf4e90c71e5f3c, type: 3}
-      propertyPath: InitialModule.startSpeed.scalar
-      value: 8
-      objectReference: {fileID: 0}
+      propertyPath: CollisionModule.m_Planes.Array.data[0]
+      value: 
+      objectReference: {fileID: 8108016443953103889}
     - target: {fileID: 5327928137560454586, guid: c004dcbfbcd46de48bbf4e90c71e5f3c, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -434,10 +426,6 @@ PrefabInstance:
     - target: {fileID: 6970228068868423935, guid: c004dcbfbcd46de48bbf4e90c71e5f3c, type: 3}
       propertyPath: m_Name
       value: fxConfetti
-      objectReference: {fileID: 0}
-    - target: {fileID: 7598190305503254835, guid: c004dcbfbcd46de48bbf4e90c71e5f3c, type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c004dcbfbcd46de48bbf4e90c71e5f3c, type: 3}

@@ -18,6 +18,9 @@ TextureImporter:
       213: 3141900230587812362
     second: icoCoin
   - first:
+      213: -1105471682781747023
+    second: iconPushThree
+  - first:
       213: 915673000278630297
     second: iconPaintBall
   - first:
@@ -231,6 +234,27 @@ TextureImporter:
       bones: []
       spriteID: a0a87ebfc954a9b20800000000000000
       internalID: 3141900230587812362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iconPushThree
+      rect:
+        serializedVersion: 2
+        x: 672
+        y: 680
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b86a8e8c5398a0f0800000000000000
+      internalID: -1105471682781747023
       vertices: []
       indices: 
       edges: []
@@ -490,7 +514,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 0c3d582e2078db346aab6225ce2cefe8
+    spriteID: a45ca687c4514754d999022a0d8aa8bd
     internalID: 0
     vertices: []
     indices: 
@@ -507,6 +531,7 @@ TextureImporter:
       button2: 4921157955859175283
       starsStandFill: 5161116690010460925
       button1: 1764023767887857751
+      iconPushThree: -1105471682781747023
       icoHeart: 3838556853171494735
       btnBase: 3361918274068334627
       iconBomb: -4603156472066961037

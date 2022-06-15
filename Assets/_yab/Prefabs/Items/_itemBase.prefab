@@ -135,7 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 0
   _color: {r: 0, g: 0, b: 0, a: 1}
-  _colorMatchPing: {r: 2.270603, g: 0.78439015, b: 0.22706035, a: 0}
+  _colorMatchPing: {r: 2.9960785, g: 1.0352942, b: 0.3137255, a: 0}
   _ballModel: {fileID: 8462825574880922697}
   _customModel: {fileID: 0}
   _activatable: {fileID: 7798136041665752175}
