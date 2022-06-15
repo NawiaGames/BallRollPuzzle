@@ -520,7 +520,35 @@ public class Level : MonoBehaviour
   }
   List<Item> _pushing = new List<Item>();
 
-  Arrow arrowBeg = null, arrowEnd = null;
+  Arrow   arrowBeg = null, arrowEnd = null;
+  List<Arrow> FindArrow(Vector2Int vi)
+  {
+    List<Arrow> arrows = new List<Arrow>();
+    bool horz = Mathf.Abs(vi.y) == _grid.dim().y/2 + 1;
+    int idxPrev = -1;
+    int idxNext = -1;
+    Vector2Int vn = vi;
+    if(horz)
+    {
+      vn.x = vi.x - 1;
+      idxPrev = _arrows.FindIndex((arr) => arr.grid == vn);
+      vn.x = vi.x + 1;
+      idxNext = _arrows.FindIndex((arr) => arr.grid == vn);
+    }
+    else
+    {
+      vn.y = vi.y - 1;
+      idxPrev = _arrows.FindIndex((arr) => arr.grid == vn);
+      vn.y = vi.y + 1;
+      idxNext = _arrows.FindIndex((arr) => arr.grid == vn);
+    }
+    if(idxPrev >= 0)
+      arrows.Add(_arrows[idxPrev]);
+    if(idxNext >= 0)
+      arrows.Add(_arrows[idxNext]);
+
+    return arrows;
+  }
   void SelectArrows()
   {
     _arrowsSelected.Clear();
@@ -549,6 +577,12 @@ public class Level : MonoBehaviour
     arrowEnd.IsSelected = (horz)? arrowBeg.grid.y == arrowEnd.grid.y : arrowBeg.grid.x == arrowEnd.grid.x;
     if(arrowEnd.IsSelected)
       _arrowsSelected.Add(arrowEnd);
+
+    if(_powerupSelected == GameState.Powerups.Type.Arrows)
+    {
+      var arrs = FindArrow(arrowBeg.grid);
+      _arrowsSelected.AddRange(arrs);
+    }
 
     _arrowsSelected = _arrowsSelected.Distinct().ToList();
     for(int q = 0; q < _arrowsSelected.Count; ++q)
@@ -680,8 +714,16 @@ public class Level : MonoBehaviour
     {
       if(_multiArrowSelection)
         SelectArrows();
-      else if(arrowBeg != arrowEnd)
-        ClearArrows();
+      else
+      {
+        if(arrowBeg != arrowEnd)
+          ClearArrows();
+        // else
+        // {
+        //   if(_powerupSelected == GameState.Powerups.Type.Arrows)
+        //     SelectArrow(arrowBeg);
+        // }
+      }
     }
     else
       ClearArrows();
