@@ -94,7 +94,10 @@ public class EffectsManager : MonoBehaviour
       {
         ps.Emit(emitCount);
         foreach(var sub in subs)
+        {
+          sub.transform.position = ps.transform.position;
           sub.Emit(emitCount);
+        }
       }
       else
         ps.Play(true);
@@ -125,9 +128,9 @@ public class EffectsManager : MonoBehaviour
     }
     void OnItemPainted(Item sender)
     {
-      var psmain = fxPainter.main;
-      psmain.startColor = sender.color;      
-      PlayFXAtPosition(fxPainter, fxPainterSubs, sender.transform.position, 1);
+      var psmain = fxPaintSplat.main;
+      psmain.startColor = sender.color;
+      PlayFXAtPosition(fxPaintSplat, sender.transform.position, 1);      
     }
     void OnItemsMatched(Level.Match3 match)
     {
@@ -138,13 +141,21 @@ public class EffectsManager : MonoBehaviour
     }
     void OnItemDestroy(Item sender)
     {
-      var psmain = fxBallFractures.main;
-      psmain.startColor = sender.color;
-      PlayFXAtPosition(fxBallFractures, sender.transform.position, ballFracturesEmitCnt, false);
-      psmain = fxBallFracturesSub.main;
-      psmain.startColor = sender.color;
-      PlayFXAtPosition(fxBallFracturesSub, sender.transform.position, ballFracturesSubEmitCnt, false);
-      
+      if(!sender.IsPainter)
+      {
+        var psmain = fxBallFractures.main;
+        psmain.startColor = sender.color;
+        PlayFXAtPosition(fxBallFractures, sender.transform.position, ballFracturesEmitCnt, false);
+        psmain = fxBallFracturesSub.main;
+        psmain.startColor = sender.color;
+        PlayFXAtPosition(fxBallFracturesSub, sender.transform.position, ballFracturesSubEmitCnt, false);
+      }
+      else
+      {
+        var psmain = fxPainter.main;
+        psmain.startColor = sender.color;
+        PlayFXAtPosition(fxPainter, fxPainterSubs, sender.transform.position, 1);
+      }
       //var emitParams = new ParticleSystem.EmitParams();
       //emitParams.position = sender.transform.position;
       //fxBallFractures.Emit(emitParams, 4);

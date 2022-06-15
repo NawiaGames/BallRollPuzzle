@@ -46,11 +46,11 @@ public class GridElem : MonoBehaviour
   {
     rend.material.color = (_even)? colorEven : colorOdd;
   }
-  // public void Fracture()
-  // {
-  //   rend.gameObject.SetActive(false);
-  //   _fracture.Fracture(Vector3.up * 4);
-  // }
+  public void Fracture()
+  {
+    rend.gameObject.SetActive(false);
+    _fracture.Fracture(Vector3.up * 4);
+  }
   public void SetSelected(bool sel, Vector2Int dir)
   {
     if(sel)

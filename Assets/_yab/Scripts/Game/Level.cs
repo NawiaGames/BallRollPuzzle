@@ -403,9 +403,16 @@ public class Level : MonoBehaviour
       for(int x = 0; x < _grid.dim().x; ++x)
       {
         va.x = x - _grid.dim().x/2;
-        //_grid.getElem(va).Fracture();
-        _grid.getElem(va).Hide();
-        yield return new WaitForSeconds(1/60f);
+        if(Succeed)
+        {
+          _grid.getElem(va).Hide();
+          yield return new WaitForSeconds(1 / 60f);
+        }
+        else
+        {
+          _grid.getElem(va).Fracture();
+          yield return new WaitForSeconds(1 / 30f);
+        }
       }
     }
   }
@@ -770,9 +777,9 @@ public class Level : MonoBehaviour
         _powerupSelected = GameState.Powerups.Type.None;
       }
 
-      onItemThrow?.Invoke(this);
       Destroy(_nextItem.gameObject);
       _nextItem = null;
+      onItemThrow?.Invoke(this);
     }
     _arrowsSelected.Clear();
     _arrows.ForEach((ar) => ar.IsSelected = false);
@@ -1278,11 +1285,9 @@ public class Level : MonoBehaviour
       yield return new WaitForSeconds(0.125f/4);
     }
     OutroBalls();
-    if(Succeed)
-    {
-      DestroyGrid();
-      DestroyArrows();
-    }
+    DestroyGrid();
+    DestroyArrows();
+
     yield return new WaitForSeconds(1.0f);
     Succeed = !AnyColorItem;
     onFinished?.Invoke(this);
@@ -1311,6 +1316,15 @@ public class Level : MonoBehaviour
       _inputBlocked = !_inputBlocked;
       BlockArrows(_inputBlocked);
     }
+
+    #if UNITY_EDITOR
+    if(Input.GetKeyDown(KeyCode.E))
+    {
+      _nextItem = null;
+      _listItems.Clear();
+      CheckEnd();
+    }
+    #endif
   }
 
   void OnDrawGizmos()
