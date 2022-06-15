@@ -68,7 +68,7 @@ MonoBehaviour:
     powerupBombs: 4
     powerupColors: 0
     powerupPainters: 0
-    powerupArrows: 0
+    powerupArrows: 2
   - level: 19
     powerupBombs: 0
     powerupColors: 4
