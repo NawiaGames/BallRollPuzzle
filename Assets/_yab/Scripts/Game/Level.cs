@@ -581,6 +581,7 @@ public class Level : MonoBehaviour
     if(_powerupSelected == GameState.Powerups.Type.Arrows)
     {
       var arrs = FindArrow(arrowBeg.grid);
+      arrs.ForEach((ar) => ar.IsSelected = true);
       _arrowsSelected.AddRange(arrs);
     }
 
