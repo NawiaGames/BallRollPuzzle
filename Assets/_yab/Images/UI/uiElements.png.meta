@@ -6,6 +6,9 @@ TextureImporter:
       213: -780752133151919145
     second: barFill
   - first:
+      213: 7725591749918506707
+    second: circleFrame_192
+  - first:
       213: -3323582823482275691
     second: barBase
   - first:
@@ -14,6 +17,9 @@ TextureImporter:
   - first:
       213: 3141900230587812362
     second: icoCoin
+  - first:
+      213: 915673000278630297
+    second: iconPaintBall
   - first:
       213: -5555134974580488717
     second: iconColorBall
@@ -160,8 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1cd37982000000000800000000000000
-      internalID: 681000385
+      spriteID: 3deb49db3c0d63b60800000000000000
+      internalID: 7725591749918506707
       vertices: []
       indices: 
       edges: []
@@ -238,14 +244,14 @@ TextureImporter:
         width: 96
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 00000000000000000800000000000000
-      internalID: 0
+      spriteID: 99f16080ebf15bc00800000000000000
+      internalID: 915673000278630297
       vertices: []
       indices: 
       edges: []
@@ -281,7 +287,7 @@ TextureImporter:
         height: 96
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 48, y: 48, z: 48, w: 48}
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -302,7 +308,7 @@ TextureImporter:
         height: 96
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 48, y: 48, z: 48, w: 48}
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -407,7 +413,7 @@ TextureImporter:
         height: 329
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 72, z: 0, w: 257}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -484,7 +490,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: b50143363eb600c4788e1a447b7a7b4e
+    spriteID: 0c3d582e2078db346aab6225ce2cefe8
     internalID: 0
     vertices: []
     indices: 
@@ -504,11 +510,11 @@ TextureImporter:
       icoHeart: 3838556853171494735
       btnBase: 3361918274068334627
       iconBomb: -4603156472066961037
+      circleFrame_192: 7725591749918506707
+      iconPaintBall: 915673000278630297
       iconColorBall: -5555134974580488717
-      Panel: -1922417273455563661
-      iconPaintBall: 0
-      circleFrame_192: 681000385
       summaryBG: 8632624238333640991
+      Panel: -1922417273455563661
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
