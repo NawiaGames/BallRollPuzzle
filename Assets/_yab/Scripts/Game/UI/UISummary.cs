@@ -32,26 +32,27 @@ public class UISummary : MonoBehaviour
 
     slider.minValue = range.beg;
     slider.maxValue = range.end;
-    slider.value = Mathf.Max(level.LevelIdx-1, range.beg);
-    destValue = level.LevelIdx;
+    slider.value = Mathf.Max(level.LevelIdx, range.beg);
+    destValue = level.LevelIdx+1;
     scores.text = string.Format(strScoresFmt, level.Points.ToString());
 
     updateSlider = false;
     for(int q = 0; q < stars.Length; ++q)
-    {
       stars[q].SetState(level.Stars > q);
-    }
+
     onShow?.Invoke();
     
     showReward = level.LevelIdx >= range.end;
 
-    winContainer.SetActive(level.Succeed && !showReward);
-    rewardContainer.SetActive(level.Succeed && showReward);
+    winContainer.SetActive(level.Succeed);
     failContainer.SetActive(!level.Succeed);
     GetComponent<UIPanel>().ActivatePanel();
 
     if(level.Succeed)
-      StartCoroutine(UpdateSlider(level));
+    {
+      winContainer.GetComponent<UIPanel>().ActivatePanel();
+      StartCoroutine(Sequence(level));
+    }
     else
       navRestartPanel.ActivatePanel();   
 
@@ -71,6 +72,7 @@ public class UISummary : MonoBehaviour
   }
   void Hide()
   {
+    updateSlider = false;
     GetComponent<UIPanel>().DeactivatePanel();
   }
   void AddRewards(Level level)
@@ -79,23 +81,26 @@ public class UISummary : MonoBehaviour
     if(reward != null)
       GameState.Powerups.AddReward(reward);
   }
-  IEnumerator UpdateSlider(Level level)
+  IEnumerator Sequence(Level level)
   {
-    yield return new WaitForSeconds(1.0f);
-    slider.value = Mathf.MoveTowards(slider.value, destValue, Time.deltaTime * 4);
-
+    yield return new WaitForSeconds(2.0f);
+    updateSlider = true;
+    yield return new WaitForSeconds(0.25f);
     if(level.Succeed)
     {
       if(!showReward)
         navNextPanel.ActivatePanel();
       else
+      {
+        rewardContainer.SetActive(level.Succeed);
+        winContainer.GetComponent<UIPanel>().SwitchPanel(rewardContainer.GetComponent<UIPanel>());
         navClaimPanel.ActivatePanel();
+      }
     }
     else
       navRestartPanel.ActivatePanel();
 
-    //AddRewards(level);
-    //this.Invoke(() => updateSlider = true, 1.0f);
+    AddRewards(level);
   }
   public void OnBtnRestart()
   {
@@ -108,9 +113,9 @@ public class UISummary : MonoBehaviour
     FindObjectOfType<Game>().NextLevel();
     onBtnPlay?.Invoke();
   }
-  // void Update()
-  // {
-  //   if(updateSlider)
-  //     slider.value = Mathf.MoveTowards(slider.value, destValue, Time.deltaTime * 4);
-  // }
+  void Update()
+  {
+    if(updateSlider)
+      slider.value = Mathf.MoveTowards(slider.value, destValue, Time.deltaTime * 4);
+  }
 }

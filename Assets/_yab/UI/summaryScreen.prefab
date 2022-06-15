@@ -1973,6 +1973,8 @@ GameObject:
   - component: {fileID: 8688041920518092074}
   - component: {fileID: 6138604571826621573}
   - component: {fileID: 34082048630055833}
+  - component: {fileID: 3194855753262442824}
+  - component: {fileID: 8714510374974718183}
   m_Layer: 5
   m_Name: winPanel
   m_TagString: Untagged
@@ -2082,6 +2084,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &3194855753262442824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3751278276026146211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71ca0b0e4e60da642a8d0f3c77403502, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skipOffScreenItemDelay: 0
+  autoRefreshValidAnimatorsList: 0
+  activationDelay: 0.05
+  deactivationDelay: 0.02
+--- !u!114 &8714510374974718183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3751278276026146211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 697f5e0982c14ee4ea5855c49882ab94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  registerPanel: 1
+  contentContainer: {fileID: 0}
+  activateOnTop: 0
+  activationDelay: 0
 --- !u!1 &3759414288592677338
 GameObject:
   m_ObjectHideFlags: 0
@@ -2664,6 +2698,8 @@ GameObject:
   - component: {fileID: 1555796893084320723}
   - component: {fileID: 955632896570040608}
   - component: {fileID: 5218792164977680663}
+  - component: {fileID: 2584730897391345658}
+  - component: {fileID: 754983099289871445}
   m_Layer: 5
   m_Name: rewardPanelVL
   m_TagString: Untagged
@@ -2773,6 +2809,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &2584730897391345658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4587971421171862289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71ca0b0e4e60da642a8d0f3c77403502, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skipOffScreenItemDelay: 0
+  autoRefreshValidAnimatorsList: 0
+  activationDelay: 0.05
+  deactivationDelay: 0.02
+--- !u!114 &754983099289871445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4587971421171862289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 697f5e0982c14ee4ea5855c49882ab94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  registerPanel: 1
+  contentContainer: {fileID: 0}
+  activateOnTop: 0
+  activationDelay: 0
 --- !u!1 &4753190398878624535
 GameObject:
   m_ObjectHideFlags: 0
