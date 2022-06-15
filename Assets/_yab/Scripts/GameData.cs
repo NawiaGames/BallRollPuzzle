@@ -200,13 +200,12 @@ public class GameData : ScriptableObject
       range.beg = 0;
       range.end = get().listRewards[0].level;
 
-      for(int q = 0; q < get().listRewards.Count; ++q)
+      for(int q = 1; q < get().listRewards.Count; ++q)
       {
-        var lvl2 = get().listRewards[q].level;
-        if(lvl > lvl2)
+        if(lvl > range.end)
         {
           range.beg = range.end+1;
-          range.end = lvl2;
+          range.end = get().listRewards[q].level;
         }
       }
 

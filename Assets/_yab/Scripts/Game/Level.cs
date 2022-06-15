@@ -1322,6 +1322,12 @@ public class Level : MonoBehaviour
     }
 
     #if UNITY_EDITOR
+    if(Input.GetKeyDown(KeyCode.W))
+    {
+      _nextItem = null;
+      _items.Clear();
+      CheckEnd();
+    }
     if(Input.GetKeyDown(KeyCode.E))
     {
       _nextItem = null;

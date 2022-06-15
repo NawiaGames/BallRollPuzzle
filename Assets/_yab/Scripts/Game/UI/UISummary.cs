@@ -24,10 +24,12 @@ public class UISummary : MonoBehaviour
   bool  updateSlider = false;
   float destValue = 0;
   bool  showReward = false;
+
+  UIReward[] _uiRewards;
+
   public void Show(Level level)
   {
     var range = GameData.Rewards.GetRewardProgress();
-
     slider.minValue = range.beg;
     slider.maxValue = range.end+1;
     slider.value = Mathf.Max(level.LevelIdx, range.beg);
@@ -39,8 +41,10 @@ public class UISummary : MonoBehaviour
       stars[q].SetState(level.Stars > q);
 
     onShow?.Invoke();
-    
-    showReward = (level.LevelIdx >= range.end && GameState.Progress.LevelPlayed <= GameState.Powerups.ClaimedOnLevel);
+
+    if(_uiRewards == null)
+      _uiRewards = rewardContainer.GetComponentsInChildren<UIReward>(true);
+    showReward = (level.LevelIdx == range.end && level.LevelIdx != GameState.Powerups.ClaimedOnLevel);
 
     winContainer.gameObject.SetActive(level.Succeed);
     failContainer.gameObject.SetActive(!level.Succeed);
@@ -93,6 +97,11 @@ public class UISummary : MonoBehaviour
       else
       {
         rewardContainer.gameObject.SetActive(level.Succeed);
+        var rewards = GameData.Rewards.GetReward(level.LevelIdx);
+        _uiRewards[0].Quantity((rewards.HasValue)?rewards.Value.powerupArrows : 0);
+        _uiRewards[1].Quantity((rewards.HasValue)?rewards.Value.powerupBombs : 0);
+        _uiRewards[2].Quantity((rewards.HasValue)?rewards.Value.powerupColors : 0);
+        _uiRewards[3].Quantity((rewards.HasValue)?rewards.Value.powerupPainters : 0);
         winContainer.SwitchPanel(rewardContainer);
         navClaimPanel.ActivatePanel();
       }
