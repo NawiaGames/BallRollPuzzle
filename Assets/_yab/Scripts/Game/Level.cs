@@ -289,7 +289,7 @@ public class Level : MonoBehaviour
   public bool Finished {get; private set;}
   public bool gameOutside => _gameplayOutside;
   public int  movesAvail => _listItems.Count + ((_nextItem)?1:0);
-  public int  ColorItems => _items.Count((item) => item.IsRegular);
+  public int  ColorItems => _items.Count((item) => item.IsRegular && !item.IsHidding);
   public bool AnyColorItem => _items.Count((item) => item.IsRegular) > 0;
   public int  Points {get; set;} = 0;
   public int  PointsMax => _maxPoints;
@@ -303,7 +303,7 @@ public class Level : MonoBehaviour
   Grid _grid = new Grid();
   List<Arrow> _arrows = new List<Arrow>();
   List<Arrow> _arrowsSelected = new List<Arrow>();
-  List<Item> _items = new List<Item>();
+  public List<Item> _items = new List<Item>();
   List<Item> _moving = new List<Item>();
   List<Item> _exploding = new List<Item>();
   List<Match3> _matching = new List<Match3>();
@@ -840,7 +840,10 @@ public class Level : MonoBehaviour
             if(CheckPainting(_pushing[p], item))
               _pushing[p].Hide();
             else
-              _items.Add(_pushing[p]);
+            {
+              if(!_items.Contains(_pushing[p]))
+                _items.Add(_pushing[p]);
+            }
             _pushing[p].Stop();
             _pushing.RemoveAt(p);
             p--;

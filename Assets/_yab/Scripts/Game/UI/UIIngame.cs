@@ -116,6 +116,7 @@ public class UIIngame : MonoBehaviour
   void UpdateScore()
   {
     score.text = "Score " + (int)_pointCurr;
+    UpdateBallsInfo(null);
   }
   void UpdateBallsInfo(Item sender)
   {
@@ -128,7 +129,7 @@ public class UIIngame : MonoBehaviour
   }
   void OnItemHide(Item sender)
   {
-    this.Invoke(()=>UpdateBallsInfo(null), 0.5f);
+    this.Invoke(()=>UpdateBallsInfo(null), -3);
   }
   void OnItemThrow(Level lvl)
   {
@@ -201,6 +202,6 @@ public class UIIngame : MonoBehaviour
       progress.value = _pointCurr;
       UpdateScore();
     }
-    UpdateBallsInfo(null);
+    //UpdateBallsInfo(null);
   }
 }

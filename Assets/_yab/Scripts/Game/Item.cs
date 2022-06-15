@@ -142,6 +142,7 @@ public class Item : MonoBehaviour
   public bool IsDirectional => _special == Spec.DirectionalItem;
   public Vector2Int? Redirected {get; set;}
   public int  Points {get; set;} = 0;
+  public bool IsHidding => _hidding;
 
   public void Show()
   {
