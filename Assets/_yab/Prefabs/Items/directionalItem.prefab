@@ -24,8 +24,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2690196335570261914}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.07, z: 0}
-  m_LocalScale: {x: 1, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: -0.003, z: 0}
+  m_LocalScale: {x: 1.72, y: 0, z: 1.03}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2829009230813421893}
@@ -45,7 +45,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 3bf08837fd21bee43950ba9772debff2, type: 2}
     - target: {fileID: 2238382564477020698, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.05
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3031739283272724307, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
       propertyPath: m_IsActive
@@ -73,15 +73,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6752348163733698667, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
       propertyPath: _color.b
-      value: 0.4056604
+      value: 0.674
       objectReference: {fileID: 0}
     - target: {fileID: 6752348163733698667, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
       propertyPath: _color.g
-      value: 0.4056604
+      value: 0.45455825
       objectReference: {fileID: 0}
     - target: {fileID: 6752348163733698667, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
       propertyPath: _color.r
-      value: 0.4056604
+      value: 0.22466666
       objectReference: {fileID: 0}
     - target: {fileID: 6752348163733698667, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
       propertyPath: _special
@@ -394,7 +394,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 522b385059303634e9f7961cd5d5b6df, type: 3}
       propertyPath: m_ConstrainProportionsScale
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 522b385059303634e9f7961cd5d5b6df, type: 3}
       propertyPath: m_CastShadows
