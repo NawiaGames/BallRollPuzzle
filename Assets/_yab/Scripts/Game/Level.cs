@@ -151,7 +151,7 @@ public class Level : MonoBehaviour
       }
       return list;
     }
-    public void update(List<Item> _items)
+    public void update(List<Item> _items, Level lvl)
     {
       clear();
       for(int q = 0; q < _items.Count; ++q)
@@ -160,7 +160,7 @@ public class Level : MonoBehaviour
           set(_items[q]);
         else
         {
-          _items[q].Points = GameData.Points.ballOut(0);
+          _items[q].Points = GameData.Points.ballOut(lvl._pushesInMove);
           _items[q].PushedOut();
           _items[q].Hide();
           _items.RemoveAt(q);
@@ -499,7 +499,7 @@ public class Level : MonoBehaviour
         t--;
       }
     }
-    _grid.update(_items);
+    _grid.update(_items, this);
     _grid.updateElems(_items);
     _items.RemoveAll((item) => 
     {
@@ -647,8 +647,8 @@ public class Level : MonoBehaviour
   }
   void OnItemPushedOut(Item item)
   {
-    _pushesInMove++;
     AddPoints(item.Points);
+    _pushesInMove++;
   }
   void ShowBigGreets()
   {
@@ -977,7 +977,7 @@ public class Level : MonoBehaviour
   }
   IEnumerator coSequenece()
   {
-    _grid.update(_items);
+    _grid.update(_items, this);
     _sequence = true;
 
     if(_painting.Count > 0)
@@ -1137,7 +1137,7 @@ public class Level : MonoBehaviour
     }
     _items.RemoveAll((item) => toDestroy.Contains(item));
     _matching.Clear();
-    _grid.update(_items);
+    _grid.update(_items, this);
   }
   void DestroyMatch()
   {
@@ -1177,7 +1177,7 @@ public class Level : MonoBehaviour
     toRemove.AddRange(_exploding);
     _exploding.Clear();
     _items.RemoveAll((item) => toRemove.Contains(item));
-    _grid.update(_items);
+    _grid.update(_items, this);
   }
 
   Vector2Int[] vdirections = new Vector2Int[4]
@@ -1190,7 +1190,7 @@ public class Level : MonoBehaviour
   IEnumerator coCheckMove()
   {
     List<Item> itemsToPush = new List<Item>();
-    _grid.update(_items);
+    _grid.update(_items, this);
     bool _pushed = false;
     for(int d = 0; d < vdirections.Length && !_pushed; ++d)
     {
