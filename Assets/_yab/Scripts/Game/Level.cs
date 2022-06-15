@@ -404,15 +404,10 @@ public class Level : MonoBehaviour
       {
         va.x = x - _grid.dim().x/2;
         if(Succeed)
-        {
           _grid.getElem(va).Hide();
-          yield return new WaitForSeconds(1 / 60f);
-        }
         else
-        {
-          _grid.getElem(va).Fracture();
-          yield return new WaitForSeconds(1 / 30f);
-        }
+         _grid.getElem(va).Fracture();
+        yield return new WaitForSeconds(1 / 60f);
       }
     }
   }
