@@ -42,6 +42,10 @@ public class GridElem : MonoBehaviour
   {
     _actObj.DeactivateObject();
   }
+  public void SetVis(bool vis)
+  {
+    rend.gameObject.SetActive(vis);
+  }
   void SetColor()
   {
     rend.material.color = (_even)? colorEven : colorOdd;

@@ -178,6 +178,11 @@ public class Level : MonoBehaviour
           _elems[v.y, v.x].gameObject.SetActive(false);
           _fields[v.y, v.x] = false;
         }
+        if(items[q].IsDirectional)
+        {
+          var v = _dim / 2 + items[q].grid;
+          _elems[v.y, v.x].SetVis(false);
+        }
       }      
     }
     public void setElem(GridElem elem)
@@ -227,6 +232,7 @@ public class Level : MonoBehaviour
       //getElem(v + vdir + new Vector2Int(-vdir.y, -vdir.x))?.Touch(0.33f);
       //getElem(v + vdir + new Vector2Int(vdir.y, vdir.x))?.Touch(0.33f);
     }
+    public void setVis(Vector2Int v) => getElem(v).SetVis(false);
   }
   public struct Match3
   {
