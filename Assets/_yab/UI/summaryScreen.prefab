@@ -1629,9 +1629,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   navNextPanel: {fileID: 1352173280443761175}
   navRestartPanel: {fileID: 5084703429188055810}
+  navClaimPanel: {fileID: 8944762502293987630}
   winContainer: {fileID: 3751278276026146211}
   failContainer: {fileID: 6846907690555509439}
-  slider: {fileID: 3686703617490899793}
+  rewardContainer: {fileID: 4587971421171862289}
+  slider: {fileID: 1933666268083704894}
   stars:
   - {fileID: 8881035245917875787}
   - {fileID: 3048724175414243772}

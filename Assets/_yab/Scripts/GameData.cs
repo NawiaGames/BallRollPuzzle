@@ -192,5 +192,25 @@ public class GameData : ScriptableObject
       }
       return ret;
     }
+
+    public static mr.Range<int> GetRewardProgress()
+    {
+      var range = new mr.Range<int>();
+      int lvl = GameState.Progress.Level;
+      range.beg = 0;
+      range.end = get().listRewards[0].level;
+
+      for(int q = 0; q < get().listRewards.Count; ++q)
+      {
+        var lvl2 = get().listRewards[q].level;
+        if(lvl > lvl2)
+        {
+          range.beg = range.end;
+          range.end = lvl2;
+        }
+      }
+
+      return range;
+    }
   }
 }
