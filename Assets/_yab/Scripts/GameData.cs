@@ -40,6 +40,7 @@ public class GameData : ScriptableObject
   [SerializeField] int pointMatchStandard = 100;
   [SerializeField] int pointMatchSpec = 200;
   [SerializeField] int pointBombExplode = 100;
+  [SerializeField] int pointMoveLeft = 500;
   [SerializeField] float[] percentOfPointsForStars;
   [SerializeField] string[] comboText;
 
@@ -158,10 +159,11 @@ public class GameData : ScriptableObject
   public static class Points
   {
     public static int ballOut(int num) => get().pointBallOut + get().pointBallOutEveryNext * num;
-    public static int matchStandard() => get().pointMatchStandard;
-    public static int bombExplode() => get().pointBombExplode;
+    public static int matchStandard => get().pointMatchStandard;
+    public static int bombExplode => get().pointBombExplode;
+    public static int moveLeft => get().pointMoveLeft;
     public static float percentForStars(int stars) => get().percentOfPointsForStars[Mathf.Clamp(stars, 0, get().percentOfPointsForStars.Length-1)];
-    public static string randomComboText() => get().comboText.get_random();
+    public static string randomComboText => get().comboText.get_random();
   }
   public static class Rewards
   {

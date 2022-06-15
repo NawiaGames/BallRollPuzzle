@@ -245,7 +245,7 @@ public class Level : MonoBehaviour
       _matches = new List<Item>(list);
       for(int q = 0; q < _matches.Count; ++q)
         _matches[q].IsFrozen = true;
-      Points = GameData.Points.matchStandard() * _matches.Count;
+      Points = GameData.Points.matchStandard * _matches.Count;
     }
 
     public Vector3 MidPos()
@@ -1210,8 +1210,8 @@ public class Level : MonoBehaviour
         yield return new WaitForSeconds(_bombExplodeDelay);
         if(!items[n].IsStatic && !items[n].IsRemoveElem)
         {
-          AddPoints(GameData.Points.bombExplode());
-          items[n].Points = GameData.Points.bombExplode();
+          items[n].Points = GameData.Points.bombExplode;
+          AddPoints(items[n].Points);
           items[n].Explode();
           items[n].Hide();
           toRemove.Add(items[n]);
@@ -1262,6 +1262,31 @@ public class Level : MonoBehaviour
   {
     StartCoroutine(coCheckMove());
   }
+  IEnumerator coEnd()
+  {
+    Succeed = !AnyColorItem;
+    if(_nextItem != null)
+      _listItems.Add(_nextItem);
+    _nextItem = null;  
+    while(_listItems.Count > 0)
+    {
+      _listItems.RemoveAt(0);
+      AddPoints(GameData.Points.movesLeft);
+      yield return new WaitForSeconds(0.125f);
+    }
+    OutroBalls();
+    if(Succeed)
+    {
+      DestroyGrid();
+      DestroyArrows();
+    }
+    this.Invoke(() => onFinished?.Invoke(this), 0.5f);
+    this.Invoke(() =>
+    {
+      Succeed = !AnyColorItem;
+      uiSummary.Show(this);
+    }, 1.5f);    
+  }
   void CheckEnd()
   {
     if(!Finished)
@@ -1269,19 +1294,7 @@ public class Level : MonoBehaviour
       if((!AnyColorItem && _moving.Count == 0 && _pushing.Count == 0) || movesAvail == 0)
       {
         Finished = true;
-        Succeed = !AnyColorItem;
-        OutroBalls();
-        if(Succeed)
-        {
-          DestroyGrid();
-          DestroyArrows();
-        }
-        this.Invoke(() => onFinished?.Invoke(this), 0.5f);
-        this.Invoke(() => 
-        {
-          Succeed = !AnyColorItem; 
-          uiSummary.Show(this);
-        }, 1.5f);
+        StartCoroutine(coEnd());
       }
     }
   }
