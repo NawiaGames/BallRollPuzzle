@@ -12,7 +12,7 @@ using TMPLbl = TMPro.TextMeshPro;
 public class Level : MonoBehaviour
 {
   public static System.Action<Vector3> onIntroFx;
-  public static System.Action<Level>   onCreate, onStart, onPlay, onFirstInteraction, onTutorialStart, onPointsAdded;
+  public static System.Action<Level>   onCreate, onStart, onPlay, onFirstInteraction, onTutorialStart, onPointsAdded, onMovesLeftChanged;
   public static System.Action<Level>   onFinished, onDestroy, onItemThrow;
   public static System.Action<Match3>  onItemsMatched;
   public static System.Action<Item, Item> onItemsHit;
@@ -655,6 +655,7 @@ public class Level : MonoBehaviour
           item = GameData.Prefabs.CreateRandItem(_trayItemContainer, false);
       }
       _listItems.RemoveAt(0);
+      //onMovesLeftChanged?.Invoke(this);
     }
 
     if(item)
@@ -1268,9 +1269,10 @@ public class Level : MonoBehaviour
     if(_nextItem != null)
       _listItems.Add(_nextItem);
     _nextItem = null;  
-    while(_listItems.Count > 0)
+    while(movesAvail > 0)
     {
       _listItems.RemoveAt(0);
+      onMovesLeftChanged?.Invoke(this);
       AddPoints(GameData.Points.moveLeft);
       yield return new WaitForSeconds(0.125f);
     }
@@ -1280,12 +1282,11 @@ public class Level : MonoBehaviour
       DestroyGrid();
       DestroyArrows();
     }
-    this.Invoke(() => onFinished?.Invoke(this), 0.5f);
-    this.Invoke(() =>
-    {
-      Succeed = !AnyColorItem;
-      uiSummary.Show(this);
-    }, 1.5f);    
+    yield return new WaitForSeconds(1.0f);
+    Succeed = !AnyColorItem;
+    onFinished?.Invoke(this);
+    yield return new WaitForSeconds(0.5f);
+    uiSummary.Show(this);
   }
   void CheckEnd()
   {

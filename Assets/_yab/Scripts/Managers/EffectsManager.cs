@@ -112,7 +112,7 @@ public class EffectsManager : MonoBehaviour
     {
       var psmain = fxPaintSplat.main;
       psmain.startColor = sender.color;      
-      PlayFXAtPosition(fxPaintSplat, sender.transform.position, 20);
+      PlayFXAtPosition(fxPaintSplat, sender.transform.position, 1);
     }
     void OnItemsMatched(Level.Match3 match)
     {

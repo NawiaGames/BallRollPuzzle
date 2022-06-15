@@ -41,6 +41,7 @@ public class UIIngame : MonoBehaviour
     Level.onItemThrow += OnItemThrow;
     Level.onPowerupUsed += OnPowerupUsed;
     Level.onPointsAdded += OnPointsAdded;
+    Level.onMovesLeftChanged += OnMovesLeftChanged;
     Level.onDestroy += OnLevelDestroy;
     Level.onCombo += OnCombo;
     Item.onHide += OnItemHide;
@@ -52,6 +53,7 @@ public class UIIngame : MonoBehaviour
     Level.onItemThrow -= OnItemThrow;
     Level.onPowerupUsed -= OnPowerupUsed;
     Level.onPointsAdded -= OnPointsAdded;
+    Level.onMovesLeftChanged -= OnMovesLeftChanged;
     Level.onDestroy -= OnLevelDestroy;
     Level.onCombo -= OnCombo;
     Item.onHide -= OnItemHide;
@@ -130,7 +132,7 @@ public class UIIngame : MonoBehaviour
   }
   void OnItemThrow(Level lvl)
   {
-    lblBallsLeft.text = (lvl.movesAvail-1).ToString();
+    lblBallsLeft.text = (lvl.movesAvail).ToString();
     PowerupsDeselect();
     UpdateBallsInfo(null);
   }
@@ -143,6 +145,10 @@ public class UIIngame : MonoBehaviour
   void OnPointsAdded(Level lvl)
   {
     _pointDest = lvl.Points;
+  }
+  void OnMovesLeftChanged(Level lvl)
+  {
+    lblBallsLeft.text = (lvl.movesAvail).ToString();
   }
   void OnCombo()
   {
@@ -191,7 +197,7 @@ public class UIIngame : MonoBehaviour
   {
     if(_pointCurr != _pointDest)
     {
-      _pointCurr = Mathf.MoveTowards(_pointCurr, _pointDest, Time.deltaTime * 500.0f);
+      _pointCurr = Mathf.MoveTowards(_pointCurr, _pointDest, Time.deltaTime * 60 * 500.0f);
       progress.value = _pointCurr;
       UpdateScore();
     }
