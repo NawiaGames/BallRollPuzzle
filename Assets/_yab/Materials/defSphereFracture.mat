@@ -135,7 +135,7 @@ Material:
     - _RimExponent: 0.5
     - _RimIntensity: 0.3
     - _Saturation: 1
-    - _Smoothness: 0.75
+    - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SoftParticlesEnabled: 0
     - _SoftParticlesFarFadeDistance: 1
