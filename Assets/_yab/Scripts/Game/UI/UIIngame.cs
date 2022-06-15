@@ -197,7 +197,7 @@ public class UIIngame : MonoBehaviour
   {
     if(_pointCurr != _pointDest)
     {
-      _pointCurr = Mathf.MoveTowards(_pointCurr, _pointDest, Time.deltaTime * 60 * 500.0f);
+      _pointCurr = Mathf.MoveTowards(_pointCurr, _pointDest, Time.deltaTime * 1200);
       progress.value = _pointCurr;
       UpdateScore();
     }
