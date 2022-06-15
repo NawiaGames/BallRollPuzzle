@@ -15,6 +15,7 @@ public class UIIngame : MonoBehaviour
   [SerializeField] UIPanel topPanel;
   [SerializeField] TMPLbl  lblLevelInfo;
   [SerializeField] TMPLbl  lblBallsCnt;
+  [SerializeField] TMPLbl  lblBallsMax;
   [SerializeField] TMPLbl  lblCash;
   [SerializeField] TMPLbl  lblBallsLeft;
 
@@ -121,7 +122,8 @@ public class UIIngame : MonoBehaviour
   void UpdateBallsInfo(Item sender)
   {
     if(_lvl)
-      lblBallsCnt.text = "" + (_lvl.BallsInitialCnt-_lvl.ColorItems) + "/" + _lvl.BallsInitialCnt;
+      lblBallsCnt.text = "" + (_lvl.BallsInitialCnt-_lvl.ColorItems);
+      lblBallsMax.text = "of" + _lvl.BallsInitialCnt;
   }
   void OnLevelDestroy(Level lvl)
   {

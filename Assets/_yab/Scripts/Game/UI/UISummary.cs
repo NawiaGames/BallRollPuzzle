@@ -44,7 +44,7 @@ public class UISummary : MonoBehaviour
 
     if(_uiRewards == null)
       _uiRewards = rewardContainer.GetComponentsInChildren<UIReward>(true);
-    showReward = (level.LevelIdx == range.end && level.LevelIdx != GameState.Powerups.ClaimedOnLevel);
+    showReward = (level.LevelIdx == range.end && GameData.Rewards.ToClaim(level.LevelIdx));
 
     winContainer.gameObject.SetActive(level.Succeed);
     failContainer.gameObject.SetActive(!level.Succeed);
@@ -59,20 +59,6 @@ public class UISummary : MonoBehaviour
       failContainer.ActivatePanel();
       navRestartPanel.ActivatePanel();   
     }
-
-    // if(level.Succeed)
-    // {
-    //   if(!showReward)
-    //     navNextPanel.ActivatePanel();
-    //   else
-    //     navClaimPanel.ActivatePanel();  
-    // }
-    // else
-    //   navRestartPanel.ActivatePanel();
-
-    // AddRewards(level);
-
-    // this.Invoke(()=> updateSlider = true, 1.0f);
   }
   void Hide()
   {

@@ -192,6 +192,11 @@ public class GameData : ScriptableObject
       }
       return ret;
     }
+    public static bool ToClaim(int level)
+    {
+      Reward? rew = GetReward(level);
+      return rew != null && level == GameState.Progress.LevelPlayed && GameState.Progress.LevelPlayed > GameState.Powerups.ClaimedOnLevel;
+    }
 
     public static mr.Range<int> GetRewardProgress()
     {
