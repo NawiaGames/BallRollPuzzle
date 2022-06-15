@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   registerPanel: 1
-  contentContainer: {fileID: 0}
+  contentContainer: {fileID: 6191274763608660853}
   activateOnTop: 0
   activationDelay: 0
 --- !u!1 &246735834248054139
@@ -5458,7 +5458,7 @@ PrefabInstance:
     - target: {fileID: 2650714622058195770, guid: 39fcc812c1f222f45a9a6edea79135aa, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 6369697263092227975, guid: 82f879583dda1cd429179c1fb8eac11e, type: 3}
+      objectReference: {fileID: -1105471682781747023, guid: 4c378e377072cf145ad5d536b9aba7de, type: 3}
     - target: {fileID: 2754233224562739650, guid: 39fcc812c1f222f45a9a6edea79135aa, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5645,7 +5645,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8851067632771146524, guid: 39fcc812c1f222f45a9a6edea79135aa, type: 3}
       propertyPath: m_Name
-      value: infoFrame (3)
+      value: pushh3Ball
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39fcc812c1f222f45a9a6edea79135aa, type: 3}
@@ -5797,7 +5797,7 @@ PrefabInstance:
     - target: {fileID: 2650714622058195770, guid: 39fcc812c1f222f45a9a6edea79135aa, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 6369697263092227975, guid: 82f879583dda1cd429179c1fb8eac11e, type: 3}
+      objectReference: {fileID: -5555134974580488717, guid: 4c378e377072cf145ad5d536b9aba7de, type: 3}
     - target: {fileID: 2754233224562739650, guid: 39fcc812c1f222f45a9a6edea79135aa, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5984,7 +5984,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8851067632771146524, guid: 39fcc812c1f222f45a9a6edea79135aa, type: 3}
       propertyPath: m_Name
-      value: infoFrame (1)
+      value: colorBall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39fcc812c1f222f45a9a6edea79135aa, type: 3}
@@ -6111,6 +6111,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4224052395869264749, guid: e2290352c8f3bcf48b35d78211161170, type: 3}
   m_PrefabInstance: {fileID: 4230266119453649928}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6191274763608660853 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8025202361718519677, guid: e2290352c8f3bcf48b35d78211161170, type: 3}
+  m_PrefabInstance: {fileID: 4230266119453649928}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5274702854810428046
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6141,7 +6146,7 @@ PrefabInstance:
     - target: {fileID: 2650714622058195770, guid: 39fcc812c1f222f45a9a6edea79135aa, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 6369697263092227975, guid: 82f879583dda1cd429179c1fb8eac11e, type: 3}
+      objectReference: {fileID: 915673000278630297, guid: 4c378e377072cf145ad5d536b9aba7de, type: 3}
     - target: {fileID: 2754233224562739650, guid: 39fcc812c1f222f45a9a6edea79135aa, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -6328,7 +6333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8851067632771146524, guid: 39fcc812c1f222f45a9a6edea79135aa, type: 3}
       propertyPath: m_Name
-      value: infoFrame (2)
+      value: paintBall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39fcc812c1f222f45a9a6edea79135aa, type: 3}
@@ -6829,7 +6834,7 @@ PrefabInstance:
     - target: {fileID: 2650714622058195770, guid: 39fcc812c1f222f45a9a6edea79135aa, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 6369697263092227975, guid: 82f879583dda1cd429179c1fb8eac11e, type: 3}
+      objectReference: {fileID: -4603156472066961037, guid: 4c378e377072cf145ad5d536b9aba7de, type: 3}
     - target: {fileID: 2754233224562739650, guid: 39fcc812c1f222f45a9a6edea79135aa, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -7016,7 +7021,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8851067632771146524, guid: 39fcc812c1f222f45a9a6edea79135aa, type: 3}
       propertyPath: m_Name
-      value: infoFrame
+      value: bomb
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39fcc812c1f222f45a9a6edea79135aa, type: 3}
