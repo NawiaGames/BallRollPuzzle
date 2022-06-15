@@ -71,15 +71,15 @@ MonoBehaviour:
     powerupPainters: 0
     powerupArrows: 8
   - level: 12
-    powerupBombs: 5
+    powerupBombs: 4
     powerupColors: 0
     powerupPainters: 0
-    powerupArrows: 1
+    powerupArrows: 2
   - level: 20
     powerupBombs: 1
-    powerupColors: 4
+    powerupColors: 6
     powerupPainters: 0
-    powerupArrows: 1
+    powerupArrows: 2
   - level: 25
     powerupBombs: 1
     powerupColors: 1
