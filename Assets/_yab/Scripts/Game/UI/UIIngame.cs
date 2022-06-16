@@ -12,12 +12,13 @@ public class UIIngame : MonoBehaviour
   [SerializeField] TMPLbl score;
 
   [Header("TopPanelRefs")]
-  [SerializeField] UIPanel topPanel;
-  [SerializeField] TMPLbl  lblLevelInfo;
-  [SerializeField] TMPLbl  lblBallsCnt;
-  [SerializeField] TMPLbl  lblBallsMax;
-  [SerializeField] TMPLbl  lblCash;
-  [SerializeField] TMPLbl  lblBallsLeft;
+  [SerializeField] UIPanel    topPanel;
+  [SerializeField] TMPLbl     lblLevelInfo;
+  [SerializeField] TMPLbl     lblBallsCnt;
+  [SerializeField] TMPLbl     lblBallsMax;
+  [SerializeField] TMPLbl     lblCash;
+  [SerializeField] TMPLbl     lblBallsLeft;
+  [SerializeField] GameObject moveLblObj;
 
   [Header("powerupsRefs")]
   [SerializeField] UIPanel  bottomPanel;
@@ -28,6 +29,7 @@ public class UIIngame : MonoBehaviour
   [SerializeField] float    comboAnimDuration;
 
   public static System.Action<GameState.Powerups.Type, bool> onPowerupChanged;
+  public static System.Action<GameObject> onMoveLblChanged;
 
   int   _pointDest = 0;
   float _pointCurr = 0;
@@ -151,6 +153,7 @@ public class UIIngame : MonoBehaviour
   void OnMovesLeftChanged(Level lvl)
   {
     lblBallsLeft.text = lvl.movesAvail.ToString();
+    onMoveLblChanged?.Invoke(moveLblObj);
   }
   void OnCombo(int events_cnt)
   {

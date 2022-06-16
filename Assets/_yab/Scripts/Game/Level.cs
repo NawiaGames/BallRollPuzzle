@@ -559,6 +559,7 @@ public class Level : MonoBehaviour
   }
   void SelectArrows()
   {
+    _arrowsSelected.ForEach((arr) => arr.IsSelected = false);
     _arrowsSelected.Clear();
     if(arrowBeg == null)
       return;
@@ -577,13 +578,12 @@ public class Level : MonoBehaviour
         _arrowsSelected.RemoveAt(q);
         --q;
       }
-      // else
-      //   _arrowsSelected[q].IsSelected = _arrowsSelected[q].IsSelected;
     }
     UpdateArrows();
   }
   void ClearArrows()
   {
+    _arrowsSelected.ForEach((arr) => arr.IsSelected = false);
     _arrowsSelected.Clear();
     for(int q = 0; q < _arrows.Count; ++q)
       _arrows[q].IsSelected = false;
@@ -604,8 +604,8 @@ public class Level : MonoBehaviour
     {
       _arrows[q].IsSelected = false;
       _grid.selectElems(_arrows[q].grid, _arrows[q].dir, false);
-      if(_grid.isBlocked(_arrows[q].grid + _arrows[q].dir)) // _grid.geti(_arrows[q].grid + _arrows[q].dir) != null)
-        _arrows[q].IsBlocked = true;
+       if(_grid.isBlocked(_arrows[q].grid + _arrows[q].dir))
+         _arrows[q].IsBlocked = true;
     }
     for(int q = 0; q < _arrowsSelected.Count; ++q)
     {
@@ -1206,15 +1206,12 @@ public class Level : MonoBehaviour
   IEnumerator coEnd()
   {
     Succeed = !AnyColorItem;
-    // if(_nextItem != null)
-    //   _listItems.Add(_nextItem);
-    //_nextItem = null;  
     while(movesAvail > 0)
     {
       _listItems.RemoveAt(0);
       onMovesLeftChanged?.Invoke(this);
       AddPoints(GameData.Points.moveLeft);
-      yield return new WaitForSeconds(0.125f/4);
+      yield return new WaitForSeconds(0.125f);
     }
     OutroBalls();
     DestroyGrid();

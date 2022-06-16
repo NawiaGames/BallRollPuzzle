@@ -36,8 +36,7 @@ public class EffectsManager : MonoBehaviour
     ParticleSystem[] fxPainterSubs;
 
     ObjectShake cameraShakeContainer;
-    UIInfoLabelManager infoLblMan;//, infoLblBigMan;
-    //Level _lvl = null;
+    UIInfoLabelManager infoLblMan,infoLblManDown;
 
     List<GameLib.ObjectFracture> listFractures = new List<GameLib.ObjectFracture>();
 
@@ -45,9 +44,9 @@ public class EffectsManager : MonoBehaviour
     {
       cameraShakeContainer = Camera.main.GetComponentInParent<ObjectShake>();
       //fxConfetti = GameObject.FindGameObjectWithTag("ConfettiFX").GetComponent<ParticleSystem>();
-      infoLblMan = FindObjectOfType<UIInfoLabelManager>(true);
-    //infoLblMan = GameObject.Find("infoCanvas").GetComponent<UIInfoLabelManager>();
-    //infoLblBigMan = GameObject.Find("infoCanvasBig").GetComponent<UIInfoLabelManager>();
+      //infoLblMan = FindObjectOfType<UIInfoLabelManager>(true);
+      infoLblMan = GameObject.Find("infoCanvas").GetComponent<UIInfoLabelManager>();
+      infoLblManDown = GameObject.Find("infoCanvas2").GetComponent<UIInfoLabelManager>();
 
       fxPainterSubs = fxPainter.GetComponentsInChildren<ParticleSystem>();
     }
@@ -63,6 +62,7 @@ public class EffectsManager : MonoBehaviour
       Level.onItemsHit += OnItemsHit;
       Level.onFinished += OnLevelFinished;
       Level.onCombo += OnLevelCombo;
+      UIIngame.onMoveLblChanged += OnMoveLblChanged;
     }
     private void OnDisable()
     {
@@ -76,6 +76,7 @@ public class EffectsManager : MonoBehaviour
       Level.onItemsHit -= OnItemsHit;
       Level.onFinished -= OnLevelFinished;
       Level.onCombo -= OnLevelCombo;
+      UIIngame.onMoveLblChanged -= OnMoveLblChanged;
     }
 
     Vector3 GetFxPosition(Vector3 objectPosition) => objectPosition + (objectPosition - Camera.main.transform.position).normalized * -offsetToCamera;
@@ -159,6 +160,11 @@ public class EffectsManager : MonoBehaviour
       //var emitParams = new ParticleSystem.EmitParams();
       //emitParams.position = sender.transform.position;
       //fxBallFractures.Emit(emitParams, 4);
+    }
+    void OnMoveLblChanged(GameObject go)
+    {
+    //infoLblMan.ShowTextPopupUI(go.transform.position + new Vector3(Random.Range(-1.0f, 1.0f) * 100, 0,Random.Range(-1.0f, 1.0f)*100) , "asdad");
+      infoLblManDown.ShowTextPopupUI(go.transform.position + new Vector3(Random.Range(-1.0f, 1.0f) * 25, 0, Random.Range(-2.0f, -1.0f) * 100), string.Format("+{0}", GameData.Points.moveLeft));
     }
     void OnFx00(object sender)
     {
