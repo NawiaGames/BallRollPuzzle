@@ -164,7 +164,7 @@ public class EffectsManager : MonoBehaviour
     void OnMoveLblChanged(GameObject go)
     {
     //infoLblMan.ShowTextPopupUI(go.transform.position + new Vector3(Random.Range(-1.0f, 1.0f) * 100, 0,Random.Range(-1.0f, 1.0f)*100) , "asdad");
-      infoLblManDown.ShowTextPopupUI(go.transform.position + new Vector3(Random.Range(-1.0f, 1.0f) * 25, 0, Random.Range(-2.0f, -1.0f) * 100), string.Format("+{0}", GameData.Points.moveLeft));
+      infoLblManDown.ShowTextPopupUI(go.transform.position + new Vector3(Random.Range(-1.0f, 1.0f) * 25, 0, Random.Range(-1.0f, 1.0f) * 10), string.Format("+{0}", GameData.Points.moveLeft));
     }
     void OnFx00(object sender)
     {
