@@ -95,11 +95,14 @@ MonoBehaviour:
   - 0.5
   - 0.7
   - 0.85
-  comboText:
-  - Great!
-  - Awesome!
-  - Fantastic!
-  - Impresive!
+  comboText0:
+  - nice!
+  - good!
+  - superb!
+  comboText1:
+  - amazing!
+  - wow!
+  - awesome!
   themeColors:
   - {r: 0.78, g: 0.7532353, b: 0.7532353, a: 1}
   - {r: 0.1882353, g: 0.17254902, b: 0.17254902, a: 1}

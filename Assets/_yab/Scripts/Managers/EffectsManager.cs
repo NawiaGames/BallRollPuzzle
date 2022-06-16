@@ -109,7 +109,7 @@ public class EffectsManager : MonoBehaviour
     }
     void OnItemPushedOut(Item sender)
     {
-      infoLblMan.ShowTextPopup(sender.transform.position, string.Format(strPushedOut, sender.Points));
+      infoLblMan.ShowTextPopup(sender.transform.position, string.Format(strPushedOut, sender.Points), sender.color);
     }
     void OnItemBombExplo(Item sender)
     {
@@ -119,7 +119,7 @@ public class EffectsManager : MonoBehaviour
     }
     void OnItemExplo(Item sender)
     {
-      infoLblMan.ShowTextPopup(sender.transform.position, string.Format(strItemExplo, sender.Points));
+      infoLblMan.ShowTextPopup(sender.transform.position, string.Format(strItemExplo, sender.Points), sender.color);
     }
     void OnItemsHit(Item itemA, Item itemB)
     {
@@ -176,7 +176,7 @@ public class EffectsManager : MonoBehaviour
       //infoLblMan.ShowTextPopup(item.vPos, GameData.Satisfy.GetSatisfyString(3), Color.green);
       //SparksFX(item.vPos);
     }
-    void OnLevelCombo()
+    void OnLevelCombo(int events_cnt)
     {
       //infoLblBigMan.ShowTextPopup(Vector3.zero, strGreetings.get_random(), Color.white);
     }

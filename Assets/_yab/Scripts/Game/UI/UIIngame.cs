@@ -152,9 +152,14 @@ public class UIIngame : MonoBehaviour
   {
     lblBallsLeft.text = lvl.movesAvail.ToString();
   }
-  void OnCombo()
+  void OnCombo(int events_cnt)
   {
     comboPanel.ActivatePanel();
+    if(events_cnt == 2)
+      comboText.text = GameData.Points.randomComboText0;
+    else if(events_cnt > 2)
+      comboText.text = GameData.Points.randomComboText1;
+    comboText.GetComponent<GameLib.Utilities.TextEffects.TextAnimator>().RefreshTextAnimatorData();  
     this.Invoke(() => comboPanel.DeactivatePanel(), comboAnimDuration);
   }
   public void OnBtnRestart()

@@ -42,7 +42,7 @@ public class GameData : ScriptableObject
   [SerializeField] int pointBombExplode = 100;
   [SerializeField] int pointMoveLeft = 500;
   [SerializeField] float[] percentOfPointsForStars;
-  [SerializeField] string[] comboText;
+  [SerializeField] string[] comboText0, comboText1;
 
   [SerializeField] Color[]    themeColors;
   public static Color[] GetThemeColors() => get().themeColors;
@@ -169,7 +169,8 @@ public class GameData : ScriptableObject
     public static int bombExplode => get().pointBombExplode;
     public static int moveLeft => get().pointMoveLeft;
     public static float percentForStars(int stars) => get().percentOfPointsForStars[Mathf.Clamp(stars, 0, get().percentOfPointsForStars.Length-1)];
-    public static string randomComboText => get().comboText.get_random();
+    public static string randomComboText0 => get().comboText0.get_random();
+    public static string randomComboText1 => get().comboText1.get_random();
   }
   public static class Rewards
   {

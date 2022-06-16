@@ -17,7 +17,7 @@ public class Level : MonoBehaviour
   public static System.Action<Match3>  onItemsMatched;
   public static System.Action<Item, Item> onItemsHit;
   public static System.Action<GameState.Powerups.Type> onPowerupUsed;  
-  public static System.Action onCombo;
+  public static System.Action<int>     onCombo;
 
   [Header("Refs")]
   [SerializeField] Transform _arrowsContainer;
@@ -677,10 +677,9 @@ public class Level : MonoBehaviour
   }
   void ShowBigGreets()
   {
-    if(_matchesInMove > 1 || _pushesInMove > 2)
-    {
-      onCombo?.Invoke();
-    }
+    int eventsCnt = _matchesInMove + _pushesInMove;
+    if(eventsCnt >= 2)
+      onCombo?.Invoke(eventsCnt);
   }
   public void OnInputBeg(TouchInputData tid)
   {
