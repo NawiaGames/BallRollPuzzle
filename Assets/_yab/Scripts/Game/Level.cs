@@ -529,7 +529,7 @@ public class Level : MonoBehaviour
   List<Item> _pushing = new List<Item>();
 
   Arrow   arrowBeg = null, arrowEnd = null;
-  List<Arrow> FindArrow(Vector2Int vi)
+  List<Arrow> FindArrows(Vector2Int vi)
   {
     List<Arrow> arrows = new List<Arrow>();
     bool horz = Mathf.Abs(vi.y) == _grid.dim().y/2 + 1;
@@ -556,6 +556,34 @@ public class Level : MonoBehaviour
       arrows.Add(_arrows[idxNext]);
 
     return arrows;
+  }
+  void SelectArrow()
+  {
+    _arrowsSelected.Clear();
+    if(arrowBeg == null)
+      return;
+    bool horz = Mathf.Abs(arrowBeg.vPos.z) == (_grid.dim().y / 2 + 1);
+
+    _arrowsSelected.Add(arrowBeg);
+    if(_powerupSelected == GameState.Powerups.Type.Arrows)
+    {
+      var arrs = FindArrows(arrowBeg.grid);
+      arrs.ForEach((ar) => ar.IsSelected = true);
+      _arrowsSelected.AddRange(arrs);
+    }
+    _arrowsSelected = _arrowsSelected.Distinct().ToList();
+    for(int q = 0; q < _arrowsSelected.Count; ++q)
+    {
+      _arrowsSelected[q].IsBlocked = _grid.isBlocked(_arrowsSelected[q].grid + _arrowsSelected[q].dir); //_grid.geti(_arrowsSelected[q].grid + _arrowsSelected[q].dir) != null;
+      if(_arrowsSelected[q].IsBlocked)
+      {
+        _arrowsSelected.RemoveAt(q);
+        --q;
+      }
+      else
+        _arrowsSelected[q].IsSelected = _arrowsSelected[q].IsSelected;
+    }
+    UpdateArrows();      
   }
   void SelectArrows()
   {
@@ -588,7 +616,7 @@ public class Level : MonoBehaviour
 
     if(_powerupSelected == GameState.Powerups.Type.Arrows)
     {
-      var arrs = FindArrow(arrowBeg.grid);
+      var arrs = FindArrows(arrowBeg.grid);
       arrs.ForEach((ar) => ar.IsSelected = true);
       _arrowsSelected.AddRange(arrs);
     }
@@ -704,37 +732,15 @@ public class Level : MonoBehaviour
   public void OnInputBeg(TouchInputData tid)
   {
     arrowBeg = arrowEnd = null;
-    if(!_allowInput || !AnyColorItem) // || !_firstInteraction)
+  }
+  public void OnInputMov(TouchInputData tid)
+  {
+    if(!_allowInput || !AnyColorItem)
       return;
 
     arrowBeg = tid.GetClosestCollider(0.5f)?.GetComponent<Arrow>() ?? null;
     if(arrowBeg)
-    {
-      arrowEnd = arrowBeg;
-      SelectArrows();
-    }
-  }
-  public void OnInputMov(TouchInputData tid)
-  {
-    if(!_allowInput || !AnyColorItem) // || !_firstInteraction)
-      return;
-
-    arrowEnd = tid.GetClosestCollider(0.5f)?.GetComponent<Arrow>() ?? null;
-    if(arrowEnd)
-    {
-      if(_multiArrowSelection)
-        SelectArrows();
-      else
-      {
-        if(arrowBeg != arrowEnd)
-          ClearArrows();
-        // else
-        // {
-        //   if(_powerupSelected == GameState.Powerups.Type.Arrows)
-        //     SelectArrow(arrowBeg);
-        // }
-      }
-    }
+      SelectArrow();
     else
       ClearArrows();
   }
@@ -777,7 +783,6 @@ public class Level : MonoBehaviour
         onPowerupUsed?.Invoke(_powerupSelected);
         _powerupSelected = GameState.Powerups.Type.None;
       }
-
       Destroy(_nextItem.gameObject);
       _nextItem = null;
       onItemThrow?.Invoke(this);
