@@ -535,23 +535,23 @@ public class Level : MonoBehaviour
     bool horz = Mathf.Abs(vi.y) == _grid.dim().y/2 + 1;
     int idxPrev = -1;
     int idxNext = -1;
-    Vector2Int vn = vi;
+    Vector2Int vnp = vi;
+    Vector2Int vnn = vi;
     if(horz)
     {
-      vn.x = vi.x - 1;
-      idxPrev = _arrows.FindIndex((arr) => arr.grid == vn);
-      vn.x = vi.x + 1;
-      idxNext = _arrows.FindIndex((arr) => arr.grid == vn);
+      vnp.x = vi.x - 1;
+      vnn.x = vi.x + 1;
     }
     else
     {
-      vn.y = vi.y - 1;
-      idxPrev = _arrows.FindIndex((arr) => arr.grid == vn);
-      vn.y = vi.y + 1;
-      idxNext = _arrows.FindIndex((arr) => arr.grid == vn);
+      vnp.y = vi.y - 1;
+      vnn.y = vi.y + 1;
     }
+
+    idxPrev = _arrows.FindIndex((arr) => arr.grid == vnp);
     if(idxPrev >= 0)
       arrows.Add(_arrows[idxPrev]);
+    idxNext = _arrows.FindIndex((arr) => arr.grid == vnn);      
     if(idxNext >= 0)
       arrows.Add(_arrows[idxNext]);
 
@@ -562,33 +562,29 @@ public class Level : MonoBehaviour
     _arrowsSelected.Clear();
     if(arrowBeg == null)
       return;
-    bool horz = Mathf.Abs(arrowBeg.vPos.z) == (_grid.dim().y / 2 + 1);
 
     _arrowsSelected.Add(arrowBeg);
     if(_powerupSelected == GameState.Powerups.Type.Arrows)
-    {
-      var arrs = FindArrows(arrowBeg.grid);
-      arrs.ForEach((ar) => ar.IsSelected = true);
-      _arrowsSelected.AddRange(arrs);
-    }
+      _arrowsSelected.AddRange(FindArrows(arrowBeg.grid));
+
     _arrowsSelected = _arrowsSelected.Distinct().ToList();
+    _arrowsSelected.ForEach((ar) => ar.IsSelected = true);
     for(int q = 0; q < _arrowsSelected.Count; ++q)
     {
-      _arrowsSelected[q].IsBlocked = _grid.isBlocked(_arrowsSelected[q].grid + _arrowsSelected[q].dir); //_grid.geti(_arrowsSelected[q].grid + _arrowsSelected[q].dir) != null;
+      _arrowsSelected[q].IsBlocked = _grid.isBlocked(_arrowsSelected[q].grid + _arrowsSelected[q].dir);
       if(_arrowsSelected[q].IsBlocked)
       {
         _arrowsSelected.RemoveAt(q);
         --q;
       }
-      else
-        _arrowsSelected[q].IsSelected = _arrowsSelected[q].IsSelected;
+      // else
+      //   _arrowsSelected[q].IsSelected = _arrowsSelected[q].IsSelected;
     }
-    UpdateArrows();      
+    UpdateArrows();
   }
   void ClearArrows()
   {
     _arrowsSelected.Clear();
-    //arrowEnd = null;
     for(int q = 0; q < _arrows.Count; ++q)
       _arrows[q].IsSelected = false;
 
@@ -606,12 +602,14 @@ public class Level : MonoBehaviour
   {
     for(int q = 0; q < _arrows.Count; ++q)
     {
+      _arrows[q].IsSelected = false;
       _grid.selectElems(_arrows[q].grid, _arrows[q].dir, false);
       if(_grid.isBlocked(_arrows[q].grid + _arrows[q].dir)) // _grid.geti(_arrows[q].grid + _arrows[q].dir) != null)
         _arrows[q].IsBlocked = true;
     }
     for(int q = 0; q < _arrowsSelected.Count; ++q)
     {
+      _arrowsSelected[q].IsSelected = true;
       _grid.selectElems(_arrowsSelected[q].grid, _arrowsSelected[q].dir, true);
     }
   }
