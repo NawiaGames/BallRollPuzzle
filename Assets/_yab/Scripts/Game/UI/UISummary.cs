@@ -18,6 +18,7 @@ public class UISummary : MonoBehaviour
 
   [SerializeField] Slider  slider;
   [SerializeField] UITwoState[] stars;
+  [SerializeField] TMPLbl  levelInfo;
   [SerializeField] TMPLbl  scores;
   [SerializeField] string  strScoresFmt = "score: {0}";
 
@@ -29,6 +30,8 @@ public class UISummary : MonoBehaviour
 
   public void Show(Level level)
   {
+    levelInfo.text = "Level " + (level.LevelIdx + 1);
+
     var range = GameData.Rewards.GetRewardProgress();
     slider.minValue = range.beg;
     slider.maxValue = range.end+1;

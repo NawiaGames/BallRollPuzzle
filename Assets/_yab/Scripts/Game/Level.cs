@@ -725,8 +725,6 @@ public class Level : MonoBehaviour
         onPowerupUsed?.Invoke(_powerupSelected);
         _powerupSelected = GameState.Powerups.Type.None;
       }
-      //Destroy(_nextItem.gameObject);
-      //_nextItem = null;
       onItemThrow?.Invoke(this);
     }
     _arrowsSelected.Clear();

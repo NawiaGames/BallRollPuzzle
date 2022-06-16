@@ -31,7 +31,6 @@ public class UIIngame : MonoBehaviour
 
   int   _pointDest = 0;
   float _pointCurr = 0;
-  int   _maxBalls = 0;
 
   Level _lvl = null;
 
@@ -135,7 +134,7 @@ public class UIIngame : MonoBehaviour
   }
   void OnItemThrow(Level lvl)
   {
-    lblBallsLeft.text = (lvl.movesAvail).ToString();
+    lblBallsLeft.text = lvl.movesAvail.ToString();
     PowerupsDeselect();
     UpdateBallsInfo(null);
   }
@@ -151,7 +150,7 @@ public class UIIngame : MonoBehaviour
   }
   void OnMovesLeftChanged(Level lvl)
   {
-    lblBallsLeft.text = (lvl.movesAvail).ToString();
+    lblBallsLeft.text = lvl.movesAvail.ToString();
   }
   void OnCombo()
   {
