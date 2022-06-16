@@ -310,8 +310,7 @@ public class Level : MonoBehaviour
   List<Item> _destroying = new List<Item>();
   List<Item> _painting = new List<Item>();
   List<Check> _checks = new List<Check>();
-  //List<ObjectFracture> _fractures = new List<ObjectFracture>();
-  //List<Item> _listNextItems = new List<Item>();
+  Transform _cameraContainer = null;
 
   //Item _nextItem = null;
   bool _inputBlocked = false;
@@ -336,8 +335,9 @@ public class Level : MonoBehaviour
 
     UIIngame.onPowerupChanged += OnPowerupChanged;
     Item.onPushedOut += OnItemPushedOut;
-
     BallsInitialCnt = ColorItems;
+
+    _cameraContainer = GameObject.Find("_cameraContainer").transform;
 
     onCreate?.Invoke(this);
   }
@@ -383,23 +383,18 @@ public class Level : MonoBehaviour
       _items[q].Show();
     }
   }
-  // void ShowBalls()
-  // {
-  //   StartCoroutine(coShowBalls());
-  // }
   IEnumerator coShowArrows(bool act)
   {
     //yield return new WaitForSeconds(0.25f);
     foreach(var arr in _arrows)
     {
-      yield return null;//new WaitForSeconds(_activationInterval);
+      yield return new WaitForSeconds(_activationInterval);
       if(act)
         arr?.Show();
       else
         arr?.Hide();  
     }
   }
-
   IEnumerator coDestroyGrid()
   {
     Vector2Int va = Vector2Int.zero;
