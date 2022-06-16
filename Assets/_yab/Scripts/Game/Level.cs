@@ -288,7 +288,7 @@ public class Level : MonoBehaviour
   public bool Succeed {get; private set;}
   public bool Finished {get; private set;}
   public bool gameOutside => _gameplayOutside;
-  public int  movesAvail => _listItems.Count + ((_nextItem)?1:0);
+  public int  movesAvail => _listItems.Count; // + ((_nextItem)?1:0);
   public int  ColorItems => _items.Count((item) => item.IsRegular && !item.IsHidding);
   public bool AnyColorItem => _items.Count((item) => item.IsRegular) > 0;
   public int  Points {get; set;} = 0;
@@ -311,9 +311,9 @@ public class Level : MonoBehaviour
   List<Item> _painting = new List<Item>();
   List<Check> _checks = new List<Check>();
   //List<ObjectFracture> _fractures = new List<ObjectFracture>();
-  List<Item> _listNextItems = new List<Item>();
+  //List<Item> _listNextItems = new List<Item>();
 
-  Item _nextItem = null;
+  //Item _nextItem = null;
   bool _inputBlocked = false;
   bool _firstInteraction = false;
   bool _checkMoves = false;
@@ -521,14 +521,14 @@ public class Level : MonoBehaviour
     });
 
     //_nextItemContainer.gameObject.SetActive(true);
-    _nextItem = CreateNextItem();
+    //_nextItem = CreateNextItem();
     UpdateArrows();
     
     FindObjectOfType<UIIngame>()?.SetLevel(this);
   }
   List<Item> _pushing = new List<Item>();
 
-  Arrow   arrowBeg = null, arrowEnd = null;
+  Arrow   arrowBeg = null;
   List<Arrow> FindArrows(Vector2Int vi)
   {
     List<Arrow> arrows = new List<Arrow>();
@@ -557,7 +557,7 @@ public class Level : MonoBehaviour
 
     return arrows;
   }
-  void SelectArrow()
+  void SelectArrows()
   {
     _arrowsSelected.Clear();
     if(arrowBeg == null)
@@ -585,60 +585,10 @@ public class Level : MonoBehaviour
     }
     UpdateArrows();      
   }
-  void SelectArrows()
-  {
-    _arrowsSelected.Clear();
-    if(arrowBeg == null || arrowEnd == null)
-      return;
-
-    bool horz = Mathf.Abs(arrowBeg.vPos.z) == (_grid.dim().y/2 + 1);
-
-    Vector3 dir = arrowBeg.vPos - arrowEnd.vPos;
-    dir.x = Mathf.Abs(dir.x);
-    dir.z = Mathf.Abs(dir.z);
-    bool _sel = false;
-    for(int q = 0; q < _arrows.Count; ++q)
-    {
-      var ar = _arrows[q];
-      if(horz)
-        _sel = _sel = Mathf.Sign(ar.grid.x - arrowBeg.grid.x) != Mathf.Sign(ar.grid.x - arrowEnd.grid.x) && ar.grid.y == arrowBeg.grid.y;
-      else
-        _sel = _sel = Mathf.Sign(ar.grid.y - arrowBeg.grid.y) != Mathf.Sign(ar.grid.y - arrowEnd.grid.y) && ar.grid.x == arrowBeg.grid.x;
-      _arrows[q].IsSelected = _sel;
-      if(_arrows[q].IsSelected)
-        _arrowsSelected.Add(_arrows[q]);
-    }
-    arrowBeg.IsSelected = true;
-    _arrowsSelected.Add(arrowBeg);
-    arrowEnd.IsSelected = (horz)? arrowBeg.grid.y == arrowEnd.grid.y : arrowBeg.grid.x == arrowEnd.grid.x;
-    if(arrowEnd.IsSelected)
-      _arrowsSelected.Add(arrowEnd);
-
-    if(_powerupSelected == GameState.Powerups.Type.Arrows)
-    {
-      var arrs = FindArrows(arrowBeg.grid);
-      arrs.ForEach((ar) => ar.IsSelected = true);
-      _arrowsSelected.AddRange(arrs);
-    }
-
-    _arrowsSelected = _arrowsSelected.Distinct().ToList();
-    for(int q = 0; q < _arrowsSelected.Count; ++q)
-    {
-      _arrowsSelected[q].IsBlocked = _grid.isBlocked(_arrowsSelected[q].grid + _arrowsSelected[q].dir); //_grid.geti(_arrowsSelected[q].grid + _arrowsSelected[q].dir) != null;
-      if(_arrowsSelected[q].IsBlocked)
-      {
-        _arrowsSelected.RemoveAt(q);
-        --q;
-      }
-      else
-        _arrowsSelected[q].IsSelected = _arrowsSelected[q].IsSelected;
-    }
-    UpdateArrows();
-  }
   void ClearArrows()
   {
     _arrowsSelected.Clear();
-    arrowEnd = null;
+    //arrowEnd = null;
     for(int q = 0; q < _arrows.Count; ++q)
       _arrows[q].IsSelected = false;
 
@@ -669,11 +619,11 @@ public class Level : MonoBehaviour
   Item CreateNextItem()
   {
     Item item = null;
-    if(_listItems.Count > 0 && _nextItem == null)
+    if(_powerupSelected == GameState.Powerups.Type.None)
     {
-      var next_item = _listItems[0];
-      if(next_item != null)
+      if(_listItems.Count > 0)
       {
+        var next_item = _listItems[0];
         if(next_item.IsRandItem)
           item = GameData.Prefabs.CreateRandItem(_trayItemContainer, false);
         else if(next_item.IsRandMoveItem)
@@ -681,25 +631,28 @@ public class Level : MonoBehaviour
         else if(next_item.IsRandPush)
           item = GameData.Prefabs.CreatePushItem(_trayItemContainer, (Random.value < 0.5f)? Item.Push.One : Item.Push.Line);
         else
-          item = Instantiate(_listItems[0], _trayItemContainer);
+          item = Instantiate(_listItems[0], _itemsContainer);
+        
+        if(item)
+          _listItems.RemoveAt(0);
       }
-      else
-      {
-        List<string> names = _items.Select((Item it) => it.name).Distinct().ToList();
-        if(names.Count > 0)
-          item = GameData.Prefabs.CreateRandItem(names, _trayItemContainer);
-        else
-          item = GameData.Prefabs.CreateRandItem(_trayItemContainer, false);
-      }
-      _listItems.RemoveAt(0);
-      //onMovesLeftChanged?.Invoke(this);
+    }
+    else
+    {
+      if(_powerupSelected == GameState.Powerups.Type.Arrows)
+        item = GameData.Prefabs.CreatePushItem(_itemsContainer, Item.Push.One);
+      else if(_powerupSelected == GameState.Powerups.Type.Bomb)
+        item = GameData.Prefabs.CreateBombItem(_itemsContainer);
+      else if(_powerupSelected == GameState.Powerups.Type.Color)
+        item = GameData.Prefabs.CreateColorChangeItem(_itemsContainer);
+      else if(_powerupSelected == GameState.Powerups.Type.Painter)
+        item = GameData.Prefabs.CreatePainterItem(_itemsContainer);
     }
 
     if(item)
     {
       item.transform.localPosition = Vector3.zero;
       item.name = item.name.Replace("(Clone)", "");
-      //item.Show();
     }
 
     return item;
@@ -731,7 +684,7 @@ public class Level : MonoBehaviour
   }
   public void OnInputBeg(TouchInputData tid)
   {
-    arrowBeg = arrowEnd = null;
+    arrowBeg = null;
   }
   public void OnInputMov(TouchInputData tid)
   {
@@ -740,14 +693,13 @@ public class Level : MonoBehaviour
 
     arrowBeg = tid.GetClosestCollider(0.5f)?.GetComponent<Arrow>() ?? null;
     if(arrowBeg)
-      SelectArrow();
+      SelectArrows();
     else
       ClearArrows();
   }
   public void OnInputEnd(TouchInputData tid)
   {
     arrowBeg = null;
-    arrowEnd = null;
     if(!_firstInteraction)
       _firstInteraction = true;
 
@@ -759,32 +711,22 @@ public class Level : MonoBehaviour
     Item push = null;
     for(int q = 0; q < _arrowsSelected.Count; ++q)
     {
-      if(_listNextItems.Count > 0)
-      {
-        push = Instantiate(_listNextItems[0], _itemsContainer);
-        push.name = _listNextItems[0].name;
-        _listNextItems.RemoveAt(0);
-      }
-      else
-      {
-        push = Instantiate(_nextItem, _itemsContainer);
-        push.name = _nextItem.name;
-      }
+      push = CreateNextItem();
       push.vturn = new Vector2Int(Mathf.RoundToInt(_arrowsSelected[q].vDir.x), Mathf.RoundToInt(_arrowsSelected[q].vDir.z));
       push.transform.localPosition = _arrowsSelected[q].transform.localPosition - new Vector3Int(_arrowsSelected[q].dir.x/2, 0, _arrowsSelected[q].dir.y/2);
       push.dir = _arrowsSelected[q].dir;
       _pushing.Add(push);
       push.Show();
     }
-    if(_arrowsSelected.Count > 0 && _nextItem)
+    if(_arrowsSelected.Count > 0) // && _nextItem)
     {
       if(_powerupSelected != GameState.Powerups.Type.None)
       {
         onPowerupUsed?.Invoke(_powerupSelected);
         _powerupSelected = GameState.Powerups.Type.None;
       }
-      Destroy(_nextItem.gameObject);
-      _nextItem = null;
+      //Destroy(_nextItem.gameObject);
+      //_nextItem = null;
       onItemThrow?.Invoke(this);
     }
     _arrowsSelected.Clear();
@@ -793,24 +735,10 @@ public class Level : MonoBehaviour
   }
   public void OnPowerupChanged(GameState.Powerups.Type type, bool state)
   {
-    if(_listNextItems.Count > 0)
-      _listNextItems.RemoveAt(0);
     if(state)
-    {
-      if(type == GameState.Powerups.Type.Bomb)
-        _listNextItems.Add(GameData.Prefabs.BombPrefab);
-      else if(type == GameState.Powerups.Type.Color)
-        _listNextItems.Add(GameData.Prefabs.ColorChangeItem);
-      else if(type == GameState.Powerups.Type.Painter)
-        _listNextItems.Add(GameData.Prefabs.PainterItem);
-      
       _powerupSelected = type;
-    }
-    else
-    {
-      if(_powerupSelected == type)
-        _powerupSelected = GameState.Powerups.Type.None;
-    }
+    else if(_powerupSelected == type)
+      _powerupSelected = GameState.Powerups.Type.None;
   }
 
   void MoveItems()
@@ -828,7 +756,7 @@ public class Level : MonoBehaviour
           _grid.touchElems(_pushing[p].grid, _pushing[p].dir);
       }
       var vg = _pushing[p].gridNext;
-      bool next_inside = _grid.IsInsideDim(vg); //_grid.isFieldInside(vg);
+      bool next_inside = _grid.IsInsideDim(vg);
       var pushType = _pushing[p].push;
       var pusher = _pushing[p];
       if(next_inside || _gameplayOutside)
@@ -836,7 +764,7 @@ public class Level : MonoBehaviour
         Item item = _grid.geti(vg);
         if(item && !item.IsDirectional)
         {
-          if(_pushing[p].push == Item.Push.None) //_gameplayPushType == PushType.None)
+          if(_pushing[p].push == Item.Push.None)
           {
             if(_pushing[p].IsColorChanger)
               BallsInitialCnt++;
@@ -853,7 +781,7 @@ public class Level : MonoBehaviour
             _pushing.RemoveAt(p);
             p--;
           }
-          else //if(_gameplayPushType == PushType.PushOne || _gameplayPushType == PushType.PushLine)
+          else
           {
             bool isField = _grid.isField(_pushing[p].grid);
             if(!item.IsStatic && !item.IsFrozen && isField)
@@ -1071,8 +999,8 @@ public class Level : MonoBehaviour
     {
       ShowBigGreets();
       CheckEnd();
-      if(AnyColorItem)
-        _nextItem = CreateNextItem();
+      // if(AnyColorItem)
+      //   _nextItem = CreateNextItem();
     }    
     _sequence = false;
   }
@@ -1283,9 +1211,9 @@ public class Level : MonoBehaviour
   IEnumerator coEnd()
   {
     Succeed = !AnyColorItem;
-    if(_nextItem != null)
-      _listItems.Add(_nextItem);
-    _nextItem = null;  
+    // if(_nextItem != null)
+    //   _listItems.Add(_nextItem);
+    //_nextItem = null;  
     while(movesAvail > 0)
     {
       _listItems.RemoveAt(0);
@@ -1329,13 +1257,13 @@ public class Level : MonoBehaviour
     #if UNITY_EDITOR
     if(Input.GetKeyDown(KeyCode.W))
     {
-      _nextItem = null;
+      //_nextItem = null;
       _items.Clear();
       CheckEnd();
     }
     if(Input.GetKeyDown(KeyCode.E))
     {
-      _nextItem = null;
+      //_nextItem = null;
       _listItems.Clear();
       CheckEnd();
     }

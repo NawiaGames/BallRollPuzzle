@@ -119,6 +119,12 @@ public class GameData : ScriptableObject
       item.name = get().colorChangeItem.name;
       return item;
     }
+    public static Item CreatePainterItem(Transform parent)
+    {
+      var item = Instantiate(get().painterItem, parent);
+      item.name = get().painterItem.name;
+      return item;      
+    }
     public static Item CreateRandItem(Transform parent, bool moveable) 
     {
       var prefabItem = (moveable)? get().moveItems.get_random() : get().items.get_random();
