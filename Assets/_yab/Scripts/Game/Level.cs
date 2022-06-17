@@ -214,6 +214,10 @@ public class Level : MonoBehaviour
     {
       return geti(grid) != null || !isField(grid);
     }
+    public bool isOnEdge(Vector2Int grid)
+    {
+      return Mathf.Abs(grid.x) == dim().x/2 + 1  || Mathf.Abs(grid.y) == dim().y / 2 + 1;
+    }
     public void selectElems(Vector2Int v, Vector2Int vdir, bool sel)
     {
       Vector2Int vbeg = v + vdir;
@@ -776,7 +780,10 @@ public class Level : MonoBehaviour
           else
           {
             bool isField = _grid.isField(_pushing[p].grid);
-            if(!item.IsStatic && !item.IsFrozen && (isField || next_inside))
+            bool isFieldNext = _grid.isField(_pushing[p].gridNext);
+            bool isOnEdge = _grid.isOnEdge(_pushing[p].grid);
+
+            if(!item.IsStatic && !item.IsFrozen && ((isFieldNext && isOnEdge) || isField))
             {
               toMove = _grid.geti(vg);
               toMove.dir = _pushing[p].dir;
@@ -1173,7 +1180,6 @@ public class Level : MonoBehaviour
   };
   void coCheckMove()
   {
-    List<Item> itemsToPush = new List<Item>();
     _grid.update(_items, this);
     bool _pushed = false;
     for(int d = 0; d < vdirections.Length && !_pushed; ++d)
@@ -1187,9 +1193,8 @@ public class Level : MonoBehaviour
             var dest = _grid.getDest(_items[q].grid, _items[q].vturn, !_gameplayOutside);
             if(dest != _items[q].grid)
             {
-              itemsToPush.Add(_items[q]);
-              _items[q].PushTo(dest);
-              _moving.Add(_items[q]);
+              _items[q].dir = _items[q].vturn;
+              _pushing.Add(_items[q]);
               _pushed = true;
             }
           }
