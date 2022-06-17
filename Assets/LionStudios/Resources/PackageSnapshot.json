@@ -3,10 +3,19 @@
         {
             "version": "1.4.10",
             "name": "com.lionstudios.release.lionanalytics",
-            "dependencies": []
+            "dependencies": [
+                {
+                    "version": "1.0.10",
+                    "name": "com.lionstudios.release.lionkitcore"
+                },
+                {
+                    "version": "1.4.10",
+                    "name": "com.lionstudios.release.lionsdkservice"
+                }
+            ]
         },
         {
-            "version": "https://github.com/theunspokenterror/gamelib.git",
+            "version": "0.0.25",
             "name": "com.ms.gamelib",
             "dependencies": []
         },
@@ -23,22 +32,66 @@
         {
             "version": "1.15.15",
             "name": "com.unity.collab-proxy",
-            "dependencies": []
+            "dependencies": [
+                {
+                    "version": "1.0.1",
+                    "name": "com.unity.services.core"
+                }
+            ]
         },
         {
             "version": "1.0.1",
             "name": "com.unity.feature.development",
-            "dependencies": []
+            "dependencies": [
+                {
+                    "version": "default",
+                    "name": "com.unity.ide.visualstudio"
+                },
+                {
+                    "version": "default",
+                    "name": "com.unity.ide.rider"
+                },
+                {
+                    "version": "default",
+                    "name": "com.unity.ide.vscode"
+                },
+                {
+                    "version": "default",
+                    "name": "com.unity.editorcoroutines"
+                },
+                {
+                    "version": "default",
+                    "name": "com.unity.performance.profile-analyzer"
+                },
+                {
+                    "version": "default",
+                    "name": "com.unity.test-framework"
+                },
+                {
+                    "version": "default",
+                    "name": "com.unity.testtools.codecoverage"
+                }
+            ]
         },
         {
             "version": "3.0.13",
             "name": "com.unity.ide.rider",
-            "dependencies": []
+            "dependencies": [
+                {
+                    "version": "1.0.6",
+                    "name": "com.unity.ext.nunit"
+                }
+            ]
         },
         {
             "version": "2.0.14",
             "name": "com.unity.ide.visualstudio",
-            "dependencies": []
+            "dependencies": [
+                {
+                    "version": "1.1.9",
+                    "name": "com.unity.test-framework"
+                }
+            ]
         },
         {
             "version": "1.2.5",
@@ -53,47 +106,136 @@
         {
             "version": "2.0.1",
             "name": "com.unity.mobile.notifications",
-            "dependencies": []
+            "dependencies": [
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.androidjni"
+                }
+            ]
         },
         {
             "version": "3.0.3",
             "name": "com.unity.recorder",
-            "dependencies": []
+            "dependencies": [
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.timeline"
+                }
+            ]
         },
         {
             "version": "12.1.6",
             "name": "com.unity.render-pipelines.universal",
-            "dependencies": []
+            "dependencies": [
+                {
+                    "version": "1.2.1",
+                    "name": "com.unity.mathematics"
+                },
+                {
+                    "version": "1.5.0",
+                    "name": "com.unity.burst"
+                },
+                {
+                    "version": "12.1.6",
+                    "name": "com.unity.render-pipelines.core"
+                },
+                {
+                    "version": "12.1.6",
+                    "name": "com.unity.shadergraph"
+                }
+            ]
         },
         {
             "version": "1.1.31",
             "name": "com.unity.test-framework",
-            "dependencies": []
+            "dependencies": [
+                {
+                    "version": "1.0.6",
+                    "name": "com.unity.ext.nunit"
+                },
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.imgui"
+                },
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.jsonserialize"
+                }
+            ]
         },
         {
             "version": "3.0.6",
             "name": "com.unity.textmeshpro",
-            "dependencies": []
+            "dependencies": [
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.ugui"
+                }
+            ]
         },
         {
             "version": "1.6.4",
             "name": "com.unity.timeline",
-            "dependencies": []
+            "dependencies": [
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.director"
+                },
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.animation"
+                },
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.audio"
+                },
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.particlesystem"
+                }
+            ]
         },
         {
             "version": "1.0.0",
             "name": "com.unity.ugui",
-            "dependencies": []
+            "dependencies": [
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.ui"
+                },
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.imgui"
+                }
+            ]
         },
         {
             "version": "1.7.7",
             "name": "com.unity.visualscripting",
-            "dependencies": []
+            "dependencies": [
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.ugui"
+                },
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.jsonserialize"
+                }
+            ]
         },
         {
             "version": "2.1.9",
             "name": "com.unity.xr.legacyinputhelpers",
-            "dependencies": []
+            "dependencies": [
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.vr"
+                },
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.xr"
+                }
+            ]
         },
         {
             "version": "1.0.0",
@@ -123,12 +265,26 @@
         {
             "version": "1.0.0",
             "name": "com.unity.modules.cloth",
-            "dependencies": []
+            "dependencies": [
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.physics"
+                }
+            ]
         },
         {
             "version": "1.0.0",
             "name": "com.unity.modules.director",
-            "dependencies": []
+            "dependencies": [
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.audio"
+                },
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.animation"
+                }
+            ]
         },
         {
             "version": "1.0.0",
@@ -163,7 +319,12 @@
         {
             "version": "1.0.0",
             "name": "com.unity.modules.screencapture",
-            "dependencies": []
+            "dependencies": [
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.imageconversion"
+                }
+            ]
         },
         {
             "version": "1.0.0",
@@ -173,12 +334,26 @@
         {
             "version": "1.0.0",
             "name": "com.unity.modules.terrainphysics",
-            "dependencies": []
+            "dependencies": [
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.physics"
+                },
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.terrain"
+                }
+            ]
         },
         {
             "version": "1.0.0",
             "name": "com.unity.modules.tilemap",
-            "dependencies": []
+            "dependencies": [
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.physics2d"
+                }
+            ]
         },
         {
             "version": "1.0.0",
@@ -188,7 +363,24 @@
         {
             "version": "1.0.0",
             "name": "com.unity.modules.uielements",
-            "dependencies": []
+            "dependencies": [
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.ui"
+                },
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.imgui"
+                },
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.jsonserialize"
+                },
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.uielementsnative"
+                }
+            ]
         },
         {
             "version": "1.0.0",
@@ -198,7 +390,16 @@
         {
             "version": "1.0.0",
             "name": "com.unity.modules.unityanalytics",
-            "dependencies": []
+            "dependencies": [
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.unitywebrequest"
+                },
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.jsonserialize"
+                }
+            ]
         },
         {
             "version": "1.0.0",
@@ -208,37 +409,120 @@
         {
             "version": "1.0.0",
             "name": "com.unity.modules.unitywebrequestassetbundle",
-            "dependencies": []
+            "dependencies": [
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.assetbundle"
+                },
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.unitywebrequest"
+                }
+            ]
         },
         {
             "version": "1.0.0",
             "name": "com.unity.modules.unitywebrequestaudio",
-            "dependencies": []
+            "dependencies": [
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.unitywebrequest"
+                },
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.audio"
+                }
+            ]
         },
         {
             "version": "1.0.0",
             "name": "com.unity.modules.unitywebrequesttexture",
-            "dependencies": []
+            "dependencies": [
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.unitywebrequest"
+                },
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.imageconversion"
+                }
+            ]
         },
         {
             "version": "1.0.0",
             "name": "com.unity.modules.unitywebrequestwww",
-            "dependencies": []
+            "dependencies": [
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.unitywebrequest"
+                },
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.unitywebrequestassetbundle"
+                },
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.unitywebrequestaudio"
+                },
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.audio"
+                },
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.assetbundle"
+                },
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.imageconversion"
+                }
+            ]
         },
         {
             "version": "1.0.0",
             "name": "com.unity.modules.vehicles",
-            "dependencies": []
+            "dependencies": [
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.physics"
+                }
+            ]
         },
         {
             "version": "1.0.0",
             "name": "com.unity.modules.video",
-            "dependencies": []
+            "dependencies": [
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.audio"
+                },
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.ui"
+                },
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.unitywebrequest"
+                }
+            ]
         },
         {
             "version": "1.0.0",
             "name": "com.unity.modules.vr",
-            "dependencies": []
+            "dependencies": [
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.jsonserialize"
+                },
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.physics"
+                },
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.xr"
+                }
+            ]
         },
         {
             "version": "1.0.0",
@@ -248,7 +532,20 @@
         {
             "version": "1.0.0",
             "name": "com.unity.modules.xr",
-            "dependencies": []
+            "dependencies": [
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.physics"
+                },
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.jsonserialize"
+                },
+                {
+                    "version": "1.0.0",
+                    "name": "com.unity.modules.subsystems"
+                }
+            ]
         }
     ]
 }

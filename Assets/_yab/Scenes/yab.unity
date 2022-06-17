@@ -1740,6 +1740,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1301126275}
   - component: {fileID: 1301126276}
+  - component: {fileID: 1301126277}
   m_Layer: 0
   m_Name: _game
   m_TagString: Untagged
@@ -1778,6 +1779,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelsContainer: {fileID: 1401569532}
+--- !u!114 &1301126277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301126274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54b7033334646a94f8a255a84c21c52b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstActivationTime: 30
+  requestInterval: 3
 --- !u!1001 &1309126050
 PrefabInstance:
   m_ObjectHideFlags: 0
