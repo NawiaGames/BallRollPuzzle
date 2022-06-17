@@ -13,6 +13,7 @@ public class Arrow : MonoBehaviour
   [SerializeField][ColorUsage(true, true)] Color _colorBlocked;
   [SerializeField] float blendSpeed = 4f;
   [SerializeField] ActivatableObject _actObj;
+  [SerializeField] ObjectShake _shake;
 
   Color   targetColor = Color.white;
   bool    _selected = false;
@@ -30,6 +31,7 @@ public class Arrow : MonoBehaviour
     targetColor = _colorNormal;
     lerpColor = targetColor;
   }
+  public void Shake() => _shake.Shake();
   public void Show()
   {
     _actObj.ActivateObject();

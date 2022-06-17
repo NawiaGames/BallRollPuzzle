@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3421667236541604523}
+  - component: {fileID: 8495602935463415631}
   m_Layer: 0
   m_Name: fx
   m_TagString: Untagged
@@ -32,6 +33,21 @@ Transform:
   m_Father: {fileID: 65186602132199662}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8495602935463415631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6509197652668794128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e3c91b30be53c841a07a2d567e59a95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectMultiplier: 1
+  useRandomPhaseOffset: 0
+  shakeSettings: {fileID: 11400000, guid: b85e3919dfc72a74bb2c335ce20c7fd5, type: 2}
 --- !u!1 &6806953521553073861
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,6 +207,7 @@ MonoBehaviour:
   _colorBlocked: {r: 0.5, g: 0.5, b: 0.5, a: 0.2509804}
   blendSpeed: 8
   _actObj: {fileID: 5006249832342351804}
+  _shake: {fileID: 8495602935463415631}
 --- !u!65 &7277004885358282157
 BoxCollider:
   m_ObjectHideFlags: 0

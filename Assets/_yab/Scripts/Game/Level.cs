@@ -567,6 +567,7 @@ public class Level : MonoBehaviour
         _arrowsSelected[q].IsBlocked = _grid.isBlocked(_arrowsSelected[q].grid + _arrowsSelected[q].dir);
         if(_arrowsSelected[q].IsBlocked)
         {
+          _arrowsSelected[q].Shake();
           _arrowsSelected.RemoveAt(q);
           --q;
         }
