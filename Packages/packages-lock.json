@@ -1,5 +1,29 @@
 {
   "dependencies": {
+    "com.lionstudios.release.lionanalytics": {
+      "version": "1.4.10",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.lionstudios.release.lionkitcore": "1.0.10",
+        "com.lionstudios.release.lionsdkservice": "1.4.10"
+      },
+      "url": "http://packages.lionstudios.cc:4873"
+    },
+    "com.lionstudios.release.lionkitcore": {
+      "version": "1.0.10",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "http://packages.lionstudios.cc:4873"
+    },
+    "com.lionstudios.release.lionsdkservice": {
+      "version": "1.4.10",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "http://packages.lionstudios.cc:4873"
+    },
     "com.ms.gamelib": {
       "version": "https://github.com/theunspokenterror/gamelib.git",
       "depth": 0,
