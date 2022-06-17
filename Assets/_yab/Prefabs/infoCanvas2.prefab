@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8253727410657249327}
   - component: {fileID: 8253727410657249326}
   m_Layer: 0
-  m_Name: infoCanvas
+  m_Name: infoCanvas2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,4 +51,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseTextColor: {r: 0.12156863, g: 0.42352942, b: 0.78431374, a: 1}
   poolSize: 10
-  labelPrefab: {fileID: 6749633061429044357, guid: 1c72cbf958527574bbeb15dd15f8edde, type: 3}
+  labelPrefab: {fileID: 6749633061429044357, guid: deac4dfde19eb6b408ed980154d88731, type: 3}

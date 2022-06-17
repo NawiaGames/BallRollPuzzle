@@ -385,10 +385,10 @@ public class Level : MonoBehaviour
   }
   IEnumerator coShowArrows(bool act)
   {
-    //yield return new WaitForSeconds(0.25f);
+    //yield return new WaitForSeconds(0.125f);
     foreach(var arr in _arrows)
     {
-      yield return new WaitForSeconds(_activationInterval);
+      yield return new WaitForSeconds(_activationInterval * 0.5f);
       if(act)
         arr?.Show();
       else
@@ -908,6 +908,7 @@ public class Level : MonoBehaviour
           _pushing.Add(_moving[q]);
           _moving[q].Stop();
           _moving[q].dir = item.vturn;
+          checkItems |= true;
         }
         else
         {
@@ -943,6 +944,7 @@ public class Level : MonoBehaviour
         }
         if(item && item.IsDirectional && _moving[q].Redirected == null)
         {
+          checkItems |= true;
           _pushing.Add(_moving[q]);
           _moving[q].Stop();
           _moving[q].dir = item.vturn;
@@ -983,14 +985,14 @@ public class Level : MonoBehaviour
       yield return null;
     };
     yield return StartCoroutine(coExplodeBombs());
-    CheckMove();
+    //yield return StartCoroutine(coCheckMove());
+    //yield return new WaitForSeconds(0.5f);
 
     if(_moving.Count == 0 && _pushing.Count == 0 && _matching.Count == 0 && _painting.Count == 0)
     {
+      CheckMove();
       ShowBigGreets();
       CheckEnd();
-      // if(AnyColorItem)
-      //   _nextItem = CreateNextItem();
     }    
     _sequence = false;
   }
@@ -1167,7 +1169,7 @@ public class Level : MonoBehaviour
     new Vector2Int(1, 0),
     new Vector2Int(0, -1),
   };
-  IEnumerator coCheckMove()
+  void coCheckMove()
   {
     List<Item> itemsToPush = new List<Item>();
     _grid.update(_items, this);
@@ -1192,11 +1194,12 @@ public class Level : MonoBehaviour
         }
       }
     }
-    yield return null;
+    //yield return null;
   }
   void CheckMove()
   {
-    StartCoroutine(coCheckMove());
+    //StartCoroutine(coCheckMove());
+    coCheckMove();
   }
   IEnumerator coEnd()
   {
