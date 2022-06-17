@@ -64,6 +64,7 @@ MonoBehaviour:
   - {fileID: 5382338121493344219, guid: a24b9964c09284fc0910f6b0a167952d, type: 3}
   - {fileID: 5382338121493344219, guid: c061aa95591a44f80abb74c22d9b7811, type: 3}
   - {fileID: 5382338121493344219, guid: 8377c53ab1a334bdd8c4198111b87488, type: 3}
+  - {fileID: 5382338121493344219, guid: 1f3b22122804b4ffb87a18c22fcf9e71, type: 3}
   listRewards:
   - level: 6
     powerupBombs: 0
@@ -99,10 +100,12 @@ MonoBehaviour:
   - nice!
   - good!
   - superb!
+  - wow!
   comboText1:
   - amazing!
-  - wow!
+  - fantastic!
   - awesome!
+  - perfect!
   themeColors:
   - {r: 0.78, g: 0.7532353, b: 0.7532353, a: 1}
   - {r: 0.1882353, g: 0.17254902, b: 0.17254902, a: 1}
