@@ -35,13 +35,15 @@ public class Level : MonoBehaviour
 
   [Header("Gameplay Variants")]
   [SerializeField] bool _gameplayOutside = false;
+  [SerializeField] bool _gameplayBlockEdge = true;
   [Header("Settings")]
   [SerializeField] Vector2Int _dim;
   [SerializeField] float _speed = 8;
   [SerializeField] int   _maxPoints = 10;
-  [SerializeField] bool  _multiArrowSelection = false;
   [Header("Items")]
   [SerializeField] List<Item> _listItems;
+  [Header("Arrows")]
+  [SerializeField] Vector2Int[] listArrows;
 
   public class Grid
   {
@@ -367,7 +369,7 @@ public class Level : MonoBehaviour
       }
     }
 
-    yield return new WaitForSeconds(0.25f);
+    //yield return new WaitForSeconds(0.25f);
     StartCoroutine(coShowBalls());
     yield return StartCoroutine(coShowArrows(true));
 
@@ -376,19 +378,17 @@ public class Level : MonoBehaviour
   IEnumerator coShowBalls()
   {
     _items.Sort((Item i0, Item i1) => (int)(i0.grid.y * 100 + i0.grid.x) - (i1.grid.y * 100 + i1.grid.x));
-    //yield return new WaitForSeconds(0.25f);
     for(int q = 0; q < _items.Count; ++q)
     {
-      yield return new WaitForSeconds(0.0625f / 4);
+      yield return new WaitForSeconds(_activationInterval * 0.25f);
       _items[q].Show();
     }
   }
   IEnumerator coShowArrows(bool act)
   {
-    //yield return new WaitForSeconds(0.125f);
     foreach(var arr in _arrows)
     {
-      yield return new WaitForSeconds(_activationInterval * 0.5f);
+      yield return new WaitForSeconds(_activationInterval * 0.25f);
       if(act)
         arr?.Show();
       else
@@ -438,46 +438,55 @@ public class Level : MonoBehaviour
     float scale = 1;
     Vector2Int vgrid = Vector2Int.zero;
     List<Arrow> listT = new List<Arrow>(),listR = new List<Arrow>(), listB = new List<Arrow>(), listL = new List<Arrow>();
+    Arrow arrow = null;
     for(int x = 0; x < _dim.x; ++x)
     {
       vgrid.x = -_dim.x / 2 + x;
       vgrid.y = _dim.y / 2 + 1;
-      var arrow = GameData.Prefabs.CreateArrow(_arrowsContainer);
-      arrow.grid = vgrid;
-      arrow.dir = new Vector2Int(0, -1);
-      //_arrows.Add(arrow);
-      listT.Add(arrow);
       float xx = (-_dim.x + 1) * 0.5f + x;
-      arrow.transform.localPosition = new Vector3(xx, 0, vgrid.y);
-      arrow.transform.Rotate(new Vector3(0, 180, 0));
-      arrow = GameData.Prefabs.CreateArrow(_arrowsContainer);
+      if(listArrows.Length == 0 || listArrows.Contains(vgrid))
+      {
+        arrow = GameData.Prefabs.CreateArrow(_arrowsContainer);
+        arrow.grid = vgrid;
+        arrow.dir = new Vector2Int(0, -1);
+        listT.Add(arrow);
+        arrow.transform.localPosition = new Vector3(xx, 0, vgrid.y);
+        arrow.transform.Rotate(new Vector3(0, 180, 0));
+      }
       vgrid.y = -_dim.y / 2 - 1;
-      arrow.grid = vgrid;
-      arrow.dir = new Vector2Int(0, 1);
-      //_arrows.Add(arrow);
-      listB.Add(arrow);
-      arrow.transform.localPosition = new Vector3(xx, 0, vgrid.y);
+      if(listArrows.Length == 0 || listArrows.Contains(vgrid))
+      {
+        arrow = GameData.Prefabs.CreateArrow(_arrowsContainer);
+        arrow.grid = vgrid;
+        arrow.dir = new Vector2Int(0, 1);
+        listB.Add(arrow);
+        arrow.transform.localPosition = new Vector3(xx, 0, vgrid.y);
+      }
     }
     for(int y = 0; y < _dim.y; ++y)
     {
       vgrid.y = -_dim.y/2 + y ;
       vgrid.x = -_dim.x/2 - 1;
-      var arrow = GameData.Prefabs.CreateArrow(_arrowsContainer);
-      arrow.grid = vgrid;
-      arrow.dir = new Vector2Int(1, 0);      
-      //_arrows.Add(arrow);
-      listL.Add(arrow);
       float yy = (-_dim.y + 1) * 0.5f + y;
-      arrow.transform.localPosition = new Vector3(vgrid.x, 0, yy);
-      arrow.transform.Rotate(new Vector3(0, 90, 0));
-      arrow = GameData.Prefabs.CreateArrow(_arrowsContainer);
+      if(listArrows.Length == 0 || listArrows.Contains(vgrid))
+      {
+        arrow = GameData.Prefabs.CreateArrow(_arrowsContainer);
+        arrow.grid = vgrid;
+        arrow.dir = new Vector2Int(1, 0);      
+        listL.Add(arrow);
+        arrow.transform.localPosition = new Vector3(vgrid.x, 0, yy);
+        arrow.transform.Rotate(new Vector3(0, 90, 0));
+      }
       vgrid.x = _dim.x / 2 + 1;
-      arrow.grid = vgrid;
-      arrow.dir = new Vector2Int(-1, 0);
-      //_arrows.Add(arrow);
-      listR.Add(arrow);
-      arrow.transform.localPosition = new Vector3(vgrid.x, 0, yy);
-      arrow.transform.Rotate(new Vector3(0, -90, 0));
+      if(listArrows.Length == 0 || listArrows.Contains(vgrid))
+      {
+        arrow = GameData.Prefabs.CreateArrow(_arrowsContainer);
+        arrow.grid = vgrid;
+        arrow.dir = new Vector2Int(-1, 0);
+        listR.Add(arrow);
+        arrow.transform.localPosition = new Vector3(vgrid.x, 0, yy);
+        arrow.transform.Rotate(new Vector3(0, -90, 0));
+      }
     }
     _arrows.AddRange(listT);
     listR.Reverse();
@@ -515,10 +524,7 @@ public class Level : MonoBehaviour
         return false;
     });
 
-    //_nextItemContainer.gameObject.SetActive(true);
-    //_nextItem = CreateNextItem();
     UpdateArrows();
-    
     FindObjectOfType<UIIngame>()?.SetLevel(this);
   }
   List<Item> _pushing = new List<Item>();
@@ -565,13 +571,17 @@ public class Level : MonoBehaviour
 
     _arrowsSelected = _arrowsSelected.Distinct().ToList();
     _arrowsSelected.ForEach((ar) => ar.IsSelected = true);
-    for(int q = 0; q < _arrowsSelected.Count; ++q)
+    
+    if(_gameplayBlockEdge)
     {
-      _arrowsSelected[q].IsBlocked = _grid.isBlocked(_arrowsSelected[q].grid + _arrowsSelected[q].dir);
-      if(_arrowsSelected[q].IsBlocked)
+      for(int q = 0; q < _arrowsSelected.Count; ++q)
       {
-        _arrowsSelected.RemoveAt(q);
-        --q;
+        _arrowsSelected[q].IsBlocked = _grid.isBlocked(_arrowsSelected[q].grid + _arrowsSelected[q].dir);
+        if(_arrowsSelected[q].IsBlocked)
+        {
+          _arrowsSelected.RemoveAt(q);
+          --q;
+        }
       }
     }
     UpdateArrows();
@@ -599,8 +609,11 @@ public class Level : MonoBehaviour
     {
       _arrows[q].IsSelected = false;
       _grid.selectElems(_arrows[q].grid, _arrows[q].dir, false);
+      if(_gameplayBlockEdge)
+      {
        if(_grid.isBlocked(_arrows[q].grid + _arrows[q].dir))
          _arrows[q].IsBlocked = true;
+      }
     }
     for(int q = 0; q < _arrowsSelected.Count; ++q)
     {
@@ -774,7 +787,7 @@ public class Level : MonoBehaviour
           else
           {
             bool isField = _grid.isField(_pushing[p].grid);
-            if(!item.IsStatic && !item.IsFrozen && isField)
+            if(!item.IsStatic && !item.IsFrozen && (isField || next_inside))
             {
               toMove = _grid.geti(vg);
               toMove.dir = _pushing[p].dir;
