@@ -79,7 +79,7 @@
 		]
 	},
 	"LionStudios.Suite.Analytics.LionAnalytics": {
-		"heartbeatInterval": 60,
+		"heartbeatInterval": 0,
 		"enableGameAnalyticsEvents": true
 	},
 	"LionStudios.Suite.Core.LionCore": {
