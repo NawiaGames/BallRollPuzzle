@@ -286,17 +286,18 @@ public class Level : MonoBehaviour
     End,
   }
 
-  public int  LevelIdx => GameState.Progress.Level;
-  public bool Succeed {get; private set;}
-  public bool Finished {get; private set;}
-  public bool gameOutside => _gameplayOutside;
-  public int  movesAvail => _listItems.Count; // + ((_nextItem)?1:0);
-  public int  ColorItems => _items.Count((item) => item.IsRegular && !item.IsHidding);
-  public bool AnyColorItem => _items.Count((item) => item.IsRegular) > 0;
-  public int  Points {get; set;} = 0;
-  public int  PointsMax => _maxPoints;
-  public int  Stars {get; set;}
-  public int  BallsInitialCnt {get; set;}
+  public int    LevelIdx => GameState.Progress.Level;
+  public bool   Succeed {get; private set;}
+  public bool   Finished {get; private set;}
+  public bool   gameOutside => _gameplayOutside;
+  public int    movesAvail => _listItems.Count; // + ((_nextItem)?1:0);
+  public int    ColorItems => _items.Count((item) => item.IsRegular && !item.IsHidding);
+  public bool   AnyColorItem => _items.Count((item) => item.IsRegular) > 0;
+  public int    Points {get; set;} = 0;
+  public int    PointsMax => _maxPoints;
+  public int    Stars {get; set;}
+  public int    BallsInitialCnt {get; set;}
+  public Arrow  arrow(int idx) => _arrows[idx];
 
   bool _started = false;
   bool _allowInput => _started && movesAvail > 0 && _pushing.Count == 0 && _moving.Count == 0 && _matching.Count == 0 && _painting.Count == 0 && !_sequence;
@@ -372,6 +373,8 @@ public class Level : MonoBehaviour
     //yield return new WaitForSeconds(0.25f);
     StartCoroutine(coShowBalls());
     yield return StartCoroutine(coShowArrows(true));
+    if(LevelIdx == 0)
+      onTutorialStart?.Invoke(this);
 
     _started = true;
   }

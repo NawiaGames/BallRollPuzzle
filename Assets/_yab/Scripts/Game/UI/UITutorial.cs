@@ -19,12 +19,14 @@ public class UITutorial : MonoBehaviour
   {
     Level.onStart += OnLevelCreated;
     Level.onTutorialStart += OnTutorialStart;
+    Level.onItemThrow += OnItemThrow;
     Level.onFinished += OnLevelFinished;
   }
   void OnDestroy()
   {
     Level.onStart -= OnLevelCreated;
     Level.onTutorialStart -= OnTutorialStart;
+    Level.onItemThrow += OnItemThrow;
     Level.onFinished -= OnLevelFinished;
   }
   void OnLevelCreated(Level lvl)
@@ -34,6 +36,16 @@ public class UITutorial : MonoBehaviour
   void OnTutorialStart(Level lvl)
   {
     level = lvl;
+    tutorial.Activate(lvl.arrow(0).transform.position);
+  }
+  void OnTutorialPowerup(Level lvl, GameState.Powerups.Type type)
+  {
+    
+  }
+  void OnItemThrow(Level lvl)
+  {
+    if(lvl.LevelIdx == 0)
+      tutorial.Deactivate();
   }
   void OnLevelFinished(Level lvl)
   {
