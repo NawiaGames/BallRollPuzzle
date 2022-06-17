@@ -97,7 +97,7 @@ MonoBehaviour:
   _positionContainer: {fileID: 8491482513625605612}
   _dollyContainer: {fileID: 8491482514433418373}
   _dollyAxis: {x: 0, y: 0, z: -1}
-  _minDistance: 96
+  _minDistance: 64
   _maxDistance: 1024
   _autoUpdateTrackedPOI: 1
   _autoFit: 1
@@ -227,7 +227,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 64
-  far clip plane: 112
+  far clip plane: 160
   field of view: 10
   orthographic: 0
   orthographic size: 5
