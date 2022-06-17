@@ -23,6 +23,7 @@ public class Item : MonoBehaviour
   [SerializeField] float      _accNonConst = 1.035f;
   [SerializeField] bool       _accTypeConst = true;
   [SerializeField] ObjectColorBlender _ocb;
+  [SerializeField] float      _touchDelay = 0.5f;
 
   [SerializeField] Transform  _rollTransf;
    
@@ -144,14 +145,21 @@ public class Item : MonoBehaviour
   public int  Points {get; set;} = 0;
   public bool IsHidding => _hidding;
 
-  public void Show()
+  private Arrow _arr = null;
+
+  public void Show(Arrow arr)
   {
+    _arr = arr;
     _gridPrev = grid;
     _gridEnd = grid;
     if(!IsRemoveElem)
     {
       _activatable.ActivateObject();
       onShow?.Invoke(this);
+      if(_arr)
+      {
+        this.Invoke(()=>{_arr?.Touch();_arr = null;}, _touchDelay);
+      }
     }
     if(IsRegular && push == Push.None)
     {
@@ -204,6 +212,11 @@ public class Item : MonoBehaviour
   {
     if(!IsReady)
       return false;
+    if(_arr)
+    {
+      _arr.Touch();
+      _arr = null;
+    }
 
     Speed();
 

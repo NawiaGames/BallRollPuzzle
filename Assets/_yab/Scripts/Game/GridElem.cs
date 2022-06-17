@@ -86,7 +86,7 @@ public class GridElem : MonoBehaviour
   {
     ProcessSelection();
 
-    //if(_vvel.sqrMagnitude > 0.01f)
+    if(_vvel.magnitude * Time.deltaTime > 0.000001f)
     {
       var _voff = _vpos;
       _vforce = -0.15f * _voff;

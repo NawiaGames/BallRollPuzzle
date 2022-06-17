@@ -272,20 +272,6 @@ public class Level : MonoBehaviour
     }
   }
 
-  public enum PushType
-  {
-    None,
-    PushOne,
-    PushLine,
-  };
-
-  enum Check
-  {
-    Match3,
-    AutoMoves,
-    End,
-  }
-
   public int    LevelIdx => GameState.Progress.Level;
   public bool   Succeed {get; private set;}
   public bool   Finished {get; private set;}
@@ -306,13 +292,12 @@ public class Level : MonoBehaviour
   Grid _grid = new Grid();
   List<Arrow> _arrows = new List<Arrow>();
   List<Arrow> _arrowsSelected = new List<Arrow>();
-  public List<Item> _items = new List<Item>();
+  List<Item> _items = new List<Item>();
   List<Item> _moving = new List<Item>();
   List<Item> _exploding = new List<Item>();
   List<Match3> _matching = new List<Match3>();
   List<Item> _destroying = new List<Item>();
   List<Item> _painting = new List<Item>();
-  List<Check> _checks = new List<Check>();
   Transform _cameraContainer = null;
 
   //Item _nextItem = null;
@@ -323,7 +308,7 @@ public class Level : MonoBehaviour
   int  _matchesInMove = 0;
   int  _pushesInMove = 0;
 
-  [SerializeField] GameState.Powerups.Type _powerupSelected = GameState.Powerups.Type.None;
+  GameState.Powerups.Type _powerupSelected = GameState.Powerups.Type.None;
 
   void Awake()
   {
@@ -384,7 +369,7 @@ public class Level : MonoBehaviour
     for(int q = 0; q < _items.Count; ++q)
     {
       yield return new WaitForSeconds(_activationInterval * 0.25f);
-      _items[q].Show();
+      _items[q].Show(null);
     }
   }
   IEnumerator coShowArrows(bool act)
@@ -724,7 +709,7 @@ public class Level : MonoBehaviour
       push.transform.localPosition = _arrowsSelected[q].transform.localPosition - new Vector3Int(_arrowsSelected[q].dir.x/2, 0, _arrowsSelected[q].dir.y/2);
       push.dir = _arrowsSelected[q].dir;
       _pushing.Add(push);
-      push.Show();
+      push.Show(_arrowsSelected[q]);
     }
     if(_arrowsSelected.Count > 0) // && _nextItem)
     {

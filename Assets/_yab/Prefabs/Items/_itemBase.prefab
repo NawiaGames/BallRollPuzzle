@@ -148,6 +148,7 @@ MonoBehaviour:
   _accNonConst: 1.03
   _accTypeConst: 1
   _ocb: {fileID: 7273517201562458461}
+  _touchDelay: 0.3
   _rollTransf: {fileID: 2238382564477020698}
   grid: {x: 0, y: 0}
 --- !u!114 &7798136041665752175

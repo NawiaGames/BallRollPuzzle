@@ -38,14 +38,17 @@ public class UITutorial : MonoBehaviour
     level = lvl;
     tutorial.Activate(lvl.arrow(0).transform.position);
   }
-  void OnTutorialPowerup(Level lvl, GameState.Powerups.Type type)
+  void OnTutorialPowerupFirst(Level lvl, GameState.Powerups.Type type)
   {
-    
+
   }
   void OnItemThrow(Level lvl)
   {
     if(lvl.LevelIdx == 0)
+    {
       tutorial.Deactivate();
+      onTutorialDone?.Invoke();
+    }
   }
   void OnLevelFinished(Level lvl)
   {
