@@ -135,7 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 0
   _color: {r: 0, g: 0, b: 0, a: 1}
-  _colorMatchPing: {r: 2.9960785, g: 1.0352942, b: 0.3137255, a: 0}
+  _colorMatchPing: {r: 2, g: 1.8039216, b: 1.0039216, a: 0}
   _ballModel: {fileID: 8462825574880922697}
   _customModel: {fileID: 0}
   _activatable: {fileID: 7798136041665752175}
@@ -210,7 +210,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  blendTime: 1
+  blendTime: 1.5
   speedMultiplier: 1
   baseColor: {r: 1, g: 1, b: 1, a: 1}
   targetColor: {r: 2.1185474, g: 2.1185474, b: 2.1185474, a: 1}

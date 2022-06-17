@@ -1,85 +1,6 @@
 {
-	"LionAdjustSdk": {
-		"iOSToken": "",
-		"androidToken": "hg27ll5ge9ds",
-		"environment": 1
-	},
-	"LionFbSdk": {
-		"app_ID": "1611406045926613"
-	},
-	"LionGameAnalyticsSdk": {
-		"iOSGameKey": "",
-		"iOSSecretKey": "",
-		"androidGameKey": "786ec7b4e6b24c3789530e99eca167e3",
-		"androidSecretKey": "447669c66b81b8aa4cb79a8732a2da1d152900c4"
-	},
-	"LionMaxSdk": {
-		"sdkKey": "h7Pq0hguT5cxuBidl255rnR8SqwdXiolJAOAFHrshTbDRGGJ4pDWnJf59WyqTR_dyyEnpGrrAdWl3NgTWs825Z"
-	},
-	"LionStudios.Suite.RemoteConfig.RemoteConfig": {
-		"rewardedAdsDisabled": false,
-		"interstitialsDisabled": false,
-		"bannersDisabled": false,
-		"crossPromoDisabled": false,
-		"interstitialTimer": 0,
-		"rvInterstitialTimer": 0,
-		"interstitialStartTimer": 0,
-		"interstitialStartLevel": 0,
-		"remoteValArray": [
-			{
-				"MaxExperimentVar": "",
-				"varType": 0,
-				"defaultValue": ""
-			},
-			{
-				"MaxExperimentVar": "",
-				"varType": 0,
-				"defaultValue": ""
-			},
-			{
-				"MaxExperimentVar": "",
-				"varType": 0,
-				"defaultValue": ""
-			},
-			{
-				"MaxExperimentVar": "",
-				"varType": 0,
-				"defaultValue": ""
-			},
-			{
-				"MaxExperimentVar": "",
-				"varType": 0,
-				"defaultValue": ""
-			},
-			{
-				"MaxExperimentVar": "",
-				"varType": 0,
-				"defaultValue": ""
-			},
-			{
-				"MaxExperimentVar": "",
-				"varType": 0,
-				"defaultValue": ""
-			},
-			{
-				"MaxExperimentVar": "",
-				"varType": 0,
-				"defaultValue": ""
-			},
-			{
-				"MaxExperimentVar": "",
-				"varType": 0,
-				"defaultValue": ""
-			},
-			{
-				"MaxExperimentVar": "",
-				"varType": 0,
-				"defaultValue": ""
-			}
-		]
-	},
 	"LionStudios.Suite.Analytics.LionAnalytics": {
-		"heartbeatInterval": 0,
+		"heartbeatInterval": 60,
 		"enableGameAnalyticsEvents": true
 	},
 	"LionStudios.Suite.Core.LionCore": {
@@ -89,8 +10,8 @@
 		"_GradlePluginOverride": ""
 	},
 	"LionStudios.Suite.Debugging.LionDebug": {
-		"debuggerEnabled": false,
-		"showDebuggerAtStartup": false,
+		"debuggerEnabled": true,
+		"showDebuggerAtStartup": true,
 		"debugLogLevel": 4
 	}
 }

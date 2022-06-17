@@ -732,6 +732,10 @@ PrefabInstance:
       propertyPath: moveWithTransform
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8711365101570566354, guid: 875f07a603afcd0488d07232d3bd1118, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8796438165910010177, guid: 875f07a603afcd0488d07232d3bd1118, type: 3}
       propertyPath: m_Name
       value: fxBombDestroy
