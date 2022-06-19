@@ -69,6 +69,7 @@ public class UIIngame : MonoBehaviour
     if(GameState.Powerups.PowerupsToShow())
     {
       SetupPowerupsInfo();
+      //PowerupsUpdate();
       bottomPanel.ActivatePanel();
     }
   }
@@ -84,6 +85,16 @@ public class UIIngame : MonoBehaviour
       int lvl = GameData.Rewards.GetLevelForPowerup((GameState.Powerups.Type)q);
       powerups[q].SetLevel(lvl);
     }
+    this.Invoke(() => 
+    {
+      var type = GameState.Powerups.TutorialToShow();
+      if(type != GameState.Powerups.Type.None)
+      {
+        int idx = GetPowerupIdx(type);
+        if(idx >= 0)
+          powerups[idx].ShowTut(true);
+      }
+    },2.0f);
   }
   void OnLevelCreated(Level lvl)
   {

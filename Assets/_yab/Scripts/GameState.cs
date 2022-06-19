@@ -116,6 +116,19 @@ public class GameState : SavableScriptableObject
       }
     }
     public static bool PowerupsToShow() => ClaimedOnLevel >= 0;
+    public static Powerups.Type TutorialToShow()
+    {
+      Powerups.Type type = Powerups.Type.None;
+      for(int q = 0; q < (int)Powerups.Type.Cnt; ++q)
+      {
+        if(GameData.Rewards.GetLevelForPowerup((Powerups.Type)q) + 1 == get().progress.level)
+        {
+          type = (Powerups.Type)q;
+          break;
+        }
+      }
+      return type;
+    }    
   }
 
   [Header("Customization")]

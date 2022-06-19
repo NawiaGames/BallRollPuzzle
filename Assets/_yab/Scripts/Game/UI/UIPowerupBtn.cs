@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPLbl = TMPro.TextMeshProUGUI;
+using GameLib.UI;
 
 public class UIPowerupBtn : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class UIPowerupBtn : MonoBehaviour
   [SerializeField] GameObject _selection;
   [SerializeField] float _selScale = 1.2f;
   [SerializeField] GameState.Powerups.Type _type;
+  [SerializeField] UITutPwrInfo tutPowerInfo;
 
   float _scaleEnd = 1.0f;
   bool _selected = false;
@@ -30,6 +32,13 @@ public class UIPowerupBtn : MonoBehaviour
   {
     stateOn.SetActive(unlocked);
     stateOff.SetActive(!unlocked);
+  }
+  public void ShowTut(bool show)
+  {
+    if(show)
+      tutPowerInfo.Activate();
+    else
+      tutPowerInfo.Deactivate();
   }
   public void Reset()
   {
