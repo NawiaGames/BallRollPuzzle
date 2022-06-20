@@ -408,7 +408,7 @@ GameObject:
   - component: {fileID: 2166224984420428676}
   - component: {fileID: 5538567391041219124}
   - component: {fileID: 6539599308854749545}
-  - component: {fileID: 5999311283358501291}
+  - component: {fileID: 6556296525579205753}
   m_Layer: 0
   m_Name: stdInfoPwr
   m_TagString: Untagged
@@ -481,7 +481,7 @@ MonoBehaviour:
   contentContainer: {fileID: 6296004281016631014}
   activateOnTop: 0
   activationDelay: 0
---- !u!114 &5999311283358501291
+--- !u!114 &6556296525579205753
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -490,7 +490,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7538357537291702772}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d75d56b93f998f46942e238585e251a, type: 3}
+  m_Script: {fileID: 11500000, guid: afa890ff437e0f641a2c0d9a2401eb03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 6539599308854749545}
@@ -654,6 +654,18 @@ PrefabInstance:
     - target: {fileID: 1894205492753103864, guid: 0a0c519bc8cabc84e88d5a7632c6566e, type: 3}
       propertyPath: m_Color.r
       value: 0.17225882
+      objectReference: {fileID: 0}
+    - target: {fileID: 2453623718187539004, guid: 0a0c519bc8cabc84e88d5a7632c6566e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6556296525579205753}
+    - target: {fileID: 2453623718187539004, guid: 0a0c519bc8cabc84e88d5a7632c6566e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnBtnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 2453623718187539004, guid: 0a0c519bc8cabc84e88d5a7632c6566e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIPowerInfo, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5265807246363395674, guid: 0a0c519bc8cabc84e88d5a7632c6566e, type: 3}
       propertyPath: m_IsActive

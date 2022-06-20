@@ -991,7 +991,8 @@ public class Level : MonoBehaviour
       yield return new WaitForSeconds(_painterStartDelay);
       Item hit = _painting[0];
       _painting.RemoveAt(0);
-      _painting.Sort((Item i0, Item i1) => (int)(i1.grid.y * 100 + i1.grid.x) - (i0.grid.y * 100 + i0.grid.x));
+      //_painting.Sort((Item i0, Item i1) => (int)(i1.grid.y * 100 + i1.grid.x) - (i0.grid.y * 100 + i0.grid.x));
+      _painting.Sort((Item i0, Item i1) => Mathf.RoundToInt(Vector2Int.Distance(hit.grid, i0.grid) - Vector2Int.Distance(hit.grid, i1.grid)));
       for(int q = 0; q < _painting.Count; ++q)
       { 
         if(_painting[q].id != hit.id)
@@ -1000,6 +1001,7 @@ public class Level : MonoBehaviour
           yield return new WaitForSeconds(_painterPropagateDelay);
         }
       }
+      yield return new WaitForSeconds(_painterStartDelay * 2);
     }
     _painting.Clear();
 

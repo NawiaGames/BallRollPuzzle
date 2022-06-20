@@ -112,7 +112,7 @@ public class UIIngame : MonoBehaviour
         if(idx >= 0)
           powerups[idx].ShowTut(true);
       }
-    },2.0f);
+    },1.0f);
   }
   void OnLevelCreated(Level lvl)
   {

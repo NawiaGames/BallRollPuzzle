@@ -17,13 +17,13 @@ MonoBehaviour:
   version: 0
   progress:
     level: 7
-    maxLevelPlayed: 7
+    maxLevelPlayed: 31
   economy:
     cash: 0
   powerups:
     claimedOnLevel: 6
     bombs: 10
-    colors: 10
-    painters: 9
+    colors: 9
+    painters: 7
     arrows: 10
   selectedTheme: 0
