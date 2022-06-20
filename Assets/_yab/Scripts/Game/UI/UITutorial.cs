@@ -36,7 +36,15 @@ public class UITutorial : MonoBehaviour
   void OnTutorialStart(Level lvl)
   {
     level = lvl;
-    tutorial.Activate(lvl.arrow(0).transform.position);
+    if(lvl.LevelIdx == 0)
+      tutorial.Activate(lvl.arrow(0).transform.position);
+    else if(lvl.LevelIdx == 5)
+    {
+      var rt = lvl.Dim / 2;
+      rt.x++;
+      tutorial.Activate(lvl.FindArrow(rt).transform.position);
+    }
+        
   }
   void OnTutorialPowerupFirst(Level lvl, GameState.Powerups.Type type)
   {
@@ -44,7 +52,7 @@ public class UITutorial : MonoBehaviour
   }
   void OnItemThrow(Level lvl)
   {
-    if(lvl.LevelIdx == 0)
+    if(lvl.LevelIdx == 0 || lvl.LevelIdx == 5)
     {
       tutorial.Deactivate();
       onTutorialDone?.Invoke();

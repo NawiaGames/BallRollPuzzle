@@ -34,6 +34,7 @@ public class Level : MonoBehaviour
   [SerializeField] float _bombExplodeDelay = 1 / 10f;
   [SerializeField] float _painterStartDelay = 0.4f;
   [SerializeField] float _painterPropagateDelay = 1.0f/10;
+  [SerializeField] bool  _destroyWithFracture = false;
 
   [Header("Gameplay Variants")]
   [SerializeField] bool _gameplayOutside = false;
@@ -42,6 +43,7 @@ public class Level : MonoBehaviour
   [SerializeField] Vector2Int _dim;
   [SerializeField] float _speed = 8;
   [SerializeField] int   _maxPoints = 10;
+  [SerializeField] bool  _usePerLevelPOI = true;
   [Header("Items")]
   [SerializeField] List<Item> _listItems;
   [Header("Arrows")]
@@ -290,6 +292,8 @@ public class Level : MonoBehaviour
   public int    Stars {get; set;}
   public int    BallsInitialCnt {get; set;}
   public Arrow  arrow(int idx) => _arrows[idx];
+  public Arrow  FindArrow(Vector2Int vi) => _arrows.Find((arr) => vi == arr.grid);
+  public Vector2Int Dim => _grid.dim();
 
   bool _started = false;
   bool _allowInput => _started && movesAvail > 0 && _pushing.Count == 0 && _moving.Count == 0 && _matching.Count == 0 && _painting.Count == 0 && !_sequence;
@@ -319,8 +323,12 @@ public class Level : MonoBehaviour
   void Awake()
   {
     _grid.init(_dim);
-    _poiLT.position = new Vector3(-_grid.dim().x/2 - 2, 0, _grid.dim().y / 2 + 2);
-    _poiRB.position = new Vector3(_grid.dim().x / 2 + 2, 0, -_grid.dim().y / 2 - 2);
+    if(_usePerLevelPOI)
+    {
+      _poiLT.position = new Vector3(-_grid.dim().x/2 - 2, 0, _grid.dim().y / 2 + 2);
+      _poiRB.position = new Vector3(_grid.dim().x / 2 + 2, 0, -_grid.dim().y / 2 - 2);
+    }
+
     _items = _itemsContainer.GetComponentsInChildren<Item>().ToList();
     uiSummary = FindObjectOfType<UISummary>(true);
     
@@ -364,7 +372,7 @@ public class Level : MonoBehaviour
     //yield return new WaitForSeconds(0.25f);
     StartCoroutine(coShowBalls());
     yield return StartCoroutine(coShowArrows(true));
-    if(LevelIdx == 0)
+    if(LevelIdx == 0 || LevelIdx == 5)
       onTutorialStart?.Invoke(this);
 
     _started = true;
@@ -401,7 +409,10 @@ public class Level : MonoBehaviour
         if(Succeed)
           _grid.getElem(va).Hide();
         else
-         _grid.getElem(va).Fracture();
+        {
+          if(_destroyWithFracture)
+          _grid.getElem(va).Fracture();
+        }
         yield return new WaitForSeconds(1 / 60f);
       }
     }

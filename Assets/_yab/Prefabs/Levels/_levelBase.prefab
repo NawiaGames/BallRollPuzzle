@@ -170,7 +170,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2191394784291358940}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 5, y: 0, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -244,15 +244,17 @@ MonoBehaviour:
   _activationInterval: 0.06666667
   _deactivationInterval: 0.016666668
   _bombExplodeDelay: 0.1
+  _painterStartDelay: 0.4
+  _painterPropagateDelay: 0.1
+  _destroyWithFracture: 0
   _gameplayOutside: 1
   _gameplayBlockEdge: 1
   _dim: {x: 5, y: 5}
   _speed: 16
   _maxPoints: 1000
+  _usePerLevelPOI: 0
   _listItems: []
   listArrows: []
-  _items: []
-  _powerupSelected: -1
 --- !u!1 &5007030670280906191
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,7 +382,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5439754146051307396}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -5, y: 0, z: 6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
