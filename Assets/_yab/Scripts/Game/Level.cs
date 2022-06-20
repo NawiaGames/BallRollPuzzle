@@ -43,11 +43,19 @@ public class Level : MonoBehaviour
   [SerializeField] Vector2Int _dim;
   [SerializeField] float _speed = 8;
   [SerializeField] int   _maxPoints = 10;
+  [SerializeField] Tutorial _tutorial;
   [SerializeField] bool  _usePerLevelPOI = true;
   [Header("Items")]
   [SerializeField] List<Item> _listItems;
   [Header("Arrows")]
   [SerializeField] Vector2Int[] listArrows;
+
+  public enum Tutorial
+  {
+    None,
+    Push,
+    PushOut,
+  }
 
   public class Grid
   {
@@ -294,6 +302,7 @@ public class Level : MonoBehaviour
   public Arrow  arrow(int idx) => _arrows[idx];
   public Arrow  FindArrow(Vector2Int vi) => _arrows.Find((arr) => vi == arr.grid);
   public Vector2Int Dim => _grid.dim();
+  public Tutorial tutorial => _tutorial;
 
   bool _started = false;
   bool _allowInput => _started && movesAvail > 0 && _pushing.Count == 0 && _moving.Count == 0 && _matching.Count == 0 && _painting.Count == 0 && !_sequence;
@@ -372,7 +381,7 @@ public class Level : MonoBehaviour
     //yield return new WaitForSeconds(0.25f);
     StartCoroutine(coShowBalls());
     yield return StartCoroutine(coShowArrows(true));
-    if(LevelIdx == 0 || LevelIdx == 5)
+    if(tutorial != Tutorial.None)
       onTutorialStart?.Invoke(this);
 
     _started = true;

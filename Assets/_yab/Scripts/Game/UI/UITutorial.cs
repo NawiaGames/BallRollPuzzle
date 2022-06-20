@@ -36,15 +36,14 @@ public class UITutorial : MonoBehaviour
   void OnTutorialStart(Level lvl)
   {
     level = lvl;
-    if(lvl.LevelIdx == 0)
+    if(lvl.tutorial == Level.Tutorial.Push)
       tutorial.Activate(lvl.arrow(0).transform.position);
-    else if(lvl.LevelIdx == 5)
+    else if(lvl.tutorial == Level.Tutorial.PushOut)
     {
       var rt = lvl.Dim / 2;
       rt.x++;
       tutorial.Activate(lvl.FindArrow(rt).transform.position);
     }
-        
   }
   void OnTutorialPowerupFirst(Level lvl, GameState.Powerups.Type type)
   {
