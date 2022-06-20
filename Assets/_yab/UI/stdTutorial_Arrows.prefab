@@ -33,7 +33,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2086613479413678562, guid: 786713e0887e2e44d967cf1186b6224e, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4290677036
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 3640892424798678552, guid: 786713e0887e2e44d967cf1186b6224e, type: 3}
       propertyPath: m_Color.b
@@ -153,9 +153,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7772622942939491331, guid: 786713e0887e2e44d967cf1186b6224e, type: 3}
       propertyPath: m_text
-      value: 'Arrow pushes 3 squares.
+      value: 'NEW POWERUP UNLOCKED!
 
-        Use arrow now!'
+        ARROW'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 786713e0887e2e44d967cf1186b6224e, type: 3}

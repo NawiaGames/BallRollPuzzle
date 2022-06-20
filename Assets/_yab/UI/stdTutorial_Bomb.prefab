@@ -109,9 +109,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7772622942939491331, guid: 786713e0887e2e44d967cf1186b6224e, type: 3}
       propertyPath: m_text
-      value: 'Bomb removes balls next to it!
+      value: 'NEW POWERUP UNLOCKED!
 
-        Use bomb now!'
+        BOMB'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 786713e0887e2e44d967cf1186b6224e, type: 3}
