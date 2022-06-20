@@ -43,6 +43,14 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.17225882
       objectReference: {fileID: 0}
+    - target: {fileID: 7057979583665774383, guid: 786713e0887e2e44d967cf1186b6224e, type: 3}
+      propertyPath: m_Pivot.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7057979583665774383, guid: 786713e0887e2e44d967cf1186b6224e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -64
+      objectReference: {fileID: 0}
     - target: {fileID: 7330738587867326614, guid: 786713e0887e2e44d967cf1186b6224e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -137,6 +145,10 @@ PrefabInstance:
         in front of it.
 
         Use painter now!'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8119022387573526973, guid: 786713e0887e2e44d967cf1186b6224e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 720
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 786713e0887e2e44d967cf1186b6224e, type: 3}
