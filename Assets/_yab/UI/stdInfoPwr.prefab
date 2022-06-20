@@ -34,10 +34,10 @@ RectTransform:
   m_Father: {fileID: 8119022387573526973}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.2, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -32, y: 0}
-  m_SizeDelta: {x: -64, y: 256}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 32, y: 0}
+  m_SizeDelta: {x: -288, y: -64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2972896637865545272
 CanvasRenderer:
@@ -108,7 +108,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: -24
+  m_lineSpacing: -48
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -255,7 +255,6 @@ GameObject:
   - component: {fileID: 2064467259745731939}
   - component: {fileID: 569156380535902694}
   - component: {fileID: 4955222618305283025}
-  - component: {fileID: 2064172248009730474}
   m_Layer: 5
   m_Name: btnConfirm
   m_TagString: Untagged
@@ -312,22 +311,6 @@ MonoBehaviour:
   autoRefreshValidAnimatorsList: 0
   activationDelay: 0.1
   deactivationDelay: 0.05
---- !u!114 &2064172248009730474
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6117593229826693638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 697f5e0982c14ee4ea5855c49882ab94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  registerPanel: 1
-  contentContainer: {fileID: 0}
-  activateOnTop: 0
-  activationDelay: 0
 --- !u!1 &6296004281016631014
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,7 +477,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 6539599308854749545}
-  btnPanel: {fileID: 2064172248009730474}
+  btnPanel: {fileID: 0}
 --- !u!1 &8795546993809085499
 GameObject:
   m_ObjectHideFlags: 0
@@ -787,7 +770,8 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 64
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8903605436379837203, guid: 0a0c519bc8cabc84e88d5a7632c6566e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0a0c519bc8cabc84e88d5a7632c6566e, type: 3}
 --- !u!224 &5608356766564232258 stripped
 RectTransform:

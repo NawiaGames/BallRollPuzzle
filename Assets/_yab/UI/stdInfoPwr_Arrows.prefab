@@ -109,12 +109,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7772622942939491331, guid: 4da06aba51511224489241f20571a968, type: 3}
       propertyPath: m_text
-      value: Arrow pushes 3 squares.
+      value: <b>Power Push</b> let's you throw 3 balls in a single move!
+      objectReference: {fileID: 0}
+    - target: {fileID: 7772622942939491331, guid: 4da06aba51511224489241f20571a968, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8171379867950491017, guid: 4da06aba51511224489241f20571a968, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -1105471682781747023, guid: 4c378e377072cf145ad5d536b9aba7de, type: 3}
+    - target: {fileID: 8802441999017837473, guid: 4da06aba51511224489241f20571a968, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802441999017837473, guid: 4da06aba51511224489241f20571a968, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 8875681476717646948, guid: 4da06aba51511224489241f20571a968, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4da06aba51511224489241f20571a968, type: 3}
 --- !u!114 &2000097045339238359 stripped
