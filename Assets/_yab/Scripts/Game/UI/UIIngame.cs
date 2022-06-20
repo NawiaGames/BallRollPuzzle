@@ -20,13 +20,17 @@ public class UIIngame : MonoBehaviour
   [SerializeField] TMPLbl     lblBallsLeft;
   [SerializeField] GameObject moveLblObj;
 
-  [Header("powerupsRefs")]
+  [Header("PowerupsRefs")]
   [SerializeField] UIPanel  bottomPanel;
   [SerializeField] UIPowerupBtn[] powerups;
 
+  [Header("ComboRefs")]
   [SerializeField] UIPanel  comboPanel;
   [SerializeField] TMPLbl   comboText;
   [SerializeField] float    comboAnimDuration;
+
+  [Header("DevSettings")]
+  [SerializeField] bool _dontShowUI = false;
 
   public static System.Action<GameState.Powerups.Type, bool> onPowerupChanged;
   public static System.Action<GameObject> onMoveLblChanged;
@@ -35,6 +39,16 @@ public class UIIngame : MonoBehaviour
   float _pointCurr = 0;
 
   Level _lvl = null;
+
+  static UIIngame static_this = null;
+  public static bool DontShowUI => static_this?._dontShowUI ?? false;
+
+#if UNITY_EDITOR
+  UIIngame()
+  {
+    static_this = this;
+  }
+#endif  
 
   void Awake()
   {
@@ -64,6 +78,8 @@ public class UIIngame : MonoBehaviour
 
   public void Show(Level level)
   {
+    if(_dontShowUI)
+      return;
     GetComponent<UIPanel>()?.ActivatePanel();
     topPanel.ActivatePanel();
     if(GameState.Powerups.PowerupsToShow())
@@ -75,6 +91,8 @@ public class UIIngame : MonoBehaviour
   }
   void Hide()
   {
+    if(_dontShowUI)
+      return;    
     topPanel.DeactivatePanel();
     bottomPanel.DeactivatePanel();
   }

@@ -1510,6 +1510,7 @@ MonoBehaviour:
   comboPanel: {fileID: 8941008515050388451}
   comboText: {fileID: 3768138619535299990}
   comboAnimDuration: 1
+  _dontShowUI: 1
 --- !u!114 &5453268848639807899
 MonoBehaviour:
   m_ObjectHideFlags: 0

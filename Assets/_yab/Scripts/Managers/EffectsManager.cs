@@ -163,6 +163,8 @@ public class EffectsManager : MonoBehaviour
     }
     void OnMoveLblChanged(GameObject go)
     {
+      if(UIIngame.DontShowUI)
+        return;
     //infoLblMan.ShowTextPopupUI(go.transform.position + new Vector3(Random.Range(-1.0f, 1.0f) * 100, 0,Random.Range(-1.0f, 1.0f)*100) , "asdad");
       infoLblManDown.ShowTextPopupUI(go.transform.position + new Vector3(Random.Range(-1.0f, 1.0f) * 25, 0, Random.Range(-1.0f, 1.0f) * 10), string.Format("+{0}", GameData.Points.moveLeft));
     }
