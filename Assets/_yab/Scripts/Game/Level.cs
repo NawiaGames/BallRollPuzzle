@@ -1239,12 +1239,15 @@ public class Level : MonoBehaviour
   IEnumerator coEnd()
   {
     Succeed = !AnyColorItem;
-    while(movesAvail > 0)
+    if(tutorial != Tutorial.Push)
     {
-      _listItems.RemoveAt(0);
-      onMovesLeftChanged?.Invoke(this);
-      AddPoints(GameData.Points.moveLeft);
-      yield return new WaitForSeconds(0.20f);
+      while(movesAvail > 0)
+      {
+        _listItems.RemoveAt(0);
+        onMovesLeftChanged?.Invoke(this);
+        AddPoints(GameData.Points.moveLeft);
+        yield return new WaitForSeconds(0.20f);
+      }
     }
     OutroBalls();
     DestroyGrid();

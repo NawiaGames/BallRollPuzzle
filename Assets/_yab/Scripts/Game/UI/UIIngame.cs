@@ -132,6 +132,7 @@ public class UIIngame : MonoBehaviour
     _pointDest = 0;
     UpdateScore();
     UpdateBallsInfo(null);
+    UpdateMovesLeft(_lvl);
 
     PowerupsDeselect();
     Show(lvl);
@@ -152,8 +153,17 @@ public class UIIngame : MonoBehaviour
   void UpdateBallsInfo(Item sender)
   {
     if(_lvl)
+    {
       lblBallsCnt.text = "" + (_lvl.BallsInitialCnt-_lvl.ColorItems);
       lblBallsMax.text = "of" + _lvl.BallsInitialCnt;
+    }
+  }
+  void UpdateMovesLeft(Level lvl)
+  {
+    if(lvl.tutorial == Level.Tutorial.Push)
+      lblBallsLeft.text = "-";
+    else
+      lblBallsLeft.text = lvl.movesAvail.ToString();
   }
   void OnLevelDestroy(Level lvl)
   {
@@ -165,7 +175,7 @@ public class UIIngame : MonoBehaviour
   }
   void OnItemThrow(Level lvl)
   {
-    lblBallsLeft.text = lvl.movesAvail.ToString();
+    UpdateMovesLeft(lvl);
     PowerupsDeselect();
     UpdateBallsInfo(null);
   }
@@ -181,7 +191,7 @@ public class UIIngame : MonoBehaviour
   }
   void OnMovesLeftChanged(Level lvl)
   {
-    lblBallsLeft.text = lvl.movesAvail.ToString();
+    UpdateMovesLeft(lvl);
     onMoveLblChanged?.Invoke(moveLblObj);
   }
   void OnCombo(int events_cnt)
@@ -240,6 +250,5 @@ public class UIIngame : MonoBehaviour
       progress.value = _pointCurr;
       UpdateScore();
     }
-    //UpdateBallsInfo(null);
   }
 }
