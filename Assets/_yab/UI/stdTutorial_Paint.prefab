@@ -133,10 +133,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7772622942939491331, guid: 786713e0887e2e44d967cf1186b6224e, type: 3}
       propertyPath: m_text
-      value: 'Paint changes the color of all the balls to the color of the ball in
-        front of it.
+      value: 'Painter changes the color of all the balls to the color of the ball
+        in front of it.
 
-        Use paint now!'
+        Use painter now!'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 786713e0887e2e44d967cf1186b6224e, type: 3}

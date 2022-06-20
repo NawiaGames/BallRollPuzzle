@@ -109,7 +109,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7772622942939491331, guid: 786713e0887e2e44d967cf1186b6224e, type: 3}
       propertyPath: m_text
-      value: 'The numer of moves is limited! '
+      value: 'The number of moves is limited! '
       objectReference: {fileID: 0}
     - target: {fileID: 8119022387573526973, guid: 786713e0887e2e44d967cf1186b6224e, type: 3}
       propertyPath: m_AnchoredPosition.y
