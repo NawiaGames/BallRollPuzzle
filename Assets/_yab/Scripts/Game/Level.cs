@@ -391,8 +391,8 @@ public class Level : MonoBehaviour
     int i = 0;
     foreach(var arr in _arrows)
     {
-      if(++i % 3 == 0)
-        yield return new WaitForSeconds(_activationInterval * 0.25f/2);
+      if(++i % 2 == 0)
+        yield return new WaitForSeconds(_activationInterval * 0.5f);
       if(act)
         arr?.Show();
       else

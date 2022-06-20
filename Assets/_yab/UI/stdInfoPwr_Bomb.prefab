@@ -99,6 +99,10 @@ PrefabInstance:
       propertyPath: m_text
       value: Destroy all balls around the bomb!
       objectReference: {fileID: 0}
+    - target: {fileID: 8171379867950491017, guid: 4da06aba51511224489241f20571a968, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -4603156472066961037, guid: 4c378e377072cf145ad5d536b9aba7de, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4da06aba51511224489241f20571a968, type: 3}
 --- !u!1 &2999609986644918874 stripped
