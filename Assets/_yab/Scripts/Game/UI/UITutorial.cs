@@ -51,7 +51,7 @@ public class UITutorial : MonoBehaviour
   }
   void OnItemThrow(Level lvl)
   {
-    if(lvl.LevelIdx == 0 || lvl.LevelIdx == 5)
+    if(lvl.tutorial == Level.Tutorial.Push || lvl.tutorial == Level.Tutorial.PushOut)
     {
       tutorial.Deactivate();
       onTutorialDone?.Invoke();
