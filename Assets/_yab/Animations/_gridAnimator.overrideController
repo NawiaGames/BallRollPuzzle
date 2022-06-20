@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: _gridAnimator
+  m_Controller: {fileID: 9100000, guid: a93d2ccd0141ceb4695ea09a52528aca, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: aaf99c8d24889834cae9bcac411796e4, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 5a5d7af80c9210649b6995ed164d45ae, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: e43826fd174e9f448a91ba1c59242bbe, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e65b14967eeb02e429e114377d83ea89, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: a28e64492aad8cc45b396613feb5ee57, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 03f1fe77d940985478cdb062dcc1d833, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 3d1977838db5baf479963b76a339e978, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 28fcc4176fc52d84faa4766679a31c0c, type: 2}
