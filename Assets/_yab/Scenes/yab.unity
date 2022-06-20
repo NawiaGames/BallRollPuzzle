@@ -1578,10 +1578,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1656759793}
     m_Modifications:
-    - target: {fileID: 2074218676515152703, guid: b674fd62f5e85c747b59fcbaeed572b3, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -280
-      objectReference: {fileID: 0}
     - target: {fileID: 4270927307264537144, guid: b674fd62f5e85c747b59fcbaeed572b3, type: 3}
       propertyPath: m_Name
       value: inGameHUD
@@ -1710,14 +1706,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5428488009618546095, guid: b674fd62f5e85c747b59fcbaeed572b3, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -280
-      objectReference: {fileID: 0}
-    - target: {fileID: 6467134511212402428, guid: b674fd62f5e85c747b59fcbaeed572b3, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -280
-      objectReference: {fileID: 0}
     - target: {fileID: 7841861317585947262, guid: b674fd62f5e85c747b59fcbaeed572b3, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1725,10 +1713,6 @@ PrefabInstance:
     - target: {fileID: 7841861317585947262, guid: b674fd62f5e85c747b59fcbaeed572b3, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7847047415246428937, guid: b674fd62f5e85c747b59fcbaeed572b3, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -280
       objectReference: {fileID: 0}
     - target: {fileID: 8201135853195600452, guid: b674fd62f5e85c747b59fcbaeed572b3, type: 3}
       propertyPath: m_AnchorMax.y
