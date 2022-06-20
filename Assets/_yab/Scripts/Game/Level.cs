@@ -32,6 +32,8 @@ public class Level : MonoBehaviour
   [SerializeField] float _activationInterval = 1/30f;
   [SerializeField] float _deactivationInterval = 1/30f;
   [SerializeField] float _bombExplodeDelay = 1 / 10f;
+  [SerializeField] float _painterStartDelay = 0.4f;
+  [SerializeField] float _painterPropagateDelay = 1.0f/10;
 
   [Header("Gameplay Variants")]
   [SerializeField] bool _gameplayOutside = false;
@@ -380,7 +382,7 @@ public class Level : MonoBehaviour
   {
     foreach(var arr in _arrows)
     {
-      yield return new WaitForSeconds(_activationInterval * 0.25f);
+      yield return new WaitForSeconds(_activationInterval * 0.25f/2);
       if(act)
         arr?.Show();
       else
@@ -973,6 +975,7 @@ public class Level : MonoBehaviour
 
     if(_painting.Count > 0)
     {
+      yield return new WaitForSeconds(_painterStartDelay);
       Item hit = _painting[0];
       _painting.RemoveAt(0);
       _painting.Sort((Item i0, Item i1) => (int)(i1.grid.y * 100 + i1.grid.x) - (i0.grid.y * 100 + i0.grid.x));
@@ -981,7 +984,7 @@ public class Level : MonoBehaviour
         if(_painting[q].id != hit.id)
         {
           _painting[q].Paint(hit);
-          yield return new WaitForSeconds(1/10.0f);
+          yield return new WaitForSeconds(_painterPropagateDelay);
         }
       }
     }
