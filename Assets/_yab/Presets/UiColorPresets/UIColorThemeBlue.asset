@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: UIColorThemeBlue
   m_EditorClassIdentifier: 
   colors:
-  - {r: 0.17225882, g: 0.5354432, b: 0.745283, a: 1}
   - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 0.17225882, g: 0.5354432, b: 0.745283, a: 1}
   - {r: 0.25, g: 0.25, b: 0.25, a: 1}
