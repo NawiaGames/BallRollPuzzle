@@ -388,9 +388,11 @@ public class Level : MonoBehaviour
   }
   IEnumerator coShowArrows(bool act)
   {
+    int i = 0;
     foreach(var arr in _arrows)
     {
-      yield return new WaitForSeconds(_activationInterval * 0.25f/2);
+      if(++i % 3 == 0)
+        yield return new WaitForSeconds(_activationInterval * 0.25f/2);
       if(act)
         arr?.Show();
       else
@@ -1014,7 +1016,8 @@ public class Level : MonoBehaviour
     if(_moving.Count == 0 && _pushing.Count == 0 && _matching.Count == 0 && _painting.Count == 0)
     {
       CheckMove();
-      ShowBigGreets();
+      if(_moving.Count == 0 && _pushing.Count == 0)
+        ShowBigGreets();
       CheckEnd();
     }    
     _sequence = false;
