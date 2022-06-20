@@ -201,7 +201,7 @@ RectTransform:
   - {fileID: 2150223461625286410}
   - {fileID: 1012142034240559306}
   m_Father: {fileID: 4270927306262247871}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -740,13 +740,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4301626555970416117}
-  m_Father: {fileID: 4270927306262247871}
+  m_Father: {fileID: 2556998464237477471}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -832}
+  m_SizeDelta: {x: -0.000061035156, y: 1664}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2456103115725278951
 GameObject:
@@ -865,6 +865,7 @@ RectTransform:
   - {fileID: 1313728295827825636}
   - {fileID: 4401101158968122112}
   - {fileID: 5212143127011186326}
+  - {fileID: 3380817786113231321}
   m_Father: {fileID: 4270927307174365769}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1086,7 +1087,7 @@ RectTransform:
   m_Children:
   - {fileID: 5372289113683680532}
   m_Father: {fileID: 4270927306262247871}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1343,7 +1344,6 @@ RectTransform:
   - {fileID: 4270927307174365769}
   - {fileID: 6185735560360206969}
   - {fileID: 2204502210513793372}
-  - {fileID: 3380817786113231321}
   - {fileID: 7600934780400588636}
   - {fileID: 5322643356085843912}
   - {fileID: 1041073860131060783}
@@ -2266,7 +2266,7 @@ RectTransform:
   m_Children:
   - {fileID: 5582166093319415657}
   m_Father: {fileID: 4270927306262247871}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -4590,6 +4590,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 915673000278630297, guid: 4c378e377072cf145ad5d536b9aba7de, type: 3}
+    - target: {fileID: 2351011653378107483, guid: 92368459d0900da41a395cbf155ba691, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 3216935212
+      objectReference: {fileID: 0}
     - target: {fileID: 2754233224562739650, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5517,7 +5521,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3817760473148858693, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4294967295
+      value: 4290677036
       objectReference: {fileID: 0}
     - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
