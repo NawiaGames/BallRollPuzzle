@@ -1097,7 +1097,7 @@ MonoBehaviour:
   stateOff: {fileID: 3457515854109017311}
   _selection: {fileID: 1125221755781777992}
   _selScale: 1.2
-  _type: 0
+  _type: -1
   tutPowerInfo: {fileID: 0}
   powerInfo: {fileID: 0}
 --- !u!114 &1195754382207551275
