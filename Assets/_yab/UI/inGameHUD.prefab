@@ -3587,23 +3587,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 8987703992672242553}
+      objectReference: {fileID: 4964786018781571103}
     - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnBtnPowerup
+      value: OnPowerupClicked
       objectReference: {fileID: 0}
     - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 4964786018781571103}
+      objectReference: {fileID: 0}
     - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UIPowerupBtn, Assembly-CSharp
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5231269290172192200, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_Color.b
@@ -4751,23 +4751,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 8987703992672242553}
+      objectReference: {fileID: 613143660604620870}
     - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnBtnPowerup
+      value: OnPowerupClicked
       objectReference: {fileID: 0}
     - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 613143660604620870}
+      objectReference: {fileID: 0}
     - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UIPowerupBtn, Assembly-CSharp
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5231269290172192200, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_Color.b
@@ -5309,23 +5309,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 8987703992672242553}
+      objectReference: {fileID: 262183543127821992}
     - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnBtnPowerup
+      value: OnPowerupClicked
       objectReference: {fileID: 0}
     - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 262183543127821992}
+      objectReference: {fileID: 0}
     - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UIPowerupBtn, Assembly-CSharp
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5231269290172192200, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_Color.b
@@ -5817,23 +5817,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 8987703992672242553}
+      objectReference: {fileID: 3704775697063288237}
     - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnBtnPowerup
+      value: OnPowerupClicked
       objectReference: {fileID: 0}
     - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 3704775697063288237}
+      objectReference: {fileID: 0}
     - target: {fileID: 3977416306997598175, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UIPowerupBtn, Assembly-CSharp
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5231269290172192200, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: m_Color.b

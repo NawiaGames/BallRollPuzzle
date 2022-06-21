@@ -1066,9 +1066,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UIIngame, Assembly-CSharp
-        m_MethodName: OnBtnPowerup2
+      - m_Target: {fileID: 6875619991707364288}
+        m_TargetAssemblyTypeName: UIPowerupBtn, Assembly-CSharp
+        m_MethodName: OnPowerupClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

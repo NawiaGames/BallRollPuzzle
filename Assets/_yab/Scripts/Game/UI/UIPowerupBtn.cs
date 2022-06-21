@@ -17,17 +17,20 @@ public class UIPowerupBtn : MonoBehaviour
   [SerializeField] UITutPwrInfo tutPowerInfo;
   [SerializeField] UIPowerInfo  powerInfo;
 
+  public static System.Action<UIPowerupBtn> onClicked;
+
+
   float _scaleEnd = 1.0f;
   bool _selected = false;
   bool _unlocked = false;
 
   void Awake()
   {
-    UIPowerInfo.onClosed += OnPowerupClosed;
+    UIPowerInfo.onClosed += OnPowerupInfoClosed;
   }
   void OnDestroy()
   {
-    UIPowerInfo.onClosed -= OnPowerupClosed;
+    UIPowerInfo.onClosed -= OnPowerupInfoClosed;
   }
 
   public bool IsSelected 
@@ -61,22 +64,29 @@ public class UIPowerupBtn : MonoBehaviour
   {
     powerInfo.type = type;
     if(show)
+    {
       powerInfo.Activate();
+      tutPowerInfo.Deactivate();
+    }
     else
+    {
       powerInfo.Deactivate();
+    }
+      
+  }
+  public void OnPowerupClicked()
+  {
+    onClicked?.Invoke(this);
   }
   public void Reset()
   {
     ico.transform.localScale = Vector3.one;
     _scaleEnd = 1.0f;
   }
-  void OnPowerupClosed(UIPowerInfo pwrInfo)
+  void OnPowerupInfoClosed(UIPowerInfo pwrInfo)
   {
     if(pwrInfo.type == type)
-    {
-      FindObjectOfType<UIIngame>().OnBtnPowerup(this);
-      //IsSelected = false;
-    }
+      OnPowerupClicked();
   }
   void Update()
   {

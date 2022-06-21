@@ -61,6 +61,7 @@ public class UIIngame : MonoBehaviour
     Level.onDestroy += OnLevelDestroy;
     Level.onCombo += OnCombo;
     Item.onHide += OnItemHide;
+    UIPowerupBtn.onClicked += OnBtnPowerup;
   }
   void OnDestroy()
   {
@@ -73,6 +74,7 @@ public class UIIngame : MonoBehaviour
     Level.onDestroy -= OnLevelDestroy;
     Level.onCombo -= OnCombo;
     Item.onHide -= OnItemHide;
+    UIPowerupBtn.onClicked -= OnBtnPowerup;
   }
 
 
@@ -232,6 +234,9 @@ public class UIIngame : MonoBehaviour
       if(idx >= 0)
       {
         powerups[idx].IsSelected = !powerups[idx].IsSelected;
+        powerups[idx].ShowInfo(powerups[idx].IsSelected);
+        if(!powerups[idx].IsSelected)
+          powerups[idx].ShowTut(false);
         onPowerupChanged?.Invoke(type, powerups[idx].IsSelected);
       }
     }

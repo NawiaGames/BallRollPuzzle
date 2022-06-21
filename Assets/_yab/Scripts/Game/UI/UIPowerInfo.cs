@@ -12,10 +12,17 @@ public class UIPowerInfo : MonoBehaviour
 
   public GameState.Powerups.Type type {get; set;} = GameState.Powerups.Type.None;
 
+  void Awake()
+  {
+  }
+  void OnDestroy()
+  {
+  }
+
   public void Activate()
   {
     panel.ActivatePanel();
-    btnPanel.ActivatePanel();
+    btnPanel?.ActivatePanel();
   }
   public void Deactivate()
   {

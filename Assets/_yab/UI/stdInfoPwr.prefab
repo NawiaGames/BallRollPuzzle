@@ -254,7 +254,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2064467259745731939}
   - component: {fileID: 569156380535902694}
-  - component: {fileID: 4955222618305283025}
   m_Layer: 5
   m_Name: btnConfirm
   m_TagString: Untagged
@@ -295,22 +294,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &4955222618305283025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6117593229826693638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71ca0b0e4e60da642a8d0f3c77403502, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skipOffScreenItemDelay: 0
-  autoRefreshValidAnimatorsList: 0
-  activationDelay: 0.1
-  deactivationDelay: 0.05
 --- !u!1 &6296004281016631014
 GameObject:
   m_ObjectHideFlags: 0
