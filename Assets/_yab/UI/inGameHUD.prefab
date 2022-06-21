@@ -1977,7 +1977,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -32}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 512}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &5268741938350054334
@@ -2472,7 +2472,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 256}
+  m_SizeDelta: {x: 0, y: 192}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!225 &8387681941369989485
 CanvasGroup:
@@ -3123,10 +3123,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: stdTutorial_Paint
       objectReference: {fileID: 0}
-    - target: {fileID: 8556488803565381415, guid: b81cf1cb5b4c04a03ae8bf22915a3716, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 112
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b81cf1cb5b4c04a03ae8bf22915a3716, type: 3}
 --- !u!224 &1350838968318890616 stripped
@@ -3479,8 +3475,8 @@ PrefabInstance:
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6875619991707364288, guid: 92368459d0900da41a395cbf155ba691, type: 3}
-      propertyPath: _type
-      value: 0
+      propertyPath: _selScale
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 6875619991707364288, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: powerInfo
@@ -3489,7 +3485,7 @@ PrefabInstance:
     - target: {fileID: 6875619991707364288, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: tutPowerInfo
       value: 
-      objectReference: {fileID: 5913684965518420721}
+      objectReference: {fileID: 1678054001831358460}
     - target: {fileID: 6875619991707364288, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: tutorialPanel
       value: 
@@ -3614,10 +3610,6 @@ PrefabInstance:
     - target: {fileID: 940891402947162551, guid: b81cf1cb5b4c04a03ae8bf22915a3716, type: 3}
       propertyPath: m_Name
       value: stdTutorial_Arrows
-      objectReference: {fileID: 0}
-    - target: {fileID: 940891402947162551, guid: b81cf1cb5b4c04a03ae8bf22915a3716, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b81cf1cb5b4c04a03ae8bf22915a3716, type: 3}
@@ -4232,10 +4224,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7531805965945500127}
     m_Modifications:
-    - target: {fileID: 1613000975462952264, guid: 90deceee0e4c0c34bbc4826a9069907f, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2630492207182969656, guid: 90deceee0e4c0c34bbc4826a9069907f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4306,7 +4294,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2630492207182969656, guid: 90deceee0e4c0c34bbc4826a9069907f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -32
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2630492207182969656, guid: 90deceee0e4c0c34bbc4826a9069907f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4437,10 +4425,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: stdTutorial_Rainbow
       objectReference: {fileID: 0}
-    - target: {fileID: 8556488803565381415, guid: b81cf1cb5b4c04a03ae8bf22915a3716, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 336
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b81cf1cb5b4c04a03ae8bf22915a3716, type: 3}
 --- !u!224 &5945196956589954033 stripped
@@ -4536,7 +4520,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2630492207182969656, guid: 50292d819f3646e4fbd0d34dbf2039a6, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -32
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2630492207182969656, guid: 50292d819f3646e4fbd0d34dbf2039a6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4692,6 +4676,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6875619991707364288, guid: 92368459d0900da41a395cbf155ba691, type: 3}
+      propertyPath: _selScale
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6875619991707364288, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: powerInfo
       value: 
       objectReference: {fileID: 5653702905970695530}
@@ -4736,10 +4724,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7531805965945500127}
     m_Modifications:
-    - target: {fileID: 1613000975462952264, guid: 33d396882cf8bb74cb7b6b49aac06fac, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2630492207182969656, guid: 33d396882cf8bb74cb7b6b49aac06fac, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4810,7 +4794,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2630492207182969656, guid: 33d396882cf8bb74cb7b6b49aac06fac, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -32
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2630492207182969656, guid: 33d396882cf8bb74cb7b6b49aac06fac, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4992,6 +4976,10 @@ PrefabInstance:
     - target: {fileID: 6875619991707364288, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: _type
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6875619991707364288, guid: 92368459d0900da41a395cbf155ba691, type: 3}
+      propertyPath: _selScale
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 6875619991707364288, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: powerInfo
@@ -5393,23 +5381,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: stdTutorial_Bomb
       objectReference: {fileID: 0}
-    - target: {fileID: 8556488803565381415, guid: b81cf1cb5b4c04a03ae8bf22915a3716, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -112
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b81cf1cb5b4c04a03ae8bf22915a3716, type: 3}
---- !u!114 &5913684965518420721 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3950433475791219176, guid: b81cf1cb5b4c04a03ae8bf22915a3716, type: 3}
-  m_PrefabInstance: {fileID: 7260756374153577241}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d75d56b93f998f46942e238585e251a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &7272318411748412364 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 13251746518255829, guid: b81cf1cb5b4c04a03ae8bf22915a3716, type: 3}
@@ -5533,6 +5506,10 @@ PrefabInstance:
     - target: {fileID: 6875619991707364288, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: _type
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6875619991707364288, guid: 92368459d0900da41a395cbf155ba691, type: 3}
+      propertyPath: _selScale
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 6875619991707364288, guid: 92368459d0900da41a395cbf155ba691, type: 3}
       propertyPath: powerInfo
@@ -5854,10 +5831,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7531805965945500127}
     m_Modifications:
-    - target: {fileID: 1613000975462952264, guid: be2917938c0f6a440bd8beb7337a5498, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2630492207182969656, guid: be2917938c0f6a440bd8beb7337a5498, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5928,7 +5901,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2630492207182969656, guid: be2917938c0f6a440bd8beb7337a5498, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -32
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2630492207182969656, guid: be2917938c0f6a440bd8beb7337a5498, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

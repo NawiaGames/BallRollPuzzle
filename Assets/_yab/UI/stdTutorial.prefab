@@ -434,7 +434,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   registerAnimator: 1
   initialDelay: 0
-  activateAnimationPreset: {fileID: 11400000, guid: 77505c0c0726874419b8ca0010be36e6, type: 2}
+  activateAnimationPreset: {fileID: 11400000, guid: 09ce43fa3450ca14ba85dc5762e381b6, type: 2}
   deactivateAnimationPreset: {fileID: 11400000, guid: a528e4653df7b3d41bf6afa9d49d2a41, type: 2}
   affectedTransform: {fileID: 0}
 --- !u!1 &6417328494406253764
