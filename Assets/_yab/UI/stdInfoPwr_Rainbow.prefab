@@ -97,8 +97,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7772622942939491331, guid: 4da06aba51511224489241f20571a968, type: 3}
       propertyPath: m_text
-      value: Rainbow changes the color of all the balls to the color of the one it
-        touches.
+      value: Changes the color of all the balls on the board!
       objectReference: {fileID: 0}
     - target: {fileID: 8171379867950491017, guid: 4da06aba51511224489241f20571a968, type: 3}
       propertyPath: m_Sprite

@@ -13,7 +13,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7330738587867326614, guid: 4da06aba51511224489241f20571a968, type: 3}
       propertyPath: m_Pivot.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7330738587867326614, guid: 4da06aba51511224489241f20571a968, type: 3}
       propertyPath: m_RootOrder
@@ -33,15 +33,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7330738587867326614, guid: 4da06aba51511224489241f20571a968, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7330738587867326614, guid: 4da06aba51511224489241f20571a968, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -64
       objectReference: {fileID: 0}
     - target: {fileID: 7330738587867326614, guid: 4da06aba51511224489241f20571a968, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 7330738587867326614, guid: 4da06aba51511224489241f20571a968, type: 3}
       propertyPath: m_LocalPosition.x
@@ -77,7 +77,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7330738587867326614, guid: 4da06aba51511224489241f20571a968, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7330738587867326614, guid: 4da06aba51511224489241f20571a968, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -97,7 +97,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7772622942939491331, guid: 4da06aba51511224489241f20571a968, type: 3}
       propertyPath: m_text
-      value: Destroy all balls around the bomb!
+      value: Instantly removes all adjesent Balls!
       objectReference: {fileID: 0}
     - target: {fileID: 8171379867950491017, guid: 4da06aba51511224489241f20571a968, type: 3}
       propertyPath: m_Sprite
@@ -105,28 +105,3 @@ PrefabInstance:
       objectReference: {fileID: -4603156472066961037, guid: 4c378e377072cf145ad5d536b9aba7de, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4da06aba51511224489241f20571a968, type: 3}
---- !u!1 &2999609986644918874 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7538357537291702772, guid: 4da06aba51511224489241f20571a968, type: 3}
-  m_PrefabInstance: {fileID: 4701020644119565230}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3831361999581112945
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2999609986644918874}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreLayout: 1
-  m_MinWidth: -1
-  m_MinHeight: -1
-  m_PreferredWidth: -1
-  m_PreferredHeight: -1
-  m_FlexibleWidth: -1
-  m_FlexibleHeight: -1
-  m_LayoutPriority: 1
