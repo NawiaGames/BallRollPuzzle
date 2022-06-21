@@ -248,10 +248,11 @@ MonoBehaviour:
   _painterPropagateDelay: 0.1
   _destroyWithFracture: 0
   _gameplayOutside: 1
-  _gameplayBlockEdge: 1
+  _gameplayBlockEdge: 0
   _dim: {x: 5, y: 5}
   _speed: 16
   _maxPoints: 1000
+  _tutorial: 0
   _usePerLevelPOI: 0
   _listItems: []
   listArrows: []
