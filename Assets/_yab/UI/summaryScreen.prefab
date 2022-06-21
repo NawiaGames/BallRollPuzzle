@@ -985,6 +985,7 @@ GameObject:
   - component: {fileID: 97430650381838281}
   - component: {fileID: 8497476229428817884}
   - component: {fileID: 4485903899357534522}
+  - component: {fileID: 3041866373113902992}
   m_Layer: 0
   m_Name: lblScore
   m_TagString: Untagged
@@ -1140,6 +1141,19 @@ MonoBehaviour:
   activateAnimationPreset: {fileID: 11400000, guid: 77505c0c0726874419b8ca0010be36e6, type: 2}
   deactivateAnimationPreset: {fileID: 11400000, guid: a528e4653df7b3d41bf6afa9d49d2a41, type: 2}
   affectedTransform: {fileID: 3390172722130502711}
+--- !u!114 &3041866373113902992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950621301001322714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61ec2acd765832c49a4052ac33eaf62d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <ThemeID>k__BackingField: 1
 --- !u!1 &1288036550778810963
 GameObject:
   m_ObjectHideFlags: 0

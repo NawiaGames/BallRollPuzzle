@@ -31,6 +31,16 @@ public class DevOptions : MonoBehaviour
   {
     FindObjectOfType<GameLib.UI.UIColorThemeManager>().ApplyThemeColorToAllSubComponents(colorThemes[(int)Mathf.Repeat(++colorTheme, colorThemes.Length)]);
   }
+  public void on_btn_wasser()
+  {
+    var gameField = GameObject.Find("gameField");
+    if(gameField)
+    {
+      var wasser = gameField.transform.GetChild(0)?.gameObject ?? null;
+      if(wasser)
+        wasser.SetActive(!wasser.activeSelf);
+    }
+  }
   [SerializeField] GameLib.UI.UIColorTheme[] colorThemes = new GameLib.UI.UIColorTheme[]{};
   [SerializeField] int colorTheme = 0;
 
