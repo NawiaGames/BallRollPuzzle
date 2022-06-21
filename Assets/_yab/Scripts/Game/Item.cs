@@ -163,7 +163,25 @@ public class Item : MonoBehaviour
     }
     if(IsRegular && push == Push.None)
     {
-      _rollTransf.GetChild(0).localRotation = Random.rotation;
+      if(_rollTransf)
+        _rollTransf.GetChild(0).localRotation = Random.rotation;
+    }
+  }
+  public void Init(Arrow arr)
+  {
+    _arr = arr;
+    _gridPrev = grid;
+    _gridEnd = grid;
+    if(!IsRemoveElem)
+    {
+      _activatable.ActivateObject();
+      if(_arr)
+        this.Invoke(() => { _arr?.Touch(); _arr = null; }, _touchDelay);
+    }
+    if(IsRegular && push == Push.None)
+    {
+      if(_rollTransf)
+        _rollTransf.GetChild(0).localRotation = Random.rotation;
     }
   }
   public void Hide(bool silent = false)
@@ -224,7 +242,8 @@ public class Item : MonoBehaviour
     for(int q = 0; q < 2 & !chpos; ++q)
     {
       transform.localPosition += vdir * dt * 0.5f * _speed;
-      Rotate(_rollTransf, dt * 0.5f * _speed);
+      if(_rollTransf)
+        Rotate(_rollTransf, dt * 0.5f * _speed);
       var grid_prev = grid;
       grid = toGridT(transform.localPosition, dir);
       chpos |= grid != grid_prev;
@@ -243,7 +262,8 @@ public class Item : MonoBehaviour
     for(int q = 0; q < 2 && ret; ++q)
     {
       transform.localPosition = Vector3.MoveTowards(transform.localPosition, toPos(_gridEnd), dt * 0.5f * _speed);
-      Rotate(_rollTransf, dt * 0.5f * _speed);
+      if(_rollTransf)
+        Rotate(_rollTransf, dt * 0.5f * _speed);
       _gridPrev = grid;
       grid = toGridT(transform.localPosition, _dir);
       if(Mathf.Approximately(Vector3.Distance(transform.localPosition, toPos(_gridEnd)), 0))

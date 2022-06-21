@@ -403,9 +403,14 @@ public class Level : MonoBehaviour
       if(++i % 2 == 0)
         yield return new WaitForSeconds(_activationInterval * 0.5f);
       if(act)
+      {
         arr?.Show();
+        var item = GameData.Prefabs.CreatePushItem(_itemsContainer, Item.Push.One);
+        item.transform.position = arr.vPos;
+        _items.Add(item);
+      }
       else
-        arr?.Hide();  
+        arr?.Hide();
     }
   }
   IEnumerator coDestroyGrid()
