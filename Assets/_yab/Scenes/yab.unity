@@ -1814,6 +1814,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8987703992672242553, guid: b674fd62f5e85c747b59fcbaeed572b3, type: 3}
+      propertyPath: _dontShowUI
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b674fd62f5e85c747b59fcbaeed572b3, type: 3}
 --- !u!224 &1270259790 stripped
@@ -1882,8 +1886,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54b7033334646a94f8a255a84c21c52b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstActivationTime: 30
-  requestInterval: 3
 --- !u!1001 &1309126050
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3478,7 +3480,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7478289251538405508}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.23, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 1
   m_Children: []
