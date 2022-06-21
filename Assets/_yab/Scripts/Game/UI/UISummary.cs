@@ -91,7 +91,8 @@ public class UISummary : MonoBehaviour
         _uiRewards[1].Quantity((rewards.HasValue)?rewards.Value.powerupBombs : 0);
         _uiRewards[2].Quantity((rewards.HasValue)?rewards.Value.powerupColors : 0);
         _uiRewards[3].Quantity((rewards.HasValue)?rewards.Value.powerupPainters : 0);
-        winContainer.SwitchPanel(rewardContainer);
+        //winContainer.SwitchPanel(rewardContainer);
+        rewardContainer.SwitchPanel();
         navClaimPanel.ActivatePanel();
       }
     }

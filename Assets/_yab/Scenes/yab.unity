@@ -3655,7 +3655,7 @@ MonoBehaviour:
   waterUVs: 1
   hideComponents: 0
   enableFoamShadows: 1
-  enableRefraction: 1
+  enableRefraction: 0
   meshRenderer: {fileID: 9220256568107580504}
   meshFilter: {fileID: 3226942469225070753}
   material: {fileID: 2100000, guid: ea66d3ba3c5ac7d498707e8c9e54524f, type: 2}
