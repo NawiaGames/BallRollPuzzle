@@ -1618,6 +1618,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 671484812686654341, guid: b674fd62f5e85c747b59fcbaeed572b3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2112396274037338548, guid: b674fd62f5e85c747b59fcbaeed572b3, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1725,6 +1729,10 @@ PrefabInstance:
     - target: {fileID: 4270927307264537147, guid: b674fd62f5e85c747b59fcbaeed572b3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301626555970416117, guid: b674fd62f5e85c747b59fcbaeed572b3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -780
       objectReference: {fileID: 0}
     - target: {fileID: 4446299567161575965, guid: b674fd62f5e85c747b59fcbaeed572b3, type: 3}
       propertyPath: m_AnchorMax.y

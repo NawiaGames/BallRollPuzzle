@@ -29,6 +29,8 @@ public class UIIngame : MonoBehaviour
   [SerializeField] TMPLbl   comboText;
   [SerializeField] float    comboAnimDuration;
 
+  [SerializeField] UIPanel  tutorialMoves;
+
   [Header("DevSettings")]
   [SerializeField] bool _dontShowUI = false;
 
@@ -58,6 +60,7 @@ public class UIIngame : MonoBehaviour
     Level.onPowerupUsed += OnPowerupUsed;
     Level.onPointsAdded += OnPointsAdded;
     Level.onMovesLeftChanged += OnMovesLeftChanged;
+    Level.onTutorialStart += OnTutorialStart;
     Level.onDestroy += OnLevelDestroy;
     Level.onCombo += OnCombo;
     Item.onHide += OnItemHide;
@@ -71,6 +74,7 @@ public class UIIngame : MonoBehaviour
     Level.onPowerupUsed -= OnPowerupUsed;
     Level.onPointsAdded -= OnPointsAdded;
     Level.onMovesLeftChanged -= OnMovesLeftChanged;
+    Level.onTutorialStart -= OnTutorialStart;
     Level.onDestroy -= OnLevelDestroy;
     Level.onCombo -= OnCombo;
     Item.onHide -= OnItemHide;
@@ -180,6 +184,8 @@ public class UIIngame : MonoBehaviour
     UpdateMovesLeft(lvl);
     PowerupsDeselect();
     UpdateBallsInfo(null);
+    if(lvl.tutorial == Level.Tutorial.Moves)
+      tutorialMoves.DeactivatePanel();    
   }
   void OnPowerupUsed(GameState.Powerups.Type type)
   {
@@ -195,6 +201,11 @@ public class UIIngame : MonoBehaviour
   {
     UpdateMovesLeft(lvl);
     onMoveLblChanged?.Invoke(moveLblObj);
+  }
+  void OnTutorialStart(Level lvl)
+  {
+    if(lvl.tutorial == Level.Tutorial.Moves)
+      tutorialMoves.ActivatePanel();
   }
   void OnCombo(int events_cnt)
   {

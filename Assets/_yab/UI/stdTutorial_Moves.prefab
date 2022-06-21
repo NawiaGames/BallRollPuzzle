@@ -115,6 +115,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 410
       objectReference: {fileID: 0}
+    - target: {fileID: 8878621195150533343, guid: 786713e0887e2e44d967cf1186b6224e, type: 3}
+      propertyPath: activateAnimationPreset
+      value: 
+      objectReference: {fileID: 11400000, guid: 77505c0c0726874419b8ca0010be36e6, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 786713e0887e2e44d967cf1186b6224e, type: 3}
 --- !u!1 &2222088682227068449 stripped

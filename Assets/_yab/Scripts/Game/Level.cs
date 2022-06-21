@@ -55,6 +55,7 @@ public class Level : MonoBehaviour
     None,
     Push,
     PushOut,
+    Moves,
   }
 
   public class Grid
