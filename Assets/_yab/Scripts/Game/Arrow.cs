@@ -39,6 +39,8 @@ public class Arrow : MonoBehaviour
   public void Hide()
   {
     _actObj.DeactivateObject();
+    if(item)
+      item.Deactivate();
   }
   public bool        IsSelected { get => _selected; set { _selected = value; targetColor = (_selected) ? _colorSelected : _colorNormal; } }
   public bool        IsBlocked { get => _blocked; set { _blocked = value; targetColor = (_blocked)? _colorBlocked : _colorNormal;}}
@@ -51,6 +53,18 @@ public class Arrow : MonoBehaviour
   Vector3 _vforce = Vector3.zero;
   Vector3 _vpos = Vector3.zero;
   Vector3 _voffs = Vector3.zero;
+
+  public Item item {get; set;} = null;
+
+  public void InitItem()
+  {
+    if(item)
+    {
+      item.Init(this);
+      item.vturn = this.dir;
+      item.transform.position = this.transform.position;
+    }
+  }
 
   public  void Touch(float velmult = 1.0f)
   {

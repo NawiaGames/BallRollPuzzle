@@ -405,9 +405,8 @@ public class Level : MonoBehaviour
       if(act)
       {
         arr?.Show();
-        var item = GameData.Prefabs.CreatePushItem(_itemsContainer, Item.Push.One);
-        item.transform.position = arr.vPos;
-        _items.Add(item);
+        arr.item = GameData.Prefabs.CreatePushItem(_itemsContainer, Item.Push.One); //CreateNextItem(); //GameData.Prefabs.CreatePushItem(_itemsContainer, Item.Push.One);
+        arr.InitItem();
       }
       else
         arr?.Hide();
@@ -738,12 +737,17 @@ public class Level : MonoBehaviour
     Item push = null;
     for(int q = 0; q < _arrowsSelected.Count; ++q)
     {
-      push = CreateNextItem();
+      push = _arrowsSelected[q].item;
       push.vturn = new Vector2Int(Mathf.RoundToInt(_arrowsSelected[q].vDir.x), Mathf.RoundToInt(_arrowsSelected[q].vDir.z));
       push.transform.localPosition = _arrowsSelected[q].transform.localPosition - new Vector3Int(_arrowsSelected[q].dir.x/2, 0, _arrowsSelected[q].dir.y/2);
       push.dir = _arrowsSelected[q].dir;
       _pushing.Add(push);
-      push.Show(_arrowsSelected[q]);
+      //push.Show(_arrowsSelected[q]);
+
+      _arrowsSelected[q].item = GameData.Prefabs.CreatePushItem(_itemsContainer, Item.Push.One); //CreateNextItem();
+      _arrowsSelected[q].InitItem();
+      //_arrowsSelected[q].item.Init(_arrowsSelected[q]);
+      //_arrowsSelected[q].item.transform.position = _arrowsSelected[q].transform.position;
     }
     if(_arrowsSelected.Count > 0) // && _nextItem)
     {
@@ -753,6 +757,9 @@ public class Level : MonoBehaviour
         _powerupSelected = GameState.Powerups.Type.None;
       }
       onItemThrow?.Invoke(this);
+
+      if(push != null && _listItems.Count > 0)
+        _listItems.RemoveAt(0);
     }
     _arrowsSelected.Clear();
     _arrows.ForEach((ar) => ar.IsSelected = false);
