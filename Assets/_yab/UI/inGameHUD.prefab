@@ -3778,6 +3778,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: stdTutorial_Arrows
       objectReference: {fileID: 0}
+    - target: {fileID: 940891402947162551, guid: b81cf1cb5b4c04a03ae8bf22915a3716, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b81cf1cb5b4c04a03ae8bf22915a3716, type: 3}
 --- !u!114 &1678054001831358460 stripped
@@ -4391,6 +4395,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7531805965945500127}
     m_Modifications:
+    - target: {fileID: 1613000975462952264, guid: 90deceee0e4c0c34bbc4826a9069907f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2630492207182969656, guid: 90deceee0e4c0c34bbc4826a9069907f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -6371,6 +6379,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7531805965945500127}
     m_Modifications:
+    - target: {fileID: 1613000975462952264, guid: be2917938c0f6a440bd8beb7337a5498, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2630492207182969656, guid: be2917938c0f6a440bd8beb7337a5498, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

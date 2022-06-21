@@ -1638,10 +1638,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3212703532120422307, guid: b674fd62f5e85c747b59fcbaeed572b3, type: 3}
-      propertyPath: m_Name
-      value: stdTutorial_newPowerup
-      objectReference: {fileID: 0}
     - target: {fileID: 4270927307264537144, guid: b674fd62f5e85c747b59fcbaeed572b3, type: 3}
       propertyPath: m_Name
       value: inGameHUD
