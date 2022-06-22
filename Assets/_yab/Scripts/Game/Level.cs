@@ -621,7 +621,7 @@ public class Level : MonoBehaviour
     {
       _arrows[q].IsBlocked = block;
     }
-    UpdateArrows();
+    //UpdateArrows();
   }
   void UpdateArrows()
   {
