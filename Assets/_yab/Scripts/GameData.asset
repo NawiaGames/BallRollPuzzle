@@ -72,6 +72,7 @@ MonoBehaviour:
   - {fileID: 5382338121493344219, guid: aae5b6223722f4dc3beddba2fc32820b, type: 3}
   - {fileID: 5382338121493344219, guid: 48c3507d97e1646c48e05b61b97a118b, type: 3}
   - {fileID: 5382338121493344219, guid: 5426de90973c74d2380108e57c93cb18, type: 3}
+  - {fileID: 5382338121493344219, guid: d0e18c9cc86f346e9a28fba9b06a84b6, type: 3}
   - {fileID: 5382338121493344219, guid: 3c91e3f70df95b945b9dc15cd7ac2123, type: 3}
   - {fileID: 5382338121493344219, guid: 117e6795116786746a8d213509c9da3f, type: 3}
   - {fileID: 5382338121493344219, guid: f01f7cd2406da4e40ba49908d847e1f2, type: 3}
@@ -104,7 +105,7 @@ MonoBehaviour:
     powerupPainters: 1
     powerupArrows: 3
   - level: 33
-    powerupBombs: 1
+    powerupBombs: 2
     powerupColors: 2
     powerupPainters: 1
     powerupArrows: 2
