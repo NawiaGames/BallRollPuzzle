@@ -754,7 +754,7 @@ public class Level : MonoBehaviour
     if(!_allowInput || !AnyColorItem)
       return;
 
-    PushBall();
+    SpawnBall();
   }
   Item CreateBall(Arrow arrow, bool pushing)
   {
@@ -765,16 +765,18 @@ public class Level : MonoBehaviour
       push.vturn = new Vector2Int(Mathf.RoundToInt(arrow.vDir.x), Mathf.RoundToInt(arrow.vDir.z));
       push.transform.localPosition = arrow.transform.localPosition - new Vector3Int(arrow.dir.x / 2, 0, arrow.dir.y / 2);
       push.dir = arrow.dir;
-      if(pushing)
-        _pushing.Add(push);
+      //if(pushing)
+      //  _pushing.Add(push);
       push.Show(arrow);
+      if(pushing)
+        PushSpawnedBall(push);
     }
     return push;
   }
-  void PushBall()
+  void SpawnBall()
   {
-    _matchesInMove = 0;
-    _pushesInMove = 0;
+    // _matchesInMove = 0;
+    // _pushesInMove = 0;
     Item push = null;
     for(int q = 0; q < _arrowsSelected.Count; ++q)
     {
@@ -792,6 +794,13 @@ public class Level : MonoBehaviour
     _arrowsSelected.Clear();
     _arrows.ForEach((ar) => ar.IsSelected = false);
     UpdateArrows();
+  }
+  void PushSpawnedBall(Item item)
+  {
+    _matchesInMove = 0;
+    _pushesInMove = 0;
+    if(item)
+      _pushing.Add(item);
   }
   public void OnPowerupChanged(GameState.Powerups.Type type, bool state)
   {
@@ -1074,11 +1083,11 @@ public class Level : MonoBehaviour
       CheckMove();
       if(_moving.Count == 0 && _pushing.Count == 0)
         ShowBigGreets();
-      //this.Invoke(()=>CheckEnd(), 1.0f);
       CheckEnd();
       if(_queue.Count > 0)
       {
-        _pushing.Add(_queue[0]);
+        //_pushing.Add(_queue[0]);
+        PushSpawnedBall(_queue[0]);
         _queue.RemoveAt(0);
       }
     }
