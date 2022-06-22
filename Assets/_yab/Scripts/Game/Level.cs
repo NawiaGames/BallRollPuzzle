@@ -617,10 +617,13 @@ public class Level : MonoBehaviour
   }
   void BlockArrows(bool block)
   {
-    // for(int q = 0; q < _arrows.Count; ++q)
-    // {
-    //   _arrows[q].IsBlocked = block;
-    // }
+    if(!GameData.Settings.inputQueue)
+    {
+      for(int q = 0; q < _arrows.Count; ++q)
+      {
+        _arrows[q].IsBlocked = block;
+      }
+    }
     // UpdateArrows();
   }
   void UpdateArrows()
@@ -718,16 +721,21 @@ public class Level : MonoBehaviour
       if(Finished || movesAvail == 0)
         return;
 
-      var arr = tid.GetClosestCollider(0.5f)?.GetComponent<Arrow>() ?? null;
-      if(arr != null)
+      if(GameData.Settings.inputQueue)
       {
-        bool contains = _queue.Find((Item it) => arr == it.arrowInitial) || _pushing.Find((Item it) => arr == it.arrowInitial);
-        if(!contains)
+        var arr = tid.GetClosestCollider(0.5f)?.GetComponent<Arrow>() ?? null;
+        if(arr != null)
         {
-          var item = CreateBall(arr, false);
-          _queue.Add(item);
+          bool contains = _queue.Find((Item it) => arr == it.arrowInitial) || _pushing.Find((Item it) => arr == it.arrowInitial);
+          if(!contains)
+          {
+            var item = CreateBall(arr, false);
+            _queue.Add(item);
+            onItemThrow?.Invoke(this);
+          }
         }
       }
+
       return;
     }
 

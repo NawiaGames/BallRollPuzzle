@@ -43,6 +43,8 @@ public class GameData : ScriptableObject
   [SerializeField] int pointMoveLeft = 500;
   [SerializeField] float[] percentOfPointsForStars;
   [SerializeField] string[] comboText0, comboText1;
+  [Header("Settings")]
+  [SerializeField] bool inputQueue = true;
 
   [SerializeField] Color[]    themeColors;
   public static Color[] GetThemeColors() => get().themeColors;
@@ -223,5 +225,10 @@ public class GameData : ScriptableObject
 
       return range;
     }
+  }
+
+  public static class Settings
+  {
+    public static bool inputQueue{get => get().inputQueue; set{ get().inputQueue = value;}}
   }
 }
