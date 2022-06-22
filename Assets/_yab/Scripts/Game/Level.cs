@@ -319,7 +319,7 @@ public class Level : MonoBehaviour
   List<Item> _destroying = new List<Item>();
   List<Item> _painting = new List<Item>();
   Transform _cameraContainer = null;
-  List<Arrow> _queue = new List<Arrow>();
+  List<Item> _queue = new List<Item>();
 
   //Item _nextItem = null;
   bool _inputBlocked = false;
@@ -617,11 +617,11 @@ public class Level : MonoBehaviour
   }
   void BlockArrows(bool block)
   {
-    for(int q = 0; q < _arrows.Count; ++q)
-    {
-      _arrows[q].IsBlocked = block;
-    }
-    //UpdateArrows();
+    // for(int q = 0; q < _arrows.Count; ++q)
+    // {
+    //   _arrows[q].IsBlocked = block;
+    // }
+    // UpdateArrows();
   }
   void UpdateArrows()
   {
@@ -715,11 +715,18 @@ public class Level : MonoBehaviour
   {
     if(!_allowInput || !AnyColorItem)
     {
+      if(Finished || movesAvail == 0)
+        return;
+
       var arr = tid.GetClosestCollider(0.5f)?.GetComponent<Arrow>() ?? null;
       if(arr != null)
       {
-        if(!_queue.Contains(arr))
-          _queue.Add(arr);
+        bool canAdd = _queue.TrueForAll((Item it) => arr != it.arrow);
+        if(canAdd)
+        {
+          var item = CreateBall(arr, false);
+          _queue.Add(item);
+        }
       }
       return;
     }
@@ -741,28 +748,29 @@ public class Level : MonoBehaviour
 
     PushBall();
   }
+  Item CreateBall(Arrow arrow, bool pushing)
+  {
+    Item push = null;
+    if(arrow)
+    {
+      push = CreateNextItem();
+      push.vturn = new Vector2Int(Mathf.RoundToInt(arrow.vDir.x), Mathf.RoundToInt(arrow.vDir.z));
+      push.transform.localPosition = arrow.transform.localPosition - new Vector3Int(arrow.dir.x / 2, 0, arrow.dir.y / 2);
+      push.dir = arrow.dir;
+      if(pushing)
+        _pushing.Add(push);
+      push.Show(arrow);
+    }
+    return push;
+  }
   void PushBall()
   {
-    if(_arrowsSelected.Count == 0)
-    {
-      if(_queue.Count > 0)
-      {
-        _arrowsSelected.Add(_queue[0]);
-        _queue.RemoveAt(0);
-      }
-    }
-
     _matchesInMove = 0;
     _pushesInMove = 0;
     Item push = null;
     for(int q = 0; q < _arrowsSelected.Count; ++q)
     {
-      push = CreateNextItem();
-      push.vturn = new Vector2Int(Mathf.RoundToInt(_arrowsSelected[q].vDir.x), Mathf.RoundToInt(_arrowsSelected[q].vDir.z));
-      push.transform.localPosition = _arrowsSelected[q].transform.localPosition - new Vector3Int(_arrowsSelected[q].dir.x / 2, 0, _arrowsSelected[q].dir.y / 2);
-      push.dir = _arrowsSelected[q].dir;
-      _pushing.Add(push);
-      push.Show(_arrowsSelected[q]);
+      push = CreateBall(_arrowsSelected[q], true);
     }
     if(_arrowsSelected.Count > 0) // && _nextItem)
     {
@@ -1060,6 +1068,11 @@ public class Level : MonoBehaviour
         ShowBigGreets();
       //this.Invoke(()=>CheckEnd(), 1.0f);
       CheckEnd();
+      if(_queue.Count > 0)
+      {
+        _pushing.Add(_queue[0]);
+        _queue.RemoveAt(0);
+      }
     }
     _sequence = false;
   }
@@ -1293,7 +1306,7 @@ public class Level : MonoBehaviour
   {
     if(!Finished)
     {
-      if(_moving.Count == 0 && _pushing.Count == 0 && _matching.Count == 0 && (!AnyColorItem || movesAvail == 0))
+      if(_moving.Count == 0 && _pushing.Count == 0 && _matching.Count == 0 && _queue.Count == 0 && (!AnyColorItem || movesAvail == 0))
       {
         Finished = true;
         StartCoroutine(coEnd());

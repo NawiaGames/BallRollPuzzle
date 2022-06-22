@@ -146,8 +146,10 @@ public class Item : MonoBehaviour
   public Vector2Int? Redirected {get; set;}
   public int  Points {get; set;} = 0;
   public bool IsHidding => _hidding;
+  public Arrow arrow => _arr;
 
   private Arrow _arr = null;
+
 
   public void Show(Arrow arr)
   {
