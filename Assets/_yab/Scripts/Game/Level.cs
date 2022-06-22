@@ -809,7 +809,11 @@ public class Level : MonoBehaviour
     else if(_powerupSelected == type)
       _powerupSelected = GameState.Powerups.Type.None;
   }
-
+  Vector2Int? IsGridDirectional(Vector2Int vi)
+  {
+    var item = _items.Find((Item item) => item.grid == vi && item.IsDirectional);
+    return item?.vturn ?? null;
+  }
   void MoveItems()
   {
     bool checkItems = false;
@@ -822,103 +826,103 @@ public class Level : MonoBehaviour
       if(checkItems)
       {
         if(_pushing[p].grid != _pushing[p].gridPrev)
+        {
           _grid.touchElems(_pushing[p].grid, _pushing[p].dir);
+          _pushing[p].Redirected = null;
+        }
       }
-      var vg = _pushing[p].gridNext;
-      bool next_inside = _grid.IsInsideDim(vg);
+      var vcg = _pushing[p].grid;
+      var vng = _pushing[p].gridNext;
+      bool next_inside = _grid.IsInsideDim(vng);
       var pushType = _pushing[p].push;
       var pusher = _pushing[p];
-      if(next_inside || _gameplayOutside)
+
+      Item itemCurr = _grid.geti(vcg);
+      Vector2Int? vDirectional = IsGridDirectional(vcg);
+      if(_pushing[p].Redirected == null && vDirectional != null)
       {
-        Item item = _grid.geti(vg);
-        if(item && !item.IsDirectional)
+        var vredir = vDirectional.Value;
+        _pushing[p].Redirected = vredir;
+        _pushing[p].Stop();
+        _pushing[p].dir = vredir;
+        _pushing[p].vturn = vredir;
+      }
+      else
+      {
+        if(next_inside || _gameplayOutside)
         {
-          if(_pushing[p].push == Item.Push.None)
+          Item itemNext = _grid.geti(vng);
+          if(itemNext && !itemNext.IsDirectional)
           {
-            if(_pushing[p].IsColorChanger)
-              BallsInitialCnt++;
-            onItemsHit?.Invoke(item, _pushing[p]);
-            item.Hit(_pushing[p]);
-            if(CheckPainting(_pushing[p], item))
-              _pushing[p].Hide();
+            if(_pushing[p].push == Item.Push.None)
+            {
+              if(_pushing[p].IsColorChanger)
+                BallsInitialCnt++;
+              onItemsHit?.Invoke(itemNext, _pushing[p]);
+              itemNext.Hit(_pushing[p]);
+              if(CheckPainting(_pushing[p], itemNext))
+                _pushing[p].Hide();
+              else
+              {
+                if(!_items.Contains(_pushing[p]))
+                  _items.Add(_pushing[p]);
+              }
+              _pushing[p].Stop();
+              _pushing.RemoveAt(p);
+              p--;
+            }
             else
             {
-              if(!_items.Contains(_pushing[p]))
-                _items.Add(_pushing[p]);
+              bool isField = _grid.isField(_pushing[p].grid);
+              bool isFieldNext = _grid.isField(_pushing[p].gridNext);
+              bool isOnEdge = _grid.isOnEdge(_pushing[p].grid);
+
+              if(!itemNext.IsStatic && !itemNext.IsFrozen && ((isFieldNext && isOnEdge) || isField))
+              {
+                toMove = _grid.geti(vng);
+                toMove.dir = _pushing[p].dir;
+              }
+              if(isField)
+              {
+                onItemsHit?.Invoke(itemNext, _pushing[p]);
+                itemNext.Hit(_pushing[p]);
+                // if(item.IsStatic)
+                //   item.Shake();
+              }
+              _pushing[p].Hide();
+              _pushing.RemoveAt(p);
+              p--;
             }
+            if(pusher.IsBomb)
+              _exploding.Add(pusher);
+            if(itemNext.IsBomb)
+              _exploding.Add(itemNext);  
+          }
+          else
+          {
+            if((!_grid.isFieldInside(_pushing[p].grid) && !next_inside) || !_grid.isField(_pushing[p].grid, true))
+            {
+              _pushing[p].Hide();
+              _pushing.RemoveAt(p);
+              p--;
+            }
+          }
+        }
+        else
+        {
+          if(pushType == Item.Push.None) //_gameplayPushType == PushType.None)
+          {
+            _items.Add(_pushing[p]);
             _pushing[p].Stop();
             _pushing.RemoveAt(p);
             p--;
           }
           else
           {
-            bool isField = _grid.isField(_pushing[p].grid);
-            bool isFieldNext = _grid.isField(_pushing[p].gridNext);
-            bool isOnEdge = _grid.isOnEdge(_pushing[p].grid);
-
-            if(!item.IsStatic && !item.IsFrozen && ((isFieldNext && isOnEdge) || isField))
-            {
-              toMove = _grid.geti(vg);
-              toMove.dir = _pushing[p].dir;
-            }
-            if(isField)
-            {
-              onItemsHit?.Invoke(item, _pushing[p]);
-              item.Hit(_pushing[p]);
-              // if(item.IsStatic)
-              //   item.Shake();
-            }
             _pushing[p].Hide();
             _pushing.RemoveAt(p);
             p--;
           }
-          if(pusher.IsBomb)
-            _exploding.Add(pusher);
-          if(item.IsBomb)
-            _exploding.Add(item);  
-        }
-        else
-        {
-          if((!_grid.isFieldInside(_pushing[p].grid) && !next_inside) || !_grid.isField(_pushing[p].grid, true))
-          {
-            _pushing[p].Hide();
-            _pushing.RemoveAt(p);
-            p--;
-          }
-          else
-          {
-            var ci = _grid.geti(_pushing[p].grid);
-            if(ci && ci.IsDirectional)
-            {
-              if(_pushing[p].Redirected == null)
-              {  
-                _pushing[p].Redirected = ci.vturn;
-                _pushing[p].Stop();
-                _pushing[p].dir = ci.vturn;
-                _pushing[p].vturn = ci.vturn;
-              }
-            }
-            else
-            {
-              _pushing[p].Redirected = null;
-            }
-          }
-        }
-      }
-      else
-      {
-        if(pushType == Item.Push.None) //_gameplayPushType == PushType.None)
-        {
-          _items.Add(_pushing[p]);
-          _pushing[p].Stop();
-          _pushing.RemoveAt(p);
-          p--;
-        }
-        else
-        {
-          _pushing[p].Hide();
-          _pushing.RemoveAt(p);
-          p--;
         }
       }
       List<Item> pushToMove = new List<Item>();
