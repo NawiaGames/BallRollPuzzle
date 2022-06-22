@@ -23,9 +23,11 @@ public class Item : MonoBehaviour
   [SerializeField] float      _accNonConst = 1.035f;
   [SerializeField] bool       _accTypeConst = true;
   [SerializeField] ObjectColorBlender _ocb;
+  [SerializeField] ObjectShake _objShk;
   [SerializeField] float      _touchDelay = 0.5f;
 
   [SerializeField] Transform  _rollTransf;
+
    
 
   public enum Push
@@ -310,6 +312,9 @@ public class Item : MonoBehaviour
       item._special = Item.Spec.None;
       item.gameObject.name = name;
     }
+    if(IsStatic)
+      Shake();
+      
     onHit?.Invoke(this);
   }
   public void Paint(Item itemSrc)
@@ -318,7 +323,11 @@ public class Item : MonoBehaviour
     color = itemSrc.color;
     onPaint?.Invoke(this);
   }
-
+  public void Shake()
+  {
+    if(IsStatic)
+      _objShk?.Shake();
+  }
   public void ExplodeBomb()
   {
     onBombExplode?.Invoke(this);

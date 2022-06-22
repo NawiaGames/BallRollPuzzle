@@ -815,7 +815,12 @@ public class Level : MonoBehaviour
               toMove.dir = _pushing[p].dir;
             }
             if(isField)
+            {
               onItemsHit?.Invoke(item, _pushing[p]);
+              item.Hit(_pushing[p]);
+              // if(item.IsStatic)
+              //   item.Shake();
+            }
             _pushing[p].Hide();
             _pushing.RemoveAt(p);
             p--;
