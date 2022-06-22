@@ -386,6 +386,7 @@ public class Level : MonoBehaviour
       onTutorialStart?.Invoke(this);
 
     _started = true;
+    CheckMove();
   }
   IEnumerator coShowBalls()
   {

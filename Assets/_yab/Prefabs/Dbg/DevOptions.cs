@@ -33,13 +33,18 @@ public class DevOptions : MonoBehaviour
   }
   public void on_btn_wasser()
   {
-    var gameField = GameObject.Find("gameField");
+    var gameField = GameObject.FindObjectOfType<GameField>();
     if(gameField)
     {
-      var wasser = gameField.transform.GetChild(0)?.gameObject ?? null;
-      if(wasser)
-        wasser.SetActive(!wasser.activeSelf);
-    }
+      gameField.SetBkg(!gameField.hq);
+    } 
+    // var gameField = GameObject.Find("gameField");
+    // if(gameField)
+    // {
+    //   var wasser = gameField.transform.GetChild(0)?.gameObject ?? null;
+    //   if(wasser)
+    //     wasser.SetActive(!wasser.activeSelf);
+    // }
   }
   [SerializeField] GameLib.UI.UIColorTheme[] colorThemes = new GameLib.UI.UIColorTheme[]{};
   [SerializeField] int colorTheme = 0;
