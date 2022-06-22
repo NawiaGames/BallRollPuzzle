@@ -73,6 +73,7 @@ MonoBehaviour:
   - {fileID: 5382338121493344219, guid: f032b244c311bcf458b0cc733949d782, type: 3}
   - {fileID: 5382338121493344219, guid: d1f0dfec24d1142429f4413241551b93, type: 3}
   - {fileID: 5382338121493344219, guid: 3a2dbf6fc69064cb5bba95a207935c35, type: 3}
+  - {fileID: 5382338121493344219, guid: 1bed15d32cd974cd2b3be041abd95485, type: 3}
   listRewards:
   - level: 6
     powerupBombs: 0
