@@ -319,6 +319,7 @@ public class Level : MonoBehaviour
   List<Item> _destroying = new List<Item>();
   List<Item> _painting = new List<Item>();
   Transform _cameraContainer = null;
+  List<Arrow> _queue = new List<Arrow>();
 
   //Item _nextItem = null;
   bool _inputBlocked = false;
@@ -407,7 +408,7 @@ public class Level : MonoBehaviour
       if(act)
         arr?.Show();
       else
-        arr?.Hide();  
+        arr?.Hide();
     }
   }
   IEnumerator coDestroyGrid()
@@ -713,7 +714,15 @@ public class Level : MonoBehaviour
   public void OnInputMov(TouchInputData tid)
   {
     if(!_allowInput || !AnyColorItem)
+    {
+      var arr = tid.GetClosestCollider(0.5f)?.GetComponent<Arrow>() ?? null;
+      if(arr != null)
+      {
+        if(!_queue.Contains(arr))
+          _queue.Add(arr);
+      }
       return;
+    }
 
     arrowBeg = tid.GetClosestCollider(0.5f)?.GetComponent<Arrow>() ?? null;
     if(arrowBeg)
@@ -730,6 +739,19 @@ public class Level : MonoBehaviour
     if(!_allowInput || !AnyColorItem)
       return;
 
+    PushBall();
+  }
+  void PushBall()
+  {
+    if(_arrowsSelected.Count == 0)
+    {
+      if(_queue.Count > 0)
+      {
+        _arrowsSelected.Add(_queue[0]);
+        _queue.RemoveAt(0);
+      }
+    }
+
     _matchesInMove = 0;
     _pushesInMove = 0;
     Item push = null;
@@ -737,7 +759,7 @@ public class Level : MonoBehaviour
     {
       push = CreateNextItem();
       push.vturn = new Vector2Int(Mathf.RoundToInt(_arrowsSelected[q].vDir.x), Mathf.RoundToInt(_arrowsSelected[q].vDir.z));
-      push.transform.localPosition = _arrowsSelected[q].transform.localPosition - new Vector3Int(_arrowsSelected[q].dir.x/2, 0, _arrowsSelected[q].dir.y/2);
+      push.transform.localPosition = _arrowsSelected[q].transform.localPosition - new Vector3Int(_arrowsSelected[q].dir.x / 2, 0, _arrowsSelected[q].dir.y / 2);
       push.dir = _arrowsSelected[q].dir;
       _pushing.Add(push);
       push.Show(_arrowsSelected[q]);
@@ -1036,8 +1058,9 @@ public class Level : MonoBehaviour
       CheckMove();
       if(_moving.Count == 0 && _pushing.Count == 0)
         ShowBigGreets();
+      //this.Invoke(()=>CheckEnd(), 1.0f);
       CheckEnd();
-    }    
+    }
     _sequence = false;
   }
   void Sequence()
@@ -1270,7 +1293,7 @@ public class Level : MonoBehaviour
   {
     if(!Finished)
     {
-      if((!AnyColorItem && _moving.Count == 0 && _pushing.Count == 0) || movesAvail == 0)
+      if(_moving.Count == 0 && _pushing.Count == 0 && _matching.Count == 0 && (!AnyColorItem || movesAvail == 0))
       {
         Finished = true;
         StartCoroutine(coEnd());
