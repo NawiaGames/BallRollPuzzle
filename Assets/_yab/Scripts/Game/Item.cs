@@ -235,6 +235,8 @@ public class Item : MonoBehaviour
       var grid_prev = grid;
       grid = toGridT(transform.localPosition, dir);
       chpos |= grid != grid_prev;
+      if(chpos)
+        _gridPrev = grid_prev;
     }
     
     return chpos;
