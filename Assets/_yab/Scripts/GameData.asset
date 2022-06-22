@@ -66,16 +66,17 @@ MonoBehaviour:
   - {fileID: 5382338121493344219, guid: 8377c53ab1a334bdd8c4198111b87488, type: 3}
   - {fileID: 5382338121493344219, guid: 1f3b22122804b4ffb87a18c22fcf9e71, type: 3}
   - {fileID: 5382338121493344219, guid: dffd4f71e622648378c87c177696b04b, type: 3}
-  - {fileID: 5382338121493344219, guid: 3c91e3f70df95b945b9dc15cd7ac2123, type: 3}
-  - {fileID: 5382338121493344219, guid: 117e6795116786746a8d213509c9da3f, type: 3}
-  - {fileID: 5382338121493344219, guid: f01f7cd2406da4e40ba49908d847e1f2, type: 3}
-  - {fileID: 5382338121493344219, guid: e838fe7de427bd942b7de46c7ccfcbaf, type: 3}
-  - {fileID: 5382338121493344219, guid: f032b244c311bcf458b0cc733949d782, type: 3}
   - {fileID: 5382338121493344219, guid: d1f0dfec24d1142429f4413241551b93, type: 3}
   - {fileID: 5382338121493344219, guid: 3a2dbf6fc69064cb5bba95a207935c35, type: 3}
   - {fileID: 5382338121493344219, guid: 1bed15d32cd974cd2b3be041abd95485, type: 3}
   - {fileID: 5382338121493344219, guid: aae5b6223722f4dc3beddba2fc32820b, type: 3}
   - {fileID: 5382338121493344219, guid: 48c3507d97e1646c48e05b61b97a118b, type: 3}
+  - {fileID: 5382338121493344219, guid: 5426de90973c74d2380108e57c93cb18, type: 3}
+  - {fileID: 5382338121493344219, guid: 3c91e3f70df95b945b9dc15cd7ac2123, type: 3}
+  - {fileID: 5382338121493344219, guid: 117e6795116786746a8d213509c9da3f, type: 3}
+  - {fileID: 5382338121493344219, guid: f01f7cd2406da4e40ba49908d847e1f2, type: 3}
+  - {fileID: 5382338121493344219, guid: e838fe7de427bd942b7de46c7ccfcbaf, type: 3}
+  - {fileID: 5382338121493344219, guid: f032b244c311bcf458b0cc733949d782, type: 3}
   listRewards:
   - level: 6
     powerupBombs: 0
@@ -98,9 +99,14 @@ MonoBehaviour:
     powerupPainters: 4
     powerupArrows: 2
   - level: 29
-    powerupBombs: 2
+    powerupBombs: 1
     powerupColors: 2
-    powerupPainters: 2
+    powerupPainters: 1
+    powerupArrows: 3
+  - level: 33
+    powerupBombs: 1
+    powerupColors: 2
+    powerupPainters: 1
     powerupArrows: 2
   pointBallOut: 50
   pointBallOutEveryNext: 10
