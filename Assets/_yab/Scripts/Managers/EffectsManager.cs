@@ -136,6 +136,7 @@ public class EffectsManager : MonoBehaviour
     void OnItemsMatched(Level.Match3 match)
     {
       Vector3 v = match.MidPos();
+      v += new Vector3(Random.Range(-0.25f, 0.25f), 0, Random.Range(-0.25f, 0.25f));
       //PlayFXAtPosition(fxPaintSplat, v, 5);
       infoLblMan.ShowTextPopup(v, string.Format(strBallsMatched, match.Points), match.GetColor());
       cameraShakeContainer.Shake(objShakePresetLo);

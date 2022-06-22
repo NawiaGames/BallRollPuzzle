@@ -121,7 +121,7 @@ public class Level : MonoBehaviour
     {
       return new Vector2Int(Mathf.Clamp(igrid.x, -_dim.x/2, _dim.x/2), Mathf.Clamp(igrid.y, -_dim.y/2, _dim.y/2));
     }
-    public Vector2Int getDest(Vector2Int vbeg, Vector2Int vdir, bool clamping)
+    public Vector2Int getDest(Level lvl, Vector2Int vbeg, Vector2Int vdir, bool clamping)
     {
       Vector2Int vend = vbeg;
       for(int q = 0; q < dim().x; ++q)
@@ -137,7 +137,7 @@ public class Level : MonoBehaviour
         else
         {
           Item block = geti(vend);
-          if(block && block.grid != vbeg && !block.IsDirectional)
+          if((block && block.grid != vbeg)) // || lvl.IsGridDirectional(vend) != null)//!block.IsDirectional)
           {
             vend = block.grid - vdir;
             break;
@@ -172,7 +172,10 @@ public class Level : MonoBehaviour
       for(int q = 0; q < _items.Count; ++q)
       {
         if(isFieldInside(_items[q].grid))
-          set(_items[q]);
+        {
+          if(!_items[q].IsDirectional)
+            set(_items[q]);
+        }
         else
         {
           _items[q].Points = GameData.Points.ballOut(lvl._pushesInMove);
@@ -852,7 +855,7 @@ public class Level : MonoBehaviour
         if(next_inside || _gameplayOutside)
         {
           Item itemNext = _grid.geti(vng);
-          if(itemNext && !itemNext.IsDirectional)
+          if(itemNext) // && IsGridDirectional(itemNext.grid) == null)
           {
             if(_pushing[p].push == Item.Push.None)
             {
@@ -935,7 +938,7 @@ public class Level : MonoBehaviour
           if(_grid.IsInsideDim(v)) //isFieldInside(v))
           {
             var item = _grid.geti(v);
-            if(item != null && !item.IsStatic && !item.IsRemoveElem && !item.IsDirectional)
+            if(item != null && !item.IsStatic && !item.IsRemoveElem)// && IsGridDirectional(item.grid) == null)    //!item.IsDirectional)
               pushToMove.Add(item);
             else
               break;
@@ -953,7 +956,7 @@ public class Level : MonoBehaviour
             Item itemNext = _grid.geti(gridDest);
             if(pushType == Item.Push.Line)
             {
-              gridDest = _grid.getDest(pushToMove.last().grid, toMove.dir, !_gameplayOutside);
+              gridDest = _grid.getDest(this, pushToMove.last().grid, toMove.dir, !_gameplayOutside);
               if(_grid.isFieldInside(gridDest))
               {
                 var vdir = gridDest - pushToMove.last().grid;
@@ -985,6 +988,7 @@ public class Level : MonoBehaviour
       var dir = _moving[q].dir;
       bool moving = _moving[q].Move(Time.deltaTime * _speed, _grid.dim());
       var item = _grid.geti(_moving[q].grid);
+      var vDirectional = IsGridDirectional(_moving[q].grid);
       if(!_grid.isFieldInside(_moving[q].grid))
       {
         _moving[q].Hide();
@@ -994,11 +998,11 @@ public class Level : MonoBehaviour
       }
       else if(!moving)
       {
-        if(item && item.IsDirectional && _moving[q].Redirected == null)
+        if(_moving[q].Redirected == null && vDirectional != null)
         {
           _pushing.Add(_moving[q]);
           _moving[q].Stop();
-          _moving[q].dir = item.vturn;
+          _moving[q].dir = vDirectional.Value; //item.vturn;
           checkItems |= true;
         }
         else
@@ -1033,12 +1037,12 @@ public class Level : MonoBehaviour
           checkItems |= true;
           _grid.touchElems(_moving[q].grid, _moving[q].dir);
         }
-        if(item && item.IsDirectional && _moving[q].Redirected == null)
+        if(item && vDirectional != null && _moving[q].Redirected == null)
         {
           checkItems |= true;
           _pushing.Add(_moving[q]);
           _moving[q].Stop();
-          _moving[q].dir = item.vturn;
+          _moving[q].dir = vDirectional.Value;//item.vturn;
         }
       }
     }
@@ -1274,6 +1278,28 @@ public class Level : MonoBehaviour
   {
     _grid.update(_items, this);
     bool _pushed = false;
+
+    if(!_pushed)
+    {
+      for(int q = 0; q < _items.Count; ++q)
+      {
+        if(_items[q].IsRegular)
+        {
+          var vDirectional = IsGridDirectional(_items[q].grid);
+          if(vDirectional != null)
+          {
+            var dest = _grid.getDest(this, _items[q].grid, _items[q].vturn, !_gameplayOutside);
+            if(dest != _items[q].grid)
+            {
+              _items[q].dir = vDirectional.Value; //_items[q].vturn;
+              _pushing.Add(_items[q]);
+              _pushed = true;
+            }
+          }
+        }
+      }
+    }
+
     for(int d = 0; d < vdirections.Length && !_pushed; ++d)
     {
       for(int q = 0; q < _items.Count; ++q)
@@ -1282,7 +1308,7 @@ public class Level : MonoBehaviour
         {
           if(_items[q].vturn == vdirections[d])
           {
-            var dest = _grid.getDest(_items[q].grid, _items[q].vturn, !_gameplayOutside);
+            var dest = _grid.getDest(this, _items[q].grid, _items[q].vturn, !_gameplayOutside);
             if(dest != _items[q].grid)
             {
               _items[q].dir = _items[q].vturn;
