@@ -721,8 +721,8 @@ public class Level : MonoBehaviour
       var arr = tid.GetClosestCollider(0.5f)?.GetComponent<Arrow>() ?? null;
       if(arr != null)
       {
-        bool canAdd = _queue.TrueForAll((Item it) => arr != it.arrow);
-        if(canAdd)
+        bool contains = _queue.Find((Item it) => arr == it.arrowInitial) || _pushing.Find((Item it) => arr == it.arrowInitial);
+        if(!contains)
         {
           var item = CreateBall(arr, false);
           _queue.Add(item);
