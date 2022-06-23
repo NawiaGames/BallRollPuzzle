@@ -247,7 +247,7 @@ MonoBehaviour:
   _painterStartDelay: 0.4
   _painterPropagateDelay: 0.1
   _destroyWithFracture: 0
-  _gameplayOutside: 1
+  _gameplayOutside: 0
   _gameplayBlockEdge: 0
   _dim: {x: 5, y: 5}
   _speed: 16
