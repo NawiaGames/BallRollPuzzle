@@ -303,13 +303,14 @@ public class Level : MonoBehaviour
   public int    PointsMax => _maxPoints;
   public int    Stars {get; set;}
   public int    BallsInitialCnt {get; set;}
+  public bool   AnyMovePending => _pushing.Count > 0 || _moving.Count > 0 || _matching.Count > 0 || _painting.Count > 0;
   public Arrow  arrow(int idx) => _arrows[idx];
   public Arrow  FindArrow(Vector2Int vi) => _arrows.Find((arr) => vi == arr.grid);
   public Vector2Int Dim => _grid.dim();
   public Tutorial tutorial => _tutorial;
 
   bool _started = false;
-  bool _allowInput => _started && movesAvail > 0 && _pushing.Count == 0 && _moving.Count == 0 && _matching.Count == 0 && _painting.Count == 0 && !_sequence;
+  bool _allowInput => _started && movesAvail > 0 && !AnyMovePending && !_sequence;
   UISummary uiSummary = null;
 
   Grid _grid = new Grid();
@@ -1086,16 +1087,15 @@ public class Level : MonoBehaviour
     //yield return StartCoroutine(coCheckMove());
     //yield return new WaitForSeconds(0.5f);
 
-    if(_moving.Count == 0 && _pushing.Count == 0 && _matching.Count == 0 && _painting.Count == 0)
+    if(!AnyMovePending) //_moving.Count == 0 && _pushing.Count == 0 && _matching.Count == 0 && _painting.Count == 0)
     {
       CheckMove();
       if(_moving.Count == 0 && _pushing.Count == 0)
         ShowBigGreets();
       yield return new WaitForSeconds(0.05f);
       CheckEnd();
-      if(_queue.Count > 0 && _moving.Count == 0 && _pushing.Count == 0 && _matching.Count == 0)
+      if(_queue.Count > 0 && !AnyMovePending)
       {
-        //_pushing.Add(_queue[0]);
         PushSpawnedBall(_queue[0]);
         _queue.RemoveAt(0);
       }
@@ -1354,7 +1354,7 @@ public class Level : MonoBehaviour
   {
     if(!Finished)
     {
-      if(_moving.Count == 0 && _pushing.Count == 0 && _matching.Count == 0 && _queue.Count == 0 && (!AnyColorItem || movesAvail == 0))
+      if(!AnyMovePending && _queue.Count == 0 && (!AnyColorItem || movesAvail == 0))
       {
         Finished = true;
         StartCoroutine(coEnd());
