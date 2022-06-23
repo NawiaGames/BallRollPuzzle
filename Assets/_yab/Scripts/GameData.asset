@@ -83,6 +83,9 @@ MonoBehaviour:
   - {fileID: 5382338121493344219, guid: a24b9964c09284fc0910f6b0a167952d, type: 3}
   - {fileID: 5382338121493344219, guid: bcb5431d478de4f3f93babeef038350b, type: 3}
   - {fileID: 5382338121493344219, guid: 8377c53ab1a334bdd8c4198111b87488, type: 3}
+  - {fileID: 5382338121493344219, guid: 5d54a065a99744fc8b43f3ed54aed0d0, type: 3}
+  - {fileID: 5382338121493344219, guid: 342f064fb9f7b4071bf5d0872ff59527, type: 3}
+  - {fileID: 5382338121493344219, guid: 51b06eddd8f5341a5b0aca6f35c24ff7, type: 3}
   listRewards:
   - level: 6
     powerupBombs: 0
