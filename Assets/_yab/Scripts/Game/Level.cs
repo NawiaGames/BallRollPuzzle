@@ -1091,8 +1091,9 @@ public class Level : MonoBehaviour
       CheckMove();
       if(_moving.Count == 0 && _pushing.Count == 0)
         ShowBigGreets();
+      yield return new WaitForSeconds(0.05f);
       CheckEnd();
-      if(_queue.Count > 0)
+      if(_queue.Count > 0 && _moving.Count == 0 && _pushing.Count == 0 && _matching.Count == 0)
       {
         //_pushing.Add(_queue[0]);
         PushSpawnedBall(_queue[0]);
