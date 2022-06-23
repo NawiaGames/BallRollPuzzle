@@ -26,7 +26,8 @@ public class UIPowerInfo : MonoBehaviour
   }
   public void Deactivate()
   {
-    panel.DeactivatePanel();
+    if(panel.IsActive)
+      panel.DeactivatePanel();
   }
 
   public void Hide()

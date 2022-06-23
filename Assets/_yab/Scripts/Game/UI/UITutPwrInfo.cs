@@ -13,7 +13,8 @@ public class UITutPwrInfo : MonoBehaviour
   }
   public void Deactivate() 
   {
-    panel.DeactivatePanel();
+    if(panel.IsActive)
+      panel.DeactivatePanel();
   }
 
   public void Hide()
