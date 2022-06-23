@@ -856,7 +856,7 @@ public class Level : MonoBehaviour
       }
       else
       {
-        if(next_inside || _gameplayOutside)
+        if(next_inside || (_gameplayOutside || _pushing[p].IsMoveable))
         {
           Item itemNext = _grid.geti(vng);
           if(itemNext) // && IsGridDirectional(itemNext.grid) == null)

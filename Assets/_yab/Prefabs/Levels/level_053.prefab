@@ -73,7 +73,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3432588927805292013, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: m_Name
-      value: level_052
+      value: level_053
       objectReference: {fileID: 0}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _dim.x
@@ -109,10 +109,6 @@ PrefabInstance:
       objectReference: {fileID: 78830873425762930}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _gameplayMatch3
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: _gameplayOutside
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
