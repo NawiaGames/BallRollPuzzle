@@ -1330,6 +1330,7 @@ public class Level : MonoBehaviour
   IEnumerator coEnd()
   {
     Succeed = !AnyColorItem;
+    onDone?.Invoke(this);
     if(tutorial != Tutorial.Push)
     {
       while(movesAvail > 0)
@@ -1344,7 +1345,6 @@ public class Level : MonoBehaviour
     DestroyGrid();
     DestroyArrows();
 
-    onDone?.Invoke(this);
     yield return new WaitForSeconds(1.0f);
     Succeed = !AnyColorItem;
     onFinished?.Invoke(this);
