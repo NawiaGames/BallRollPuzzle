@@ -861,6 +861,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: itemGreen
       objectReference: {fileID: 0}
+    - target: {fileID: 4327388485657350923, guid: 81e4dd7c9f6a78c4a95f4ba2f974c3c9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7504906227862767392, guid: 81e4dd7c9f6a78c4a95f4ba2f974c3c9, type: 3}
       propertyPath: m_RootOrder
       value: 9
