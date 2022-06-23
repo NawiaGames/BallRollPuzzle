@@ -953,10 +953,10 @@ public class Level : MonoBehaviour
         }
         if(pushToMove.Count > 0)
         {
-          bool inside = _grid.isFieldInside(pushToMove.last().grid + toMove.dir);
+          //bool inside = _grid.isFieldInside(pushToMove.last().grid + toMove.dir);
           bool empty = !_grid.isField(pushToMove.last().grid + toMove.dir);
           bool inDim = _grid.IsInsideDim(pushToMove.last().grid + toMove.dir);
-          if((inDim || _gameplayOutside || pushToMove.last().IsMoveable))// || (!_gameplayOutside && inDim && empty))
+          if((inDim || _gameplayOutside || pushToMove.last().IsMoveable))
           {
             var gridDest = pushToMove.last().grid + toMove.dir;
             Item itemNext = _grid.geti(gridDest);
