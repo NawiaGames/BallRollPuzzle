@@ -22,7 +22,7 @@ public class UIPowerupBtn : MonoBehaviour
 
   float _scaleEnd = 1.0f;
   bool _selected = false;
-  bool _unlocked = false;
+  //bool _unlocked = false;
 
   void Awake()
   {

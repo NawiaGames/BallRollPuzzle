@@ -23,7 +23,7 @@ public class EffectsManager : MonoBehaviour
     [SerializeField] int ballFracturesSubEmitCnt = 1;
     [SerializeField] ParticleSystem fxHit = null;
     [SerializeField] ParticleSystem fxBombDestroy = null;
-    [SerializeField] int fxBombDestroyEmitCnt = 5;
+    //[SerializeField] int fxBombDestroyEmitCnt = 5;
     [SerializeField] ParticleSystem fxPainter = null;
 
   [Header("FX string")]

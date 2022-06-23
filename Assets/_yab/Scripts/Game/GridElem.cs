@@ -42,6 +42,10 @@ public class GridElem : MonoBehaviour
   {
     _actObj.DeactivateObject();
   }
+  public void HideFail()
+  {
+    _fx.GetComponent<Animator>().SetTrigger("fail");
+  }
   public void SetVis(bool vis)
   {
     rend.gameObject.SetActive(vis);

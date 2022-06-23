@@ -429,7 +429,10 @@ public class Level : MonoBehaviour
         else
         {
           if(_destroyWithFracture)
-          _grid.getElem(va).Fracture();
+            _grid.getElem(va).Fracture();
+          else
+            _grid.getElem(va).HideFail();
+
         }
         yield return new WaitForSeconds(1 / 60f);
       }
