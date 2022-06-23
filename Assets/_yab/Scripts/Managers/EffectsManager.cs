@@ -60,8 +60,10 @@ public class EffectsManager : MonoBehaviour
       Level.onStart += OnLevelStart;
       Level.onItemsMatched += OnItemsMatched;
       Level.onItemsHit += OnItemsHit;
+      Level.onDone += OnLevelDone;
       Level.onFinished += OnLevelFinished;
       Level.onCombo += OnLevelCombo;
+      
       UIIngame.onMoveLblChanged += OnMoveLblChanged;
     }
     private void OnDisable()
@@ -74,6 +76,7 @@ public class EffectsManager : MonoBehaviour
       Level.onStart -= OnLevelStart;
       Level.onItemsMatched -= OnItemsMatched;
       Level.onItemsHit -= OnItemsHit;
+      Level.onDone -= OnLevelDone;
       Level.onFinished -= OnLevelFinished;
       Level.onCombo -= OnLevelCombo;
       UIIngame.onMoveLblChanged -= OnMoveLblChanged;
@@ -189,10 +192,15 @@ public class EffectsManager : MonoBehaviour
     {
       //infoLblBigMan.ShowTextPopup(Vector3.zero, strGreetings.get_random(), Color.white);
     }
-    void OnLevelFinished(Level lvl) 
+    void OnLevelDone(Level lvl)
     {
       if(lvl.Succeed)
         fxConfettiLevel.Play();
+    }
+    void OnLevelFinished(Level lvl) 
+    {
+      // if(lvl.Succeed)
+      //   fxConfettiLevel.Play();
       cameraShakeContainer.Shake(objShakePresetHi);
       //_lvl = null;
     }

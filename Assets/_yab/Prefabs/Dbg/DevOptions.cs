@@ -17,10 +17,16 @@ public class DevOptions : MonoBehaviour
   // }
   public void on_btn_prev()
   {
+    var level = FindObjectOfType<Level>(true);
+    if(level)
+      Level.onFinished?.Invoke(level);    
     FindObjectOfType<Game>(true).PrevLevel();
   }
   public void on_btn_next()
   {
+    var level = FindObjectOfType<Level>(true);
+    if(level)
+      Level.onFinished?.Invoke(level);
     FindObjectOfType<Game>(true).NextLevel();
   }
   public void on_btn_reset_progress()
@@ -38,14 +44,8 @@ public class DevOptions : MonoBehaviour
     {
       gameField.SetBkg(!gameField.hq);
     } 
-    // var gameField = GameObject.Find("gameField");
-    // if(gameField)
-    // {
-    //   var wasser = gameField.transform.GetChild(0)?.gameObject ?? null;
-    //   if(wasser)
-    //     wasser.SetActive(!wasser.activeSelf);
-    // }
   }
+  
   [SerializeField] GameLib.UI.UIColorTheme[] colorThemes = new GameLib.UI.UIColorTheme[]{};
   [SerializeField] int colorTheme = 0;
 

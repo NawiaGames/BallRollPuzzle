@@ -58,8 +58,8 @@ public class Game : MonoBehaviour
   }
   public void RestartLevel()
   {
-    CreateLevel();
     onLevelRestart?.Invoke(level);
+    CreateLevel();
   }
   public void PrevLevel()
   {
@@ -76,11 +76,20 @@ public class Game : MonoBehaviour
   void Update()
   {
     if(Input.GetKeyDown(KeyCode.Z))
+    {
+      Level.onFinished?.Invoke(level);
       PrevLevel();
+    }
     else if(Input.GetKeyDown(KeyCode.X))
+    {
+      Level.onFinished?.Invoke(level);
       NextLevel();
+    }
     else if(Input.GetKeyDown(KeyCode.R))
+    {
+      Level.onFinished?.Invoke(level);
       RestartLevel();
+    }
     // else if(Input.GetKeyDown(KeyCode.E))
     //   level?.DbgFinishLevel();
   }

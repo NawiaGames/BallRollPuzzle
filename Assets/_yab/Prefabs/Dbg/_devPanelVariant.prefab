@@ -946,7 +946,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5028115723686203520, guid: b6c61f673ab13c849a14a75c1dc6ee3b, type: 3}
       propertyPath: m_Name
-      value: _devPanel
+      value: _devPanelVariant
       objectReference: {fileID: 0}
     - target: {fileID: 5028115723686203520, guid: b6c61f673ab13c849a14a75c1dc6ee3b, type: 3}
       propertyPath: m_IsActive

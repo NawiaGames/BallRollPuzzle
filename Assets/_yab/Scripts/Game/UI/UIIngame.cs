@@ -54,6 +54,7 @@ public class UIIngame : MonoBehaviour
 
   void Awake()
   {
+    Game.onLevelRestart += OnLevelRestart;
     Level.onCreate += OnLevelStart;
     Level.onFinished += OnLevelFinished;
     Level.onItemThrow += OnItemThrow;
@@ -68,6 +69,7 @@ public class UIIngame : MonoBehaviour
   }
   void OnDestroy()
   {
+    Game.onLevelRestart -= OnLevelRestart;
     Level.onCreate -= OnLevelStart;
     Level.onFinished -= OnLevelFinished;
     Level.onItemThrow -= OnItemThrow;
@@ -80,7 +82,6 @@ public class UIIngame : MonoBehaviour
     Item.onHide -= OnItemHide;
     UIPowerupBtn.onClicked -= OnBtnPowerup;
   }
-
 
   public void Show(Level level)
   {
@@ -118,7 +119,7 @@ public class UIIngame : MonoBehaviour
         if(idx >= 0)
           powerups[idx].ShowTut(true);
       }
-    },1.0f);
+    },0.01f);
   }
   void OnLevelCreated(Level lvl)
   {
@@ -142,6 +143,10 @@ public class UIIngame : MonoBehaviour
 
     PowerupsDeselect();
     Show(lvl);
+  }
+  void OnLevelRestart(Level lvl)
+  {
+    Hide();
   }
   void OnLevelFinished(Level lvl)
   {

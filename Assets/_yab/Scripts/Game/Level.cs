@@ -13,7 +13,7 @@ public class Level : MonoBehaviour
 {
   public static System.Action<Vector3> onIntroFx;
   public static System.Action<Level>   onCreate, onStart, onPlay, onFirstInteraction, onTutorialStart, onPointsAdded, onMovesLeftChanged;
-  public static System.Action<Level>   onFinished, onDestroy, onItemThrow;
+  public static System.Action<Level>   onDone, onFinished, onDestroy, onItemThrow;
   public static System.Action<Match3>  onItemsMatched;
   public static System.Action<Item, Item> onItemsHit;
   public static System.Action<GameState.Powerups.Type> onPowerupUsed;  
@@ -1344,6 +1344,7 @@ public class Level : MonoBehaviour
     DestroyGrid();
     DestroyArrows();
 
+    onDone?.Invoke(this);
     yield return new WaitForSeconds(1.0f);
     Succeed = !AnyColorItem;
     onFinished?.Invoke(this);
