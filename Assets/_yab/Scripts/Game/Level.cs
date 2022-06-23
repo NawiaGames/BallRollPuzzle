@@ -954,7 +954,9 @@ public class Level : MonoBehaviour
         if(pushToMove.Count > 0)
         {
           bool inside = _grid.isFieldInside(pushToMove.last().grid + toMove.dir);
-          if(inside || _gameplayOutside)
+          bool empty = !_grid.isField(pushToMove.last().grid + toMove.dir);
+          bool inDim = _grid.IsInsideDim(pushToMove.last().grid + toMove.dir);
+          if((inDim || _gameplayOutside || pushToMove.last().IsMoveable))// || (!_gameplayOutside && inDim && empty))
           {
             var gridDest = pushToMove.last().grid + toMove.dir;
             Item itemNext = _grid.geti(gridDest);
@@ -971,7 +973,7 @@ public class Level : MonoBehaviour
             }
             else
             {
-              if(!(itemNext && (itemNext.IsStatic || itemNext.IsRemoveElem)))
+              if(!(itemNext && (itemNext.IsStatic || itemNext.IsRemoveElem)) || itemNext == null)
                 pushToMove.ForEach((item) => item.PushBy(toMove.dir));
               else
                 pushToMove.Clear();  
