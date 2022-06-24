@@ -79,6 +79,10 @@ public class Item : MonoBehaviour
 
   void Awake()
   {
+    Init();
+  }
+  public void Init()
+  {
     if(IsRegular || IsColorChanger)
       _mr = _ballModel.GetComponent<MeshRenderer>();
     else
@@ -96,6 +100,7 @@ public class Item : MonoBehaviour
 
     name = name.Replace("(Clone)", "");
   }
+  
   public int   id { get => _id; set{ _id = value;}}
   public Color color
   {

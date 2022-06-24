@@ -134,6 +134,14 @@ public class GameData : ScriptableObject
       item.name = get().painterItem.name;
       return item;      
     }
+    public static Item CreateItem(int idx, Transform parent, bool moveable)
+    {
+      int themeId = GameData.Levels.itemThemeIdx;
+      var prefabItem = get().items[themeId].item(idx, moveable);
+      var item = Instantiate(prefabItem, parent);
+      item.name = prefabItem.name;
+      return item;      
+    }    
     public static Item CreateRandItem(Transform parent, bool moveable) 
     {
       int themeId = GameData.Levels.itemThemeIdx;

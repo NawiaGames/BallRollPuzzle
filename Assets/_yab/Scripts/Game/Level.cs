@@ -468,7 +468,26 @@ public class Level : MonoBehaviour
     float scale = 1;
 
     //items create
-
+    if(itemTheme != GameData.Levels.ItemTheme.Marbles)
+    {
+      for(int q = 0; q < _items.Count; ++q)
+      {
+        if(_items[q].IsRegular)
+        {
+          int  idx = _items[q].id;
+          bool mov = _items[q].IsMoveable;
+          var pos = _items[q].transform.localPosition;
+          var quat = _items[q].transform.localRotation;
+          var grid = _items[q].grid;
+          var item = GameData.Prefabs.CreateItem(idx, _items[q].transform.parent, mov);
+          item.transform.localPosition = pos;
+          item.transform.localRotation = quat;
+          item.Init();
+          Destroy(_items[q].gameObject);
+          _items[q] = item;
+        }
+      }
+    }
 
     Vector2Int vgrid = Vector2Int.zero;
     List<Arrow> listT = new List<Arrow>(),listR = new List<Arrow>(), listB = new List<Arrow>(), listL = new List<Arrow>();
