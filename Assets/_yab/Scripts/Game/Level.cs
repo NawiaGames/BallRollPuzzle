@@ -931,7 +931,7 @@ public class Level : MonoBehaviour
                 toMove = _grid.geti(vng);
                 toMove.dir = _pushing[p].dir;
               }
-              if(isField)
+              if(isField || isOnEdge)
               {
                 onItemsHit?.Invoke(itemNext, _pushing[p]);
                 itemNext.Hit(_pushing[p]);
