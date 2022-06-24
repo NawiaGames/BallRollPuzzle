@@ -110,6 +110,7 @@ public class Item : MonoBehaviour
       _color = value; 
       _mr.material.color = _color;
       _mpb.SetColor("_MainColor", _color);
+      _mpb.SetColor("_BaseColor", _color);
       _mr.SetPropertyBlock(_mpb);
     }
   }
@@ -306,6 +307,7 @@ public class Item : MonoBehaviour
   {
     if(item == null)
       return;
+
     if(this.IsColorChanger && item.IsRegular)
     {
       id = item.id;
@@ -326,7 +328,7 @@ public class Item : MonoBehaviour
     }
     if(IsStatic)
       Shake();
-      
+
     onHit?.Invoke(this);
   }
   public void Paint(Item itemSrc)

@@ -684,7 +684,16 @@ public class Level : MonoBehaviour
       _grid.selectElems(_arrowsSelected[q].grid, _arrowsSelected[q].dir, true);
     }
   }
+  Item ReplacePainter(Item painter, Item hit)
+  {
+    var item = GameData.Prefabs.CreateItem(hit.id, hit.transform.parent, hit.IsMoveable);
+    item.transform.localPosition = painter.transform.localPosition;
+    item.transform.localRotation = painter.transform.localRotation;
+    item.transform.localScale = painter.transform.localScale;
+    item.Init();
 
+    return item;
+  }
   Item CreateNextItem()
   {
     Item item = null;

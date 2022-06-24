@@ -171,6 +171,7 @@ public class GameData : ScriptableObject
     {
       Marbles,
       Sport,
+      MarblesV2,
     }
 
     static public Level GetPrefab(int idx) => get().listLevels[idx];
