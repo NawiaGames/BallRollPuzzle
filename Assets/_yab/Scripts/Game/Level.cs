@@ -328,6 +328,7 @@ public class Level : MonoBehaviour
   List<Item> _painting = new List<Item>();
   Transform _cameraContainer = null;
   List<Item> _queue = new List<Item>();
+  List<Item> _items2AnimOut = new List<Item>();
 
   //Item _nextItem = null;
   bool _inputBlocked = false;
@@ -456,6 +457,11 @@ public class Level : MonoBehaviour
     {
       item.Deactivate();
       yield return new WaitForSeconds(1 / 15f);
+    }
+    foreach(var item in _items2AnimOut)
+    {
+      yield return new WaitForSeconds(_activationInterval * 0.125f);
+      item.Deactivate();
     }
   }
   void OutroBalls()
@@ -1387,9 +1393,11 @@ public class Level : MonoBehaviour
   {
     if(!Finished)
     {
-      if(!AnyMovePending && _queue.Count == 0 && (!AnyColorItem || movesAvail == 0))
+      if(!AnyMovePending && (!AnyColorItem || (movesAvail == 0 && _queue.Count == 0)))
       {
         Finished = true;
+        _items2AnimOut.AddRange(_queue);
+        _queue.Clear();
         StartCoroutine(coEnd());
       }
     }
