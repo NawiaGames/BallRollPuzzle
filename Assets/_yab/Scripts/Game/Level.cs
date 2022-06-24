@@ -45,10 +45,14 @@ public class Level : MonoBehaviour
   [SerializeField] int   _maxPoints = 10;
   [SerializeField] Tutorial _tutorial;
   [SerializeField] bool  _usePerLevelPOI = true;
+  [SerializeField] GameData.Levels.ItemTheme _itemTheme = GameData.Levels.ItemTheme.Marbles;
   [Header("Items")]
   [SerializeField] List<Item> _listItems;
   [Header("Arrows")]
   [SerializeField] Vector2Int[] listArrows;
+
+  public GameData.Levels.ItemTheme itemTheme => _itemTheme;
+  public int itemThemeIdx => (int)_itemTheme;
 
   public enum Tutorial
   {
@@ -462,6 +466,10 @@ public class Level : MonoBehaviour
   void Init()
   {
     float scale = 1;
+
+    //items create
+
+
     Vector2Int vgrid = Vector2Int.zero;
     List<Arrow> listT = new List<Arrow>(),listR = new List<Arrow>(), listB = new List<Arrow>(), listL = new List<Arrow>();
     Arrow arrow = null;
@@ -665,7 +673,7 @@ public class Level : MonoBehaviour
         else if(next_item.IsRandMoveItem)
           item = GameData.Prefabs.CreateRandItem(_trayItemContainer, true);
         else if(next_item.IsRandPush)
-          item = GameData.Prefabs.CreatePushItem(_trayItemContainer, (Random.value < 0.5f)? Item.Push.One : Item.Push.Line);
+          item = GameData.Prefabs.CreatePushItem(_trayItemContainer); //(Random.value < 0.5f)? Item.Push.One : Item.Push.Line);
         else
           item = Instantiate(_listItems[0], _itemsContainer);
         
@@ -676,7 +684,7 @@ public class Level : MonoBehaviour
     else
     {
       if(_powerupSelected == GameState.Powerups.Type.Arrows)
-        item = GameData.Prefabs.CreatePushItem(_itemsContainer, Item.Push.One);
+        item = GameData.Prefabs.CreatePushItem(_itemsContainer);
       else if(_powerupSelected == GameState.Powerups.Type.Bomb)
         item = GameData.Prefabs.CreateBombItem(_itemsContainer);
       else if(_powerupSelected == GameState.Powerups.Type.Color)

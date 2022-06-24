@@ -16,11 +16,21 @@ public class GameData : ScriptableObject
     static_this = this;
   }
 
+  [System.Serializable]
+  struct Items
+  {
+    [SerializeField] Levels.ItemTheme _theme;
+    [SerializeField] Item[] _items;
+    [SerializeField] Item[] _moveItems;
+
+    public Item item(int idx, bool moveable) => (!moveable)?_items[idx] : _moveItems[idx];
+    public Item random(bool moveable) => (!moveable)? _items.get_random() : _moveItems.get_random();
+    public Item[] items(bool moveable) => (!moveable)? _items : _moveItems;
+  };
+
   [Header("Prefabs")]
-  [SerializeField] Item[] items;
-  [SerializeField] Item[] moveItems;
+  [SerializeField] Items[] items;
   [SerializeField] Item pushItem;
-  [SerializeField] Item pushLineItem;
   [SerializeField] Item bombItem;
   [SerializeField] Item staticItem;
   [SerializeField] Item colorChangeItem;
@@ -89,13 +99,10 @@ public class GameData : ScriptableObject
     public static Item PainterItem => get().painterItem;
     public static Arrow CreateArrow(Transform parent){return Instantiate(get().arrowPrefab, parent);}
     public static GridElem CreateGridElem(Transform parent) { return Instantiate(get().gridElemPrefab, parent); }
-    public static Item CreatePushItem(Transform parent, Item.Push push_type)
+    public static Item CreatePushItem(Transform parent)
     { 
       Item item = null;
-      if(push_type == Item.Push.One)
-        item = Instantiate(get().pushItem, parent);
-      else
-        item = Instantiate(get().pushLineItem, parent);  
+      item = Instantiate(get().pushItem, parent);
       item.name = get().pushItem.name;
       return item;
     }
@@ -129,16 +136,18 @@ public class GameData : ScriptableObject
     }
     public static Item CreateRandItem(Transform parent, bool moveable) 
     {
-      var prefabItem = (moveable)? get().moveItems.get_random() : get().items.get_random();
+      int themeId = GameData.Levels.itemThemeIdx;
+      var prefabItem = get().items[themeId].random(moveable);
       var item = Instantiate(prefabItem, parent);
       item.name = prefabItem.name;
       return item;
     }
     public static Item CreateRandItem(List<string> names, Transform parent) 
     {
+      int themeId = GameData.Levels.itemThemeIdx;
       Item item = null;
-      List<Item> prefabs = new List<Item>(get().items);
-      prefabs.AddRange(get().moveItems);
+      List<Item> prefabs = new List<Item>(get().items[themeId].items(false));
+      prefabs.AddRange(get().items[themeId].items(true));
       prefabs.RemoveAll((Item it) => !names.Contains(it.name));
       prefabs.shuffle(20);
       var prefab = prefabs.get_random();
@@ -150,6 +159,12 @@ public class GameData : ScriptableObject
   }
   public static class Levels
   {
+    public enum ItemTheme
+    {
+      Marbles,
+      Sport,
+    }
+
     static public Level GetPrefab(int idx) => get().listLevels[idx];
     static public Level CreateLevel(int idx, Transform levelsContainer)
     {
@@ -163,6 +178,8 @@ public class GameData : ScriptableObject
     {
       return (int)Mathf.Repeat(lvl_idx + 1.0f, get().listLevels.Count); // - 1.0f);
     }
+    static public ItemTheme itemTheme => get().listLevels[GameState.Progress.Level].itemTheme;
+    static public int   itemThemeIdx => get().listLevels[GameState.Progress.Level].itemThemeIdx;
   }
   public static class Points
   {
