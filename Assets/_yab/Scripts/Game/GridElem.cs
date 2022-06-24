@@ -90,14 +90,20 @@ public class GridElem : MonoBehaviour
   {
     ProcessSelection();
 
-    if(_vvel.magnitude * Time.deltaTime > 0.000001f)
+    if(_vvel.sqrMagnitude > 0)
     {
       var _voff = _vpos;
       _vforce = -0.15f * _voff;
       _vvel += _vforce;
       _vpos += _vvel * Time.deltaTime * 4;
-      _model.transform.localPosition = _vpos;
       _vvel *= 0.95f;
+      if(_vvel.magnitude < 0.0001f)
+      {
+        _vvel.Set(0,0,0);
+        _vforce.Set(0, 0, 0);
+        _vpos.y = 0;
+      }
+      _model.transform.localPosition = _vpos;
     }
   }
 }
