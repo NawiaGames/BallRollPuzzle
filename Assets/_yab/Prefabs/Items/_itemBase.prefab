@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectMultiplier: 1
   useRandomPhaseOffset: 1
-  shakeSettings: {fileID: 11400000, guid: b85e3919dfc72a74bb2c335ce20c7fd5, type: 2}
+  shakeSettings: {fileID: 11400000, guid: 8f87ede93aca78b4284979cf721be53e, type: 2}
 --- !u!1 &4053333539769331205
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,6 +167,9 @@ MonoBehaviour:
   _objShk: {fileID: 7252232302845462380}
   _touchDelay: 0.3
   _rollTransf: {fileID: 2238382564477020698}
+  _objShakeStaticPreset: {fileID: 11400000, guid: 8f87ede93aca78b4284979cf721be53e, type: 2}
+  _objShakeBallPreset: {fileID: 11400000, guid: 636d6cde49a6ebb4dbd8e650a248a970, type: 2}
+  _objShakeBallMovePreset: {fileID: 11400000, guid: 0fa07756bec961f48ad8bbf6dcdc773f, type: 2}
   grid: {x: 0, y: 0}
 --- !u!114 &7798136041665752175
 MonoBehaviour:

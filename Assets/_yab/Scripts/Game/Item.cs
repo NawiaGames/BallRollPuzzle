@@ -28,7 +28,9 @@ public class Item : MonoBehaviour
 
   [SerializeField] Transform  _rollTransf;
 
-   
+  [SerializeField] ObjectShakePreset _objShakeStaticPreset;
+  [SerializeField] ObjectShakePreset _objShakeBallPreset;
+  [SerializeField] ObjectShakePreset _objShakeBallMovePreset;
 
   public enum Push
   {
@@ -326,8 +328,7 @@ public class Item : MonoBehaviour
       item._special = Item.Spec.None;
       item.gameObject.name = name;
     }
-    if(IsStatic)
-      Shake();
+    Shake();
 
     onHit?.Invoke(this);
   }
@@ -340,7 +341,16 @@ public class Item : MonoBehaviour
   public void Shake()
   {
     if(IsStatic)
-      _objShk?.Shake();
+      _objShk?.Shake(_objShakeStaticPreset);
+    // else
+    //   _objShk?.Shake(_objShakeBallPreset);  
+  }
+  public void Shake(bool move)
+  {
+    if(move)
+      _objShk?.Shake(_objShakeBallMovePreset);
+    else
+      _objShk?.Shake(_objShakeBallPreset);  
   }
   public void ExplodeBomb()
   {

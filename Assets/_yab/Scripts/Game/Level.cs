@@ -1016,14 +1016,24 @@ public class Level : MonoBehaviour
             else
             {
               if(!(itemNext && (itemNext.IsStatic || itemNext.IsRemoveElem)) || itemNext == null)
+              {
                 pushToMove.ForEach((item) => item.PushBy(toMove.dir));
+                if(pushToMove.Count > 0)
+                  pushToMove.first().Shake(true);                
+              }
               else
-                pushToMove.Clear();  
+              {
+                if(pushToMove.Count > 0)
+                  pushToMove.first().Shake(false);
+                pushToMove.Clear();
+              }
             }
             _moving.AddRange(pushToMove);
           }
           else
           {
+            if(pushToMove.Count > 0)
+              pushToMove.first().Shake(false);
             pushToMove.ForEach((item) => item.Stop());
             pushToMove.Clear();
           }

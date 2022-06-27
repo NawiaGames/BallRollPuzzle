@@ -66,6 +66,17 @@ public class GameState : SavableScriptableObject
   }
   [SerializeField] PowerUps powerups;
 
+  [System.Serializable]
+  class GameSettings
+  {
+    [SerializeField] bool _sounds;
+    [SerializeField] bool _haptics;
+
+    public bool sounds {get => _sounds; set{_sounds = value;}}
+    public bool haptics {get => _haptics; set { _haptics = value; } }
+  }
+  [SerializeField] GameSettings settings;
+
   public static class Progress
   {
     public static int   Level 
@@ -129,6 +140,11 @@ public class GameState : SavableScriptableObject
       }
       return type;
     }    
+  }
+
+  public static class Settings
+  {
+    public static bool IsMuted {get => get().settings.sounds; set{get().settings.sounds = value; get().settings.haptics = value;}}
   }
 
   [Header("Customization")]

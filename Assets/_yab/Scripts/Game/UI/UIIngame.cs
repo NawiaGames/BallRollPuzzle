@@ -31,6 +31,9 @@ public class UIIngame : MonoBehaviour
 
   [SerializeField] UIPanel  tutorialMoves;
 
+  [Header("Settings")]
+  [SerializeField] UIToggleButton muteBtn;
+
   [Header("DevSettings")]
   [SerializeField] bool _dontShowUI = false;
 
@@ -66,6 +69,9 @@ public class UIIngame : MonoBehaviour
     Level.onCombo += OnCombo;
     Item.onHide += OnItemHide;
     UIPowerupBtn.onClicked += OnBtnPowerup;
+
+    //ApplySettings();
+    muteBtn.SetState(!GameState.Settings.IsMuted);
   }
   void OnDestroy()
   {
@@ -225,6 +231,15 @@ public class UIIngame : MonoBehaviour
   public void OnBtnRestart()
   {
     FindObjectOfType<Game>()?.RestartLevel();
+  }
+  void ApplySettings()
+  {
+    GameObject.FindObjectOfType<AudioManager>(true)?.gameObject.SetActive(!GameState.Settings.IsMuted);
+  }
+  public void OnBtnMute()
+  {
+    GameState.Settings.IsMuted = !GameState.Settings.IsMuted;
+    ApplySettings();
   }
   void PowerupsUpdate()
   {
