@@ -70,8 +70,9 @@ public class UIIngame : MonoBehaviour
     Item.onHide += OnItemHide;
     UIPowerupBtn.onClicked += OnBtnPowerup;
 
-    //ApplySettings();
+    //
     muteBtn.SetState(!GameState.Settings.IsMuted);
+    ApplySettings();
   }
   void OnDestroy()
   {

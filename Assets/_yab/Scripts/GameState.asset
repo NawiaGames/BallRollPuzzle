@@ -16,14 +16,17 @@ MonoBehaviour:
   dataPath: Data
   version: 0
   progress:
-    level: 22
-    maxLevelPlayed: 22
+    level: 0
+    maxLevelPlayed: 0
   economy:
     cash: 0
   powerups:
-    claimedOnLevel: 6
+    claimedOnLevel: -1
     bombs: 0
-    colors: 10
+    colors: 0
     painters: 0
-    arrows: 4
+    arrows: 0
+  settings:
+    _sounds: 1
+    _haptics: 0
   selectedTheme: 0

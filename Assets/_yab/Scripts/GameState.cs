@@ -144,7 +144,7 @@ public class GameState : SavableScriptableObject
 
   public static class Settings
   {
-    public static bool IsMuted {get => get().settings.sounds; set{get().settings.sounds = value;}} //= value; get().settings.haptics = value;}}
+    public static bool IsMuted {get => !get().settings.sounds; set{get().settings.sounds = !value;}} //= value; get().settings.haptics = value;}}
   }
 
   [Header("Customization")]
