@@ -122,25 +122,15 @@ MonoBehaviour:
     powerupPainters: 0
     powerupArrows: 4
   - level: 30
-    powerupBombs: 2
+    powerupBombs: 4
     powerupColors: 6
     powerupPainters: 0
-    powerupArrows: 3
+    powerupArrows: 4
   - level: 40
-    powerupBombs: 2
-    powerupColors: 2
-    powerupPainters: 4
-    powerupArrows: 2
-  - level: 29
-    powerupBombs: 1
-    powerupColors: 2
-    powerupPainters: 1
-    powerupArrows: 3
-  - level: 33
-    powerupBombs: 2
-    powerupColors: 2
-    powerupPainters: 1
-    powerupArrows: 2
+    powerupBombs: 4
+    powerupColors: 4
+    powerupPainters: 6
+    powerupArrows: 4
   pointBallOut: 50
   pointBallOutEveryNext: 10
   pointMatchStandard: 100
