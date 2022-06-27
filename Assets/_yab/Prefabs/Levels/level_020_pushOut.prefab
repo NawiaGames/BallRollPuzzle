@@ -80,6 +80,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
+      propertyPath: _tutorial
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _maxPoints
       value: 1200
       objectReference: {fileID: 0}
@@ -102,6 +106,10 @@ PrefabInstance:
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _listItems.Array.size
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
+      propertyPath: listArrows.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _listItems.Array.data[0]
@@ -135,6 +143,10 @@ PrefabInstance:
       propertyPath: _listItems.Array.data[7]
       value: 
       objectReference: {fileID: 6445466529311080229, guid: 47a470869a49fe347a43f28b5c56fad3, type: 3}
+    - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
+      propertyPath: listArrows.Array.data[0].y
+      value: -4
+      objectReference: {fileID: 0}
     - target: {fileID: 9021463498802342378, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
