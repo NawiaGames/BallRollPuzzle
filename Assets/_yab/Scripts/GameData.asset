@@ -82,16 +82,18 @@ MonoBehaviour:
   - {fileID: 5382338121493344219, guid: 3921f55b16a194c3cb3641768534e531, type: 3}
   - {fileID: 5382338121493344219, guid: d1f0dfec24d1142429f4413241551b93, type: 3}
   - {fileID: 5382338121493344219, guid: 3a2dbf6fc69064cb5bba95a207935c35, type: 3}
-  - {fileID: 5382338121493344219, guid: 48c3507d97e1646c48e05b61b97a118b, type: 3}
+  - {fileID: 5382338121493344219, guid: ce625a6d42e7644e49e53d2d40c2a8d5, type: 3}
+  - {fileID: 5382338121493344219, guid: 5426de90973c74d2380108e57c93cb18, type: 3}
   - {fileID: 5382338121493344219, guid: aae5b6223722f4dc3beddba2fc32820b, type: 3}
   - {fileID: 5382338121493344219, guid: d0e18c9cc86f346e9a28fba9b06a84b6, type: 3}
-  - {fileID: 5382338121493344219, guid: 5426de90973c74d2380108e57c93cb18, type: 3}
   - {fileID: 5382338121493344219, guid: 1bed15d32cd974cd2b3be041abd95485, type: 3}
   - {fileID: 5382338121493344219, guid: 57b12f30e91f74529a153154f56e05d5, type: 3}
   - {fileID: 5382338121493344219, guid: e438d8d68f35a4813b7badede2445121, type: 3}
   - {fileID: 5382338121493344219, guid: 3f9460457a14f4f18a94349e423c43bd, type: 3}
   - {fileID: 5382338121493344219, guid: ada24bccdb9dc41c5a10f2010c98d414, type: 3}
   - {fileID: 5382338121493344219, guid: 13d1eb18c2b5b4b9da510a085b429e0d, type: 3}
+  - {fileID: 5382338121493344219, guid: 1ec5884464e6e4ba9812ec572265d875, type: 3}
+  - {fileID: 5382338121493344219, guid: 48c3507d97e1646c48e05b61b97a118b, type: 3}
   - {fileID: 5382338121493344219, guid: c061aa95591a44f80abb74c22d9b7811, type: 3}
   - {fileID: 5382338121493344219, guid: 1f3b22122804b4ffb87a18c22fcf9e71, type: 3}
   - {fileID: 5382338121493344219, guid: 3271447b7f6194993bb69bb01a8a2c8b, type: 3}
@@ -100,13 +102,11 @@ MonoBehaviour:
   - {fileID: 5382338121493344219, guid: 342f064fb9f7b4071bf5d0872ff59527, type: 3}
   - {fileID: 5382338121493344219, guid: c838b540267014d00898c3a48e6aa703, type: 3}
   - {fileID: 5382338121493344219, guid: 51b06eddd8f5341a5b0aca6f35c24ff7, type: 3}
+  - {fileID: 5382338121493344219, guid: d302e6c21febb4f9a8527017b55abff4, type: 3}
   - {fileID: 5382338121493344219, guid: b8c04d596ae244855894a422370d2342, type: 3}
   - {fileID: 5382338121493344219, guid: 445dfa233acff43fb96e8dc33a9cbdae, type: 3}
   - {fileID: 5382338121493344219, guid: dffd4f71e622648378c87c177696b04b, type: 3}
   - {fileID: 5382338121493344219, guid: 3f912bfca17e04429aeddffb2fbf52d3, type: 3}
-  - {fileID: 5382338121493344219, guid: ce625a6d42e7644e49e53d2d40c2a8d5, type: 3}
-  - {fileID: 5382338121493344219, guid: 1ec5884464e6e4ba9812ec572265d875, type: 3}
-  - {fileID: 5382338121493344219, guid: d302e6c21febb4f9a8527017b55abff4, type: 3}
   - {fileID: 5382338121493344219, guid: a24b9964c09284fc0910f6b0a167952d, type: 3}
   - {fileID: 5382338121493344219, guid: 8377c53ab1a334bdd8c4198111b87488, type: 3}
   - {fileID: 5382338121493344219, guid: bcb5431d478de4f3f93babeef038350b, type: 3}
@@ -116,17 +116,17 @@ MonoBehaviour:
     powerupColors: 0
     powerupPainters: 0
     powerupArrows: 8
-  - level: 12
+  - level: 20
     powerupBombs: 4
     powerupColors: 0
     powerupPainters: 0
-    powerupArrows: 3
-  - level: 20
+    powerupArrows: 4
+  - level: 30
     powerupBombs: 2
     powerupColors: 6
     powerupPainters: 0
     powerupArrows: 3
-  - level: 25
+  - level: 40
     powerupBombs: 2
     powerupColors: 2
     powerupPainters: 4
