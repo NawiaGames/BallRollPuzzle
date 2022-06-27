@@ -97,7 +97,8 @@ public class GridElem : MonoBehaviour
       _vvel += _vforce;
       _vpos += _vvel * Time.deltaTime * 4;
       _vvel *= 0.95f;
-      if(_vvel.magnitude < 0.0001f)
+      //if(_vvel.magnitude < 0.0001f)
+      if((_vvel.y > 0 && _vpos.y > 0) || _vvel.magnitude < 0.0001f)
       {
         _vvel.Set(0,0,0);
         _vforce.Set(0, 0, 0);
