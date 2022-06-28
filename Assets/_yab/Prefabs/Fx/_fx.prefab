@@ -68,7 +68,6 @@ MonoBehaviour:
   ballFracturesSubEmitCnt: 4
   fxHit: {fileID: 5483926277836527142}
   fxBombDestroy: {fileID: 2876338096343389615}
-  fxBombDestroyEmitCnt: 5
   fxPainter: {fileID: 2394166267336298602}
   strPushedOut: +{0}!
   strBallsMatched: +{0}!
@@ -389,11 +388,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5327928137560454586, guid: c004dcbfbcd46de48bbf4e90c71e5f3c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5327928137560454586, guid: c004dcbfbcd46de48bbf4e90c71e5f3c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 5327928137560454586, guid: c004dcbfbcd46de48bbf4e90c71e5f3c, type: 3}
       propertyPath: m_LocalRotation.w

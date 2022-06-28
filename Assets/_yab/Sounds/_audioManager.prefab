@@ -46,13 +46,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 2988126309158869323}
   audioClipPool:
-  - {fileID: 8300000, guid: f96cc49b5fe62bb41b755b1e2db151fb, type: 3}
-  - {fileID: 8300000, guid: 7f67cd8e78f64e9409e52e41ca2471c4, type: 3}
-  - {fileID: 8300000, guid: 0815d7abeaf33034ca7ba18120b2bcec, type: 3}
   - {fileID: 8300000, guid: 83a365c54534bd74aa0f0bd40e254a70, type: 3}
-  baseVolume: 0.15
-  basePitch: 2
-  usePitchBuildup: 0
+  baseVolume: 1
+  basePitch: 1
+  usePitchBuildup: 1
   pitchBuildupStep: 0.1
   pitchBuildupResetTime: 1
   maxPitch: 5
@@ -102,11 +99,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 2988126309158869323}
   audioClipPool:
-  - {fileID: 8300000, guid: 88ec22082ae89564eb5d32be984f69f1, type: 3}
-  - {fileID: 8300000, guid: d73c21ccbced84f4cb8115f73446c681, type: 3}
+  - {fileID: 8300000, guid: 4b216700262cbf945b0d197ae3bbee5f, type: 3}
   baseVolume: 1
   basePitch: 1
-  usePitchBuildup: 0
+  usePitchBuildup: 1
   pitchBuildupStep: 0.1
   pitchBuildupResetTime: 1
   maxPitch: 5
@@ -404,9 +400,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 2988126309158869323}
   audioClipPool:
-  - {fileID: 8300000, guid: a10b1f1158d95fe489a5f5e50ccb6e06, type: 3}
-  baseVolume: 0.15
-  basePitch: 2
+  - {fileID: 8300000, guid: fb7474e1db8038a4b82da9d6103b2199, type: 3}
+  baseVolume: 1
+  basePitch: 1
   usePitchBuildup: 0
   pitchBuildupStep: 0.1
   pitchBuildupResetTime: 1
@@ -459,7 +455,7 @@ MonoBehaviour:
   audioClipPool: []
   baseVolume: 1
   basePitch: 1
-  usePitchBuildup: 0
+  usePitchBuildup: 1
   pitchBuildupStep: 0.1
   pitchBuildupResetTime: 1
   maxPitch: 5
@@ -512,7 +508,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f1b5ac9648c09ba4aaf1e585e3adf08f, type: 3}
   baseVolume: 1
   basePitch: 1
-  usePitchBuildup: 0
+  usePitchBuildup: 1
   pitchBuildupStep: 0.1
   pitchBuildupResetTime: 1
   maxPitch: 5
