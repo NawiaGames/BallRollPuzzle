@@ -21,14 +21,15 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: rainbow 2
-  m_Shader: {fileID: -6465566751694194690, guid: 851f52b0dde3b2c41875e9c0b73e67f1, type: 3}
+  m_Shader: {fileID: 4800000, guid: 8d2bb70cbf9db8d4da26e15b26e74248, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -108,6 +109,7 @@ Material:
     - _FogMaxDIstance: 0.5
     - _GlossMapScale: 0
     - _Glossiness: 0
+    - _GlossinessSource: 0
     - _GlossyReflections: 0
     - _GlowAnimationSpeed: 0
     - _GlowExponent: 0
@@ -121,16 +123,19 @@ Material:
     - _RimExponent: 0
     - _RimIntensity: 0
     - _Saturation: 1
+    - _Shininess: 0
     - _Smoothness: 1
+    - _SmoothnessSource: 0
     - _SmoothnessTextureChannel: 0
+    - _SpecSource: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 1, g: 0, b: 0, a: 1}
-    - _Color: {r: 1, g: 0, b: 0, a: 1}
+    - _BaseColor: {r: 0, g: 0.6039216, b: 1, a: 1}
+    - _Color: {r: 0, g: 0.6039216, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FogColor: {r: 0, g: 0.3333333, b: 0.5, a: 1}
     - _GlowClampRemap: {r: 0.25, g: 1, b: 0, a: 0}

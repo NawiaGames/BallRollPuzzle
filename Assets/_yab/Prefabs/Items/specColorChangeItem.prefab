@@ -49,19 +49,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7273517201562458461, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7273517201562458461, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
       propertyPath: baseColor.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7273517201562458461, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
       propertyPath: baseColor.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7273517201562458461, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
       propertyPath: baseColor.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7273517201562458461, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
       propertyPath: targetColor.b
@@ -75,6 +75,14 @@ PrefabInstance:
       propertyPath: targetColor.r
       value: 766.9961
       objectReference: {fileID: 0}
+    - target: {fileID: 7273517201562458461, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
+      propertyPath: rendererContainers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7273517201562458461, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
+      propertyPath: rendererContainers.Array.data[0]
+      value: 
+      objectReference: {fileID: 8862489096257540541}
     - target: {fileID: 7845557772794626158, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -128,6 +136,11 @@ PrefabInstance:
 --- !u!4 &2006239682929536340 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2238382564477020698, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
+  m_PrefabInstance: {fileID: 344469612221040462}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8862489096257540541 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9095634800868202227, guid: bc781b9a207e0684b8d8eed47b9a0a70, type: 3}
   m_PrefabInstance: {fileID: 344469612221040462}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1646071880415402981
