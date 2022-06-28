@@ -1806,7 +1806,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   winContainer: {fileID: 8714510374974718183}
   navNextPanel: {fileID: 1352173280443761175}
-  navWinRestartPanel: {fileID: 0}
+  navWinRestartPanel: {fileID: 7571907202310341499}
   failContainer: {fileID: 7064481876280522664}
   navRestartPanel: {fileID: 5084703429188055810}
   rewardContainer: {fileID: 754983099289871445}
@@ -6046,6 +6046,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <ThemeID>k__BackingField: 1
+--- !u!1 &7571907202310341499 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8025202361718519677, guid: e2290352c8f3bcf48b35d78211161170, type: 3}
+  m_PrefabInstance: {fileID: 453718407267070982}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1895407618479997111
 PrefabInstance:
   m_ObjectHideFlags: 0

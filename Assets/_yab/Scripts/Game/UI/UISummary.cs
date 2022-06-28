@@ -9,13 +9,13 @@ public class UISummary : MonoBehaviour
 {
   public static System.Action onShow, onBtnPlay;
 
-  [SerializeField] UIPanel winContainer;
-  [SerializeField] UIPanel navNextPanel;
-  [SerializeField] UIPanel navWinRestartPanel;
-  [SerializeField] UIPanel failContainer;
-  [SerializeField] UIPanel navRestartPanel;
-  [SerializeField] UIPanel rewardContainer;
-  [SerializeField] UIPanel navClaimPanel;
+  [SerializeField] UIPanel    winContainer;
+  [SerializeField] UIPanel    navNextPanel;
+  [SerializeField] GameObject navWinRestartPanel;
+  [SerializeField] UIPanel    failContainer;
+  [SerializeField] UIPanel    navRestartPanel;
+  [SerializeField] UIPanel    rewardContainer;
+  [SerializeField] UIPanel    navClaimPanel;
 
   [SerializeField] Slider  slider;
   [SerializeField] UITwoState[] stars;
@@ -51,6 +51,7 @@ public class UISummary : MonoBehaviour
     showReward = (level.LevelIdx == range.end && GameData.Rewards.ToClaim(level.LevelIdx));
 
     winContainer.gameObject.SetActive(level.Succeed);
+    navWinRestartPanel.SetActive(level.Succeed && level.Stars < 3);
     failContainer.gameObject.SetActive(!level.Succeed);
     GetComponent<UIPanel>().ActivatePanel();
     if(level.Succeed)
@@ -85,8 +86,9 @@ public class UISummary : MonoBehaviour
       if(!showReward)
       {
         navNextPanel.ActivatePanel();
-        //yield return new WaitForSeconds(0.25f);
-        navWinRestartPanel.ActivatePanel();
+        yield return new WaitForSeconds(0.25f);
+        if(level.Stars < 3)
+          navWinRestartPanel.SetActive(true);
       }
       else
       {
