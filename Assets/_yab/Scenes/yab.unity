@@ -1205,8 +1205,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54b7033334646a94f8a255a84c21c52b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstActivationTime: 30
-  requestInterval: 3
 --- !u!114 &1301126278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1624,6 +1622,10 @@ PrefabInstance:
     - target: {fileID: 2352424071432865273, guid: 97353bccc23e57441a2439ca23b136d3, type: 3}
       propertyPath: m_Name
       value: summaryScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 3390172722130502711, guid: 97353bccc23e57441a2439ca23b136d3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -9.60199
       objectReference: {fileID: 0}
     - target: {fileID: 3757636349516137851, guid: 97353bccc23e57441a2439ca23b136d3, type: 3}
       propertyPath: m_AnchorMax.y
