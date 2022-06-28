@@ -1153,6 +1153,8 @@ GameObject:
   - component: {fileID: 1301126275}
   - component: {fileID: 1301126276}
   - component: {fileID: 1301126277}
+  - component: {fileID: 1301126278}
+  - component: {fileID: 1301126279}
   m_Layer: 0
   m_Name: _game
   m_TagString: Untagged
@@ -1205,6 +1207,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstActivationTime: 30
   requestInterval: 3
+--- !u!114 &1301126278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301126274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa97cd881abd5ed419e5bc2aaed2cae2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1301126279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301126274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b22af8836d1025439627452a0cd4a8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sendNotification: 1
+  id: -1797328100
+  smallIconID: icon_0
+  largeIconID: 
+  title: Hello!
+  text:
+  - It's time to play!
+  displayDelay: 3
+  repeatInterval: 24
 --- !u!1001 &1309126050
 PrefabInstance:
   m_ObjectHideFlags: 0
