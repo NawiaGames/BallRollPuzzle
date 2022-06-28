@@ -11,6 +11,7 @@ public class UISummary : MonoBehaviour
 
   [SerializeField] UIPanel winContainer;
   [SerializeField] UIPanel navNextPanel;
+  [SerializeField] UIPanel navWinRestartPanel;
   [SerializeField] UIPanel failContainer;
   [SerializeField] UIPanel navRestartPanel;
   [SerializeField] UIPanel rewardContainer;
@@ -78,11 +79,15 @@ public class UISummary : MonoBehaviour
   {
     yield return new WaitForSeconds(1.0f);
     updateSlider = true;
-    yield return new WaitForSeconds((showReward)?1.0f : 0.5f);
+    yield return new WaitForSeconds((showReward)?1.0f : 0.25f);
     if(level.Succeed)
     {
       if(!showReward)
+      {
         navNextPanel.ActivatePanel();
+        //yield return new WaitForSeconds(0.25f);
+        navWinRestartPanel.ActivatePanel();
+      }
       else
       {
         rewardContainer.gameObject.SetActive(level.Succeed);
