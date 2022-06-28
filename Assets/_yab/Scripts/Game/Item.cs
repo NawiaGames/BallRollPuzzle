@@ -143,6 +143,7 @@ public class Item : MonoBehaviour
   public bool IsColorChanger => _special == Spec.ColorChange;
   public bool IsRegular => _special == Spec.None;
   public bool IsSpecial => _special != Spec.None;
+  public bool IsPush  => _push != Push.None;
   public bool IsMoveable => _autoMove;
   public bool IsRandItem => _special == Spec.RandomItem;
   public bool IsRandMoveItem => _special == Spec.RandomMoveItem;
@@ -310,7 +311,7 @@ public class Item : MonoBehaviour
     if(item == null)
       return;
 
-    if(this.IsColorChanger && item.IsRegular)
+    if(this.IsColorChanger && item.IsRegular && !item.IsPush)
     {
       id = item.id;
       _ballModel.SetActive(true);
@@ -319,7 +320,7 @@ public class Item : MonoBehaviour
       _special = Item.Spec.None;
       name = item.gameObject.name;
     }
-    else if(item.IsColorChanger && this.IsRegular)
+    else if(item.IsColorChanger && this.IsRegular && !this.IsPush)
     {
       item.id = id;
       item._ballModel.SetActive(true);

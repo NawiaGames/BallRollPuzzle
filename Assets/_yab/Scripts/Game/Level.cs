@@ -961,7 +961,14 @@ public class Level : MonoBehaviour
         {
           if(pushType == Item.Push.None) //_gameplayPushType == PushType.None)
           {
-            _items.Add(_pushing[p]);
+            if(_pushing[p].IsBomb)
+            {
+              _exploding.Add(_pushing[p]);
+            }
+            else
+            {
+              _items.Add(_pushing[p]);
+            }
             _pushing[p].Stop();
             _pushing.RemoveAt(p);
             p--;
