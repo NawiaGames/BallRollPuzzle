@@ -72,6 +72,7 @@ MonoBehaviour:
   - {fileID: 5382338121493344219, guid: e60c9c96ccc7c4833a85857fecbc9ed0, type: 3}
   - {fileID: 5382338121493344219, guid: 5cdd2421148704b24aac82e16299173b, type: 3}
   - {fileID: 5382338121493344219, guid: a85a64337e5df4d1e9e1d1040585ecf7, type: 3}
+  - {fileID: 5382338121493344219, guid: e0e5f7fbfedac425e8ae71dc62aed9be, type: 3}
   - {fileID: 5382338121493344219, guid: 127b378ab60a14264be98b4aac2055c0, type: 3}
   - {fileID: 5382338121493344219, guid: 9217982d68cc340f88a055a09742c57e, type: 3}
   - {fileID: 5382338121493344219, guid: 842ab52fc37cb444c881a6d409a39be2, type: 3}
@@ -110,23 +111,24 @@ MonoBehaviour:
   - {fileID: 5382338121493344219, guid: a24b9964c09284fc0910f6b0a167952d, type: 3}
   - {fileID: 5382338121493344219, guid: 8377c53ab1a334bdd8c4198111b87488, type: 3}
   - {fileID: 5382338121493344219, guid: bcb5431d478de4f3f93babeef038350b, type: 3}
+  - {fileID: 5382338121493344219, guid: bcb5431d478de4f3f93babeef038350b, type: 3}
   listRewards:
   - level: 10
     powerupBombs: 0
     powerupColors: 0
     powerupPainters: 0
-    powerupArrows: 8
-  - level: 20
+    powerupArrows: 10
+  - level: 21
     powerupBombs: 4
     powerupColors: 0
     powerupPainters: 0
     powerupArrows: 4
-  - level: 30
+  - level: 31
     powerupBombs: 4
     powerupColors: 6
     powerupPainters: 0
     powerupArrows: 4
-  - level: 40
+  - level: 41
     powerupBombs: 4
     powerupColors: 4
     powerupPainters: 6
