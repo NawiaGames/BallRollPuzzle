@@ -197,7 +197,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loop: 0
-  rendererContainers: []
+  rendererContainers:
+  - {fileID: 9095634800868202227}
   blendCurve:
     serializedVersion: 2
     m_Curve:
