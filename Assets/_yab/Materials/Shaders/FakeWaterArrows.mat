@@ -138,6 +138,7 @@ Material:
     - _WorldCenter: 0.2
     - _WorldScale: 8
     - _ZWrite: 1
+    - _smallWaveAmplitude: 0.1
     - _waveHeigth: 1
     - _waveScale: 4
     - _waveSpeed: 0.1
