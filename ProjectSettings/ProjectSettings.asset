@@ -134,7 +134,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 0.6
+  bundleVersion: 0.7
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -160,7 +160,7 @@ PlayerSettings:
     iPhone: 0
     tvOS: 0
   overrideDefaultApplicationIdentifier: 1
-  AndroidBundleVersionCode: 6
+  AndroidBundleVersionCode: 7
   AndroidMinSdkVersion: 23
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
@@ -731,7 +731,7 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
-    Android: LK_HAS_LION_ANALYTICS;HAS_LION_GAME_ANALYTICS_SDK;HAS_LION_APPLOVIN_SDK;gameanalytics_max_enabled;HAS_LION_ADJUST_SDK;HAS_LION_FACEBOOK_SDK;HAS_LION_GOOGLE_REVIEW_SDK;GOOGLE_PLAY_SERVICES
+    Android: LK_HAS_LION_ANALYTICS;HAS_LION_GAME_ANALYTICS_SDK;HAS_LION_APPLOVIN_SDK;gameanalytics_max_enabled;HAS_LION_ADJUST_SDK;HAS_LION_FACEBOOK_SDK;HAS_LION_GOOGLE_REVIEW_SDK;GOOGLE_PLAY_SERVICES;HAS_BYTEBREW_SDK
     iPhone: LK_HAS_LION_ANALYTICS;gameanalytics_max_enabled
   additionalCompilerArguments: {}
   platformArchitecture: {}

@@ -30,7 +30,7 @@ MonoBehaviour:
   secretKey:
   - 447669c66b81b8aa4cb79a8732a2da1d152900c4
   Build:
-  - 0.3
+  - 0.7
   SelectedPlatformOrganization:
   - 
   SelectedPlatformStudio:
@@ -65,7 +65,7 @@ MonoBehaviour:
   ResourceCurrencies: []
   LastCreatedGamePlatform: 0
   Platforms: 0b000000
-  CurrentInspectorState: 3
+  CurrentInspectorState: 1
   ClosedHints: 
   DisplayHints: 0
   DisplayHintsScrollState: {x: 0, y: 0}
